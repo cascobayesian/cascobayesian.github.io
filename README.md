@@ -7,9 +7,9 @@
 
 #### The shape of political space
 
-#### Rental dynamics under non-equilibrium 
+#### Rental dynamics under non-equilibrium assumptions
 
-#### 
+#### Measuring homelessness in Maine
 
 ### Past projects:
 
