@@ -93,23 +93,23 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Quarto Academic, PhD",
+    "title": "Jack O’Brien, PhD",
     "section": "",
-    "text": "Lab\n  \n  \n    \n     Uprofile\n  \n  \n    \n     E-mail\n  \n  \n    \n     LinkedIn\n  \n  \n    \n     YouTube\n  \n  \n      ORCID\n  \n  \n      Web of Science\n  \n  \n      Scopus\n  \n  \n      Google Scholar\n  \n\n  \n  \nI’m a Quarto Academeic Website Template adapted by Dr. Gang He.\nI’m a template that you can fork to build your own website with easy adaptation and deployment.\n\nStar this repository to bookmark it for future reference.\n\nFork this repository and rename it to YourGitHubUserName.github.io.\n\nUpdate the _quarto.yml file to configure your site’s basic settings.\n\nAdd or edit content in the following files and folders:\n\n/posts/ – posts about publications, news, events\n\nteaching.qmd – teaching information\n\nprojects.yml – research or other projects\n\npeople.qmd and /people/ – team or collaborators\n\n/files/ - profiles, images, pdfs, and includes\n\nRender and preview your site locally.\n\nPublish your site using GitHub Pages (make sure configuring your GitHub repository to publish from the docs directory, not the root folder).\nRefine and polish your content and design as needed.\n\n✅ Enjoy your new website!\n\n\n\n\nResearcher, Univerisity\n\n\n\n\n\nPhD, Univerisity"
+    "text": "E-mail\n  \n  \n    \n     GitHub\n  \n  \n    \n     YouTube\n  \n  \n      Google Scholar\n  \n\n  \n  \nWelcome! This is the academic website for Jack O’Brien. I’m an applied statistician and data scientist as well as a professor of statistics at Bowdoin College. In addition to teaching, I spend most of my time thinking about how different types of social science data (pottery shards, election results, tweets) can be integrated to create complex portraits of social phenomena. I’m particularly interested in creating low-dimensional representation of long-standing cultural forms.\n\n\n\nAssociate Professor, Bowdoin College\nAssistant Professor, Bowdoin College\nSenior Statistician, Wellcome Trust Centre for Human Genetics, University of Oxford\n\n\n\n\n\nBA, Pomona College (Mathematics)\nPhD, UCLA (Biomathematics)"
   },
   {
     "objectID": "index.html#experience",
     "href": "index.html#experience",
-    "title": "Quarto Academic, PhD",
+    "title": "Jack O’Brien, PhD",
     "section": "",
-    "text": "Researcher, Univerisity"
+    "text": "Associate Professor, Bowdoin College\nAssistant Professor, Bowdoin College\nSenior Statistician, Wellcome Trust Centre for Human Genetics, University of Oxford"
   },
   {
     "objectID": "index.html#education",
     "href": "index.html#education",
-    "title": "Quarto Academic, PhD",
+    "title": "Jack O’Brien, PhD",
     "section": "",
-    "text": "PhD, Univerisity"
+    "text": "BA, Pomona College (Mathematics)\nPhD, UCLA (Biomathematics)"
   },
   {
     "objectID": "index.html#recent-posts",
@@ -138,5 +138,12 @@
     "title": "People",
     "section": "Alumni",
     "text": "Alumni\n\n\n   \n    \n    \n      Order By\n      Default\n      \n      \n      \n        Name\n      \n      \n        Role\n      \n      \n        Started\n      \n      \n        Ended\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\n \n\n\n\nName\n\n\n\nRole\n\n\n\nStarted\n\n\n\nEnded\n\n\n\n\n\n\n\n\n\n\n\nAlumni A\n\n\nPhD Alumni\n\n\n2024\n\n\n2025\n\n\n\n\n\n\n\n\n\nAlumni B\n\n\nMasters Alumni\n\n\n2024\n\n\n2025\n\n\n\n\n\n\n\n\n\nAlumni C\n\n\nUndergraduate Alumni\n\n\n2024\n\n\n2025\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html#recent-work",
+    "href": "index.html#recent-work",
+    "title": "Jack O’Brien, PhD",
+    "section": "Recent work",
+    "text": "Recent work\nCheck out my recent(ish) paper using mixture models to map political ideology using election data: O’Brien. 2025. “A Bayesian mixture model captures temporal and spatial structure of voting blocs within longitudinal referendum data”. Current in press in Political Science Research and Methods."
   }
 ]
