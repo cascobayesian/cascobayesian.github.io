@@ -9,7 +9,7 @@
 <meta name="author" content="Jack O’Brien">
 <meta name="description" content="Academic Website for Jack O’Brien">
 
-<title>Jack O’Brien, PhD</title>
+<title>People</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,18 +32,21 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-3e8f12d1b5c8d04d32925f9f9ead600c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,6 +73,63 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-lab-member .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-image','listing-title','listing-subtitle',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-image","listing-title","listing-lastname","listing-subtitle","listing-categories","listing-started","listing-ended"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-lab-member'] = new List('listing-lab-member', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-lab-alumni .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-image','listing-title','listing-subtitle','listing-started','listing-ended',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-title-sort'] }],
+      
+      searchColumns: ["listing-image","listing-title","listing-lastname","listing-subtitle","listing-categories","listing-started","listing-ended"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-lab-alumni'] = new List('listing-lab-alumni', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id="></script>
 
 <script type="text/javascript">
@@ -100,16 +160,43 @@ https://badge.dimensions.ai/
 
 <script type="text/javascript" src="//cdn.plu.mx/widget-popup.js"></script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="Jack O’Brien, PhD">
-<meta property="og:image" content="https://cascobayesian.github.io/culture_painting.png">
-<meta property="og:image:height" content="900">
-<meta property="og:image:width" content="1600">
-<meta name="twitter:title" content="Jack O’Brien, PhD">
-<meta name="twitter:image" content="https://cascobayesian.github.io/culture_painting.png">
-<meta name="twitter:image-height" content="900">
-<meta name="twitter:image-width" content="1600">
+<meta property="og:title" content="People">
+<meta property="og:description" content="Who we are">
+<meta property="og:image" content="https://cascobayesian.github.io/files/profiles/profile1.JPG">
+<meta name="twitter:title" content="People">
+<meta name="twitter:description" content="Who we are">
+<meta name="twitter:image" content="https://cascobayesian.github.io/files/profiles/profile1.JPG">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -194,70 +281,222 @@ https://badge.dimensions.ai/
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(7)</span></div><div class="category" data-category="RGlyZWN0b3I=">Director <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TWFzdGVycyUyMFN0dWRlbnQ=">Masters Student <span class="quarto-category-count">(2)</span></div><div class="category" data-category="UGhEJTIwU3R1ZGVudA==">PhD Student <span class="quarto-category-count">(2)</span></div><div class="category" data-category="VW5kZXJncmFkdWF0ZSUyMFN0dWRlbnQ=">Undergraduate Student <span class="quarto-category-count">(2)</span></div></div></div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content">
+<main class="content column-page-left" id="quarto-document-content">
 
-
-
-
-<div class="quarto-about-trestles column-page">
-  <div class="about-entity">
-    <img src="culture_painting.png" class="about-image
-  rounded " style="width: 100%;">
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Jack O’Brien, PhD</h1>
-</div>
-<div class="quarto-title-meta column-page">
-  </div>
-</header>
-    <div class="about-links">
-  <a href="mailto:jobrien@bowdoin.edu" class="about-link" rel="" target="">
-    <i class="bi bi-envelope"></i>
-     <span class="about-link-text">E-mail</span>
-  </a>
-  <a href="https://github.com/cascobayesian" class="about-link" rel="" target="_blank">
-    <i class="bi bi-globe"></i>
-     <span class="about-link-text">GitHub</span>
-  </a>
-  <a href="https://www.youtube.com" class="about-link" rel="" target="_blank">
-    <i class="bi bi-youtube"></i>
-     <span class="about-link-text">YouTube</span>
-  </a>
-  <a href="https://scholar.google.com/citations?user=eKEAQGUAAAAJ&amp;hl=en" class="about-link" rel="" target="_blank">
-     <span class="about-link-text"><i class="ai  ai-google-scholar"></i> Google Scholar</span>
-  </a>
-</div>
-  </div>
-  <div class="about-contents"><div id="hero-heading">
-<p>Welcome! This is the academic website for Jack O’Brien. I’m an applied statistician and data scientist as well as a professor of mathematics at Bowdoin College. In addition to teaching, I spend most of my time thinking about how different types of social science data (pottery sherds, election results, tweets) can be integrated to create complex portraits of social phenomena. I’m particularly interested in investigating low-dimensional representations of persistent cultural forms within datasets as a means to resolve several long-standing statistical issues in the social sciences.</p>
-<section id="experience" class="level2">
-<h2 data-anchor-id="experience">Experience</h2>
-<ul>
-<li>Associate Professor, Bowdoin College</li>
-<li>Assistant Professor, Bowdoin College</li>
-<li>Senior Statistician, Wellcome Trust Centre for Human Genetics, University of Oxford</li>
-<li>Research Associate in Statistical Genetics, University of Bristol</li>
-</ul>
-</section>
-<section id="education" class="level2">
-<h2 data-anchor-id="education">Education</h2>
-<ul>
-<li>BA, Pomona College (Mathematics)</li>
-<li>PhD, UCLA (Biomathematics)</li>
-</ul>
-</section>
-</div></div>
+<h1 class="title">People</h1>
+<p class="subtitle lead">Who we are</p>
 </div>
 
-<section id="recent-work" class="level2">
-<h2 data-anchor-id="recent-work">Recent work</h2>
-<ul>
-<li>(<strong>Dec 2025</strong>) Check out my recent(ish) paper using mixture models to map political ideology using election data: <a href="https://arxiv.org/abs/2301.01677">O’Brien. 2025. “A Bayesian mixture model captures temporal and spatial structure of voting blocs within longitudinal referendum data”</a>. Currently in press in <em>Political Science Research and Methods</em>.</li>
-<li>(<strong>Dec 2025</strong>) My two honors students, Avery Cutler and Nathan Kellerman, made absolutely amazing mid-year presentations on their respective projects, both of which are fascinating. Check out their projects here: (Avery), (Nathan).</li>
-<li>(<strong>July 2025</strong>) Delighted to see Assistant Professor of Physics Fe McBride’s <a href="https://academic.oup.com/mnras/article/541/2/1613/8175000">paper, “A radio-quiet AGN as a candidate counterpart to neutrino event IceCube–200615A” to be finally published in <em>The Monthly Notices of the Royal Astronomical Society</em></a>.</li>
-</ul>
+
+
+<div class="quarto-title-meta column-page-left">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="team" class="level2">
+<h2 class="anchored" data-anchor-id="team">Team</h2>
+<div id="listing-lab-member" class="quarto-listing quarto-listing-container-grid">
+<div class="list grid quarto-listing-cols-4">
+<div class="g-col-1" data-index="0" data-categories="UGhEJTIwU3R1ZGVudA==">
+<a href="https://drganghe.github.io/quarto-academic-website-template" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-center">
+<p class="card-img-top">
+<img loading="lazy" src="./files/profiles/profile1.JPG" class="thumbnail-image card-img" style="height: 200px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Student A
+</h5>
+<div class="card-subtitle listing-subtitle">
+PhD Student
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="1" data-categories="TWFzdGVycyUyMFN0dWRlbnQ=">
+<a href="https://drganghe.github.io/quarto-academic-website-template" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-center">
+<p class="card-img-top">
+<img loading="lazy" src="./files/profiles/profile3.JPG" class="thumbnail-image card-img" style="height: 200px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Student B
+</h5>
+<div class="card-subtitle listing-subtitle">
+Masters Student
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="2" data-categories="VW5kZXJncmFkdWF0ZSUyMFN0dWRlbnQ=">
+<a href="https://drganghe.github.io/quarto-academic-website-template" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-center">
+<p class="card-img-top">
+<img loading="lazy" src="./files/profiles/profile5.JPG" class="thumbnail-image card-img" style="height: 200px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Student C
+</h5>
+<div class="card-subtitle listing-subtitle">
+Undergraduate Student
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="3" data-categories="RGlyZWN0b3I=">
+<a href="https://drganghe.github.io/quarto-academic-website-template" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-center">
+<p class="card-img-top">
+<img loading="lazy" src="./files/profiles/profile7.JPG" class="thumbnail-image card-img" style="height: 200px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+PI Name
+</h5>
+<div class="card-subtitle listing-subtitle">
+PI
+</div>
+</div>
+</div></a>
+</div>
+</div>
+<div class="listing-no-matching d-none">No matching items</div>
+</div>
+</section>
+<section id="alumni" class="level2">
+<h2 class="anchored" data-anchor-id="alumni">Alumni</h2>
+<div id="listing-lab-alumni" class="quarto-listing quarto-listing-container-table">
+<div class="listing-actions-group">
+   <div class="input-group input-group-sm quarto-listing-sort">
+    <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
+    <select id="listing-lab-alumni-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-lab-alumni'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+      <option value="" disabled="" selected="" hidden="">Order By</option>
+      <option value="index" data-direction="asc">Default</option>
+      <option value="listing-image" data-direction="asc">
+      </option>
+      <option value="listing-title-sort" data-direction="asc">
+        Name
+      </option>
+      <option value="listing-subtitle" data-direction="asc">
+        Role
+      </option>
+      <option value="listing-started" data-direction="asc">
+        Started
+      </option>
+      <option value="listing-ended" data-direction="asc">
+        Ended
+      </option>
+    </select>
+  </div>
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
+</div>
+<table class="quarto-listing-table table">
+<thead>
+<tr>
+
+<th>
+<a class="sort" data-sort="listing-image" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;"> </a>
+</th>
+
+<th>
+<a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Name</a>
+</th>
+
+<th>
+<a class="sort" data-sort="listing-subtitle" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Role</a>
+</th>
+
+<th>
+<a class="sort" data-sort="listing-started" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Started</a>
+</th>
+
+<th>
+<a class="sort" data-sort="listing-ended" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Ended</a>
+</th>
+
+</tr>
+</thead>
+<tbody class="list">
+
+<tr data-index="0" data-categories="UGhEJTIwU3R1ZGVudA==" data-listing-title-sort="Alumni A">
+<td>
+<span class="listing-image"><img loading="lazy" src="./files/profiles/profile2.JPG" style="height: 25px;"></span>
+</td>
+<td>
+<a href="https://drganghe.github.io/quarto-academic-website-template" class="title listing-title">Alumni A</a>
+</td>
+<td>
+<span class="listing-subtitle">PhD Alumni</span>
+</td>
+<td>
+<span class="listing-started">2024</span>
+</td>
+<td>
+<span class="listing-ended">2025</span>
+</td>
+
+</tr>
+
+<tr data-index="1" data-categories="TWFzdGVycyUyMFN0dWRlbnQ=" data-listing-title-sort="Alumni B">
+<td>
+<span class="listing-image"><img loading="lazy" src="./files/profiles/profile4.JPG" style="height: 25px;"></span>
+</td>
+<td>
+<a href="https://drganghe.github.io/quarto-academic-website-template" class="title listing-title">Alumni B</a>
+</td>
+<td>
+<span class="listing-subtitle">Masters Alumni</span>
+</td>
+<td>
+<span class="listing-started">2024</span>
+</td>
+<td>
+<span class="listing-ended">2025</span>
+</td>
+
+</tr>
+
+<tr data-index="2" data-categories="VW5kZXJncmFkdWF0ZSUyMFN0dWRlbnQ=" data-listing-title-sort="Alumni C">
+<td>
+<span class="listing-image"><img loading="lazy" src="./files/profiles/profile6.JPG" style="height: 25px;"></span>
+</td>
+<td>
+<a href="https://drganghe.github.io/quarto-academic-website-template" class="title listing-title">Alumni C</a>
+</td>
+<td>
+<span class="listing-subtitle">Undergraduate Alumni</span>
+</td>
+<td>
+<span class="listing-started">2024</span>
+</td>
+<td>
+<span class="listing-ended">2025</span>
+</td>
+
+</tr>
+
+</tbody>
+</table>
+<div class="listing-no-matching d-none">No matching items</div>
+</div>
 
 
 
@@ -266,6 +505,13 @@ https://badge.dimensions.ai/
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
     const isCodeAnnotation = (el) => {
       for (const clz of el.classList) {
         if (clz.startsWith('code-annotation-')) {                     
@@ -675,8 +921,19 @@ https://badge.dimensions.ai/
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/cascobayesian" target="_blank">
+    <a class="nav-link" href="https://github.com/drganghe/quarto-academic-website-template" target="_blank">
       <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://bsky.app" target="_blank">
+<p><i class="fa-brands fa-bluesky" aria-label="bluesky"></i></p>
+</a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="./posts.xml" target="_blank">
+      <i class="bi bi-rss" role="img">
 </i> 
     </a>
   </li>  

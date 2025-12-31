@@ -24,18 +24,14 @@ about:
       href: https://www.youtube.com     
       target: _blank 
     - text: "{{< ai google-scholar >}} Google Scholar"
-      href: https://scholar.google.com
+      href: https://scholar.google.com/citations?user=eKEAQGUAAAAJ&hl=en
       target: _blank
-#    - text: "{{< ai researchgate >}} Research Gate"
-#      href: https://www.researchgate.net
-#      target: _blank
-
 
 ---
 
 :::{#hero-heading}
 
-Welcome! This is the academic website for Jack O'Brien. I'm an applied statistician and data scientist as well as a professor of statistics at Bowdoin College. In addition to teaching, I spend most of my time thinking about how different types of social science data (pottery shards, election results, tweets) can be integrated to create complex portraits of social phenomena. I'm particularly interested in creating low-dimensional representation of long-standing cultural forms.
+Welcome! This is the academic website for Jack O'Brien. I'm an applied statistician and data scientist as well as a professor of mathematics at Bowdoin College. In addition to teaching, I spend most of my time thinking about how different types of social science data (pottery sherds, election results, tweets) can be integrated to create complex portraits of social phenomena. I'm particularly interested in investigating low-dimensional representations of persistent cultural forms within datasets as a means to resolve several long-standing statistical issues in the social sciences. 
 
 
 
@@ -44,6 +40,7 @@ Welcome! This is the academic website for Jack O'Brien. I'm an applied statistic
 - Associate Professor, Bowdoin College
 - Assistant Professor, Bowdoin College
 - Senior Statistician, Wellcome Trust Centre for Human Genetics, University of Oxford
+- Research Associate in Statistical Genetics, University of Bristol
 
 ## Education
 
@@ -53,5 +50,7 @@ Welcome! This is the academic website for Jack O'Brien. I'm an applied statistic
 :::
 
 ## Recent work
-Check out my recent(ish) paper using mixture models to map political ideology using election data: [O'Brien. 2025. "A Bayesian mixture model captures temporal and spatial structure of voting blocs within longitudinal referendum data"](https://arxiv.org/abs/2301.01677). Current in press in *Political Science Research and Methods*.
+* (**Dec 2025**) Check out my recent(ish) paper using mixture models to map political ideology using election data: [O'Brien. 2025. "A Bayesian mixture model captures temporal and spatial structure of voting blocs within longitudinal referendum data"](https://arxiv.org/abs/2301.01677). Currently in press in *Political Science Research and Methods*.
+* (**Dec 2025**) My two honors students, Avery Cutler and Nathan Kellerman, made absolutely amazing mid-year presentations on their respective projects, both of which are fascinating. Check out their projects here: (Avery), (Nathan).
+* (**July 2025**) Delighted to see Assistant Professor of Physics Fe McBride's [paper, "A radio-quiet AGN as a candidate counterpart to neutrino event IceCube–200615A" to be finally published in *The Monthly Notices of the Royal Astronomical Society*](https://academic.oup.com/mnras/article/541/2/1613/8175000).
 

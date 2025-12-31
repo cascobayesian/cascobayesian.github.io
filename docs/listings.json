@@ -22,5 +22,13 @@
   {
     "listing": "/people.html",
     "items": []
+  },
+  {
+    "listing": "/student.html",
+    "items": []
+  },
+  {
+    "listing": "/research.html",
+    "items": []
   }
 ]
