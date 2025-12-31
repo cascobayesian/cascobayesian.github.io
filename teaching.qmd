@@ -12,6 +12,7 @@ title-block-banner: false
 ::: {.grid}
 
 ::: {.g-col-12 .g-col-md-2}
+![](files/images/placeholder2.JPG)
 
 :::
 
@@ -19,14 +20,14 @@ title-block-banner: false
 
 [Spring 2026](cascobayesian.github.io)
 
-An advanced introduction to the practice and principles of statistical modeling, or how to build statistical models to interpret data in as many contexts as we can possibly squeeze into a semester. Topics make for a breathy, tour de force of the core workhorses of statistics: simulation, parametric models, inference, testing,  regression in its myriad forms, and, hopefully, clustering. Along the way, we'll consider data from a wide array of sources -- speed dating experiments, teaching evaluations, hate crimes, criminal sentencing, plague deaths, historical debates on colonialism, and the Titanic itself -- to give students a wide exposure to different interpretive domains. Throughout the semester, we will collaboratively fashion the tools each student will need to construct their own final data project, an extensive exploration of a dataset of their choosing. Assumes a course in probability and an enthusiasm for coding. 
+An advanced introduction to the practice and principles of statistical modeling. Practically, this means learning how to build statistical models to interpret data in as many contexts as we can possibly squeeze into a semester. Topics make for a roaring tour of many core workhorses of statistics: simulation, parametric models, inference, testing,  regression in its myriad forms, and, hopefully, clustering. Along the way, we'll consider data from a wide array of sources -- speed dating experiments, teaching evaluations, hate crimes, criminal sentencing, plague deaths, historical debates on colonialism, and the Titanic itself -- to give students wide exposure to different interpretive perspectives. Through the semester, we will collaboratively fashion the tools each student will need to construct their final data project, an extensive exploration of a data set of their choosing. Assumes a course in probability and enthusiasmfor coding (if not necessarily any experience, though that will be helpful).  
 
 :::
 
 :::
 
 
-## Class 2
+## Data Science (Math 1756)
 
 ::: {.grid}
 
@@ -37,7 +38,7 @@ An advanced introduction to the practice and principles of statistical modeling,
 
 ::: {.g-col-12 .g-col-md-10}
 
-[Spring 2025](https://www.google.com), &nbsp; [Fall 2023](https://www.google.com)
+[Spring 2026](https://www.google.com)
 
 Class 2 introduction.
 
@@ -45,24 +46,5 @@ Class 2 introduction.
 
 :::
 
-
-## Class 3
-
-::: {.grid}
-
-::: {.g-col-12 .g-col-md-2}
-![](files/images/placeholder3.JPG)
-
-:::
-
-::: {.g-col-12 .g-col-md-10}
-
-[Spring 2025](https://www.google.com), &nbsp; [Spring 2024](https://www.google.com)
-
-Class 3 introduction. 
-
-:::
-
-:::
 
 

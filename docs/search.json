@@ -95,14 +95,14 @@
     "href": "index.html",
     "title": "Jack O’Brien, PhD",
     "section": "",
-    "text": "E-mail\n  \n  \n    \n     GitHub\n  \n  \n    \n     YouTube\n  \n  \n      Google Scholar\n  \n\n  \n  \nWelcome! This is the academic website for Jack O’Brien. I’m an applied statistician and data scientist as well as a professor of mathematics at Bowdoin College. In addition to teaching, I spend most of my time thinking about how different types of social science data (pottery sherds, election results, tweets) can be integrated to create complex portraits of social phenomena. I’m particularly interested in investigating low-dimensional representations of persistent cultural forms within datasets as a means to resolve several long-standing statistical issues in the social sciences.\n\n\n\nAssociate Professor, Bowdoin College\nAssistant Professor, Bowdoin College\nSenior Statistician, Wellcome Trust Centre for Human Genetics, University of Oxford\nResearch Associate in Statistical Genetics, University of Bristol\n\n\n\n\n\nBA, Pomona College (Mathematics)\nPhD, UCLA (Biomathematics)"
+    "text": "E-mail\n  \n  \n    \n     GitHub\n  \n  \n    \n     YouTube\n  \n  \n      Google Scholar\n  \n\n  \n  \nWelcome! This is the academic website for Jack O’Brien. I’m an applied statistician and data scientist as well as a professor of mathematics at Bowdoin College. In addition to teaching, I spend most of my time thinking about how different types of social science data (pottery sherds, election results, tweets) can be integrated to create complex portraits of social phenomena. I’m particularly interested in investigating low-dimensional representations of persistent cultural forms within datasets as a means to resolve several long-standing statistical issues in the social sciences.\n\n\n\nAssociate Professor, Bowdoin College\nSenior Statistician, Wellcome Trust Centre for Human Genetics, University of Oxford\nResearch Associate in Statistical Genetics, University of Bristol\n\n\n\n\n\nBA, Pomona College (Mathematics)\nPhD, UCLA (Biomathematics)"
   },
   {
     "objectID": "index.html#experience",
     "href": "index.html#experience",
     "title": "Jack O’Brien, PhD",
     "section": "",
-    "text": "Associate Professor, Bowdoin College\nAssistant Professor, Bowdoin College\nSenior Statistician, Wellcome Trust Centre for Human Genetics, University of Oxford\nResearch Associate in Statistical Genetics, University of Bristol"
+    "text": "Associate Professor, Bowdoin College\nSenior Statistician, Wellcome Trust Centre for Human Genetics, University of Oxford\nResearch Associate in Statistical Genetics, University of Bristol"
   },
   {
     "objectID": "index.html#education",
@@ -144,7 +144,7 @@
     "href": "index.html#recent-work",
     "title": "Jack O’Brien, PhD",
     "section": "Recent work",
-    "text": "Recent work\n\n(Dec 2025) Check out my recent(ish) paper using mixture models to map political ideology using election data: O’Brien. 2025. “A Bayesian mixture model captures temporal and spatial structure of voting blocs within longitudinal referendum data”. Currently in press in Political Science Research and Methods.\n(Dec 2025) My two honors students, Avery Cutler and Nathan Kellerman, made absolutely amazing mid-year presentations on their respective projects, both of which are fascinating. Check out their projects here: [Avery], Nathan.\n(July 2025) Delighted to see Assistant Professor of Physics Fe McBride’s paper, “A radio-quiet AGN as a candidate counterpart to neutrino event IceCube–200615A” to be finally published in The Monthly Notices of the Royal Astronomical Society."
+    "text": "Recent work\n\n(Dec 2025) Check out my recent(ish) paper using mixture models to map political ideology using election data: O’Brien. 2025. “A Bayesian mixture model captures temporal and spatial structure of voting blocs within longitudinal referendum data”. Currently in press in Political Science Research and Methods.\n(Dec 2025) My two honors students, Avery Cutler and Nathan Kellerman, made absolutely amazing mid-year presentations on their respective projects, both of which are fascinating. Check out their projects here: [Avery], Nathan.\n(July 2025) Delighted to see Assistant Professor of Physics Fe McBride’s paper, “A radio-quiet AGN as a candidate counterpart to neutrino event IceCube–200615A” published in The Monthly Notices of the Royal Astronomical Society."
   },
   {
     "objectID": "student.html",
@@ -193,6 +193,13 @@
     "href": "teaching.html#statistics-math-2606",
     "title": "Courses",
     "section": "Statistics (Math 2606)",
-    "text": "Statistics (Math 2606)\n\n\n\n\n\nSpring 2026\nAn advanced introduction to the practice and principles of statistical modeling, or how to build statistical models to interpret data in as many contexts as we can possibly squeeze into a semester. Topics make for a breathy, tour de force of the core workhorses of statistics: simulation, parametric models, inference, testing, regression in its myriad forms, and, hopefully, clustering. Along the way, we’ll consider data from a wide array of sources – speed dating experiments, teaching evaluations, hate crimes, criminal sentencing, plague deaths, historical debates on colonialism, and the Titanic itself – to give students a wide exposure to different interpretive domains. Throughout the semester, we will collaboratively fashion the tools each student will need to construct their own final data project, an extensive exploration of a dataset of their choosing. Assumes a course in probability and an enthusiasm for coding."
+    "text": "Statistics (Math 2606)\n\n\n\n\n\nSpring 2026\nAn advanced introduction to the practice and principles of statistical modeling. Practically, this means learning how to build statistical models to interpret data in as many contexts as we can possibly squeeze into a semester. Topics make for a roaring tour of many core workhorses of statistics: simulation, parametric models, inference, testing, regression in its myriad forms, and, hopefully, clustering. Along the way, we’ll consider data from a wide array of sources – speed dating experiments, teaching evaluations, hate crimes, criminal sentencing, plague deaths, historical debates on colonialism, and the Titanic itself – to give students wide exposure to different interpretive perspectives. Through the semester, we will collaboratively fashion the tools each student will need to construct their final data project, an extensive exploration of a data set of their choosing. Assumes a course in probability and enthusiasmfor coding (if not necessarily any experience, though that will be helpful)."
+  },
+  {
+    "objectID": "teaching.html#data-science-math-1756",
+    "href": "teaching.html#data-science-math-1756",
+    "title": "Courses",
+    "section": "Data Science (Math 1756)",
+    "text": "Data Science (Math 1756)\n\n\n\n\n\nSpring 2026\nClass 2 introduction."
   }
 ]
