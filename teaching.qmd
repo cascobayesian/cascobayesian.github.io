@@ -1,24 +1,25 @@
 ---
-title: "Teaching"
-subtitle: "I teach."
+title: "Courses"
+subtitle: ""
 title-block-banner: false
 ---
 
+*"The fundamental problem of communication is that of reproducing at one point, either exactly or approximately, a message selected at another point."* -Claude Shannon
 
-## Class 1
+
+## Statistics (Math 2606)
 
 ::: {.grid}
 
 ::: {.g-col-12 .g-col-md-2}
-![](files/images/placeholder1.jpg)
 
 :::
 
 ::: {.g-col-12 .g-col-md-10}
 
-[Fall 2024](https://www.google.com), &nbsp; [Fall 2023](https://www.google.com)
+[Spring 2026](cascobayesian.github.io)
 
-Class 1 introduction.
+An advanced introduction to the practice and principles of modern statistical modeling -- how to use mathematical and computational models to interpret data in as many contexts as we can possibly squeeze into a semester. Topics makes for a breathy, tour de force of the core workhorses of statistics, including parametric models, simulation, inference, testing,  regression in its many forms, and clustering. Along the way, we'll consider data from a wide array of sources -- speed dating experiments, teaching evaluations, hate crimes, criminal sentencing, plague deaths, historical debates on colonialism, and the Titanic itself -- to give students a wide exposure to different domains. Together, we will collaboratively fashion the tools each student will need to construct their own final data project, including the . Assumes a course in probability and an enthusiasm for coding. 
 
 :::
 

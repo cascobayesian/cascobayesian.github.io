@@ -58,9 +58,9 @@
   {
     "objectID": "teaching.html",
     "href": "teaching.html",
-    "title": "Teaching",
+    "title": "Courses",
     "section": "",
-    "text": "Fall 2024,   Fall 2023\nClass 1 introduction."
+    "text": "“The fundamental problem of communication is that of reproducing at one point, either exactly or approximately, a message selected at another point.” -Claude Shannon"
   },
   {
     "objectID": "teaching.html#class-1",
@@ -72,14 +72,14 @@
   {
     "objectID": "teaching.html#class-2",
     "href": "teaching.html#class-2",
-    "title": "Teaching",
+    "title": "Courses",
     "section": "Class 2",
     "text": "Class 2\n\n\n\n\n\nSpring 2025,   Fall 2023\nClass 2 introduction."
   },
   {
     "objectID": "teaching.html#class-3",
     "href": "teaching.html#class-3",
-    "title": "Teaching",
+    "title": "Courses",
     "section": "Class 3",
     "text": "Class 3\n\n\n\n\n\nSpring 2025,   Spring 2024\nClass 3 introduction."
   },
@@ -187,5 +187,12 @@
     "title": "People",
     "section": "Alumni",
     "text": "Alumni\n\n\n   \n    \n    \n      Order By\n      Default\n      \n      \n      \n        Name\n      \n      \n        Role\n      \n      \n        Started\n      \n      \n        Ended\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\n \n\n\n\nName\n\n\n\nRole\n\n\n\nStarted\n\n\n\nEnded\n\n\n\n\n\n\n\n\n\n\n\nAlumni A\n\n\nPhD Alumni\n\n\n2024\n\n\n2025\n\n\n\n\n\n\n\n\n\nAlumni B\n\n\nMasters Alumni\n\n\n2024\n\n\n2025\n\n\n\n\n\n\n\n\n\nAlumni C\n\n\nUndergraduate Alumni\n\n\n2024\n\n\n2025\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "teaching.html#statistics-math-2606",
+    "href": "teaching.html#statistics-math-2606",
+    "title": "Courses",
+    "section": "Statistics (Math 2606)",
+    "text": "Statistics (Math 2606)\n\n\n\n\n\nSpring 2026\nAn advanced introduction to the practice and principles of modern statistical modeling – how to use mathematical and computational models to interpret data in as many contexts as we can possibly squeeze into a semester. Topics makes for a breathy, tour de force of the core workhorses of statistics, including parametric models, simulation, inference, testing, regression in its many forms, and clustering. Along the way, we’ll consider data from a wide array of sources – speed dating experiments, teaching evaluations, hate crimes, criminal sentencing, plague deaths, historical debates on colonialism, and the Titanic itself – to give students a wide exposure to different domains. Together, we will collaboratively fashion the tools each student will need to construct their own final data project, including the . Assumes a course in probability and an enthusiasm for coding."
   }
 ]
