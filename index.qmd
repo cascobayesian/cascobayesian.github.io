@@ -52,5 +52,5 @@ Welcome! This is the academic website for Jack O'Brien. I'm an applied statistic
 ## Recent work
 * (**Dec 2025**) Check out my recent(ish) paper using mixture models to map political ideology using election data: [O'Brien. 2025. "A Bayesian mixture model captures temporal and spatial structure of voting blocs within longitudinal referendum data"](https://arxiv.org/abs/2301.01677). Currently in press in *Political Science Research and Methods*.
 * (**Dec 2025**) My two honors students, Avery Cutler and Nathan Kellerman, made absolutely amazing mid-year presentations on their respective projects, both of which are fascinating. Check out their projects here: [Avery], [Nathan](https://github.com/nathan-kellerman/nkellerman-research-git).
-* (**July 2025**) Delighted to see Assistant Professor of Physics Fe McBride's [paper, "A radio-quiet AGN as a candidate counterpart to neutrino event IceCube–200615A" to be finally published in *The Monthly Notices of the Royal Astronomical Society*](https://academic.oup.com/mnras/article/541/2/1613/8175000).
+* (**July 2025**) Delighted to see Assistant Professor of Physics Fe McBride's paper, ["A radio-quiet AGN as a candidate counterpart to neutrino event IceCube–200615A"](https://academic.oup.com/mnras/article/541/2/1613/8175000) to be finally published in *The Monthly Notices of the Royal Astronomical Society*.
 
