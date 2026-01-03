@@ -4,23 +4,26 @@ subtitle: ""
 title-block-banner: false
 ---
 
-*"The fundamental problem of communication is that of reproducing at one point, either exactly or approximately, a message selected at another point."* -Claude Shannon
-
+*“In all the works on pedagogy that ever I read ... I don't remember that any one has advocated a system of teaching by practical jokes, mostly cruel. That, however, describes the method of our great teacher, Experience.”* -Charles Pierce
 
 ## Statistics (Math 2606)
 
 ::: {.grid}
 
-::: {.g-col-12 .g-col-md-2}
-![](files/images/placeholder2.JPG)
+::: {.g-col-12 .g-col-md-5}
 
+![](files/images/proportion.jpg){width="4in"}
+
+![](files/images/regression.jpg){width="4in"}
+
+![](files/images/sequence.jpg){width="4in"}
 :::
 
-::: {.g-col-12 .g-col-md-10}
+::: {.g-col-12 .g-col-md-7}
 
-[Spring 2026](cascobayesian.github.io)
+[Spring 2026](https://cascobayesian.github.io/Computational.Hermeneutics/)
 
-An advanced introduction to the practice and principles of statistical modeling. Practically, this means: (1) learning how to build statistical models; (2) how to interpret their results in data, and (3) trying to look at how to do that in as many contexts as we can possibly squeeze into a semester. Topics make for a roaring tour of many of the core workhorses of computational statistics: simulation, parametric models, inference, testing,  regression in its myriad forms, and, hopefully, clustering. Along the way, we'll consider data from a wide array of sources -- speed dating experiments, teaching evaluations, hate crimes, criminal sentencing, plague deaths, historical debates on colonialism, and the Titanic itself -- to give students wide exposure to different interpretive perspectives. Through the semester, we will collaboratively fashion the tools each student will need to construct their final data project, an extensive exploration of a data set of their choosing. Course material very much assumes a course in probability. No coding experience is assumed, but for those with no experience, you may want to keep a lighter schedule for the semester. 
+An advanced introduction to the practice and principles of statistical modeling. In practice this means we will be: (1) learning how to build statistical models; (2) learning how to interpret their results from real data sets, and (3) repeating that in as many contexts as we can possibly squeeze into a semester. We'll take a galloping tour of many of the workhorses of computational statistics and machine learning: simulation, parametric models, inference, testing,  regression (in its myriad forms), and clustering. Along the way, we'll consider data from across the modern experience -- university teaching evaluations, municipal hate crimes, speed dating experiments, astronomical surveys, criminal sentencing, immigration processes, the Atlantic slave trade, and the Titanic disaster -- to give students wide exposure to different interpretive examples for squaring up statistical results with the complex, ambiguous messiness of human understanding. Through the semester, we will collaboratively fashion the tools each student will need to construct their final data project, the elaboration of a statistical model for a data set of their choosing. Course material very much assumes a course in probability, though a comprehensive review is provided. No coding experience is assumed, but for those with truly no experience, a lighter schedule for the semester might be wise. 
 
 :::
 
@@ -31,12 +34,12 @@ An advanced introduction to the practice and principles of statistical modeling.
 
 ::: {.grid}
 
-::: {.g-col-12 .g-col-md-2}
-![](files/images/placeholder2.JPG)
+::: {.g-col-12 .g-col-md-5}
+![](files/images/network.jpg){width="4in"}
 
 :::
 
-::: {.g-col-12 .g-col-md-10}
+::: {.g-col-12 .g-col-md-7}
 
 [Spring 2026](https://www.google.com)
 

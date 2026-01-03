@@ -31,14 +31,12 @@ about:
 
 :::{#hero-heading}
 
-Welcome! This is the academic website for Jack O'Brien. I'm an applied statistician and data scientist as well as a professor of mathematics at Bowdoin College. In addition to teaching, I spend most of my time thinking about how different types of social science data (pottery sherds, election results, tweets) can be integrated to create complex portraits of social phenomena. I'm particularly interested in investigating low-dimensional representations of persistent cultural forms within datasets as a means to resolve several long-standing statistical issues in the social sciences. 
-
-
+Welcome! This is the academic website for Jack O'Brien. I'm an applied statistician, data scientist and a professor of mathematics at Bowdoin College. In addition to teaching, I spend most of my time thinking about how different types of social science data (pottery sherds, election results, tweets) can be integrated to create complex portraits of social phenomena. I'm particularly interested in how statistical techniques from genetics and high-throughput biology can provide low-dimensional representations of persistent cultural features to address long-standing statistical complexities in the social sciences. 
 
 ## Experience
 
 - Associate Professor, Bowdoin College
-- Senior Statistician, Wellcome Trust Centre for Human Genetics, University of Oxford
+- Senior Statistician, Wellcome Trust Centre for Human Genetics, University of Oxford 
 - Research Associate in Statistical Genetics, University of Bristol
 
 ## Education
