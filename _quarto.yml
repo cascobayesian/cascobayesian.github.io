@@ -19,24 +19,19 @@ website:
 #        href: index.qmd
       - text: Home
         href: index.qmd
-          
-      - text: About
-        menu:
-          - text: About
-            href: about.qmd
-          - text: Contact
-            href: contact.qmd             
       - text: Research
-        menu: 
-          - text: Student Research
-            href: student.qmd
-          - text: Research
-            href: research.qmd
+        href: research.qmd
       - text: Teaching # Comment the Teaching part out to remove the Teaching page
         href: teaching.qmd
-      - text: People   # Comment the Group part out to remove the Group page
-        href: people.qmd
-
+      - text: Student Research
+        menu:
+          - text: Student Research
+            href: student.qmd
+          - text: Letters of Recommendation
+            href: student.qmd
+      - text: Contact
+        href: contact.qmd             
+      
     right: 
       - text: CV
         href: files/nsf-biosketch.pdf

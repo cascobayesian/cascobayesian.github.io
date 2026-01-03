@@ -4,8 +4,5 @@ description-meta: "Reach out to me with questions and comments"
 title-block-banner: false
 ---
 
-<center>
-
 What's to say about Jack O'Brien? Hard telling, not knowing!
 
-</center>
