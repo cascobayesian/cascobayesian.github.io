@@ -6,19 +6,16 @@ title-block-banner: false
 
 <center>
 
-**JO'B**
+**Jack O'Brien**
 
-School
+*(aka John David O'Brien)*
 
-College
+Position: Associate Professor of Mathematics
 
-University
+School: Bowdoin College
 
-Address: 
+Address: 8600 College Station, Brunswick, Maine, USA 04011
 
-Phone: 
-
-E-mail: 
-
+E-mail: jobrien@bowdoin.edu
 
 </center>

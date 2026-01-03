@@ -1,0 +1,11 @@
+---
+title: "About"
+description-meta: "Reach out to me with questions and comments"
+title-block-banner: false
+---
+
+<center>
+
+What's worth saying about Jack O'Brien? Not too much!
+
+</center>

@@ -19,10 +19,8 @@ website:
 #        href: index.qmd
       - text: About
         menu:
-          - text: News
-            href: posts.qmd#category=news
-          - text: Events
-            href: posts.qmd#category=event      
+          - text: About
+            href: about.qmd
           - text: Contact
             href: contact.qmd             
       - text: Research

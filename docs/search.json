@@ -88,7 +88,7 @@
     "href": "contact.html",
     "title": "Contact",
     "section": "",
-    "text": "JO’B\nSchool\nCollege\nUniversity\nAddress:\nPhone:\nE-mail:"
+    "text": "Jack O’Brien\n(aka John David O’Brien)\nPosition: Associate Professor of Mathematics\nSchool: Bowdoin College\nAddress: 8600 College Station, Brunswick, Maine, USA 04011\nE-mail: jobrien@bowdoin.edu"
   },
   {
     "objectID": "index.html",
@@ -201,5 +201,12 @@
     "title": "Courses",
     "section": "Data Science (Math 1756)",
     "text": "Data Science (Math 1756)\n\n\n\n\n\nSpring 2026\nClass 2 introduction."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "What’s worth saying about Jack O’Brien? Not too much!"
   }
 ]
