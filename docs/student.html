@@ -83,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
     const options = {
       valueNames: ['listing-image','listing-title','listing-subtitle',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-image","listing-title","listing-lastname","listing-subtitle","listing-categories","listing-started","listing-ended"],
+      searchColumns: ["listing-image","listing-title","listing-lastname","listing-subtitle","listing-categories","listing-started","listing-ended","listing-current"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -111,7 +111,7 @@ ul.task-list li input[type="checkbox"] {
     const options = {
       valueNames: ['listing-image','listing-title','listing-subtitle','listing-started','listing-ended',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-title-sort'] }],
       
-      searchColumns: ["listing-image","listing-title","listing-lastname","listing-subtitle","listing-categories","listing-started","listing-ended"],
+      searchColumns: ["listing-image","listing-title","listing-lastname","listing-subtitle","listing-categories","listing-started","listing-ended","listing-current"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -190,10 +190,10 @@ window.Quarto = {
 
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="People">
-<meta property="og:description" content="Who we are">
+<meta property="og:description" content="test">
 <meta property="og:image" content="https://cascobayesian.github.io/files/profiles/profile1.JPG">
 <meta name="twitter:title" content="People">
-<meta name="twitter:description" content="Who we are">
+<meta name="twitter:description" content="test">
 <meta name="twitter:image" content="https://cascobayesian.github.io/files/profiles/profile1.JPG">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -210,47 +210,36 @@ window.Quarto = {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-about" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">About</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-about">    
-        <li>
-    <a class="dropdown-item" href="./posts.html#category=news">
- <span class="dropdown-text">News</span></a>
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
   </li>  
-        <li>
-    <a class="dropdown-item" href="./posts.html#category=event">
- <span class="dropdown-text">Events</span></a>
+  <li class="nav-item">
+    <a class="nav-link" href="./teaching.html"> 
+<span class="menu-text">Research</span></a>
   </li>  
-        <li>
-    <a class="dropdown-item" href="./contact.html">
- <span class="dropdown-text">Contact</span></a>
-  </li>  
-    </ul>
-  </li>
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-research" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Research</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-research">    
-        <li>
-    <a class="dropdown-item" href="./student.html">
- <span class="dropdown-text">Student Research</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./research.html">
- <span class="dropdown-text">Research</span></a>
-  </li>  
-    </ul>
-  </li>
   <li class="nav-item">
     <a class="nav-link" href="./teaching.html"> 
 <span class="menu-text">Teaching</span></a>
   </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-student-research" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Student Research</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-student-research">    
+        <li>
+    <a class="dropdown-item" href="./research.html">
+ <span class="dropdown-text">Student Research</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./student.html">
+ <span class="dropdown-text">Letters of Recommendation</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
-    <a class="nav-link" href="./people.html"> 
-<span class="menu-text">People</span></a>
+    <a class="nav-link" href="./contact.html"> 
+<span class="menu-text">Contact</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
@@ -280,14 +269,14 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(7)</span></div><div class="category" data-category="RGlyZWN0b3I=">Director <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TWFzdGVycyUyMFN0dWRlbnQ=">Masters Student <span class="quarto-category-count">(2)</span></div><div class="category" data-category="UGhEJTIwU3R1ZGVudA==">PhD Student <span class="quarto-category-count">(2)</span></div><div class="category" data-category="VW5kZXJncmFkdWF0ZSUyMFN0dWRlbnQ=">Undergraduate Student <span class="quarto-category-count">(2)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(10)</span></div><div class="category" data-category="RGlyZWN0b3I=">Director <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TWFzdGVycyUyMFN0dWRlbnQ=">Masters Student <span class="quarto-category-count">(2)</span></div><div class="category" data-category="UGhEJTIwU3R1ZGVudA==">PhD Student <span class="quarto-category-count">(2)</span></div><div class="category" data-category="VW5kZXJncmFkdWF0ZSUyMFN0dWRlbnQ=">Undergraduate Student <span class="quarto-category-count">(5)</span></div></div></div>
 <!-- main -->
 <main class="content column-page-left" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">People</h1>
-<p class="subtitle lead">Who we are</p>
+<p class="subtitle lead">test</p>
 </div>
 
 
@@ -324,7 +313,23 @@ PhD Student
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="1" data-categories="TWFzdGVycyUyMFN0dWRlbnQ=">
+<div class="g-col-1" data-index="1" data-categories="VW5kZXJncmFkdWF0ZSUyMFN0dWRlbnQ=">
+<a href="" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-center">
+<p class="card-img-top">
+<img loading="lazy" src="./files/profiles/avery_culter.jpeg" class="thumbnail-image card-img" style="height: 200px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Avery Cutler
+</h5>
+<div class="card-subtitle listing-subtitle">
+Bayesian inference of informal agreements from eviction dockets
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="2" data-categories="TWFzdGVycyUyMFN0dWRlbnQ=">
 <a href="https://drganghe.github.io/quarto-academic-website-template" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-center">
 <p class="card-img-top">
@@ -336,22 +341,6 @@ Student B
 </h5>
 <div class="card-subtitle listing-subtitle">
 Masters Student
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="2" data-categories="VW5kZXJncmFkdWF0ZSUyMFN0dWRlbnQ=">
-<a href="https://drganghe.github.io/quarto-academic-website-template" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-center">
-<p class="card-img-top">
-<img loading="lazy" src="./files/profiles/profile5.JPG" class="thumbnail-image card-img" style="height: 200px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Student C
-</h5>
-<div class="card-subtitle listing-subtitle">
-Undergraduate Student
 </div>
 </div>
 </div></a>
@@ -453,7 +442,26 @@ PI
 
 </tr>
 
-<tr data-index="1" data-categories="TWFzdGVycyUyMFN0dWRlbnQ=" data-listing-title-sort="Alumni B">
+<tr data-index="1" data-categories="VW5kZXJncmFkdWF0ZSUyMFN0dWRlbnQ=" data-listing-title-sort="Alex Richardson">
+<td>
+<span class="listing-image"><img loading="lazy" src="./files/profiles/alex_richardson.jpeg" style="height: 25px;"></span>
+</td>
+<td>
+<a href="https://www.linkedin.com/in/alexander-richardson-87ba0520a/" class="title listing-title">Alex Richardson</a>
+</td>
+<td>
+<span class="listing-subtitle">A hidden Markov model of student swipe records</span>
+</td>
+<td>
+<span class="listing-started">2022</span>
+</td>
+<td>
+<span class="listing-ended">2025</span>
+</td>
+
+</tr>
+
+<tr data-index="2" data-categories="TWFzdGVycyUyMFN0dWRlbnQ=" data-listing-title-sort="Alumni B">
 <td>
 <span class="listing-image"><img loading="lazy" src="./files/profiles/profile4.JPG" style="height: 25px;"></span>
 </td>
@@ -472,21 +480,59 @@ PI
 
 </tr>
 
-<tr data-index="2" data-categories="VW5kZXJncmFkdWF0ZSUyMFN0dWRlbnQ=" data-listing-title-sort="Alumni C">
+<tr data-index="3" data-categories="VW5kZXJncmFkdWF0ZSUyMFN0dWRlbnQ=" data-listing-title-sort="Brian Liu">
 <td>
-<span class="listing-image"><img loading="lazy" src="./files/profiles/profile6.JPG" style="height: 25px;"></span>
+<span class="listing-image"><img loading="lazy" src="./files/profiles/brian_liu.jpeg" style="height: 25px;"></span>
 </td>
 <td>
-<a href="https://drganghe.github.io/quarto-academic-website-template" class="title listing-title">Alumni C</a>
+<a href="https://www.linkedin.com/in/brianliu03/" class="title listing-title">Brian Liu</a>
 </td>
 <td>
-<span class="listing-subtitle">Undergraduate Alumni</span>
+<span class="listing-subtitle">Statistical modeling of municipal eviction records</span>
 </td>
 <td>
-<span class="listing-started">2024</span>
+<span class="listing-started">2022</span>
 </td>
 <td>
 <span class="listing-ended">2025</span>
+</td>
+
+</tr>
+
+<tr data-index="4" data-categories="VW5kZXJncmFkdWF0ZSUyMFN0dWRlbnQ=" data-listing-title-sort="Lauren Traum">
+<td>
+<span class="listing-image"><img loading="lazy" src="./files/profiles/lauren.jpeg" style="height: 25px;"></span>
+</td>
+<td>
+<a href="https://iriss.stanford.edu/people/lauren-traum" class="title listing-title">Lauren Traum</a>
+</td>
+<td>
+<span class="listing-subtitle">Modeling voting blocs in state legislatures</span>
+</td>
+<td>
+<span class="listing-started">2022</span>
+</td>
+<td>
+<span class="listing-ended">2024</span>
+</td>
+
+</tr>
+
+<tr data-index="5" data-categories="VW5kZXJncmFkdWF0ZSUyMFN0dWRlbnQ=" data-listing-title-sort="Sejal Prachand">
+<td>
+<span class="listing-image"><img loading="lazy" src="./files/profiles/sejal.jpeg" style="height: 25px;"></span>
+</td>
+<td>
+<a href="https://www.linkedin.com/in/sejal-prachand" class="title listing-title">Sejal Prachand</a>
+</td>
+<td>
+<span class="listing-subtitle">Spatial models and citizen ecological science data</span>
+</td>
+<td>
+<span class="listing-started">2022</span>
+</td>
+<td>
+<span class="listing-ended">2024</span>
 </td>
 
 </tr>

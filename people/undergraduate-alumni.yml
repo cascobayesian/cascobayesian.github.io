@@ -1,10 +1,39 @@
-    - path: https://drganghe.github.io/quarto-academic-website-template
-      image: "/files/profiles/profile6.JPG"
-      title: "Alumni C"
-      lastname: "C"
-#      author: 
-      subtitle: "Undergraduate Alumni"
-#      date: "2024-03-12"
+    - path: https://www.linkedin.com/in/sejal-prachand
+      image: "/files/profiles/sejal.jpeg"
+      title: "Sejal Prachand"
+      lastname: "Sejal Prachand"
+      current: "UMontana Graduate Student"
+      subtitle: "Spatial models and citizen ecological science data"
       categories: [Undergraduate Student] 
-      started: "2024"
+      started: "2022"
+      ended: "2024"
+      
+    - path: https://iriss.stanford.edu/people/lauren-traum
+      image: "/files/profiles/lauren.jpeg"
+      title: "Lauren Traum"
+      lastname: "Lauren Traum"
+      current: "Stanford Pre-doc"
+      subtitle: "Modeling voting blocs in state legislatures"
+      categories: [Undergraduate Student] 
+      started: "2022"
+      ended: "2024"
+    
+    - path: https://www.linkedin.com/in/brianliu03/
+      image: "/files/profiles/brian_liu.jpeg"
+      title: "Brian Liu"
+      lastname: "Brian Liu"
+      current: "Watson Fellow"
+      subtitle: "Statistical modeling of municipal eviction records"
+      categories: [Undergraduate Student] 
+      started: "2022"
+      ended: "2025"
+    
+    - path: https://www.linkedin.com/in/alexander-richardson-87ba0520a/
+      image: "/files/profiles/alex_richardson.jpeg"
+      title: "Alex Richardson"
+      lastname: "Alex Richardon"
+      current: "NCSU Graduate Student"
+      subtitle: "A hidden Markov model of student swipe records"
+      categories: [Undergraduate Student] 
+      started: "2022"
       ended: "2025"

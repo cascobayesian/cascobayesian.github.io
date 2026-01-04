@@ -31,15 +31,15 @@ about:
 
 :::{#hero-heading}
 
-Welcome! This is the academic website of Jack O'Brien. I'm an applied statistician, data scientist, and a professor of mathematics at Bowdoin College. In addition to teaching, I spend most of my time thinking about how different types of social science data (pottery sherds, election results, tweets) can be integrated to create complex portraits of social phenomena. I'm particularly interested in how statistical techniques from genetics and high-throughput biology can provide low-dimensional representations of persistent cultural features to address long-standing statistical complexities in the social sciences. 
+Welcome! This is the academic website of Jack O'Brien. I'm an applied statistician, data scientist, and a professor of mathematics at [Bowdoin College](https://www.bowdoin.edu/). In addition to teaching, I spend most of my time thinking about how mixture models can be used to analyze social science data ([pottery sherds](https://royalsocietypublishing.org/rspb/article/283/1827/20152824/84418/Mixture-model-of-pottery-decorations-from-Lake), [election results](https://arxiv.org/abs/2301.01677), [tweets](https://journals.sagepub.com/doi/abs/10.1177/0038038520956940)) to create remarkably simple portraits of complex social phenomena. Recently, I have been thinking a lot about how to connect these methods to the [Bayesian multiview problem](https://arxiv.org/pdf/2312.13484): how to integrate multiple types of election and demographic information into a single model that simultaneously ascertains the relative contribution of each data type to the overall model?  
 
-## Experience
+### Experience
 
-- Associate Professor, Bowdoin College
-- Senior Statistician, Wellcome Trust Centre for Human Genetics, University of Oxford 
-- Research Associate in Statistical Genetics, University of Bristol
+- Associate Professor, Bowdoin College (2018-present)
+- Senior Statistician, Wellcome Trust Centre for Human Genetics, University of Oxford (2010-2012)
+- Research Associate in Statistical Genetics, University of Bristol (2008-2009)
 
-## Education
+### Education
 
 - BA, Pomona College (Mathematics)
 - PhD, UCLA (Biomathematics)
@@ -48,6 +48,6 @@ Welcome! This is the academic website of Jack O'Brien. I'm an applied statistici
 
 ## Recent work
 * (**Dec 2025**) Check out my recent(ish) paper using mixture models to map political ideology using election data: [O'Brien. 2025. "A Bayesian mixture model captures temporal and spatial structure of voting blocs within longitudinal referendum data"](https://arxiv.org/abs/2301.01677). Currently in press in *Political Science Research and Methods*.
-* (**Dec 2025**) My two honors students, Avery Cutler and Nathan Kellerman, made absolutely amazing mid-year presentations on their respective projects, both of which are fascinating. Check out their projects here: [Avery], [Nathan](https://github.com/nathan-kellerman/nkellerman-research-git).
-* (**July 2025**) Delighted to see Assistant Professor of Physics Fe McBride's paper, ["A radio-quiet AGN as a candidate counterpart to neutrino event IceCube–200615A"](https://academic.oup.com/mnras/article/541/2/1613/8175000) published in *The Monthly Notices of the Royal Astronomical Society*.
+* (**Dec 2025**) My two honors students, Avery Cutler and Nathan Kellerman, made absolutely amazing mid-year presentations on their respective projects. Check out their projects here: [Avery's on modeling eviction records in Boston] and [Nathan's work on a new EM algorithm for overdispersed count data](https://github.com/nathan-kellerman/nkellerman-research-git).
+* (**July 2025**) Very happy to see Assistant Professor of Physics Fe McBride's paper, ["A radio-quiet AGN as a candidate counterpart to neutrino event IceCube–200615A"](https://academic.oup.com/mnras/article/541/2/1613/8175000) (on which I made a very small assist) published in *The Monthly Notices of the Royal Astronomical Society*.
 

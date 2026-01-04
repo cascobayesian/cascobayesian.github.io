@@ -1,10 +1,19 @@
-    - path: https://drganghe.github.io/quarto-academic-website-template
-      image: "/files/profiles/profile5.JPG"
-      title: "Student C"
-      lastname: "C"
-#      author: 
-      subtitle: "Undergraduate Student"
-#      date: "2024-03-12"
-      categories: [Undergraduate Student] 
-      started: "2024"
-      ended: "2025"
+- path: https://www.linkedin.com/in/avery--cutler/
+  image: "/files/profiles/avery_cutler.jpeg"
+  title: "Avery Cutler"
+  lastname: "Avery Cutler"
+  current: "Bowdoin Student"
+  subtitle: "Bayesian inference of informal agreements from eviction dockets"
+  categories: [Undergraduate Student] 
+  started: "2022"
+  ended: "2026"
+
+- path: https://www.linkedin.com/in/nathan--kellerman/
+  image: "/files/profiles/nathan_kellerman.jpeg"
+  title: "Nathan Kellerman"
+  lastname: "Nathan Kellerman"
+  current: "Bowdoin Student"
+  subtitle: "An efficient EM-algorithm for dispersed count data"
+  categories: [Undergraduate Student] 
+  started: "2022"
+  ended: "2026"
