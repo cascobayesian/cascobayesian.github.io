@@ -29,6 +29,8 @@ website:
             href: student.qmd
           - text: Letters of Recommendation
             href: lor.qmd
+          - text: Appointments
+            href: appointments.qmd
       - text: Contact
         href: contact.qmd             
       
