@@ -20,15 +20,15 @@ website:
       - text: Home
         href: index.qmd
       - text: Research
-        href: teaching.qmd
+        href: research.qmd
       - text: Teaching # Comment the Teaching part out to remove the Teaching page
         href: teaching.qmd
-      - text: Student Research
+      - text: Students
         menu:
           - text: Student Research
-            href: research.qmd
-          - text: Letters of Recommendation
             href: student.qmd
+          - text: Letters of Recommendation
+            href: lor.qmd
       - text: Contact
         href: contact.qmd             
       

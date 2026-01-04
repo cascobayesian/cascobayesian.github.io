@@ -1,59 +1,8 @@
 ---
 title: ""
 subtitle: ""
-#image: files/group.jpeg
-page-layout: full
-listing:  #an example of listing external links
-#  template: item-default-external.ejs
-- id: lab-member
-  sort: "started"
-  type: grid
-  fields: [image, title, subtitle]
-  grid-item-align: center
-  grid-columns: 4
-  image-height: 200px
-  categories: true
-#  sort-ui: true
-#  filter-ui: true
-  contents: 
-    - /people/undergraduate-student.yml
-
-- id: lab-alumni
-  sort: "ended dsc"
-  type: table
-  fields: [image, title, subtitle, current, ended]
-  grid-item-align: center  
-  grid-columns: 4
-  image-height: 100px
-  field-display-names: 
-      title: "Name"
-      subtitle: "Project"
-      current: "Position"
-      ended: "Year"
-#  categories: true
-#  sort-ui: true
-#  filter-ui: true
-  contents: 
-    - /people/undergraduate-alumni.yml
-
-
-page-navigation: false
-title-block-banner: false
-toc: false
-
-format:
-  html:
-    link-external-newwindow: true
+format:  html
 ---
 
 
-## Current research students
-
-:::{#lab-member}
-:::
-
-## Former research students
-
-:::{#lab-alumni}
-:::
-
+## Research
