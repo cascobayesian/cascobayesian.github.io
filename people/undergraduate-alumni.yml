@@ -37,3 +37,13 @@
       categories: [Undergraduate Student] 
       started: "2022"
       ended: "2025"
+    
+    - https://www.linkedin.com/in/ahmad-harb-2a10a7230/
+      image: "/files/profiles/alex_richardson.jpeg"
+      title: "Alex Richardson"
+      lastname: "Alex Richardon"
+      current: "NCSU Graduate Student"
+      subtitle: "A hidden Markov model of student swipe records"
+      categories: [Undergraduate Student] 
+      started: "2022"
+      ended: "2025"

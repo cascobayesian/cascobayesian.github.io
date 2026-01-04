@@ -1,10 +1,8 @@
 ---
 title: ""
 subtitle: ""
-#image: files/group.jpeg
 page-layout: full
 listing:  #an example of listing external links
-#  template: item-default-external.ejs
 - id: lab-member
   sort: "started"
   type: grid
@@ -13,8 +11,6 @@ listing:  #an example of listing external links
   grid-columns: 4
   image-height: 200px
   categories: true
-#  sort-ui: true
-#  filter-ui: true
   contents: 
     - /people/undergraduate-student.yml
 
