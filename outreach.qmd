@@ -3,16 +3,6 @@ title: "Outreach & activism"
 subtitle: "Statistics for housing, tenants and the public"
 toc: true
 toc-location: right
-listing:
-  id: outreach-news
-  contents: news
-  include:
-    categories: "{outreach}"
-  sort: "date desc"
-  type: table
-  fields: [date, title]
-  date-format: "MMM YYYY"
-  max-items: 5
 ---
 
 As we confront the disaster of increasing authoritarianism and its computational and data-based implementation, I think it is incumbent upon us as quantitative scholars that we challenge ourselves to do the difficult work of re-imagining our disciplines freed from their associations with the surveillance state. The [Just Mathematics Collective](https://www.justmathematicscollective.net/) provides some much needed initiative in that direction.
@@ -35,21 +25,11 @@ Portland's landlords report every unit's rent to the city each year. I mapped fi
 Brunswick has no rent registry, so I built one: the town's rental housing, unit by unit, from the assessor's records, with current rents estimated from Census data and asking rents from Zillow listings. The report covers housing units, rentals and short-term rentals.
 
 ```{=html}
-<a class="map-link" href="files/brunswick_housing_report.pdf" target="_blank" rel="noopener">
+<div class="map-link" style="pointer-events: none;">
   <img src="files/images/brunswick_rent_map_thumb.jpg" alt="Map of Brunswick, Maine, with a dot for each rental unit, shaded by estimated current rent">
-  <span class="map-link-label">Read the Brunswick housing report (PDF) &rarr;</span>
-</a>
+</div>
 ```
-
-## Evictions in Boston
-
-Related student work: Brian Liu's honors thesis, *Chains for Change: A Bayesian and Sociological Analysis of Boston's Eviction Court Cases*, and Avery Cutler's honors thesis on informal agreements in eviction dockets.
 
 ## PMP
 
-## Rent control, redone
-
-## Recent outreach news
-
-::: {#outreach-news}
-:::
+I am a huge fan of the [Prison Mathematics Project](https://prisonmathproject.org/). If you can, please consider joining or [donating](https://prisonmathproject.org/donate).

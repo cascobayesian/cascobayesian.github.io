@@ -50,7 +50,7 @@ website:
         target: _blank
 
   page-footer:
-    left: "&copy; 2026 Jack O'Brien &middot; Department of Mathematics, Bowdoin College &middot; 8600 College Station, Brunswick, Maine 04011"
+    left: "&copy; 2026 Jack O'Brien &middot; Department of Mathematics and Statistics, Bowdoin College &middot; 8600 College Station, Brunswick, Maine 04011"
     right: "Built with [Quarto](https://quarto.org)"
 
 format:

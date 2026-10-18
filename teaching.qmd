@@ -1,25 +1,18 @@
 ---
 title: "Teaching"
-subtitle: "Statistics, data science and Bayesian statistics at Bowdoin College"
 toc: true
 toc-location: right
-listing:
-  id: teaching-news
-  contents: news
-  include:
-    categories: "{teaching}"
-  sort: "date desc"
-  type: table
-  fields: [date, title]
-  date-format: "MMM YYYY"
-  max-items: 5
 ---
 
+::: {style="text-align: center;"}
 > *"In all the works on pedagogy that ever I read ... I don't remember that any one has advocated a system of teaching by practical jokes, mostly cruel. That, however, describes the method of our great teacher, Experience."*
 >
 > — Charles S. Peirce
+:::
 
-## Data science (Math 1756)
+## Courses
+
+### Data science (Math 1756)
 
 ::: {.grid}
 
@@ -30,23 +23,18 @@ listing:
 ::: {.g-col-12 .g-col-md-8}
 **Spring 2026**
 
-An advanced introductory exploration of the principles of data science, including logic, probability and data organization. As a final project, students present a set of models for a data set of their choosing.
+A calculus-informed, computation-based introduction to data science, taught in R. The course moves from visualizing and describing data to the linear model and its discontents: multiple and categorical regressors, ANOVA, model selection, prediction and omitted-variable bias. Students then do the practical work of logic, cleaning and wrangling data found in the wild, and presenting it in documents and code that people can read. The second half turns to probability and simulation (conditional probability, random variables, data-generating processes, the central limit theorem and the bootstrap) and ends with testing: sensitivity and specificity, p-values, power, effect sizes, and what significance does and does not mean.
 
-<!-- Draft fragments from the previous version, to finish:
-Examples will be drawn from data sets that
-calculus-informed and computation-based introduction to the interpretation of data.
--->
+Three mini-projects (the visual interpretation of data, data transformations, and writing with uncertainty) build toward a final project in which students present a set of models for a data set of their choosing. The course assumes a semester of calculus; no coding experience is assumed.
 :::
 
 :::
 
-## Statistical modelling (Math 2606)
+### Statistical modelling (Math 2606)
 
 ::: {.grid}
 
 ::: {.g-col-12 .g-col-md-4}
-![](files/images/proportion.jpg){fig-alt="Plot of a proportion"}
-
 ![](files/images/regression.jpg){fig-alt="Regression plot"}
 :::
 
@@ -60,41 +48,32 @@ Though a comprehensive review is provided, the pace of the material very much as
 
 :::
 
-## Bayesian statistics
+### Bayesian statistics (Math 3606)
 
-Applied Bayesian statistics with computation: the theory of the Bayesian approach, followed by Markov chain Monte Carlo techniques for practical inference, with intensive use of R. Taught as Advanced Topics in Statistics (Fall 2013, Fall 2014, Fall 2017, Fall 2019, Fall 2023, Spring 2024).
+::: {.grid}
 
-## Some ideas about statistics
-
-::: {.callout-note appearance="simple"}
-This section is being written.
+::: {.g-col-12 .g-col-md-4}
+![](files/images/proportion.jpg){fig-alt="Plot of a proportion"}
 :::
 
-## Recent teaching news
+::: {.g-col-12 .g-col-md-8}
+**Fall 2025**
 
-::: {#teaching-news}
+An applied course in Bayesian statistics, with intensive use of R. After a review of probability, likelihood and maximum likelihood estimation, the course develops Bayesian reasoning in one-ish dimension: conducting a poll, choosing priors, describing posteriors, and the conjugate models (beta-binomial, Poisson, normal, exponential and normal-gamma), along with numerical approaches and objective priors. The third part covers Markov chain Monte Carlo: rejection and importance sampling, Monte Carlo error, Markov chains, the Metropolis–Hastings algorithm, Gibbs sampling and convergence diagnostics. It closes with complex models: Hamiltonian Monte Carlo in RStan, DAGs, hierarchical models, linear and logistic regression, and ANOVA.
+
+There are no exams. The semester ends with group presentations, in which each group investigates an applied topic in Bayesian methods from the primary literature and presents a worked example. Students need probability, including conditional probability and the common distributions, though the course starts from the beginning to bring everyone to the same level.
 :::
 
-## Earlier courses
-
-- **Statistics**, Bowdoin (Spring 2014 to Spring 2024). Techniques in statistics and probabilistic machine learning, with intensive use of R.
-- **Probability**, Bowdoin (Fall 2012 to Fall 2021). Proof-based probability ending with the central limit theorem.
-- **Biostatistics**, Bowdoin (Fall 2012 to Spring 2015; Fall 2017). Accelerated introductory statistics with readings from the social and natural sciences.
-- **Seminar in Statistics**, Wellcome Trust Centre for Human Genetics, University of Oxford (2011–2012).
-- **Cape Town Workshop in Genetic Epidemiology** (March 2011). A short course for African researchers studying the genetic basis of malaria.
-- **Introductory Statistics**, University of Bristol (2009, 2010).
-- **Statistical Phylogenetics**, **Calculus II** and **Introduction to Applied Mathematics**, UCLA.
+:::
 
 ## Honors theses
 
-- **Nathan Kellerman** (2025–26): an efficient EM algorithm for dispersed count data
-- **Avery Cutler** (2025–26): Bayesian inference of informal agreements from eviction dockets
-- **Brian Liu** (2024–25): *Chains for Change: A Bayesian and Sociological Analysis of Boston's Eviction Court Cases*
+- **[Nathan Kellerman](students/research.qmd)** (2025–26): an efficient EM algorithm for dispersed count data
+- **[Avery Cutler](students/research.qmd)** (2025–26): Bayesian inference of informal agreements from eviction dockets
+- **[Brian Liu](students/research.qmd)** (2024–25): *Chains for Change: A Bayesian and Sociological Analysis of Boston's Eviction Court Cases*
 - **Max Hukill** (2019–21): a statistical model of honeybee foraging and learning
 - **Nan Ding** (2018–19): exploring the mathematical emergence of homeostasis in microbial ecosystems
 - **Jacob Spertus** (2014–15): *A Bayesian Exploration of the Arabidopsis thaliana Chloroplast Genome*
 - **Chunyi Zhao** (2014–15): *The Card Swiper's Coloring Book: Bayesian Inference of Social Networks on Spatio-temporal Data*
 - **Zoe Karp** (2013–14): *Bayesian Parameter Estimation without Likelihoods: An Example in Lobster Heart Modeling*
 - **Nathan Meyers** (2012–13): *The Twitterscape in Time and Space*
-
-See also [student research](students/research.qmd).

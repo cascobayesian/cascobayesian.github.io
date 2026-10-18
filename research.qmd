@@ -12,9 +12,9 @@ My research develops Bayesian mixture models to find interpretable structures in
 ![](files/images/lake-chad-pottery.png){fig-alt=""}
 :::
 ::: {.pcard-body}
-### [Statistical innovations](research/methods.qmd)
+### Statistical innovations <!-- link: research/methods.qmd -->
 
-The Beta-Binomial Mixture Model. How to Fit It. How to Pin Down the Number of Blocs. Extensions. Some Pieces of Pottery.
+The Beta-binomial mixture model. How to fit it. How to nail down the number of blocs. Some pieces of pottery. Extensions.
 :::
 :::
 
@@ -23,9 +23,9 @@ The Beta-Binomial Mixture Model. How to Fit It. How to Pin Down the Number of Bl
 ![](files/images/research/maine_pies_7_3_card.jpg){fig-alt=""}
 :::
 ::: {.pcard-body}
-### [Mapping voting blocs](research/voting-blocs.qmd)
+### Mapping voting blocs <!-- link: research/voting-blocs.qmd -->
 
-A model from population genetics, applied to election returns. The blocs it finds are neither left nor right, strikingly spatial, and stable across elections.
+How to map voting blocs? Blocs are neither left nor right but highly spatial and stable across elections. Maine politics redux.
 :::
 :::
 
@@ -34,20 +34,20 @@ A model from population genetics, applied to election returns. The blocs it find
 ![](files/images/research/california_rainbow.jpg){fig-alt="" .contain}
 :::
 ::: {.pcard-body}
-### [Local politics](research/local-politics.qmd)
+### Local politics <!-- link: research/local-politics.qmd -->
 
-What divides voters when the parties aren't on the ballot: Maine, California and places across the country.
+How local is politics? Mapping the demographic structure of voting blocs across the US, including California, Miami, and NYC.
 :::
 :::
 
 ::: {.pcard}
 ::: {.pcard-img}
-![](files/images/research/switzerland_blocs.jpg){fig-alt=""}
+![](files/images/research/switzerland_pca_1995_2005.gif){fig-alt="Rotating 3-D plot of Swiss communes on the first three principal coordinates of their referendum votes, 1995–2005, coloured by voting bloc" .contain}
 :::
 ::: {.pcard-body}
-### [Politics worldwide](research/worldwide.qmd)
+### Politics worldwide <!-- link: research/worldwide.qmd -->
 
-Mapping local politics in a variety of electoral structures. The Netherlands, Switzerland, Croatia, Botswana, and Korea (to start).
+What structures voting blocs within and across countries? Case studies in the Netherlands, Switzerland, Croatia, Botswana and Korea (to start).
 :::
 :::
 

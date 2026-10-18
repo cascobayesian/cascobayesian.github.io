@@ -45,7 +45,8 @@ h3 { font-size: 1.15rem; margin-top: 1.6rem; }
   background: var(--jo-card-bg); border: 1px solid var(--jo-rule); border-radius: 10px;
   overflow: hidden; transition: border-color .15s ease, transform .15s ease;
 }
-.pcard:hover { border-color: var(--bs-link-color); transform: translateY(-2px); }
+/* Hover lift off while the Research cards have no links; restore with the links. */
+/* .pcard:hover { border-color: var(--bs-link-color); transform: translateY(-2px); } */
 .pcard .pcard-img { height: 150px; background: var(--jo-chip-bg); display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .pcard .pcard-img img { width: 100%; height: 100%; object-fit: cover; margin: 0; }
 .pcard .pcard-img .bi, .pcard .pcard-img i { font-size: 2.6rem; color: var(--bs-link-color); opacity: .75; }
