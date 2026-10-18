@@ -15,11 +15,11 @@ listing:
 ---
 
 ```{=html}
-<div class="mast">
+<div class="mast column-screen-inset">
   <p class="mast-name" role="heading" aria-level="1">Jack O'Brien</p>
   <p class="mast-sub">Applied statistics &middot; Bowdoin College</p>
 </div>
-<div class="hero-grid column-page">
+<div class="hero-grid column-screen-inset">
   <div class="hero-viz">
     <div class="viz-pair">
       <img src="files/images/netherlands_1971_map.png" alt="Map of Dutch municipalities colored by their 1971 voting bloc">
