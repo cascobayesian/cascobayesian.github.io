@@ -104,19 +104,19 @@ h3 { font-size: 1.15rem; margin-top: 1.6rem; }
 .nav-footer { border-top: 0; padding-block: 2.2rem; }
 
 /* Headings */
-h1.title, .quarto-title h1 { font-weight: 800; letter-spacing: -0.015em; }
+h1.title, .quarto-title h1 { font-weight: 600; letter-spacing: -0.02em; }
 .quarto-title .subtitle {
   font-family: var(--jo-condensed); text-transform: uppercase; letter-spacing: .05em;
   font-size: 1.35rem; color: var(--jo-grad-a);
 }
-h2 { border-bottom: 0; font-weight: 800; }
+h2 { border-bottom: 0; font-weight: 600; letter-spacing: -0.01em; }
 h2::after { content: ""; display: block; width: 2.5rem; height: 3px; margin-top: .45rem;
   background: linear-gradient(90deg, var(--jo-grad-a), var(--jo-grad-b)); }
 
 /* Home masthead */
 .mast { margin: 1.2rem 0 1rem; }
 .mast-name {
-  font-family: "Nunito", sans-serif; font-weight: 800; font-size: clamp(2.4rem, 6vw, 3.6rem);
+  font-family: "IBM Plex Sans", sans-serif; font-weight: 600; font-size: clamp(2.3rem, 5.5vw, 3.3rem);
   line-height: 1.05; margin: 0; letter-spacing: -0.02em;
   background: linear-gradient(90deg, var(--jo-grad-a), var(--jo-grad-b));
   -webkit-background-clip: text; background-clip: text; color: transparent;
@@ -161,3 +161,19 @@ h2::after { content: ""; display: block; width: 2.5rem; height: 3px; margin-top:
 .wide-media { margin: 1.5rem 0 2rem; }
 .wide-media video { width: 100%; height: auto; display: block; border: 1px solid var(--jo-rule); background: #fff; }
 .wide-media figcaption { color: var(--jo-muted); font-size: .9rem; margin-top: .5rem; }
+
+/* Home hero: rotating 1971 PCA over its map (left), text with portrait beneath (right) */
+.hero-grid {
+  display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  grid-template-areas: "viz text" "viz portrait"; grid-template-rows: auto 1fr;
+  gap: 1.4rem 2.4rem; margin: .8rem 0 2.6rem; align-items: start;
+}
+.hero-viz { grid-area: viz; margin: 0; }
+.hero-viz video { width: 100%; height: auto; display: block; background: #fff; }
+.hero-viz figcaption { color: var(--jo-muted); font-size: .88rem; margin-top: .4rem; }
+.hero-text { grid-area: text; font-size: 1.04rem; }
+.hero-text p { margin-bottom: 1rem; }
+.hero-portrait { grid-area: portrait; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; object-position: 25% center; display: block; }
+@media (max-width: 860px) {
+  .hero-grid { grid-template-columns: minmax(0, 1fr); grid-template-areas: "text" "viz" "portrait"; }
+}

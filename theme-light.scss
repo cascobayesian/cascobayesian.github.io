@@ -1,5 +1,5 @@
 /*-- scss:defaults --*/
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Barlow+Condensed:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans+Condensed:wght@400;500;600&display=swap');
 
 // Light frame, white page: warm off-white bands top and bottom (after Masiello),
 // a deep bay-blue wordmark, and a navy-to-teal gradient for the name.
@@ -17,11 +17,11 @@ $link-color: $accent;
 $primary:    $accent;
 $secondary:  $slate;
 
-$font-family-sans-serif: "Nunito Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-$headings-font-family:   "Nunito", "Nunito Sans", system-ui, sans-serif;
-$headings-font-weight:   700;
+$font-family-sans-serif: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+$headings-font-family:   "IBM Plex Sans", system-ui, sans-serif;
+$headings-font-weight:   600;
 $font-size-root: 17px;
-$line-height-base: 1.65;
+$line-height-base: 1.6;
 
 $navbar-bg: $frame;
 $navbar-fg: $ink;
@@ -43,5 +43,5 @@ $border-color: $rule;
   --jo-todo-fg: #6b5200;
   --jo-grad-a: #26407e;
   --jo-grad-b: #1f7a8c;
-  --jo-condensed: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --jo-condensed: "IBM Plex Sans Condensed", "Arial Narrow", sans-serif;
 }

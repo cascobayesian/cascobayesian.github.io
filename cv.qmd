@@ -4,6 +4,16 @@ subtitle: "Updated March 2026"
 page-layout: full
 ---
 
+## Background
+
+- **Associate Professor**, Department of Mathematics, Bowdoin College (2018 to present); Assistant Professor (2012 to 2018)
+- **Senior Statistician**, Wellcome Trust Centre for Human Genetics, University of Oxford (2010 to 2012)
+- **Research Associate in Statistical Genetics**, University of Bristol (2008 to 2010)
+- **Ph.D., Biomathematics**, University of California, Los Angeles
+- **B.A., Mathematics**, Pomona College
+
+## Full CV
+
 [<i class="bi bi-download"></i> Download the CV (PDF)](files/cv_jobrien_2026.pdf){.btn .btn-outline-primary .mb-3}
 
 ```{=html}

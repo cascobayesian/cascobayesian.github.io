@@ -2,7 +2,7 @@
   image: "/files/profiles/james_duncan.jpeg"
   title: "James Duncan"
   lastname: "James Duncan"
-  current: "Bowdoin '26"
+  current: "Analyst, Federal Reserve Bank of Philadelphia"
   subtitle: "Finding level sets of complex demographic data"
   categories: [Undergraduate Student]
   started: "2023"
@@ -12,7 +12,7 @@
   image: "/files/profiles/avery_cutler.jpeg"
   title: "Avery Cutler"
   lastname: "Avery Cutler"
-  current: "Bowdoin '26"
+  current: "Transportation Planner, Foursquare"
   subtitle: "Bayesian inference of informal agreements from eviction dockets"
   categories: [Undergraduate Student]
   started: "2022"
@@ -22,7 +22,7 @@
   image: "/files/profiles/nathan_kellerman.jpeg"
   title: "Nathan Kellerman"
   lastname: "Nathan Kellerman"
-  current: "Bowdoin '26"
+  current: "UConn Graduate Student"
   subtitle: "An efficient EM-algorithm for dispersed count data"
   categories: [Undergraduate Student]
   started: "2022"
