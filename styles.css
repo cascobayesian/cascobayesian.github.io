@@ -187,3 +187,10 @@ h2::after { content: ""; display: block; width: 2.5rem; height: 3px; margin-top:
   .hero-portrait { contain: none; height: auto; aspect-ratio: 3 / 2; }
 }
 
+
+/* Clickable map thumbnails (Outreach) */
+.map-link { display: block; max-width: 640px; margin: 1rem 0 1.6rem; text-decoration: none; }
+.map-link img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; object-position: center 45%; border: 1px solid var(--jo-rule); transition: border-color .15s ease, box-shadow .15s ease; }
+.map-link:hover img, .map-link:focus-visible img { border-color: var(--bs-link-color); box-shadow: 0 4px 16px rgba(29, 39, 51, .12); }
+.map-link-label { display: inline-block; margin-top: .45rem; font-weight: 500; }
+.map-link:hover .map-link-label { text-decoration: underline; }

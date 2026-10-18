@@ -2,8 +2,7 @@ project:
   type: website
   output-dir: docs
   resources:
-    - files/cv_jobrien_2026.pdf
-    - files/images/**
+    - files/**
 
 description-meta: "Jack O'Brien: statistician and data scientist, Bowdoin College"
 author-meta: "Jack O'Brien"

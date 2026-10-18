@@ -21,7 +21,25 @@ As we confront the disaster of increasing authoritarianism and its computational
 
 ## Rent control in Portland
 
+Portland's landlords report every unit's rent to the city each year. I mapped five years of those filings (2021–2025): 5,353 rental buildings and about 95,000 unit-year records, each placed on its tax parcel. Click a building to see every rent reported for it.
+
+```{=html}
+<a class="map-link" href="files/portland-rent-map/index.html" target="_blank" rel="noopener">
+  <img src="files/images/portland_rent_map_thumb.png" alt="Map of Portland, Maine, with a dot for each registered rental building, colored by median rent">
+  <span class="map-link-label">Open the Portland rent registry map &rarr;</span>
+</a>
+```
+
 ## Brunswick rent registry
+
+Brunswick has no rent registry, so I built one: the town's rental housing, unit by unit, from the assessor's records, with current rents estimated from Census data and asking rents from Zillow listings. The report covers housing units, rentals and short-term rentals.
+
+```{=html}
+<a class="map-link" href="files/brunswick_housing_report.pdf" target="_blank" rel="noopener">
+  <img src="files/images/brunswick_rent_map_thumb.jpg" alt="Map of Brunswick, Maine, with a dot for each rental unit, shaded by estimated current rent">
+  <span class="map-link-label">Read the Brunswick housing report (PDF) &rarr;</span>
+</a>
+```
 
 ## Evictions in Boston
 
