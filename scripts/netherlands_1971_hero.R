@@ -17,10 +17,10 @@ pr     <- st_read(file.path(nl, "data", "cbs_boundaries_2025.gpkg"), "provincies
 gm$hex <- legend$hex[match(cols$K8[match(gm$statcode, cols$gm_code)], legend$colour)]
 stopifnot(mean(is.na(gm$hex)) < 0.02)   # only the Flevoland polders lack a 1971 result
 
-S <- 800   # both pieces are S x S pixels so they sit side by side at the same size
+S <- 800; SH <- 1000  # both pieces are S x SH pixels (portrait, like the country) so they sit side by side at the same size
 
 # The map
-png(file.path(out, "netherlands_1971_map.png"), S, S, bg = "white")
+png(file.path(out, "netherlands_1971_map.png"), S, SH, bg = "white")
 par(mar = c(0, 0, 0, 0))
 plot(st_geometry(gm), col = adjustcolor(ifelse(is.na(gm$hex), "#d9d9d9", gm$hex), 0.9),
      border = adjustcolor("white", 0.7), lwd = 0.3)
@@ -45,9 +45,9 @@ frames <- file.path(tempdir(), sprintf("f%03d.png", seq_len(NF)))
 for (k in seq_len(NF)) {
   theta <- 360 * (k - 1) / NF; phi <- 22 + 6 * sin(2 * pi * (k - 1) / NF)
   p <- proj(xyz, theta, phi); o <- order(p$depth, decreasing = TRUE)
-  png(frames[k], S, S, bg = "white")
+  png(frames[k], S, SH, bg = "white")
   par(mar = c(0, 0, 0, 0))
-  plot(NA, xlim = c(-1, 1), ylim = c(-1, 1), asp = 1, axes = FALSE, xlab = "", ylab = "")
+  plot(NA, xlim = c(-1, 1), ylim = c(-1, 1) * SH / S, asp = 1, axes = FALSE, xlab = "", ylab = "")
   points(p$x[o] * 0.95, p$y[o] * 0.95, pch = 21, cex = cex[o],
          bg = adjustcolor(hex[o], 0.92), col = adjustcolor("white", 0.95), lwd = 0.9)
   dev.off()
