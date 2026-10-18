@@ -1,6 +1,6 @@
 ---
 title: "Politics worldwide"
-subtitle: "Voting blocs beyond the United States"
+subtitle: "Mapping local politics in a variety of electoral structures"
 ---
 
 ::: {.callout-note appearance="simple"}
@@ -19,3 +19,11 @@ Dutch municipalities in every Tweede Kamer election from 1946 to 2025, placed by
 ```
 
 ## Switzerland
+
+![Swiss communes by referendum voting bloc, 1982–2026: a 20-bloc fit merged to ten.](../files/images/research/switzerland_blocs.jpg){fig-alt="Map of Switzerland's communes in ten colors, with French-speaking, German-speaking and Italian-speaking regions forming distinct blocs." width="100%"}
+
+## Croatia
+
+## Botswana
+
+## Korea

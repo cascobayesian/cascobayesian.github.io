@@ -1,5 +1,6 @@
 ---
 title: "Maine's history"
+draft: true   # for the future; hidden from the published site
 ---
 
 ::: {.callout-note appearance="simple"}

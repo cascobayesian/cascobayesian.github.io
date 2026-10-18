@@ -1,6 +1,6 @@
 ---
 title: "Research"
-subtitle: "Mixture models for social science, and the statistics that make them work"
+subtitle: "Computational Statistics for Social Science"
 listing:
   id: research-news
   contents: news
@@ -13,9 +13,20 @@ listing:
   max-items: 5
 ---
 
-My research develops Bayesian models, mostly mixture models, to find interpretable structure in complex data. I started in statistical phylogenetics and genetics (viral evolution, malaria genomics, microbial metagenomics). These days I work mainly on social science: political structure in election data, cultural patterns in the archaeological record, and the rhythms of social life online.
+My research develops Bayesian mixture models to find interpretable structures in complex data. While I started in statistical phylogenetics and genetics (viral evolution, malaria genomics, microbial metagenomics), these days I work mainly on social science: political structure in election data, cultural patterns in the archaeological record, and the rhythms of social life online.
 
 ::: {.card-grid}
+
+::: {.pcard}
+::: {.pcard-img}
+![](files/images/lake-chad-pottery.png){fig-alt=""}
+:::
+::: {.pcard-body}
+### [Statistical innovations](research/methods.qmd)
+
+The Beta-Binomial Mixture Model. How to Fit It. How to Pin Down the Number of Blocs. Extensions. Some Pieces of Pottery.
+:::
+:::
 
 ::: {.pcard}
 ::: {.pcard-img}
@@ -41,34 +52,12 @@ What divides voters when the parties aren't on the ballot: Maine, California and
 
 ::: {.pcard}
 ::: {.pcard-img}
-![](files/images/research/netherlands_poster.jpg){fig-alt=""}
+![](files/images/research/switzerland_blocs.jpg){fig-alt=""}
 :::
 ::: {.pcard-body}
 ### [Politics worldwide](research/worldwide.qmd)
 
-The same model on referendum returns from the Netherlands and Switzerland.
-:::
-:::
-
-::: {.pcard}
-::: {.pcard-img}
-![](files/images/research/maine_map.jpg){fig-alt=""}
-:::
-::: {.pcard-body}
-### [Maine's history](research/maine-history.qmd)
-
-A long view of Maine's political geography.
-:::
-:::
-
-::: {.pcard}
-::: {.pcard-img}
-![](files/images/lake-chad-pottery.png){fig-alt=""}
-:::
-::: {.pcard-body}
-### [Statistical innovations](research/methods.qmd)
-
-The beta-binomial mixture model, how to fit it, and how to pin down the number of blocs. Plus pottery and propaganda.
+Mapping local politics in a variety of electoral structures. The Netherlands, Switzerland, Croatia, Botswana, and Korea (to start).
 :::
 :::
 

@@ -155,7 +155,7 @@ h2::after { content: ""; display: block; width: 2.5rem; height: 3px; margin-top:
 /* Research cards with images (Masiello "Research Areas") */
 .pcard .pcard-img { height: 170px; background: #fff; border-bottom: 1px solid var(--jo-rule); }
 .pcard .pcard-img img { object-fit: cover; object-position: center top; }
-.pcard h3 a { color: inherit; text-decoration: none; }
+.pcard h3 a { color: inherit; text-decoration: none; font-weight: inherit; }
 .pcard h3 a:hover { color: var(--bs-link-color); }
 .pcard { border-radius: 4px; }
 .wide-media { margin: 1.5rem 0 2rem; }
