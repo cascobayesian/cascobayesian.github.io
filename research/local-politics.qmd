@@ -35,7 +35,11 @@ Some of Maine's most characteristic ballots are almost invisible to partisanship
 
 ## California
 
-California's propositions give us 74 statewide questions from 2012 to 2024 on nearly 3,000 precincts in Los Angeles County alone. The model finds ten blocs there.
+California's propositions cover the whole state: more than 22,000 precincts voting on the same statewide questions.
+
+![California's 2024 precincts colored by voting bloc (K = 25), fitted on nine categories of ballot question.](../files/images/research/california_clusters.jpg){fig-alt="Map of California precincts in many colors, showing large rural blocs in the north and east and a dense patchwork in the Bay Area and Southern California." width="70%" fig-align="center"}
+
+Zooming in, Los Angeles County alone has nearly 3,000 precincts voting on 74 propositions from 2012 to 2024, and the model finds ten blocs there.
 
 ![Los Angeles County's ten voting blocs, with central Los Angeles enlarged.](../files/images/research/la_map.jpg){fig-alt="Map of Los Angeles County precincts colored by ten voting blocs, with an enlarged inset of central Los Angeles showing South LA, East LA and the Gateway Cities, and the Westside." width="100%"}
 

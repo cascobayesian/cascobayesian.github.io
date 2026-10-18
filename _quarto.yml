@@ -3,6 +3,7 @@ project:
   output-dir: docs
   resources:
     - files/cv_jobrien_2026.pdf
+    - files/images/**
 
 description-meta: "Jack O'Brien: statistician and data scientist, Bowdoin College"
 author-meta: "Jack O'Brien"
@@ -20,6 +21,7 @@ website:
 
   navbar:
     background: light
+    search: true
     collapse-below: lg
     left:
       - text: About
@@ -76,10 +78,8 @@ website:
 
 format:
   html:
-    theme:
-      light: [cosmo, theme-light.scss]
-      dark: [cosmo, theme-dark.scss]
-    respect-user-color-scheme: true
+    # Mockup: a single light theme, like the Masiello site.
+    theme: [cosmo, theme-light.scss]
     css: styles.css
     toc: false
     link-external-icon: false

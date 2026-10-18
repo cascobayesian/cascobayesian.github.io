@@ -18,6 +18,9 @@ My research develops Bayesian models, mostly mixture models, to find interpretab
 ::: {.card-grid}
 
 ::: {.pcard}
+::: {.pcard-img}
+![](files/images/research/maine_mixed_towns_card.jpg){fig-alt=""}
+:::
 ::: {.pcard-body}
 ### [Mapping voting blocs](research/voting-blocs.qmd)
 
@@ -26,6 +29,9 @@ A model from population genetics, applied to election returns. The blocs it find
 :::
 
 ::: {.pcard}
+::: {.pcard-img}
+![](files/images/research/california_clusters.jpg){fig-alt=""}
+:::
 ::: {.pcard-body}
 ### [Local politics](research/local-politics.qmd)
 
@@ -34,6 +40,9 @@ What divides voters when the parties aren't on the ballot: Maine, California and
 :::
 
 ::: {.pcard}
+::: {.pcard-img}
+![](files/images/research/netherlands_poster.jpg){fig-alt=""}
+:::
 ::: {.pcard-body}
 ### [Politics worldwide](research/worldwide.qmd)
 
@@ -42,6 +51,9 @@ The same model on referendum returns from the Netherlands and Switzerland.
 :::
 
 ::: {.pcard}
+::: {.pcard-img}
+![](files/images/research/maine_map.jpg){fig-alt=""}
+:::
 ::: {.pcard-body}
 ### [Maine's history](research/maine-history.qmd)
 
@@ -50,6 +62,9 @@ A long view of Maine's political geography.
 :::
 
 ::: {.pcard}
+::: {.pcard-img}
+![](files/images/lake-chad-pottery.png){fig-alt=""}
+:::
 ::: {.pcard-body}
 ### [Statistical innovations](research/methods.qmd)
 

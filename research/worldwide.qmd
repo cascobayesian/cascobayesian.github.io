@@ -9,4 +9,13 @@ This page is being written.
 
 ## The Netherlands
 
+Dutch municipalities in every Tweede Kamer election from 1946 to 2025, placed by how they voted and colored by the bloc they belonged to in 1946. The animation follows the blocs as they drift, merge and split across eighty years.
+
+```{=html}
+<figure class="wide-media column-page">
+  <video src="../files/images/research/netherlands_morph.mp4" poster="../files/images/research/netherlands_poster.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="Animation of Dutch municipalities' voting blocs, 1946 to 2025"></video>
+  <figcaption>Tweede Kamer elections, 1946–2025: municipalities in Jensen–Shannon principal coordinates, colored by their 1946 bloc (K = 8).</figcaption>
+</figure>
+```
+
 ## Switzerland
