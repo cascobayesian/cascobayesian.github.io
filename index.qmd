@@ -16,8 +16,7 @@ listing:
 
 ```{=html}
 <div class="hero">
-  <!-- TODO: Jack: replace with a real headshot (e.g. files/images/headshot.jpg) -->
-  <img class="headshot" src="files/images/headshot-placeholder.svg" alt="Photo of Jack O'Brien (placeholder)">
+  <img class="headshot" src="files/images/headshot.jpg" alt="Jack O'Brien teaching at Bowdoin">
   <div>
     <p class="hero-name">Jack O'Brien</p>
     <div class="role">Associate Professor of Mathematics &middot; Bowdoin College</div>

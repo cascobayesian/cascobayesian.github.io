@@ -20,7 +20,7 @@ h3 { font-size: 1.15rem; margin-top: 1.6rem; }
 
 /* Home hero */
 .hero { display: grid; grid-template-columns: 220px 1fr; gap: 2.5rem; align-items: start; margin: 1.5rem 0 1rem; }
-.hero img.headshot { width: 220px; height: 220px; object-fit: cover; border-radius: 50%; border: 1px solid var(--jo-rule); }
+.hero img.headshot { width: 220px; height: 220px; object-fit: cover; border-radius: 14px; border: 1px solid var(--jo-rule); }
 .hero > * { min-width: 0; }
 .hero .hero-name { font-family: "Source Serif 4", Georgia, serif; font-weight: 600; margin: 0 0 .2rem; font-size: 2.3rem; line-height: 1.2; }
 .hero .role { color: var(--jo-muted); font-size: 1.1rem; margin-bottom: 1rem; }
