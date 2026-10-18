@@ -1,40 +1,69 @@
-    - path: https://www.linkedin.com/in/sejal-prachand
-      image: "/files/images/headshot-placeholder.svg"
-      title: "Sejal Prachand"
-      lastname: "Sejal Prachand"
-      current: "UMontana Graduate Student"
-      subtitle: "Spatial models and citizen ecological science data"
-      categories: [Undergraduate Student] 
-      started: "2022"
-      ended: "2024"
-      
-    - path: https://iriss.stanford.edu/people/lauren-traum
-      image: "/files/images/headshot-placeholder.svg"
-      title: "Lauren Traum"
-      lastname: "Lauren Traum"
-      current: "Stanford Pre-doc"
-      subtitle: "Modeling voting blocs in state legislatures"
-      categories: [Undergraduate Student] 
-      started: "2022"
-      ended: "2024"
-    
-    - path: https://www.linkedin.com/in/brianliu03/
-      image: "/files/profiles/brian_liu.jpeg"
-      title: "Brian Liu"
-      lastname: "Brian Liu"
-      current: "Watson Fellow"
-      subtitle: "Statistical modeling of municipal eviction records"
-      categories: [Undergraduate Student] 
-      started: "2022"
-      ended: "2025"
-    
-    - path: https://www.linkedin.com/in/alexander-richardson-87ba0520a/
-      image: "/files/profiles/alex_richardson.jpeg"
-      title: "Alex Richardson"
-      lastname: "Alex Richardon"
-      current: "NCSU Graduate Student"
-      subtitle: "A hidden Markov model of student swipe records"
-      categories: [Undergraduate Student] 
-      started: "2022"
-      ended: "2025"
-  
+- path: https://www.linkedin.com/in/james-duncan-b22914255/
+  image: "/files/profiles/james_duncan.jpeg"
+  title: "James Duncan"
+  lastname: "James Duncan"
+  current: "Bowdoin '26"
+  subtitle: "Finding level sets of complex demographic data"
+  categories: [Undergraduate Student]
+  started: "2023"
+  ended: "2026"
+
+- path: https://www.linkedin.com/in/avery--cutler/
+  image: "/files/profiles/avery_cutler.jpeg"
+  title: "Avery Cutler"
+  lastname: "Avery Cutler"
+  current: "Bowdoin '26"
+  subtitle: "Bayesian inference of informal agreements from eviction dockets"
+  categories: [Undergraduate Student]
+  started: "2022"
+  ended: "2026"
+
+- path: https://www.linkedin.com/in/nathan--kellerman/
+  image: "/files/profiles/nathan_kellerman.jpeg"
+  title: "Nathan Kellerman"
+  lastname: "Nathan Kellerman"
+  current: "Bowdoin '26"
+  subtitle: "An efficient EM-algorithm for dispersed count data"
+  categories: [Undergraduate Student]
+  started: "2022"
+  ended: "2026"
+
+- path: https://www.linkedin.com/in/brianliu03/
+  image: "/files/profiles/brian_liu.jpeg"
+  title: "Brian Liu"
+  lastname: "Brian Liu"
+  current: "Watson Fellow"
+  subtitle: "Statistical modeling of municipal eviction records"
+  categories: [Undergraduate Student]
+  started: "2022"
+  ended: "2025"
+
+- path: https://www.linkedin.com/in/alexander-richardson-87ba0520a/
+  image: "/files/profiles/alex_richardson.jpeg"
+  title: "Alex Richardson"
+  lastname: "Alex Richardson"
+  current: "NCSU Graduate Student"
+  subtitle: "A hidden Markov model of student swipe records"
+  categories: [Undergraduate Student]
+  started: "2022"
+  ended: "2025"
+
+- path: https://www.linkedin.com/in/sejal-prachand
+  image: "/files/images/headshot-placeholder.svg"
+  title: "Sejal Prachand"
+  lastname: "Sejal Prachand"
+  current: "UMontana Graduate Student"
+  subtitle: "Spatial models and citizen ecological science data"
+  categories: [Undergraduate Student]
+  started: "2022"
+  ended: "2024"
+
+- path: https://iriss.stanford.edu/people/lauren-traum
+  image: "/files/images/headshot-placeholder.svg"
+  title: "Lauren Traum"
+  lastname: "Lauren Traum"
+  current: "Stanford Pre-doc"
+  subtitle: "Modeling voting blocs in state legislatures"
+  categories: [Undergraduate Student]
+  started: "2022"
+  ended: "2024"

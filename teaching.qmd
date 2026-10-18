@@ -87,8 +87,8 @@ This section is being written.
 
 ## Honors theses
 
-- **Nathan Kellerman** (2025–26), in progress
-- **Avery Cutler** (2025–26), in progress
+- **Nathan Kellerman** (2025–26): an efficient EM algorithm for dispersed count data
+- **Avery Cutler** (2025–26): Bayesian inference of informal agreements from eviction dockets
 - **Brian Liu** (2024–25): *Chains for Change: A Bayesian and Sociological Analysis of Boston's Eviction Court Cases*
 - **Max Hukill** (2019–21): a statistical model of honeybee foraging and learning
 - **Nan Ding** (2018–19): exploring the mathematical emergence of homeostasis in microbial ecosystems

@@ -3,16 +3,17 @@ title: ""
 subtitle: ""
 page-layout: full
 listing:  #an example of listing external links
-- id: lab-member
-  sort: "started"
-  type: grid
-  fields: [image, title, subtitle]
-  grid-item-align: center
-  grid-columns: 4
-  image-height: 200px
-  categories: true
-  contents: 
-    - ../people/undergraduate-student.yml
+# Current students: un-comment this block and the section below when there are some.
+# - id: lab-member
+#   sort: "started"
+#   type: grid
+#   fields: [image, title, subtitle]
+#   grid-item-align: center
+#   grid-columns: 4
+#   image-height: 200px
+#   categories: true
+#   contents:
+#     - ../people/undergraduate-student.yml
 
 - id: lab-alumni
   sort: "ended dsc"
@@ -43,12 +44,14 @@ format:
 ---
 
 
+<!--
 ## Current research students
 
 :::{#lab-member}
 :::
+-->
 
-## Former research students
+## Former research students (since 2023)
 
 :::{#lab-alumni}
 :::

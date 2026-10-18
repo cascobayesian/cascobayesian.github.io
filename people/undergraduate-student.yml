@@ -1,30 +1,4 @@
-- path: https://www.linkedin.com/in/james-duncan-b22914255/
-  image: "/files/profiles/james_duncan.jpeg"
-  title: "James Duncan"
-  lastname: "James Duncan"
-  current: "Bowdoin Student"
-  subtitle: "Finding level sets of complex demographic data"
-  categories: [Undergraduate Student] 
-  started: "2023"
-  ended: "2026"
-  
-- path: https://www.linkedin.com/in/avery--cutler/
-  image: "/files/profiles/avery_cutler.jpeg"
-  title: "Avery Cutler"
-  lastname: "Avery Cutler"
-  current: "Bowdoin Student"
-  subtitle: "Bayesian inference of informal agreements from eviction dockets"
-  categories: [Undergraduate Student] 
-  started: "2022"
-  ended: "2026"
-
-- path: https://www.linkedin.com/in/nathan--kellerman/
-  image: "/files/profiles/nathan_kellerman.jpeg"
-  title: "Nathan Kellerman"
-  lastname: "Nathan Kellerman"
-  current: "Bowdoin Student"
-  subtitle: "An efficient EM-algorithm for dispersed count data"
-  categories: [Undergraduate Student] 
-  started: "2022"
-  ended: "2026"
-
+# Current research students. Add entries here in the same format as
+# undergraduate-alumni.yml, then un-comment the "Current research students"
+# section in students/research.qmd.
+[]
