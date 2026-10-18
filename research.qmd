@@ -1,21 +1,11 @@
 ---
-title: "Research"
+title: "Current Research"
 subtitle: "Computational Statistics for Social Science"
-listing:
-  id: research-news
-  contents: news
-  include:
-    categories: "{research}"
-  sort: "date desc"
-  type: table
-  fields: [date, title]
-  date-format: "MMM YYYY"
-  max-items: 5
 ---
 
 My research develops Bayesian mixture models to find interpretable structures in complex data. While I started in statistical phylogenetics and genetics (viral evolution, malaria genomics, microbial metagenomics), these days I work mainly on social science: political structure in election data, cultural patterns in the archaeological record, and the rhythms of social life online.
 
-::: {.card-grid}
+::: {.card-grid .two-up}
 
 ::: {.pcard}
 ::: {.pcard-img}
@@ -30,7 +20,7 @@ The Beta-Binomial Mixture Model. How to Fit It. How to Pin Down the Number of Bl
 
 ::: {.pcard}
 ::: {.pcard-img}
-![](files/images/research/maine_mixed_towns_card.jpg){fig-alt=""}
+![](files/images/research/maine_pies_zoom.jpg){fig-alt=""}
 :::
 ::: {.pcard-body}
 ### [Mapping voting blocs](research/voting-blocs.qmd)
@@ -41,7 +31,7 @@ A model from population genetics, applied to election returns. The blocs it find
 
 ::: {.pcard}
 ::: {.pcard-img}
-![](files/images/research/california_clusters.jpg){fig-alt=""}
+![](files/images/research/california_rainbow.jpg){fig-alt="" .contain}
 :::
 ::: {.pcard-body}
 ### [Local politics](research/local-politics.qmd)
@@ -61,17 +51,4 @@ Mapping local politics in a variety of electoral structures. The Netherlands, Sw
 :::
 :::
 
-::: {.pcard}
-::: {.pcard-body}
-### [Publications](research/publications.qmd) and [talks](research/talks.qmd)
-
-Twenty-one peer-reviewed papers, from viral evolution to voting blocs.
-:::
-:::
-
-:::
-
-## Recent research news
-
-::: {#research-news}
 :::

@@ -194,3 +194,11 @@ h2::after { content: ""; display: block; width: 2.5rem; height: 3px; margin-top:
 .map-link:hover img, .map-link:focus-visible img { border-color: var(--bs-link-color); box-shadow: 0 4px 16px rgba(29, 39, 51, .12); }
 .map-link-label { display: inline-block; margin-top: .45rem; font-weight: 500; }
 .map-link:hover .map-link-label { text-decoration: underline; }
+
+/* Research page: four large cards, two per row */
+.card-grid.two-up { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.6rem; }
+.card-grid.two-up .pcard-img { height: 320px; }
+.card-grid.two-up .pcard h3 { font-size: 1.25rem; }
+.card-grid.two-up .pcard p { font-size: 1rem; }
+.pcard .pcard-img img.contain { object-fit: contain; object-position: center; }
+@media (max-width: 700px) { .card-grid.two-up { grid-template-columns: minmax(0, 1fr); } .card-grid.two-up .pcard-img { height: 240px; } }
