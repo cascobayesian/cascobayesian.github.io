@@ -169,8 +169,9 @@ h2::after { content: ""; display: block; width: 2.5rem; height: 3px; margin-top:
   gap: 1.4rem 2.4rem; margin: .8rem 0 2.6rem; align-items: start;
 }
 .hero-viz { grid-area: viz; margin: 0; }
-.hero-viz video { width: 100%; height: auto; display: block; background: #fff; }
-.hero-viz figcaption { color: var(--jo-muted); font-size: .88rem; margin-top: .4rem; }
+.viz-pair { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; align-items: center; }
+.viz-pair img, .viz-pair video { width: 100%; height: auto; aspect-ratio: 1 / 1; display: block; background: #fff; margin: 0; }
+.hero-viz .viz-caption { color: var(--jo-muted); font-size: .88rem; margin: .6rem 0 0; text-align: center; text-wrap: balance; }
 .hero-text { grid-area: text; font-size: 1.04rem; }
 .hero-text p { margin-bottom: 1rem; }
 .hero-portrait { grid-area: portrait; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; object-position: 25% center; display: block; }
