@@ -22,7 +22,7 @@
   --town-line: #c4c3b8;
   --limit: #2f3b4a;           /* Portland city limit */
   --town-label: #7d8590;
-  --hwy: #f2bb55; --hwy-case: #c98b2b; --art: #ecd3a0;   /* MaineDOT major roads */
+  --hwy: #eba7a2; --hwy-case: #cf817b; --art: #f1d3d0;   /* MaineDOT major roads, soft red */
   --ptu: #d1312b;             /* PTU audit layer */
   --parcel: #f7f8f9;
   --parcel-line: #c3cad3;
@@ -104,7 +104,6 @@ header.top {
 .ptu-dl { display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; margin: 0; font-size: 12.5px; }
 .ptu-dl dt { color: var(--muted); }
 .ptu-dl dd { margin: 0; font-variant-numeric: tabular-nums; }
-.shield { pointer-events: none; font-family: var(--font-head); font-size: 11px; font-weight: 600; color: #fff; background: #1f4b99; border: 1.5px solid #fff; border-radius: 4px 4px 7px 7px; padding: 1px 5px; box-shadow: 0 1px 2px rgb(0 0 0 / .3); }
 .town-label { pointer-events: none; font-family: var(--font-head); font-size: 11.5px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--town-label); white-space: nowrap; text-shadow: 0 0 3px var(--land), 0 0 3px var(--land); }
 .tooltip .m { color: var(--muted); font-variant-numeric: tabular-nums; }
 
@@ -644,11 +643,6 @@ details li { margin-bottom: 3px; }
           layout: { "line-join": "round", "line-cap": "round" }, paint: { "line-color": css("--hwy-case"), "line-width": W(1.6, 3.8, 8) } });
         map.addLayer({ id: "roads-hwy", type: "line", source: "roads", filter: ["==", ["get", "kind"], "hwy"],
           layout: { "line-join": "round", "line-cap": "round" }, paint: { "line-color": css("--hwy"), "line-width": W(0.8, 2.4, 6) } });
-        roads.features.filter(f => f.properties.kind === "shield").forEach(f => {
-          const el = document.createElement("div");
-          el.className = "shield"; el.textContent = f.properties.label;
-          new maplibregl.Marker({ element: el }).setLngLat(f.geometry.coordinates).addTo(map);
-        });
       }
       if (towns) map.addLayer({ id: "limit", type: "line", source: "towns", filter: ["==", ["get", "kind"], "limit"],
         layout: { "line-join": "round" },
