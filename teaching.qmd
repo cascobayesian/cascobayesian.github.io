@@ -68,12 +68,14 @@ There are no exams. The semester ends with group presentations, in which each gr
 
 ## Honors theses
 
-- **[Nathan Kellerman](students/research.qmd)** (2025–26): an efficient EM algorithm for dispersed count data
-- **[Avery Cutler](students/research.qmd)** (2025–26): Bayesian inference of informal agreements from eviction dockets
-- **[Brian Liu](students/research.qmd)** (2024–25): *Chains for Change: A Bayesian and Sociological Analysis of Boston's Eviction Court Cases*
-- **Max Hukill** (2019–21): a statistical model of honeybee foraging and learning
-- **Nan Ding** (2018–19): exploring the mathematical emergence of homeostasis in microbial ecosystems
-- **Jacob Spertus** (2014–15): *A Bayesian Exploration of the Arabidopsis thaliana Chloroplast Genome*
-- **Chunyi Zhao** (2014–15): *The Card Swiper's Coloring Book: Bayesian Inference of Social Networks on Spatio-temporal Data*
-- **Zoe Karp** (2013–14): *Bayesian Parameter Estimation without Likelihoods: An Example in Lobster Heart Modeling*
-- **Nathan Meyers** (2012–13): *The Twitterscape in Time and Space*
+| Student | Year | Thesis | Bowdoin Library copy |
+|---|---|---|---|
+| **[Nathan Kellerman](students/research.qmd)** | 2025–26 | *A Rapid Algorithm for Inferring Latent Mixture Structure in Replicate Social Science Data* | [Digital Collections](https://digitalcollections.bowdoin.edu/view/60900/a-rapid-algorithm-for-inferring-latent-mixture-structure-in-replicate-social-science-data) (Bowdoin login) |
+| **[Avery Cutler](students/research.qmd)** | 2025–26 | *Beyond the Docket: A Bayesian Exploration of Settlement Outcomes in Boston Evictions* | [Digital Collections](https://digitalcollections.bowdoin.edu/view/60942/beyond-the-docket-a-bayesian-exploration-of-settlement-outcomes-in-boston-evictions) (Bowdoin login) |
+| **[Brian Liu](students/research.qmd)** | 2024–25 | *Chains for Change: Mathematical Modeling of Boston's Eviction Court Cases* | [Digital Collections](https://digitalcollections.bowdoin.edu/browse/collection/85) (Bowdoin login) |
+| **Max Hukill** | 2019–21 | *A Bayesian Hierarchical Mixture Model with Continuous-Time Markov Chains to Capture Bumblebee Foraging Behavior* | [Digital Collections](https://digitalcollections.bowdoin.edu/view/6537/a-bayesian-hierarchical-mixture-model-with-continuous-time-markov-chains-to-capture-bumblebee-foraging-behavior) (open access) |
+| **Nan Ding** | 2018–19 | *Rein Control Homeostasis and the Dynamics of Complex Ecosystem Stability* | Special Collections, Thesis 2019 D5 |
+| **Jacob Spertus** | 2014–15 | *A Bayesian Exploration of the Arabidopsis thaliana Chloroplast Genome* | Special Collections, Thesis 2015 S647 |
+| **Chunyi Zhao** | 2014–15 | *The Card Swiper's Coloring Book: Statistical Inference of Social Cliques from Spatio-temporal Data* | Special Collections, Thesis 2015 Z4 |
+| **Zoe Karp** | 2013–14 | *Bayesian Parameter Estimation without Likelihoods: An Example from Lobster Heart Modeling* | Special Collections, Thesis 2014 K3 |
+| **Nathan Meyers** | 2012–13 | *The Twitterscape in Time and Space* | Special Collections, Thesis 2013 M4 |
