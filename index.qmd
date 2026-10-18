@@ -2,16 +2,6 @@
 pagetitle: "Jack O'Brien | Statistics & Data Science, Bowdoin College"
 page-layout: article
 toc: false
-listing:
-  id: recent
-  contents: news
-  sort: "date desc"
-  type: table
-  fields: [date, title, categories]
-  date-format: "MMM YYYY"
-  max-items: 5
-  sort-ui: false
-  filter-ui: false
 ---
 
 ```{=html}
@@ -39,10 +29,3 @@ listing:
   <img class="hero-portrait" src="files/images/teaching.jpg" alt="Jack O'Brien teaching at Bowdoin">
 </div>
 ```
-
-## Recent
-
-::: {#recent}
-:::
-
-[All news &rarr;](news.qmd)

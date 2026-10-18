@@ -27,23 +27,7 @@ website:
       - text: About
         href: index.qmd
       - text: Research
-        menu:
-          - text: Overview
-            href: research.qmd
-          - text: Mapping voting blocs
-            href: research/voting-blocs.qmd
-          - text: Local politics
-            href: research/local-politics.qmd
-          - text: Politics worldwide
-            href: research/worldwide.qmd
-          - text: Maine's history
-            href: research/maine-history.qmd
-          - text: Statistical innovations
-            href: research/methods.qmd
-          - text: Publications
-            href: research/publications.qmd
-          - text: Talks
-            href: research/talks.qmd
+        href: research.qmd
       - text: Teaching
         href: teaching.qmd
       # Uncomment once the first video is published (see videos/_template.qmd).
@@ -52,13 +36,7 @@ website:
       - text: Outreach
         href: outreach.qmd
       - text: Students
-        menu:
-          - text: Student research
-            href: students/research.qmd
-          - text: Letters of recommendation
-            href: students/letters.qmd
-          - text: Appointments
-            href: students/appointments.qmd
+        href: students/research.qmd
       - text: News
         href: news.qmd
       - text: CV
