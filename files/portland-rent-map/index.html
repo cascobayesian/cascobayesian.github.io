@@ -22,6 +22,8 @@
   --town-line: #c4c3b8;
   --limit: #2f3b4a;           /* Portland city limit */
   --town-label: #7d8590;
+  --hwy: #f2bb55; --hwy-case: #c98b2b; --art: #ecd3a0;   /* MaineDOT major roads */
+  --ptu: #d1312b;             /* PTU audit layer */
   --parcel: #f7f8f9;
   --parcel-line: #c3cad3;
   --parcel-reg: #e6ecf4;
@@ -80,6 +82,29 @@ header.top {
   max-width: 260px;
 }
 .tooltip b { font-weight: 600; }
+.ptu-toggle {
+  position: absolute; top: 10px; right: 10px; z-index: 4; display: flex; align-items: center; gap: 8px;
+  font: inherit; font-size: 13px; font-weight: 500; color: var(--fg); background: var(--surface); cursor: pointer;
+  border: 1px solid var(--line); border-radius: 6px; padding: 7px 11px; box-shadow: 0 2px 8px rgb(0 0 0 / .12);
+}
+.ptu-toggle .box { width: 14px; height: 14px; border-radius: 3px; border: 1.5px solid var(--muted); display: grid; place-items: center; flex: none; }
+.ptu-toggle[aria-pressed="true"] .box { background: var(--ptu); border-color: var(--ptu); }
+.ptu-toggle[aria-pressed="true"] .box::after { content: ""; width: 4px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0; transform: translateY(-1px) rotate(45deg); }
+.ptu-toggle .n { color: var(--muted); font-weight: 400; font-variant-numeric: tabular-nums; }
+.ptu-toggle:hover { border-color: var(--muted); }
+.ptu-toggle:focus-visible { outline: 2px solid var(--series); outline-offset: 2px; }
+.ptu-block { display: flex; flex-direction: column; gap: 8px; }
+.ptu-block .eyebrow { display: flex; align-items: center; gap: 6px; }
+.ptu-block .eyebrow i { width: 9px; height: 9px; border-radius: 50%; background: var(--ptu); }
+.ptu-card { border: 1px solid var(--line); border-left: 3px solid var(--ptu); border-radius: 6px; padding: 9px 11px; display: flex; flex-direction: column; gap: 6px; }
+.ptu-card .head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.badge { font-size: 11.5px; font-weight: 600; border-radius: 4px; padding: 2px 7px; white-space: nowrap; }
+.badge.bad { background: #fde8e6; color: #9c1d17; }
+.badge.ok { background: #e6f2ea; color: #1d5a33; }
+.ptu-dl { display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; margin: 0; font-size: 12.5px; }
+.ptu-dl dt { color: var(--muted); }
+.ptu-dl dd { margin: 0; font-variant-numeric: tabular-nums; }
+.shield { pointer-events: none; font-family: var(--font-head); font-size: 11px; font-weight: 600; color: #fff; background: #1f4b99; border: 1.5px solid #fff; border-radius: 4px 4px 7px 7px; padding: 1px 5px; box-shadow: 0 1px 2px rgb(0 0 0 / .3); }
 .town-label { pointer-events: none; font-family: var(--font-head); font-size: 11.5px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--town-label); white-space: nowrap; text-shadow: 0 0 3px var(--land), 0 0 3px var(--land); }
 .tooltip .m { color: var(--muted); font-variant-numeric: tabular-nums; }
 
@@ -184,6 +209,7 @@ details li { margin-bottom: 3px; }
   </header>
   <div class="main">
     <div id="map">
+      <button class="ptu-toggle" id="ptuToggle" aria-pressed="false" hidden title="Color the buildings in the Portland Tenants Union's March 2026 Zillow audit red"><span class="box"></span>PTU Zillow audit <span class="n" id="ptuN"></span></button>
       <div class="loading" id="loading">Loading 25,000 parcels and 5,300 registered buildings…</div>
     </div>
     <aside class="panel empty" id="panel" aria-live="polite"><div class="panel-inner" id="panelInner"><div class="note">Loading the registry…</div></div></aside>
@@ -202,6 +228,7 @@ details li { margin-bottom: 3px; }
   const BREAKS = [1400, 1700, 2000, 2500];
 
   let META, BUILDINGS, BY_ID = new Map(), chunks = new Map(), map, selectedId = null;
+  let PTU = null, PTU_BY_B = new Map(), PTU_EXTRA = new Map(), ptuOn = false;
   const panel = $("#panel"), inner = $("#panelInner");
 
   // ---------- panel: default view
@@ -229,6 +256,8 @@ details li { margin-bottom: 3px; }
           <p>Rents come from the City of Portland's yearly <a href="https://www.portlandmaine.gov/rent-history" target="_blank" rel="noopener">Long Term Rental Registration Data</a> PDFs (license years 2021–2025). Landlords report these figures when they register or renew. They are shown as reported; nothing was recalculated.</p>
           <p>"Previous" and "current" rent refer to different dates in each year's file. Each year column shows the city's own label. The 2024 file has no tax-rate column.</p>
           <p>Buildings are placed using the city's <a href="https://gis.portlandmaine.gov/maps/rest/services/planningCadastre/Tax_Parcels/FeatureServer/11" target="_blank" rel="noopener">tax parcel layer</a>, matched on parcel ID, or on street address when the parcel ID didn't match. The base map is drawn from the same parcels, so the gaps between parcels are streets. Water, neighboring towns, and the dashed city limit come from the Maine GeoLibrary's town boundary layer.</p>
+          ${PTU ? `<p>The red layer is the <a href="${esc(PTU.source.sheet)}" target="_blank" rel="noopener">Portland Tenants Union's March 2026 audit</a> of new Zillow listings (<a href="${esc(PTU.source.article)}" target="_blank" rel="noopener">Press Herald story</a>). PTU checked each listing's 2026 registration and compared its asking rent with the rent PTU calculated as allowed. Results are shown as PTU recorded them. Listings were placed by street address. ${PTU.listings.length} of ${PTU.listings.length + PTU.unplaced.length} audited listings are on the map. PTU excluded listings it couldn't tie to an address, and they aren't shown.</p>` : ""}
+          <p>Water, town lines and major roads come from the State of Maine (Maine GeoLibrary and MaineDOT).</p>
           <p>The current license year (2026) isn't published in bulk. Look it up by address in the city's Citizen Self Service portal.</p>
         </div>
       </details>
@@ -236,7 +265,12 @@ details li { margin-bottom: 3px; }
         <summary>Not on the map (${um.length} registrations)</summary>
         <p class="note" style="margin:8px 0 0">These registrations' parcel IDs and addresses didn't match the parcel layer.</p>
         <ul>${um.map(u => `<li><span class="mono">${esc(u.lic)}</span> · ${esc(titleCase(u.address))} · parcel <span class="mono">${esc(u.parcel || "none")}</span> · ${u.years.join(", ")} · ${u.rows} rows</li>`).join("")}</ul>
-      </details>`;
+      </details>
+      ${PTU && PTU.unplaced.length ? `<details>
+        <summary>PTU audit listings not on the map (${PTU.unplaced.length})</summary>
+        <p class="note" style="margin:8px 0 0">These street addresses aren't in the registry, the city's address points, or the parcel layer.</p>
+        <ul>${PTU.unplaced.map(u => `<li>${esc(u.address)}${u.unit ? ", " + esc(u.unit) : ""} · ${esc(u.verdict || "—")} · sheet row ${u.row}</li>`).join("")}</ul>
+      </details>` : ""}`;
   }
 
   // ---------- data loading
@@ -342,8 +376,61 @@ details li { margin-bottom: 3px; }
           <div class="note">License <span class="mono">${esc(u.lic)}</span> · ${L[F.beds] ?? "—"} bed / ${L[F.baths] ?? "—"} bath in ${L[F.year]} · ${ex && ex !== "None of the above" ? "Exemption claimed: " + esc(ex) : "No exemption claimed"}</div>
         </div>
         ${sparkline(u)}
+        ${ptuHTML(d.id)}
         ${yearTable(u)}
       </div>`;
+  }
+
+  // ---------- PTU audit
+  const fmtDate = s => s ? new Date(s + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "";
+  function ptuHTML(id) {
+    const ls = PTU_BY_B.get(id);
+    if (!ls) return "";
+    const badge = v => v ? `<span class="badge ${/non/i.test(v) ? "bad" : "ok"}">${esc(v)}</span>` : "";
+    const row = (k, v) => v == null || v === "" ? "" : `<dt>${k}</dt><dd>${v}</dd>`;
+    const vsAllowed = l => typeof l.diff !== "number" ? "" : l.diff > 0 ? ` · asking is ${money(l.diff)} above` : l.diff < 0 ? ` · asking is ${money(-l.diff)} below` : " · asking equals it";
+    return `
+      <div class="ptu-block">
+        <div class="eyebrow"><i></i>PTU Zillow audit, March 2026 · ${ls.length} listing${ls.length > 1 ? "s" : ""}</div>
+        ${ls.map(l => `
+        <div class="ptu-card">
+          <div class="head">
+            <div><b>${esc(l.unit ? "Unit " + String(l.unit).replace(/^(unit|apt)\s*/i, "") : "Unit not given")}</b> <span class="note">· listed ${esc(fmtDate(l.date))}</span></div>
+            ${badge(l.verdict)}
+          </div>
+          <dl class="ptu-dl">
+            ${row("Asking rent", money(l.price) + (l.beds != null ? ` · ${l.beds} bed / ${l.baths ?? "—"} bath` : ""))}
+            ${row("Registered for 2026", esc(l.registered || "—"))}
+            ${row("Rent control", l.exempt === "Non-Exempt" ? "Covered" : l.exempt ? "Exempt: " + esc(l.exempt) : null)}
+            ${row("PTU's allowable rent", l.allowable != null && typeof l.allowable === "number" ? money(l.allowable) + vsAllowed(l) : null)}
+            ${row("Asking vs. allowable", l.rentCheck ? esc(l.rentCheck) : null)}
+            ${row("Registration math correct?", l.correctCalc ? esc(l.correctCalc) : null)}
+            ${row("Registration issues", l.issues ? esc(l.issues) : null)}
+          </dl>
+          ${l.notes ? `<div class="note">Auditor's note: ${esc(l.notes)}</div>` : ""}
+          <div class="note">PTU spreadsheet, "All Listings" row ${l.row}${l.placedBy !== "registry address" ? ` · placed by ${esc(l.placedBy)}` : ""}</div>
+        </div>`).join("")}
+        <p class="note" style="margin:0">PTU marks a listing non-compliant if the unit is unregistered, the asking rent is above PTU's calculated allowable rent, or the registration math is wrong. Advertising a rent above the allowed amount isn't illegal in itself; signing a lease at that rent is.</p>
+      </div>`;
+  }
+
+  function openAuditOnly(id) {
+    selectedId = id;
+    const b = PTU_EXTRA.get(id);
+    if (map && map.getLayer("sel")) map.setFilter("sel", ["==", ["get", "id"], ""]);
+    panel.classList.remove("empty");
+    if (map) requestAnimationFrame(() => map.resize());
+    inner.innerHTML = `
+      <div class="row-between">
+        <div style="min-width:0">
+          <div class="eyebrow">Not in the 2021–2025 registry · parcel <span class="mono">${esc(id)}</span></div>
+          <h2>${esc(titleCase(b.addr[0]))}</h2>
+        </div>
+        <button class="close" id="closeBtn" aria-label="Close building">Close ✕</button>
+      </div>
+      ${ptuHTML(id)}
+      ${aboutHTML()}`;
+    $("#closeBtn").onclick = closeBuilding;
   }
 
   function sparkline(u) {
@@ -460,12 +547,26 @@ details li { margin-bottom: 3px; }
     return ["case", ["<", ["get", "median"], 0], css("--nodata"),
       ["step", ["get", "median"], css("--bin1"), BREAKS[0], css("--bin2"), BREAKS[1], css("--bin3"), BREAKS[2], css("--bin4"), BREAKS[3], css("--bin5")]];
   }
+  function bldColor() {
+    return ptuOn ? ["case", ["==", ["get", "ptu"], 1], css("--ptu"), colorExpr()] : colorExpr();
+  }
+  function setPTU(on) {
+    ptuOn = on;
+    $("#ptuToggle").setAttribute("aria-pressed", String(on));
+    if (!map || !map.getLayer("bld")) return;
+    map.setPaintProperty("bld", "circle-color", bldColor());
+    map.setPaintProperty("bld", "circle-opacity", on ? ["case", ["==", ["get", "ptu"], 1], 1, 0.4] : 1);
+    map.setPaintProperty("bld", "circle-stroke-opacity", on ? ["case", ["==", ["get", "ptu"], 1], 1, 0.4] : 1);
+    // audited buildings draw on top while the layer is on
+    map.setLayoutProperty("bld", "circle-sort-key", on ? ["+", ["*", ["get", "ptu"], 100000], ["-", 0, ["get", "n"]]] : ["-", 0, ["get", "n"]]);
+    if (map.getLayer("ptux")) map.setLayoutProperty("ptux", "visibility", on ? "visible" : "none");
+  }
   function applyTheme() {
     if (!map || !map.getLayer("bld")) return;
     map.setPaintProperty("ground", "background-color", css("--map-ground"));
     map.setPaintProperty("parcel-fill", "fill-color", ["case", ["==", ["get", "r"], 1], css("--parcel-reg"), css("--parcel")]);
     map.setPaintProperty("parcel-line", "line-color", css("--parcel-line"));
-    map.setPaintProperty("bld", "circle-color", colorExpr());
+    map.setPaintProperty("bld", "circle-color", bldColor());
     map.setPaintProperty("bld", "circle-stroke-color", css("--surface"));
     map.setPaintProperty("sel", "circle-stroke-color", css("--accent"));
   }
@@ -474,22 +575,30 @@ details li { margin-bottom: 3px; }
   tip.className = "tooltip"; tip.hidden = true;
 
   async function init() {
-    let idx, parcels, towns;
+    let idx, parcels, towns, roads;
     try {
       // towns are context only; the map still works without them
-      [idx, parcels, towns] = await Promise.all([getJSON("data/index.json"), getJSON("data/parcels.json"), getJSON("data/towns.json").catch(() => null)]);
+      [idx, parcels, towns, roads] = await Promise.all([getJSON("data/index.json"), getJSON("data/parcels.json"), getJSON("data/towns.json").catch(() => null),
+        getJSON("data/roads.json").catch(() => null), getJSON("data/ptu.json").then(d => PTU = d).catch(() => null)]);
     } catch (e) {
       $("#loading").textContent = `Couldn't load the map data (${e.message}). Reload the page to try again.`;
       return;
     }
     META = idx.meta; BUILDINGS = idx.buildings;
     BUILDINGS.forEach(b => BY_ID.set(b.id, b));
+    if (PTU) {
+      PTU.listings.forEach(l => { if (!PTU_BY_B.has(l.b)) PTU_BY_B.set(l.b, []); PTU_BY_B.get(l.b).push(l); });
+      PTU.extra.forEach(b => PTU_EXTRA.set(b.id, b));
+      $("#ptuN").textContent = `${PTU_BY_B.size} buildings`;
+      $("#ptuToggle").hidden = false;
+      $("#ptuToggle").onclick = () => setPTU(!ptuOn);
+    }
     renderIntro();
 
     const pts = {
       type: "FeatureCollection",
       features: BUILDINGS.map(b => ({ type: "Feature", geometry: { type: "Point", coordinates: [b.lon, b.lat] },
-        properties: { id: b.id, n: b.nUnits, median: b.median ?? -1 } })),
+        properties: { id: b.id, n: b.nUnits, median: b.median ?? -1, ptu: PTU_BY_B.has(b.id) ? 1 : 0 } })),
     };
     let w = 180, s = 90, e = -180, n = -90;
     BUILDINGS.forEach(b => { w = Math.min(w, b.lon); e = Math.max(e, b.lon); s = Math.min(s, b.lat); n = Math.max(n, b.lat); });
@@ -503,7 +612,7 @@ details li { margin-bottom: 3px; }
     });
     map.touchZoomRotate.disableRotation();
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-left");
-    map.addControl(new maplibregl.AttributionControl({ compact: true, customAttribution: "Parcels and rents: City of Portland · Town boundaries: Maine GeoLibrary" }));
+    map.addControl(new maplibregl.AttributionControl({ compact: true, customAttribution: "Parcels and rents: City of Portland · Towns: Maine GeoLibrary · Roads: MaineDOT · Audit: Portland Tenants Union" }));
     $("#map").appendChild(tip);
     // the map's box changes when the phone bottom sheet opens or closes
     if (window.ResizeObserver) new ResizeObserver(() => map.resize()).observe($("#map"));
@@ -526,6 +635,21 @@ details li { margin-bottom: 3px; }
       map.addLayer({ id: "parcel-fill", type: "fill", source: "parcels", paint: { "fill-color": css("--parcel") } });
       map.addLayer({ id: "parcel-line", type: "line", source: "parcels", minzoom: 13.5,
         paint: { "line-color": css("--parcel-line"), "line-width": ["interpolate", ["linear"], ["zoom"], 13.5, 0.3, 17, 1] } });
+      if (roads) {
+        map.addSource("roads", { type: "geojson", data: roads });
+        const W = (a, b, c) => ["interpolate", ["linear"], ["zoom"], 10, a, 14, b, 17, c];
+        map.addLayer({ id: "roads-art", type: "line", source: "roads", filter: ["==", ["get", "kind"], "art"],
+          layout: { "line-join": "round", "line-cap": "round" }, paint: { "line-color": css("--art"), "line-width": W(0.5, 1.6, 3.5) } });
+        map.addLayer({ id: "roads-hwy-case", type: "line", source: "roads", filter: ["==", ["get", "kind"], "hwy"],
+          layout: { "line-join": "round", "line-cap": "round" }, paint: { "line-color": css("--hwy-case"), "line-width": W(1.6, 3.8, 8) } });
+        map.addLayer({ id: "roads-hwy", type: "line", source: "roads", filter: ["==", ["get", "kind"], "hwy"],
+          layout: { "line-join": "round", "line-cap": "round" }, paint: { "line-color": css("--hwy"), "line-width": W(0.8, 2.4, 6) } });
+        roads.features.filter(f => f.properties.kind === "shield").forEach(f => {
+          const el = document.createElement("div");
+          el.className = "shield"; el.textContent = f.properties.label;
+          new maplibregl.Marker({ element: el }).setLngLat(f.geometry.coordinates).addTo(map);
+        });
+      }
       if (towns) map.addLayer({ id: "limit", type: "line", source: "towns", filter: ["==", ["get", "kind"], "limit"],
         layout: { "line-join": "round" },
         paint: { "line-color": css("--limit"), "line-dasharray": [4, 2], "line-width": ["interpolate", ["linear"], ["zoom"], 10, 1.2, 15, 2.5] } });
@@ -537,19 +661,38 @@ details li { margin-bottom: 3px; }
           "circle-stroke-color": css("--surface"),
           "circle-stroke-width": ["interpolate", ["linear"], ["zoom"], 11, 0.5, 15, 1.5],
         } });
+      if (PTU && PTU.extra.length) {
+        map.addSource("ptux", { type: "geojson", data: { type: "FeatureCollection",
+          features: PTU.extra.map(b => ({ type: "Feature", geometry: { type: "Point", coordinates: [b.lon, b.lat] }, properties: { id: b.id } })) } });
+        map.addLayer({ id: "ptux", type: "circle", source: "ptux", layout: { visibility: "none" },
+          paint: { "circle-radius": ["interpolate", ["linear"], ["zoom"], 11, 2.5, 14, 4, 17, 7], "circle-color": css("--ptu"),
+                   "circle-stroke-color": css("--surface"), "circle-stroke-width": ["interpolate", ["linear"], ["zoom"], 11, 0.5, 15, 1.5] } });
+        map.on("mousemove", "ptux", ev => {
+          map.getCanvas().style.cursor = "pointer";
+          const b = PTU_EXTRA.get(ev.features[0].properties.id), n = PTU_BY_B.get(b.id).length;
+          tip.innerHTML = `<b>${esc(titleCase(b.addr[0]))}</b><br><span class="m">PTU audit: ${n} listing${n > 1 ? "s" : ""} · not in the 2021–2025 registry</span>`;
+          tip.hidden = false;
+          const p = ev.point, mw = $("#map").clientWidth;
+          tip.style.left = Math.min(p.x + 14, mw - 270) + "px"; tip.style.top = (p.y + 14) + "px";
+        });
+        map.on("mouseleave", "ptux", () => { map.getCanvas().style.cursor = ""; tip.hidden = true; });
+        map.on("click", "ptux", ev => { tip.hidden = true; openAuditOnly(ev.features[0].properties.id); });
+      }
       map.addLayer({ id: "sel", type: "circle", source: "bld", filter: ["==", ["get", "id"], ""],
         paint: {
           "circle-radius": ["interpolate", ["linear"], ["zoom"], 11, ["+", 3, ["*", 0.55, R]], 14, ["+", 4, ["*", 0.9, R]], 17, ["+", 5, ["*", 1.7, R]]],
           "circle-color": "rgba(0,0,0,0)", "circle-stroke-width": 3, "circle-stroke-color": css("--accent"),
         } });
       applyTheme();
+      setPTU(ptuOn);
       $("#loading").hidden = true;
       if (selectedId) map.setFilter("sel", ["==", ["get", "id"], selectedId]);
 
       map.on("mousemove", "bld", ev => {
         map.getCanvas().style.cursor = "pointer";
         const f = ev.features[0]; const b = BY_ID.get(f.properties.id);
-        tip.innerHTML = `<b>${esc(titleCase(b.addr[0]))}</b><br><span class="m">${b.nLatest} unit${b.nLatest === 1 ? "" : "s"} in ${b.latestYear} · ${b.median ? "median " + money(b.median) : "no rent reported"}</span>`;
+        const np = (PTU_BY_B.get(b.id) || []).length;
+        tip.innerHTML = `<b>${esc(titleCase(b.addr[0]))}</b><br><span class="m">${b.nLatest} unit${b.nLatest === 1 ? "" : "s"} in ${b.latestYear} · ${b.median ? "median " + money(b.median) : "no rent reported"}${np ? ` · PTU audit: ${np} listing${np > 1 ? "s" : ""}` : ""}</span>`;
         tip.hidden = false;
         const p = ev.point, mw = $("#map").clientWidth;
         tip.style.left = Math.min(p.x + 14, mw - 270) + "px"; tip.style.top = (p.y + 14) + "px";
