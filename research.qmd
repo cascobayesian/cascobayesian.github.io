@@ -20,7 +20,7 @@ The Beta-Binomial Mixture Model. How to Fit It. How to Pin Down the Number of Bl
 
 ::: {.pcard}
 ::: {.pcard-img}
-![](files/images/research/maine_pies_zoom.jpg){fig-alt=""}
+![](files/images/research/maine_pies_7_3_card.jpg){fig-alt=""}
 :::
 ::: {.pcard-body}
 ### [Mapping voting blocs](research/voting-blocs.qmd)

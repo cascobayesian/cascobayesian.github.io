@@ -15,7 +15,7 @@ This page is being written.
 
 Population geneticists describe each person's genome as a mixture of ancestral populations. I describe each precinct's votes as a mixture of voting blocs. [Paper (PSRM 2026)](https://www.cambridge.org/core/journals/political-science-research-and-methods/article/bayesian-mixture-model-captures-temporal-and-spatial-structure-of-voting-blocs-within-longitudinal-referendum-data/B2C9A113D969277325F9EDAC4F90E83F) · [arXiv](https://arxiv.org/abs/2301.01677)
 
-![Maine towns as mixtures of communities: each pie shows the share of a town's blocks assigned to each community, averaged over the last 500 MCMC draws.](../files/images/research/maine_mixed_towns.jpg){fig-alt="Map of Maine with a pie chart in each town showing its mix of seven communities: The Old Coast, The New Coast, Hills and Farms, The Old Mills, The Deep Woods, New France and Extra." width="85%" fig-align="center"}
+![Maine towns as mixtures of seven communities: each town is filled with the share of its blocks assigned to each community, averaged over the last 1,000 saved MCMC draws.](../files/images/research/maine_pies_7_3.jpg){fig-alt="Map of Maine in which each town is divided into colored slices showing its mix of seven communities." width="80%" fig-align="center"}
 
 ## What's remarkable
 
