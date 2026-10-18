@@ -1,67 +1,100 @@
 ---
-title: ""
-subtitle: ""
-title-block-banner: false
-format:
-  html
+title: "Teaching"
+subtitle: "Statistics, data science and Bayesian statistics at Bowdoin College"
+toc: true
+toc-location: right
+listing:
+  id: teaching-news
+  contents: news
+  include:
+    categories: "{teaching}"
+  sort: "date desc"
+  type: table
+  fields: [date, title]
+  date-format: "MMM YYYY"
+  max-items: 5
 ---
 
-<p style="text-align:center;">*“In all the works on pedagogy that ever I read ... I don't remember that any one has advocated a system of teaching by practical jokes, mostly cruel. That, however, describes the method of our great teacher, Experience.”* </p>
+> *"In all the works on pedagogy that ever I read ... I don't remember that any one has advocated a system of teaching by practical jokes, mostly cruel. That, however, describes the method of our great teacher, Experience."*
+>
+> — Charles S. Peirce
 
-
-<p style="text-align:right;">— Charles Pierce</p>
-
-# Courses 
-
-## Statistics (Math 2606)
+## Data science (Math 1756)
 
 ::: {.grid}
 
-::: {.g-col-12 .g-col-md-5}
-
-![](files/images/proportion.jpg){width="4in"}
-
-![](files/images/regression.jpg){width="4in"}
-
-![](files/images/sequence.jpg){width="4in"}
+::: {.g-col-12 .g-col-md-4}
+![](files/images/network.jpg){fig-alt="Network diagram"}
 :::
 
-::: {.g-col-12 .g-col-md-7}
+::: {.g-col-12 .g-col-md-8}
+**Spring 2026**
 
-[Spring 2026](https://cascobayesian.github.io/Computational-Hermeneutics/)
+An advanced introductory exploration of the principles of data science, including logic, probability and data organization. As a final project, students present a set of models for a data set of their choosing.
+
+<!-- Draft fragments from the previous version, to finish:
+Examples will be drawn from data sets that
+calculus-informed and computation-based introduction to the interpretation of data.
+-->
+:::
+
+:::
+
+## Statistical modelling (Math 2606)
+
+::: {.grid}
+
+::: {.g-col-12 .g-col-md-4}
+![](files/images/proportion.jpg){fig-alt="Plot of a proportion"}
+
+![](files/images/regression.jpg){fig-alt="Regression plot"}
+:::
+
+::: {.g-col-12 .g-col-md-8}
+**[Spring 2026](https://cascobayesian.github.io/Computational-Hermeneutics/)** · [Source on GitHub](https://github.com/cascobayesian/Stats2606)
 
 An intensive survey of the practice and principles of statistical modeling. Over the course of the semester, we'll be: (1) learning how to build statistical models; (2) learning how to interpret their results from real data sets, and (3) repeating that in as many ways and contexts as we can possibly squeeze in during our time together. The course is structured as a brisk -- some might say breathy -- tour of many of the workhorses of computational statistics: simulation, parametric models, testing, regression (in its myriad forms), model selection, and clustering. To give students as wide a range of perspectives on the subtle craft, extraordinary power, and varied dangers of statistical reasoning, we'll draw on wide array of examples: municipal hate crimes, speed dating experiments, exoplanet surveys, criminal sentencing, immigration control procedures, and sightings of Big Foot.
 
-Though a comprehensive review is provided, the pace of the material very much assumes a previous course in probability. No coding experience is assumed but for those with truly no experience a lighter schedule for the semester might be wise. 
+Though a comprehensive review is provided, the pace of the material very much assumes a previous course in probability. No coding experience is assumed but for those with truly no experience a lighter schedule for the semester might be wise.
 :::
 
 :::
 
+## Bayesian statistics
 
-## Data Science (Math 1756)
+Applied Bayesian statistics with computation: the theory of the Bayesian approach, followed by Markov chain Monte Carlo techniques for practical inference, with intensive use of R. Taught as Advanced Topics in Statistics (Fall 2013, Fall 2014, Fall 2017, Fall 2019, Fall 2023, Spring 2024).
 
-::: {.grid}
+## Some ideas about statistics
 
-::: {.g-col-12 .g-col-md-5}
-![](files/images/network.jpg){width="4in"}
-
+::: {.callout-note appearance="simple"}
+This section is being written.
 :::
 
-::: {.g-col-12 .g-col-md-7}
+## Recent teaching news
 
-[Spring 2026](https://www.google.com)
-
-An advanced introductory exploration of the principles of data science, including logic, probability, data organization, 
-
-As a final project, students will present  a set of models for a data set of their choosing.  
-
-Examples will be drawn from data sets that 
-
-calculus-informed and computation-based introduction to the interpretation of data.
-
+::: {#teaching-news}
 :::
 
-:::
+## Earlier courses
 
+- **Statistics**, Bowdoin (Spring 2014 to Spring 2024). Techniques in statistics and probabilistic machine learning, with intensive use of R.
+- **Probability**, Bowdoin (Fall 2012 to Fall 2021). Proof-based probability ending with the central limit theorem.
+- **Biostatistics**, Bowdoin (Fall 2012 to Spring 2015; Fall 2017). Accelerated introductory statistics with readings from the social and natural sciences.
+- **Seminar in Statistics**, Wellcome Trust Centre for Human Genetics, University of Oxford (2011–2012).
+- **Cape Town Workshop in Genetic Epidemiology** (March 2011). A short course for African researchers studying the genetic basis of malaria.
+- **Introductory Statistics**, University of Bristol (2009, 2010).
+- **Statistical Phylogenetics**, **Calculus II** and **Introduction to Applied Mathematics**, UCLA.
 
+## Honors theses
 
+- **Nathan Kellerman** (2025–26), in progress
+- **Avery Cutler** (2025–26), in progress
+- **Brian Liu** (2024–25): *Chains for Change: A Bayesian and Sociological Analysis of Boston's Eviction Court Cases*
+- **Max Hukill** (2019–21): a statistical model of honeybee foraging and learning
+- **Nan Ding** (2018–19): exploring the mathematical emergence of homeostasis in microbial ecosystems
+- **Jacob Spertus** (2014–15): *A Bayesian Exploration of the Arabidopsis thaliana Chloroplast Genome*
+- **Chunyi Zhao** (2014–15): *The Card Swiper's Coloring Book: Bayesian Inference of Social Networks on Spatio-temporal Data*
+- **Zoe Karp** (2013–14): *Bayesian Parameter Estimation without Likelihoods: An Example in Lobster Heart Modeling*
+- **Nathan Meyers** (2012–13): *The Twitterscape in Time and Space*
+
+See also [student research](students/research.qmd).

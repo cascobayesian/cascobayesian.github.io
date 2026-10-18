@@ -1,0 +1,12 @@
+---
+title: "Politics worldwide"
+subtitle: "Voting blocs beyond the United States"
+---
+
+::: {.callout-note appearance="simple"}
+This page is being written.
+:::
+
+## The Netherlands
+
+## Switzerland

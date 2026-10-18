@@ -1,0 +1,39 @@
+/*-- scss:defaults --*/
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap');
+
+// Restrained palette: ink, slate, and a muted bay-blue accent
+$ink:     #1f2a33;
+$slate:   #5b6b79;
+$accent:  #1f5f7a;
+$paper:   #fbfbf9;
+$rule:    #e3e6e8;
+
+$body-bg:    $paper;
+$body-color: $ink;
+$link-color: $accent;
+$primary:    $accent;
+$secondary:  $slate;
+
+$font-family-sans-serif: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+$headings-font-family:   "Source Serif 4", Georgia, serif;
+$headings-font-weight:   600;
+$font-size-root: 17px;
+$line-height-base: 1.6;
+
+$navbar-bg: $paper;
+$navbar-fg: $ink;
+$navbar-hl: $accent;
+$footer-bg: $paper;
+$footer-fg: $slate;
+
+$border-color: $rule;
+
+/*-- scss:rules --*/
+:root {
+  --jo-muted: #{$slate};
+  --jo-rule: #{$rule};
+  --jo-card-bg: #ffffff;
+  --jo-chip-bg: #eef2f4;
+  --jo-todo-bg: #fff6d6;
+  --jo-todo-fg: #6b5200;
+}

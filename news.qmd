@@ -1,0 +1,14 @@
+---
+title: "News"
+subtitle: "Papers, talks, courses, students and outreach"
+listing:
+  contents: news
+  sort: "date desc"
+  type: default
+  categories: true
+  sort-ui: false
+  filter-ui: true
+  feed: true
+  date-format: "MMMM YYYY"
+page-layout: full
+---

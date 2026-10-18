@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Photo placeholder">
+  <rect width="400" height="400" fill="#dfe6ec"/>
+  <circle cx="200" cy="160" r="70" fill="#b7c4cf"/>
+  <path d="M70 360c10-80 70-120 130-120s120 40 130 120z" fill="#b7c4cf"/>
+  <text x="200" y="385" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#5b6b79">[TODO: headshot]</text>
+</svg>

@@ -1,10 +1,73 @@
 ---
-title: ""
-subtitle: ""
-format:  html
+title: "Research"
+subtitle: "Mixture models for social science, and the statistics that make them work"
+listing:
+  id: research-news
+  contents: news
+  include:
+    categories: "{research}"
+  sort: "date desc"
+  type: table
+  fields: [date, title]
+  date-format: "MMM YYYY"
+  max-items: 5
 ---
 
+My research develops Bayesian models, mostly mixture models, to find interpretable structure in complex data. I started in statistical phylogenetics and genetics (viral evolution, malaria genomics, microbial metagenomics). These days I work mainly on social science: political structure in election data, cultural patterns in the archaeological record, and the rhythms of social life online.
 
-## Research
+::: {.card-grid}
 
-[In progress]
+::: {.pcard}
+::: {.pcard-body}
+### [Mapping voting blocs](research/voting-blocs.qmd)
+
+A model from population genetics, applied to election returns. The blocs it finds are neither left nor right, strikingly spatial, and stable across elections.
+:::
+:::
+
+::: {.pcard}
+::: {.pcard-body}
+### [Local politics](research/local-politics.qmd)
+
+What divides voters when the parties aren't on the ballot: Maine, California and places across the country.
+:::
+:::
+
+::: {.pcard}
+::: {.pcard-body}
+### [Politics worldwide](research/worldwide.qmd)
+
+The same model on referendum returns from the Netherlands and Switzerland.
+:::
+:::
+
+::: {.pcard}
+::: {.pcard-body}
+### [Maine's history](research/maine-history.qmd)
+
+A long view of Maine's political geography.
+:::
+:::
+
+::: {.pcard}
+::: {.pcard-body}
+### [Statistical innovations](research/methods.qmd)
+
+The beta-binomial mixture model, how to fit it, and how to pin down the number of blocs. Plus pottery and propaganda.
+:::
+:::
+
+::: {.pcard}
+::: {.pcard-body}
+### [Publications](research/publications.qmd) and [talks](research/talks.qmd)
+
+Twenty-one peer-reviewed papers, from viral evolution to voting blocs.
+:::
+:::
+
+:::
+
+## Recent research news
+
+::: {#research-news}
+:::

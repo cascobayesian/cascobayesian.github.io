@@ -1,0 +1,13 @@
+---
+title: "Curriculum Vitae"
+subtitle: "Updated March 2026"
+page-layout: full
+---
+
+[<i class="bi bi-download"></i> Download the CV (PDF)](files/cv_jobrien_2026.pdf){.btn .btn-outline-primary .mb-3}
+
+```{=html}
+<object class="cv-embed" data="files/cv_jobrien_2026.pdf" type="application/pdf" aria-label="Curriculum vitae of Jack O'Brien">
+  <p>Your browser can't display the PDF here. <a href="files/cv_jobrien_2026.pdf">Download the CV</a> instead.</p>
+</object>
+```

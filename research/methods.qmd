@@ -1,0 +1,34 @@
+---
+title: "Statistical innovations"
+subtitle: "The models behind the maps"
+toc: true
+toc-location: right
+---
+
+::: {.callout-note appearance="simple"}
+This page is being written.
+:::
+
+## The beta-binomial mixture model
+
+- Fitting it by expectation–maximization
+- A full Bayesian treatment
+- Nailing down the posterior on the number of blocs
+
+### What's next
+
+- Mixture of experts
+- Nonparametric approaches
+- Time and space
+
+## Back to pottery
+
+The same ideas, applied to pottery decoration at Lake Chad Basin sites ([O'Brien, Lin & MacEachern 2016](https://royalsocietypublishing.org/rspb/article/283/1827/20152824/84418/Mixture-model-of-pottery-decorations-from-Lake)).
+
+![Cultural periods by depth across excavation units at Lake Chad Basin sites, from the pottery-decoration mixture model.](../files/images/lake-chad-pottery.png){fig-alt="Stacked colored bars showing inferred cultural periods by depth for excavation units at Lake Chad Basin sites" width="100%"}
+
+<!-- TODO: Jack: confirm this figure is from O'Brien, Lin & MacEachern (2016) -->
+
+## Other examples
+
+- Hannah and propaganda

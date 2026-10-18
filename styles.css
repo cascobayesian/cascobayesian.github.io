@@ -1,1 +1,78 @@
-/* css styles */
+/* Shared layout styles; colors come from theme-light.scss / theme-dark.scss */
+
+.navbar { border-bottom: 1px solid var(--jo-rule); }
+.navbar-brand .navbar-title { font-family: "Source Serif 4", Georgia, serif; font-weight: 600; }
+
+h1.title, .quarto-title h1 { font-size: 2.1rem; letter-spacing: -0.01em; }
+h2 { margin-top: 2.4rem; padding-bottom: .3rem; border-bottom: 1px solid var(--jo-rule); font-size: 1.45rem; }
+h3 { font-size: 1.15rem; margin-top: 1.6rem; }
+.subtitle, .lead { color: var(--jo-muted); }
+.muted { color: var(--jo-muted); }
+
+/* Placeholders that Jack needs to fill in */
+.todo {
+  background: var(--jo-todo-bg);
+  color: var(--jo-todo-fg);
+  padding: 0 .3em;
+  border-radius: 3px;
+  font-size: .92em;
+}
+
+/* Home hero */
+.hero { display: grid; grid-template-columns: 220px 1fr; gap: 2.5rem; align-items: start; margin: 1.5rem 0 1rem; }
+.hero img.headshot { width: 220px; height: 220px; object-fit: cover; border-radius: 50%; border: 1px solid var(--jo-rule); }
+.hero > * { min-width: 0; }
+.hero .hero-name { font-family: "Source Serif 4", Georgia, serif; font-weight: 600; margin: 0 0 .2rem; font-size: 2.3rem; line-height: 1.2; }
+.hero .role { color: var(--jo-muted); font-size: 1.1rem; margin-bottom: 1rem; }
+.hero-links { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.2rem; }
+.hero-links a {
+  display: inline-flex; align-items: center; gap: .4rem;
+  padding: .35rem .8rem; border: 1px solid var(--jo-rule); border-radius: 999px;
+  text-decoration: none; font-size: .95rem; background: var(--jo-card-bg);
+}
+.hero-links a:hover { border-color: var(--bs-link-color); }
+@media (max-width: 720px) {
+  .hero { grid-template-columns: 1fr; gap: 1.2rem; text-align: center; }
+  .hero img.headshot { margin: 0 auto; width: 160px; height: 160px; }
+  .hero-links { justify-content: center; }
+  .hero > div > p:not(.hero-name) { text-align: left; }
+}
+
+/* Card grid (projects, home highlights) */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(230px, 100%), 1fr)); gap: 1.25rem; margin: 1.25rem 0 2rem; }
+.pcard {
+  display: flex; flex-direction: column;
+  background: var(--jo-card-bg); border: 1px solid var(--jo-rule); border-radius: 10px;
+  overflow: hidden; transition: border-color .15s ease, transform .15s ease;
+}
+.pcard:hover { border-color: var(--bs-link-color); transform: translateY(-2px); }
+.pcard .pcard-img { height: 150px; background: var(--jo-chip-bg); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.pcard .pcard-img img { width: 100%; height: 100%; object-fit: cover; margin: 0; }
+.pcard .pcard-img .bi, .pcard .pcard-img i { font-size: 2.6rem; color: var(--bs-link-color); opacity: .75; }
+.pcard .pcard-body { padding: 1rem 1.1rem 1.1rem; display: flex; flex-direction: column; flex: 1; }
+.pcard h3 { margin: .2rem 0 .4rem; font-size: 1.08rem; border: 0; }
+.pcard p { font-size: .95rem; margin-bottom: .7rem; }
+.pcard .pcard-links { margin-top: auto; font-size: .92rem; display: flex; flex-wrap: wrap; gap: .8rem; }
+.chip {
+  display: inline-block; font-size: .72rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
+  color: var(--jo-muted); background: var(--jo-chip-bg); border-radius: 4px; padding: .1rem .45rem; margin-right: .3rem;
+}
+
+/* Publication and talk lists */
+.pub-list { list-style: none; padding-left: 0; }
+.pub-list li { padding: .65rem 0; border-bottom: 1px solid var(--jo-rule); }
+.pub-list li:last-child { border-bottom: 0; }
+.pub-list .pub-title { font-weight: 600; }
+.pub-list .pub-venue { font-style: italic; }
+.pub-list .pub-note { color: var(--jo-muted); font-size: .92rem; }
+
+/* Course entries */
+.course { padding: .8rem 0; border-bottom: 1px solid var(--jo-rule); }
+.course:last-of-type { border-bottom: 0; }
+.course .course-title { font-weight: 600; font-size: 1.05rem; }
+.course .course-terms { color: var(--jo-muted); font-size: .92rem; }
+
+/* CV embed */
+.cv-embed { width: 100%; height: 85vh; border: 1px solid var(--jo-rule); border-radius: 8px; }
+.pcard .pcard-img > p { margin: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+.pcard .pcard-links p { margin: 0; display: flex; flex-wrap: wrap; gap: .8rem; }

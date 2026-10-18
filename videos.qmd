@@ -1,0 +1,13 @@
+---
+title: "Videos"
+subtitle: "Short explainers on voting blocs, statistics and housing"
+listing:
+  contents: videos
+  sort: "date desc"
+  type: grid
+  grid-columns: 3
+  fields: [image, title, description]
+  categories: false
+page-layout: full
+draft: true
+---

@@ -1,0 +1,35 @@
+---
+title: "Outreach & activism"
+subtitle: "Statistics for housing, tenants and the public"
+toc: true
+toc-location: right
+listing:
+  id: outreach-news
+  contents: news
+  include:
+    categories: "{outreach}"
+  sort: "date desc"
+  type: table
+  fields: [date, title]
+  date-format: "MMM YYYY"
+  max-items: 5
+---
+
+<!-- Outline from Jack's notes. Each section is a placeholder until written. -->
+
+## Rent control in Portland
+
+## Brunswick rent registry
+
+## Evictions in Boston
+
+Related student work: Brian Liu's honors thesis, *Chains for Change: A Bayesian and Sociological Analysis of Boston's Eviction Court Cases*, and Avery Cutler's ongoing work on informal agreements in eviction dockets.
+
+## PMP
+
+## Rent control, redone
+
+## Recent outreach news
+
+::: {#outreach-news}
+:::

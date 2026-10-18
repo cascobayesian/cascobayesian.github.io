@@ -1,0 +1,51 @@
+---
+title: "Publications"
+subtitle: "I publish as John D. O'Brien"
+toc: true
+toc-location: right
+---
+
+<p class="muted">Full list also on <a href="https://scholar.google.com/citations?user=eKEAQGUAAAAJ&hl=en">Google Scholar</a>.</p>
+
+## In draft
+
+<ul class="pub-list">
+<li>John O'Brien. <span class="pub-title">"The topological analysis of mixture models."</span></li>
+<li>John O'Brien and Aaron Kaufman. <span class="pub-title">"The shape of local political space."</span></li>
+</ul>
+
+## Peer-reviewed publications
+
+<!-- TODO: Jack: add DOI or PDF links for the papers below that have none -->
+
+<ul class="pub-list">
+<li>John D. O'Brien. 2026. <span class="pub-title">"A Bayesian mixture model captures temporal and spatial structure of voting blocs within longitudinal referendum data."</span> <span class="pub-venue">Political Science Research and Methods</span>, 1–22. doi:10.1017/psrm.2025.10050. [<a href="https://www.cambridge.org/core/journals/political-science-research-and-methods/article/bayesian-mixture-model-captures-temporal-and-spatial-structure-of-voting-blocs-within-longitudinal-referendum-data/B2C9A113D969277325F9EDAC4F90E83F">journal</a>] [<a href="https://arxiv.org/abs/2301.01677">arXiv</a>]</li>
+<li>Felicia McBride, Nur Schettino, John D. O'Brien, Wilder Harwood, Liz Perot, Grant Temple, Hugo Ayalo Solares, et al. 2025. <span class="pub-title">"A radio-quiet AGN as a candidate counterpart to neutrino event IceCube–200615A."</span> <span class="pub-venue">Monthly Notices of the Royal Astronomical Society</span> 541(2). [<a href="https://academic.oup.com/mnras/article/541/2/1613/8175000">journal</a>]</li>
+<li>Dhiraj Murthy, John D. O'Brien, Alex Gross, Nathan Meyers. 2021. <span class="pub-title">"Variations in the temporal structure of sociability across American cities."</span> <span class="pub-venue">Sociology</span> 55(1): 30–55. <span class="pub-note">Nominated for paper of the year by the British Sociological Association.</span></li>
+<li>Nicholas Record, John D. O'Brien, Karen Stamieszkin, Jeffrey A. Runge. 2019. <span class="pub-title">"Omic-style statistical clustering reveals old and new patterns in Gulf of Maine ecosystem."</span> <span class="pub-venue">Canadian Journal of Fisheries and Aquatic Sciences</span>.</li>
+<li>C. M. Ndila, S. Uyoga, A. W. Macharia, G. Nyutu, N. Peshu, J. Ojal, M. Shebe, et al. 2018. <span class="pub-title">"Human candidate gene polymorphisms and risk of severe malaria in children in Kilifi, Kenya: a case-control association study."</span> <span class="pub-venue">The Lancet Haematology</span> 5(8): e333–e345.</li>
+<li>John D. O'Brien, Lucas Amenga-Etego, Ruiqi Li. 2017. <span class="pub-title">"Approaches to estimating inbreeding coefficients in clinical isolates of <em>Plasmodium falciparum</em> from genomic sequence data."</span> <span class="pub-venue">Malaria Journal</span> 15(1): 473–484.</li>
+<li>Alistair Miles, Zamin Iqbal, Paul Vauterin, Richard Pearson, Susanna Campino, Marie Theron, Keith Gould, Daniel Mead, Elizabeth Drury, John D. O'Brien, Valentin Rubio, et al. 2016. <span class="pub-title">"Indels, structural variation, and recombination drive genomic diversity in <em>Plasmodium falciparum</em>."</span> <span class="pub-venue">Genome Research</span> 26(9): 1288–99.</li>
+<li>John D. O'Brien, Kathryn Lin, Scott MacEachern. 2016. <span class="pub-title">"Mixture model of pottery decorations from Lake Chad Basin archaeological sites reveals ancient segregation patterns."</span> <span class="pub-venue">Proceedings of the Royal Society B</span> 283(1827): 2824.</li>
+<li>John D. O'Brien, Zamin Iqbal, Jason Wendler, Lucas Amenga-Etego. 2016. <span class="pub-title">"Inferring strain mixture within clinical <em>Plasmodium falciparum</em> isolates using genomic sequence data."</span> <span class="pub-venue">PLoS Computational Biology</span> 12(6): e1004824.</li>
+<li>Vladimir Douhovnikoff, Samuel Taylor, Eric Hazelton, Cindi Smith, John D. O'Brien. 2015. <span class="pub-title">"Maximal stomatal conductance to water and plasticity in stomatal traits differ between native and invasive introduced lineages of <em>Phragmites australis</em> in North America."</span> <span class="pub-venue">AoB Plants</span> 8: plw006.</li>
+<li>John D. O'Brien, Xavier Didelot, Lucas Amenga-Etego, Zamin Iqbal, Daniel Falush. 2014. <span class="pub-title">"A Bayesian approach to inferring the phylogenetic structure of communities from metagenomic data."</span> <span class="pub-venue">Genetics</span> 10(3): 114–119.</li>
+<li>Jason Wendler, John Okombo, Roberto Amato, Olivo Miotto, Steven Kiara, Leah Mwai, Lewa Pole, John D. O'Brien, Magnus Manske, Daniel Alcock, et al. 2014. <span class="pub-title">"A genome-wide association study of <em>Plasmodium falciparum</em> susceptibility to 22 antimalarial drugs in Kenya."</span> <span class="pub-venue">PLoS ONE</span> 9(5): e96486.</li>
+<li>Olivo Miotto, Jacob Almagro-Garcia, Magnus Manske, Bronwyn MacInnis, Susana Campino, Kirk A. Rockett, Chanaki Amaratunga, et al. 2013. <span class="pub-title">"Multiple populations of artemisinin-resistant <em>Plasmodium falciparum</em> in Cambodia."</span> <span class="pub-venue">Nature Genetics</span> 45(6): 648–655.</li>
+<li>Samuel Oyola, Yong Gu, Magnus Manske, Thomas Otto, John D. O'Brien, Daniel Alcock, Bronwyn MacInnis, Matthew Berriman, Chris Newbold, Dominic Kwiatkowski, et al. 2013. <span class="pub-title">"Efficient depletion of host DNA contamination in malaria clinical sequencing."</span> <span class="pub-venue">Journal of Clinical Microbiology</span> 51(3): 745–751.</li>
+<li>Magnus Manske, Olivo Miotto, Susanna Campino, Sarah Auburn, Jacob Almagro-Garcia, Gareth Maslen, John D. O'Brien, Abdoulaye Djimde, et al. 2012. <span class="pub-title">"Analysis of <em>Plasmodium falciparum</em> diversity in natural infections by deep sequencing."</span> <span class="pub-venue">Nature</span> 487(7407): 375–9.</li>
+<li>Vladimir Minin, John D. O'Brien, Arseni Seregin. 2011. <span class="pub-title">"Imputation estimators partially correct for model misspecification."</span> <span class="pub-venue">Statistical Applications in Genetics and Molecular Biology</span> 10(1): 1201–1218.</li>
+<li>Dwayne Chambers, Erica Flapan, John D. O'Brien. 2010. <span class="pub-title">"The topological symmetry groups of complete graphs with 4n+3 vertices."</span> <span class="pub-venue">Discrete and Continuous Dynamical Systems, Series S</span> 4: 1401–1412.</li>
+<li>John D. O'Brien, Vladimir N. Minin, Marc A. Suchard. 2009. <span class="pub-title">"Learning to count: robust estimates for labeled distances between molecular sequences."</span> <span class="pub-venue">Molecular Biology and Evolution</span> 26: 801–814.</li>
+<li>John D. O'Brien, Zhen-Su She, Marc A. Suchard. 2008. <span class="pub-title">"Dating the time of viral subtype divergence."</span> <span class="pub-venue">BMC Evolutionary Biology</span> 8(1): 172–179.</li>
+<li>Zhu Yang, John D. O'Brien (joint first author), Xiao-Bin Zheng, Huai-Qu Zhu, Zhen-Su She. 2007. <span class="pub-title">"Tree and rate estimation by local evaluation of heterochronous nucleotide data."</span> <span class="pub-venue">Bioinformatics</span> 23(1): 169–176.</li>
+<li>Greg Lakatos, John D. O'Brien, Tom Chou. 2006. <span class="pub-title">"Hydrodynamic mean field solutions of 1D exclusion processes with spatially varying hopping rates."</span> <span class="pub-venue">Journal of Physics A: Mathematical and General</span> 39(10): 2253–2264.</li>
+</ul>
+
+
+## Awards and fellowships
+
+- Royal Society International Travel Grant, 2009
+- University of California Chancellor's Fellowship, 2003–2004 and 2007–2008
+- NIH Systems and Integrative Biology Fellowship, 2004–2007
+- Fulbright Scholar, U.S. Department of State, 2002–2003

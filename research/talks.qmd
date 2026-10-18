@@ -1,0 +1,40 @@
+---
+title: "Talks"
+subtitle: "Presentations and workshops"
+---
+
+<ul class="pub-list">
+<li><span class="pub-title">"The persistent structure of political ideology from referendum data."</span> Conference on Computational Social Science, Philadelphia, PA, July 2024. <span class="pub-note">Reviewed</span></li>
+<li><span class="pub-title">"The topology of mixture models."</span> Symposium on Data Science and Statistics, Richmond, VA, June 2024. <span class="pub-note">Reviewed</span></li>
+<li><span class="pub-title">"Inferring the shape of Maine's political ideology with referendum data."</span> Colby–Bates–Bowdoin Mathematics Meeting, Waterville, ME, October 2023. <span class="pub-note">Invited</span></li>
+<li><span class="pub-title">"Inferring the structure of political ideology with a Bayesian model of referendum data."</span> Political and Computational Social Science, Cambridge, MA, June 2022. <span class="pub-note">Contributed</span></li>
+<li><span class="pub-title">"Bayesian mixtures of mixture for metagenomic data."</span> Meeting of the Indian Statistical Association, Gainesville, FL, August 2018. <span class="pub-note">Contributed</span></li>
+<li><span class="pub-title">"All is everywhere: latent Dirichlet dispersion for ecological count data."</span> Joint Statistical Meetings, Baltimore, MD, August 2017. <span class="pub-note">Contributed</span></li>
+<li><span class="pub-title">"What's in that ecology? A latent factor Dirichlet-multinomial model for metagenomic count data."</span> Joint Statistical Meetings, Chicago, IL, August 2016. <span class="pub-note">Contributed</span></li>
+<li><span class="pub-title">Working group: Merging population genetics with epidemiology.</span> Genetic Epidemiology of Malaria Workshop, June 2015. <span class="pub-note">Invited</span></li>
+<li><span class="pub-title">"Regression in complex microbial ecosystems."</span> Bigelow Laboratory for Ocean Sciences, December 2014. <span class="pub-note">Invited</span></li>
+<li><span class="pub-title">"A Bayesian approach to inferring community structure and evolutionary history from whole-genome metagenomic data."</span> Joint Statistical Meetings, August 2014. <span class="pub-note">Invited</span></li>
+<li><span class="pub-title">"The lineage model: A Bayesian approach to inferring ecology and evolution."</span> Newton Institute Workshop on Metagenomics, March 2014. <span class="pub-note">Invited</span></li>
+<li><span class="pub-title">"Measurably evolving ecologies: statistical methods for metagenomic sequence data."</span> Colby–Bates–Bowdoin Seminar, November 2013. <span class="pub-note">Invited</span></li>
+<li><span class="pub-title">"The lineage model: inferring ecoevolutionary dynamics from metagenomic data."</span> Joint Statistical Meetings, August 2013. <span class="pub-note">Contributed</span></li>
+<li><span class="pub-title">"Testing pipelines with crosses."</span> Genetic Epidemiology of Malaria Conference, June 2012. <span class="pub-note">Invited</span></li>
+<li><span class="pub-title">"Towards a reconstruction of the historical migration patterns of <em>P. falciparum</em> through its organelles."</span> International Biogeography Society Conference, September 2011. <span class="pub-note">Contributed</span></li>
+<li><span class="pub-title">"Simultaneously estimating microbial ecology and evolution."</span> Bristol Complexity Seminar, March 2010. <span class="pub-note">Invited</span></li>
+<li><span class="pub-title">"The lineage model for microbial community composition."</span> Oxford Mathematical Biology Seminar, November 2009. <span class="pub-note">Invited</span></li>
+<li><span class="pub-title">"The lineage model for microbial community composition."</span> Joint Statistical Meetings, August 2009. <span class="pub-note">Contributed</span></li>
+<li><span class="pub-title">"A more general model of the evolution of influenza subtypes."</span> Stochastic Processes and their Applications, August 2009. <span class="pub-note">Contributed</span></li>
+<li><span class="pub-title">"A Bayesian model for metagenomic population structure."</span> Gordon Research Conference in Applied Microbiology, July 2009. <span class="pub-note">Contributed</span></li>
+<li><span class="pub-title">"Phylogenetics and GMRFs to model conformational changes."</span> University of Bath, June 2009. <span class="pub-note">Invited</span></li>
+<li><span class="pub-title">"Robust counting for unusual distances."</span> European Bioinformatics Institute, October 2008. <span class="pub-note">Invited</span></li>
+<li><span class="pub-title">"Modeling distance, rates and non-neutrality in viral systems."</span> Centers for Disease Control and Prevention, Influenza Division, April 2008. <span class="pub-note">Invited</span></li>
+<li><span class="pub-title">"Counting codon changes carefully: Markov-chain-induced counting processes for robust distance estimation."</span> Joint Statistical Meetings, July 2007. <span class="pub-note">Contributed</span></li>
+<li><span class="pub-title">"Watching change in influenza A viruses."</span> Peking University, Center for Theoretical Biology, July 2006. <span class="pub-note">Invited</span></li>
+<li><span class="pub-title">"Characterizing the rate of nucleotide substitution along branches in influenza phylogenies."</span> DIMACS Workshop on Rapidly Evolving Pathogens, July 2006. <span class="pub-note">Contributed</span></li>
+<li><span class="pub-title">"Breaking the molecular clock (assumption)."</span> Society for Molecular Biology and Evolution, May 2006. <span class="pub-note">Contributed</span></li>
+<li><span class="pub-title">"Cognitive aspects of the grammar of Norwegian Sign Language."</span> University of Bergen, Department of Linguistics, March 2003. <span class="pub-note">Invited</span></li>
+</ul>
+
+## Other
+
+- Co-organizer, *Statworks* conference on network inference, while at the University of Bristol.
+- Fulbright project (2002–2003, Bergen, Norway): developed a dictionary of mathematics terms for Norwegian Sign Language.

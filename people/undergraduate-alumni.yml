@@ -1,5 +1,5 @@
     - path: https://www.linkedin.com/in/sejal-prachand
-      image: "/files/profiles/sejal.jpeg"
+      image: "/files/images/headshot-placeholder.svg"
       title: "Sejal Prachand"
       lastname: "Sejal Prachand"
       current: "UMontana Graduate Student"
@@ -9,7 +9,7 @@
       ended: "2024"
       
     - path: https://iriss.stanford.edu/people/lauren-traum
-      image: "/files/profiles/lauren.jpeg"
+      image: "/files/images/headshot-placeholder.svg"
       title: "Lauren Traum"
       lastname: "Lauren Traum"
       current: "Stanford Pre-doc"

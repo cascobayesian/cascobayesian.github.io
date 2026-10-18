@@ -1,60 +1,98 @@
 ---
-title: "Jack O'Brien, PhD"
-description-meta: "Academic Website for Jack O'Brien"
-image: "culture_painting.png"
-page-navigation: false
+pagetitle: "Jack O'Brien | Statistics & Data Science, Bowdoin College"
+page-layout: article
 toc: false
-#sidebar: false
-page-layout: full
-
-about:
-  id: hero-heading
-  template: trestles
-  image-width: 100%
-  links:
-    - icon: envelope
-      text: E-mail
-      href: mailto:jobrien@bowdoin.edu    
-    - icon: globe
-      text: GitHub
-      href: https://github.com/cascobayesian
-      target: _blank
-    - icon: youtube
-      text: YouTube
-      href: https://www.youtube.com     
-      target: _blank 
-    - text: "{{< ai google-scholar >}} Google Scholar"
-      href: https://scholar.google.com/citations?user=eKEAQGUAAAAJ&hl=en
-      target: _blank
-
+listing:
+  id: recent
+  contents: news
+  sort: "date desc"
+  type: table
+  fields: [date, title, categories]
+  date-format: "MMM YYYY"
+  max-items: 5
+  sort-ui: false
+  filter-ui: false
 ---
 
-:::{#hero-heading}
+```{=html}
+<div class="hero">
+  <!-- TODO: Jack: replace with a real headshot (e.g. files/images/headshot.jpg) -->
+  <img class="headshot" src="files/images/headshot-placeholder.svg" alt="Photo of Jack O'Brien (placeholder)">
+  <div>
+    <p class="hero-name">Jack O'Brien</p>
+    <div class="role">Associate Professor of Mathematics &middot; Bowdoin College</div>
+    <p>I'm an applied statistician and data scientist. My research is on how mixture models and similar approaches can be used to analyze social science data like <a href="https://royalsocietypublishing.org/rspb/article/283/1827/20152824/84418/Mixture-model-of-pottery-decorations-from-Lake">pottery sherds</a>, <a href="https://arxiv.org/abs/2301.01677">election results</a>, and <a href="https://journals.sagepub.com/doi/abs/10.1177/0038038520956940">tweets</a> to create remarkably simple portraits of complex social phenomena. I'm also fascinated by housing dynamics.</p>
+    <div class="hero-links">
+      <a href="mailto:jobrien@bowdoin.edu"><i class="bi bi-envelope"></i> jobrien@bowdoin.edu</a>
+      <a href="cv.html"><i class="bi bi-file-earmark-text"></i> CV</a>
+      <a href="https://github.com/cascobayesian"><i class="bi bi-github"></i> GitHub</a>
+      <a href="https://scholar.google.com/citations?user=eKEAQGUAAAAJ&hl=en"><i class="bi bi-mortarboard"></i> Google Scholar</a>
+    </div>
+  </div>
+</div>
+```
 
-Welcome! This is the academic website of Jack O'Brien. I'm an applied statistician, data scientist, and an associate professor of mathematics at [Bowdoin College](https://en.wikipedia.org/wiki/Bowdoin_College). My research is on how mixture models and similar approaches can be used to analyze social science data like [pottery sherds](https://royalsocietypublishing.org/rspb/article/283/1827/20152824/84418/Mixture-model-of-pottery-decorations-from-Lake), [election results](https://arxiv.org/abs/2301.01677), and  [tweets](https://journals.sagepub.com/doi/abs/10.1177/0038038520956940) to create remarkably simple portraits of complex social phenomena. I'm also fascinated by housing dynamics.
+## Recent
 
---- 
+::: {#recent}
+:::
 
-### Experience
+[All news &rarr;](news.qmd)
 
-- Associate Professor, Bowdoin College (2018-present)
-- Senior Statistician, Wellcome Trust Centre for Human Genetics, University of Oxford (2010-2012)
-- Research Associate in Statistical Genetics, University of Bristol (2008-2009)
+## What I work on
 
-### Education
+::: {.card-grid}
 
-- BA, Pomona College (Mathematics)
-- PhD, UCLA (Biomathematics)
+::: {.pcard}
+::: {.pcard-body}
+[Research]{.chip}
 
---- 
+### Mapping voting blocs
 
-As we confront the disaster of increasing authoritarianism and its computational and data-based implementation, I think it is incumbent upon us as quantitative scholars that we challenge ourselves to do the difficult work of re-imagining our disciplines freed from their associations with the surveillance state. The [Just Mathematics Collective](https://www.justmathematicscollective.net/) provides some much needed initiative in that direction.
+A model borrowed from population genetics finds voting blocs in election returns: neither left nor right, strikingly spatial, and stable across elections.
 
+::: {.pcard-links}
+[Read more](research/voting-blocs.qmd)
+:::
+:::
+:::
+
+::: {.pcard}
+::: {.pcard-body}
+[Teaching]{.chip}
+
+### Statistics at Bowdoin
+
+Statistical modeling, data science and Bayesian statistics, taught with real data and a lot of computation.
+
+::: {.pcard-links}
+[Teaching](teaching.qmd)
+:::
+:::
+:::
+
+::: {.pcard}
+::: {.pcard-body}
+[Outreach]{.chip}
+
+### Housing and the public
+
+Rent control in Portland, a rent registry for Brunswick, and eviction records in Boston.
+
+::: {.pcard-links}
+[Outreach](outreach.qmd)
+:::
+:::
+:::
 
 :::
 
-## Recent work
-* (**Dec 2025**) Check out my recent(ish) paper using mixture models to map political ideology using election data: [O'Brien. 2025. "A Bayesian mixture model captures temporal and spatial structure of voting blocs within longitudinal referendum data"](https://arxiv.org/abs/2301.01677). Currently in press in *Political Science Research and Methods*.
-* (**Dec 2025**) My two honors students, Avery Cutler and Nathan Kellerman, made absolutely amazing mid-year presentations on their respective projects. Check out their projects here: [Avery's on modeling eviction records in Boston] and [Nathan's work on a new EM algorithm for overdispersed count data](https://github.com/nathan-kellerman/nkellerman-research-git).
-* (**July 2025**) Very happy to see Assistant Professor of Physics Fe McBride's paper, ["A radio-quiet AGN as a candidate counterpart to neutrino event IceCube–200615A"](https://academic.oup.com/mnras/article/541/2/1613/8175000) (on which I made a very small assist) published in *The Monthly Notices of the Royal Astronomical Society*.
+## Background
 
+- **Associate Professor**, Department of Mathematics, Bowdoin College (2018 to present); Assistant Professor (2012 to 2018)
+- **Senior Statistician**, Wellcome Trust Centre for Human Genetics, University of Oxford (2010 to 2012)
+- **Research Associate in Statistical Genetics**, University of Bristol (2008 to 2010)
+- **Ph.D., Biomathematics**, University of California, Los Angeles
+- **B.A., Mathematics**, Pomona College
+
+As we confront the disaster of increasing authoritarianism and its computational and data-based implementation, I think it is incumbent upon us as quantitative scholars that we challenge ourselves to do the difficult work of re-imagining our disciplines freed from their associations with the surveillance state. The [Just Mathematics Collective](https://www.justmathematicscollective.net/) provides some much needed initiative in that direction.
