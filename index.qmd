@@ -16,12 +16,12 @@ toc: false
       <video src="files/images/netherlands_1971_pca.mp4" poster="files/images/netherlands_1971_pca.png" autoplay muted loop playsinline preload="auto" aria-label="The same municipalities placed by how they voted in 1971, rotating in three dimensions"></video>
       <ul class="viz-legend" aria-label="Voting blocs">
         <li style="--c:#E8B75C">Catholic heartland</li>
-        <li style="--c:#E2A7FF">Catholic towns, Labour minority</li>
-        <li style="--c:#E4827C">Catholic-majority mixed countryside</li>
+        <li style="--c:#E2A7FF">Catholic/Labour towns</li>
+        <li style="--c:#E4827C">Catholic/mixed countryside</li>
         <li style="--c:#64A1E8">Bible Belt</li>
-        <li style="--c:#9CA503">Orthodox Protestant north</li>
+        <li style="--c:#9CA503">Orthodox north</li>
         <li style="--c:#71D379">Labour towns &amp; north</li>
-        <li style="--c:#00B892">Big cities &amp; mixed towns</li>
+        <li style="--c:#00B892">Big cities/mixed towns</li>
         <li style="--c:#00D4E9">Large mixed cities</li>
       </ul>
     </div>
