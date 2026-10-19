@@ -1,6 +1,7 @@
 project:
   type: website
   output-dir: docs
+  post-render: scripts/unlist_hidden_pages.py
   resources:
     - files/**
 
