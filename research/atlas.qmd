@@ -1,0 +1,72 @@
+---
+title: "The Atlas of US Voting Blocs"
+subtitle: "Every location we've successfully run the voting bloc model"
+toc: false
+page-layout: full
+# Not linked from anywhere on the site, and kept out of the site search; reach it at /research/atlas.html.
+search: false
+---
+
+{{< include _atlas_coverage.md >}}
+
+{{< include _atlas_map.html >}}
+
+::: {.atlas-caption}
+Places analyzed with the [voting-bloc model](voting-blocs.qmd). Each of the sixteen statewide fits is colored by its precinct- or town-level voting blocs, from red (most Republican) to violet (most Democratic); points mark city and county fits. In California (30 blocs) and Washington (14) the colors rank each state's own blocs. Everywhere else they follow each bloc's 2020 Biden vote on one shared scale (2024 Harris vote in Maine), so neighboring blocs match across state lines. **Click any colored state or orange point** to explore its blocs. City panels rank each city's own blocs the same way, except Seattle, San Diego and New Orleans, which are their county within the statewide fit and keep its colors.
+:::
+
+{{< include _atlas_panels.html >}}
+
+```{=html}
+<style>
+.atlas-map { position: relative; width: 100%; }
+.atlas-map img { display: block; width: 100%; height: auto; }
+.atlas-hot { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.atlas-hot path { fill: transparent; stroke: transparent; stroke-width: 6; cursor: pointer; pointer-events: all;
+                  transition: fill .15s, stroke .15s; }
+.atlas-hot path:hover, .atlas-hot path:focus { fill: rgba(255,255,255,.25); stroke: #222; outline: none; }
+.atlas-hot path.active { stroke: #222; }
+.atlas-hot circle.city { fill: transparent; stroke: transparent; stroke-width: 5; cursor: pointer; pointer-events: all;
+                         transition: stroke .15s; }
+.atlas-hot circle.city:hover, .atlas-hot circle.city:focus, .atlas-hot circle.city.active { stroke: #222; outline: none; }
+.atlas-coverage { font-size: 1.1rem; margin: -.5rem 0 1rem; }
+.atlas-caption { font-size: .9rem; color: #555; margin: .5rem 0 1.5rem; }
+.atlas-panel { border-top: 1px solid #ddd; padding-top: 1rem; scroll-margin-top: 4rem; }
+.atlas-panel-head { display: flex; align-items: baseline; justify-content: space-between; }
+.atlas-panel-head h2 { margin: 0; border: 0; }
+.atlas-close { background: none; border: 0; font-size: 1.8rem; line-height: 1; cursor: pointer; color: #555; }
+.atlas-panel-sub { color: #555; margin: .25rem 0 1rem; }
+.atlas-panel-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; align-items: start; }
+.atlas-panel-grid figure { margin: 0; }
+.atlas-panel-grid img { width: 100%; height: auto; }
+.atlas-panel-grid figcaption { font-size: .8rem; color: #666; margin-top: .25rem; }
+.atlas-blocs { list-style: none; padding: 0; margin: 0; align-self: center; }
+.atlas-blocs li { display: grid; grid-template-columns: 2rem 1fr; column-gap: .6rem; margin-bottom: .8rem; }
+.bloc-swatch { grid-row: span 2; width: 2rem; height: 2rem; border-radius: 50%; border: 1.5px solid #111;
+               display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .85rem; }
+.bloc-name { font-weight: 600; line-height: 1.2; }
+.bloc-meta { font-size: .8rem; color: #666; }
+@media (max-width: 900px) {
+  .atlas-panel-grid { grid-template-columns: 1fr; }
+  .atlas-state-map { order: -1; }
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const show = (state) => {
+    document.querySelectorAll(".atlas-panel").forEach(p => p.hidden = p.id !== "panel-" + state);
+    document.querySelectorAll(".atlas-hot [data-state]").forEach(p => p.classList.toggle("active", p.dataset.state === state));
+    const panel = document.getElementById("panel-" + state);
+    if (panel) panel.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+  document.querySelectorAll(".atlas-hot [data-state]").forEach(p => {
+    p.addEventListener("click", () => show(p.dataset.state));
+    p.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); show(p.dataset.state); } });
+  });
+  document.querySelectorAll(".atlas-close").forEach(b => b.addEventListener("click", () => {
+    b.closest(".atlas-panel").hidden = true;
+    document.querySelectorAll(".atlas-hot [data-state]").forEach(p => p.classList.remove("active"));
+  }));
+});
+</script>
+```
