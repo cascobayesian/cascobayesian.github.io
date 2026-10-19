@@ -1,0 +1,14 @@
+---
+title: "Advising"
+aliases:
+  - research.html
+page-navigation: false
+title-block-banner: false
+toc: false
+---
+
+For students:
+
+- [Letters of recommendation](letters.qmd)
+- [Appointments](appointments.qmd)
+- [Mathematics course prerequisites at Bowdoin](prerequisites.qmd): a map of which courses lead to which

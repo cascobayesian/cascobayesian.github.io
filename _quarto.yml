@@ -35,8 +35,8 @@ website:
       #   href: videos.qmd
       - text: Outreach
         href: outreach.qmd
-      - text: Students
-        href: students/research.qmd
+      - text: Advising
+        href: students/advising.qmd
       - text: News
         href: news.qmd
       - text: CV
