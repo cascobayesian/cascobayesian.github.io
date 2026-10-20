@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Brunswick Rent Registry (Mock-up)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<style>
+/* Same layout and palette as ../portland-rent-map: header strip, parcel map on the left,
+   record panel on the right (bottom sheet on phones). */
+:root {
+  --bg: #f4f6f8;
+  --surface: #ffffff;
+  --surface-2: #eef1f4;
+  --fg: #18212c;
+  --muted: #586374;
+  --line: #d6dce3;
+  --accent: #b9440f;          /* selection only; data uses the blue ramp */
+  --series: #2a78d6;
+  --map-ground: #ecebe4;      /* land outside Brunswick's parcels */
+  --water: #c6dbec;
+  --limit: #2f3b4a;           /* town line */
+  --hwy: #eba7a2; --hwy-case: #cf817b; --art: #f1d3d0;
+  --str: #d1312b;             /* short-term rental layer */
+  --parcel: #f7f8f9;
+  --parcel-line: #c3cad3;
+  --nodata: #a3abb5;
+  --bin1: #86b6ef; --bin2: #5598e7; --bin3: #2a78d6; --bin4: #1c5cab; --bin5: #104281;
+  --warn-bg: #fff4e5; --warn-fg: #7a3d00;
+  --font-ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-head: "IBM Plex Sans Condensed", "IBM Plex Sans", system-ui, sans-serif;
+  --font-data: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --panel-w: 460px;
+  color-scheme: light;
+}
+html, body { height: 100%; margin: 0; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-ui); font-size: 14px; line-height: 1.45; }
+[hidden] { display: none !important; }
+.app { height: 100%; display: grid; grid-template-rows: auto auto 1fr; grid-template-columns: minmax(0, 1fr); }
+header.top {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px;
+  padding-block: 10px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  background: var(--surface); border-bottom: 1px solid var(--line);
+}
+.brand { display: flex; flex-direction: column; min-width: 0; }
+.brand h1 { margin: 0; font-family: var(--font-head); font-weight: 600; font-size: 19px; letter-spacing: .01em; text-wrap: balance; }
+.brand h1 .tag { font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--warn-fg); background: var(--warn-bg); border-radius: 4px; padding: 2px 6px; margin-left: 6px; vertical-align: 2px; }
+.brand .sub { color: var(--muted); font-size: 12.5px; }
+.mockbar { background: var(--warn-bg); color: var(--warn-fg); font-size: 12.5px; padding: 6px max(16px, env(safe-area-inset-left, 0px)); border-bottom: 1px solid #f0d9b8; }
+.search { position: relative; flex: 1 1 260px; max-width: 420px; min-width: 0; }
+.search input {
+  width: 100%; box-sizing: border-box; font: inherit; padding: 8px 12px; border-radius: 6px;
+  border: 1px solid var(--line); background: var(--bg); color: var(--fg);
+}
+.search input:focus-visible, button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.results {
+  position: absolute; z-index: 20; top: calc(100% + 4px); left: 0; right: 0; max-height: 300px; overflow-y: auto;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 6px; box-shadow: 0 8px 24px rgb(0 0 0 / .14);
+  margin: 0; padding: 4px 0; list-style: none;
+}
+.results li button { all: unset; box-sizing: border-box; width: 100%; display: flex; justify-content: space-between; gap: 12px; padding: 7px 12px; cursor: pointer; }
+.results li button:hover, .results li button[aria-selected="true"] { background: var(--surface-2); }
+.results .meta { color: var(--muted); font-size: 12px; white-space: nowrap; }
+.results .none { padding: 7px 12px; color: var(--muted); }
+.legend { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; font-size: 12px; color: var(--muted); }
+.legend .title { color: var(--fg); font-weight: 500; }
+.legend .sw { display: inline-flex; align-items: center; gap: 5px; font-variant-numeric: tabular-nums; }
+.legend .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 1.5px var(--surface); }
+
+.main { position: relative; display: grid; grid-template-columns: 1fr var(--panel-w); min-height: 0; }
+#map { position: relative; min-height: 0; background: var(--map-ground); }
+.loading {
+  position: absolute; inset: 0; display: grid; place-items: center; z-index: 5; background: var(--map-ground); color: var(--muted);
+  font-family: var(--font-data); font-size: 13px;
+}
+.tooltip {
+  position: absolute; z-index: 6; pointer-events: none; background: var(--surface); color: var(--fg);
+  border: 1px solid var(--line); border-radius: 6px; padding: 6px 9px; font-size: 12.5px; box-shadow: 0 4px 14px rgb(0 0 0 / .16);
+  max-width: 260px;
+}
+.tooltip b { font-weight: 600; }
+.tooltip .m { color: var(--muted); font-variant-numeric: tabular-nums; }
+.controls { position: absolute; top: 10px; right: 10px; z-index: 4; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.seg { display: flex; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; box-shadow: 0 2px 8px rgb(0 0 0 / .12); overflow: hidden; }
+.seg button { all: unset; cursor: pointer; font-size: 13px; font-weight: 500; padding: 7px 11px; color: var(--muted); }
+.seg button[aria-pressed="true"] { background: var(--fg); color: var(--surface); }
+.toggle {
+  display: flex; align-items: center; gap: 8px;
+  font: inherit; font-size: 13px; font-weight: 500; color: var(--fg); background: var(--surface); cursor: pointer;
+  border: 1px solid var(--line); border-radius: 6px; padding: 7px 11px; box-shadow: 0 2px 8px rgb(0 0 0 / .12);
+}
+.toggle .box { width: 14px; height: 14px; border-radius: 3px; border: 1.5px solid var(--muted); display: grid; place-items: center; flex: none; }
+.toggle[aria-pressed="true"] .box { background: var(--str); border-color: var(--str); }
+.toggle[aria-pressed="true"] .box::after { content: ""; width: 4px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0; transform: translateY(-1px) rotate(45deg); }
+.toggle .n { color: var(--muted); font-weight: 400; font-variant-numeric: tabular-nums; }
+
+aside.panel { background: var(--surface); border-left: 1px solid var(--line); overflow-y: auto; min-width: 0; display: flex; flex-direction: column; }
+.panel-inner { padding: 16px max(16px, env(safe-area-inset-right, 0px)) 24px 18px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 500; }
+.panel h2 { margin: 2px 0 0; font-family: var(--font-head); font-weight: 600; font-size: 22px; line-height: 1.15; text-wrap: balance; }
+.panel h3 { margin: 0; font-family: var(--font-head); font-weight: 600; font-size: 17px; }
+.facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.fact { background: var(--surface-2); border-radius: 6px; padding: 8px 10px; min-width: 0; }
+.fact .k { font-size: 11px; color: var(--muted); }
+.fact .v { font-family: var(--font-data); font-size: 14px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.fact .v.txt { font-family: var(--font-ui); font-size: 13px; }
+.close { all: unset; cursor: pointer; color: var(--muted); font-size: 13px; padding: 4px 6px; border-radius: 4px; }
+.close:hover { color: var(--fg); background: var(--surface-2); }
+.row-between { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.unit-filter { font: inherit; font-size: 12.5px; padding: 4px 8px; border-radius: 5px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); width: 130px; }
+
+.tbl-wrap { overflow: auto; border: 1px solid var(--line); border-radius: 6px; max-height: 52vh; }
+table.units { border-collapse: collapse; width: 100%; font-size: 12.5px; font-variant-numeric: tabular-nums; }
+table.units th, table.units td { padding: 5px 8px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+table.units thead th { position: sticky; top: 0; font-family: var(--font-head); font-size: 13px; font-weight: 600; background: var(--surface-2); vertical-align: bottom; }
+table.units th:first-child, table.units td:first-child { text-align: left; }
+table.units td { font-family: var(--font-data); }
+table.units td .ci { display: block; color: var(--muted); font-size: 11px; }
+table.units tr:last-child td { border-bottom: 0; }
+table.units .na { color: var(--muted); }
+a { color: var(--series); }
+.note { font-size: 12.5px; color: var(--muted); }
+.callout { background: var(--warn-bg); color: var(--warn-fg); border-radius: 6px; padding: 8px 10px; font-size: 12.5px; }
+.callout.str { background: #fde8e6; color: #9c1d17; }
+details { border-top: 1px solid var(--line); padding-top: 10px; }
+details summary { cursor: pointer; font-weight: 500; }
+.prose p { margin: 0 0 8px; max-width: 62ch; }
+
+.maplibregl-ctrl-group { background: var(--surface) !important; }
+.maplibregl-ctrl-attrib { background: color-mix(in srgb, var(--surface) 85%, transparent) !important; color: var(--muted) !important; }
+
+@media (max-width: 760px) {
+  .main { grid-template-columns: 1fr; grid-template-rows: minmax(0, 1fr) auto; }
+  aside.panel { border-left: 0; border-top: 1px solid var(--line); max-height: 46vh; }
+  aside.panel.empty { max-height: 26vh; }
+  .brand .sub { display: none; }
+  .legend { width: 100%; flex-wrap: nowrap; overflow-x: auto; white-space: nowrap; padding-bottom: 2px; scrollbar-width: none; }
+  .panel-inner { padding: 12px 16px calc(16px + env(safe-area-inset-bottom, 0px)); }
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="brand">
+      <h1>Brunswick Rent Registry <span class="tag">Mock-up</span></h1>
+      <span class="sub">What a public rental registry for Brunswick, ME could look like</span>
+    </div>
+    <div class="search" role="search">
+      <label for="q" style="position:absolute;left:-9999px">Find an address</label>
+      <input id="q" type="search" placeholder="Find an address, e.g. 10 Townsend Ln" autocomplete="off" aria-controls="results" aria-expanded="false">
+      <ul id="results" class="results" role="listbox" hidden></ul>
+    </div>
+    <div class="legend" id="legend" aria-label="Map legend"></div>
+  </header>
+  <div class="mockbar">
+    <b>Mock-up, not an official Town of Brunswick site.</b> The town's rental registry isn't public. Every rent shown here is a statistical estimate, not a rent reported by a landlord.
+  </div>
+  <div class="main">
+    <div id="map">
+      <div class="controls">
+        <div class="seg" role="group" aria-label="Color buildings by">
+          <button id="byCur" aria-pressed="true">Current rent</button>
+          <button id="byOff" aria-pressed="false">Asking rent</button>
+        </div>
+        <button class="toggle" id="strToggle" aria-pressed="false" hidden title="Show parcels with short-term rental listings (April 2025)"><span class="box"></span>Short-term rentals <span class="n" id="strN"></span></button>
+      </div>
+      <div class="loading" id="loading">Loading parcels and rental buildings…</div>
+    </div>
+    <aside class="panel empty" id="panel" aria-live="polite"><div class="panel-inner" id="panelInner"><div class="note">Loading the registry…</div></div></aside>
+  </div>
+</div>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+(() => {
+  const $ = (s, el = document) => el.querySelector(s);
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const money = v => v == null ? null : "$" + Math.round(v).toLocaleString("en-US");
+  const range = s => s ? s.split("-").map(v => money(+v)).join("–") : "";
+  const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+  // Bins put about a fifth of buildings in each color
+  const SCALES = {
+    cur: { field: "median", title: "Estimated current rent, building median", breaks: [1100, 1300, 1500, 1700] },
+    off: { field: "offered", title: "Estimated asking rent, building median", breaks: [1750, 1900, 2100, 2300] }
+  };
+  let mode = "cur";
+
+  let META, BUILDINGS, BY_ID = new Map(), UNITS = null, STRS = null, STR_BY_ID = new Map(), map, selectedId = null, strOn = false;
+  const panel = $("#panel"), inner = $("#panelInner");
+
+  async function getJSON(url) {
+    const r = await fetch(url);
+    if (!r.ok) throw new Error(url + ": " + r.status);
+    return r.json();
+  }
+
+  // ---------- legend
+  function binLabels(b) {
+    return [`&lt;${money(b[0])}`, `${money(b[0])}–${(b[1] - 1).toLocaleString()}`, `${money(b[1])}–${(b[2] - 1).toLocaleString()}`,
+            `${money(b[2])}–${(b[3] - 1).toLocaleString()}`, `${money(b[3])}+`];
+  }
+  function renderLegend() {
+    const s = SCALES[mode];
+    $("#legend").innerHTML = `<span class="title">${s.title}</span>` +
+      binLabels(s.breaks).map((l, i) => `<span class="sw"><i class="dot" style="background:var(--bin${i + 1})"></i>${l}</span>`).join("") +
+      (mode === "cur" ? `<span class="sw"><i class="dot" style="background:var(--nodata)"></i>No estimate</span>` : "") +
+      `<span class="sw">Dot size = units</span>`;
+  }
+
+  // ---------- panel: default view
+  function renderIntro() {
+    panel.classList.add("empty");
+    const c = META.counts;
+    inner.innerHTML = `
+      <div>
+        <div class="eyebrow">How to use</div>
+        <h2>Search an address or click a dot</h2>
+      </div>
+      <div class="prose">
+        <p>Each dot is a rental building, placed on its tax parcel. Click one to see its units, with an estimate of what each tenant pays now and what the unit would be listed for today.</p>
+        <p class="note">${c.buildings.toLocaleString()} buildings with ${c.units.toLocaleString()} rental units are mapped. ${(c.units - c.with_estimate).toLocaleString()} units in senior and assisted living have no current-rent estimate.</p>
+      </div>
+      ${aboutHTML()}`;
+  }
+
+  function aboutHTML() {
+    return `
+      <details>
+        <summary>About this mock-up</summary>
+        <div class="prose note" style="margin-top:8px">
+          <p>Brunswick began requiring every long-term rental unit to register in April 2025, but the registry isn't published. This page shows how it could be shared, in the style of <a href="../portland-rent-map/">Portland's registry map</a>, using public data in place of the registry.</p>
+          <p><b>Buildings and units</b> come from the town's assessing records (as of ${esc(META.assessing_date)}): units in multi-unit buildings without an owner-occupant, plus tax-exempt and senior housing. Single homes whose owner lives elsewhere are left out, because the records can't tell a rental from a second home. Unit counts for the largest complexes were corrected from outside sources. Unit numbers are mostly not in the records, so units are numbered in order.</p>
+          <p><b>Estimated current rent</b> is what a tenant in the unit likely pays now: a model of 2020–2024 American Community Survey contract rent by block group, using the unit's size and type. <b>Estimated asking rent</b> is what the unit would likely be listed for today: a model of 2025–26 Zillow asking rents by neighborhood, bedrooms, baths, house vs. apartment, and new construction. Ranges are 95% intervals. Neither is a rent anyone reported.</p>
+          <p><b>Short-term rentals</b> are parcels with listings that meet the town's STR definition in its April 18, 2025 listings report (${META.counts.str_listings} listings on ${META.counts.str_parcels} parcels; listings without a parcel number aren't shown).</p>
+          <p>Owner names are left out. Map: Town of Brunswick parcels; water, town line and roads from U.S. Census TIGER/Line 2023.</p>
+        </div>
+      </details>`;
+  }
+
+  // ---------- panel: one building
+  function openBuilding(id, { fly = false } = {}) {
+    const b = BY_ID.get(id);
+    if (!b) return;
+    selectedId = id;
+    map.setFilter("sel", ["==", ["get", "id"], id]);
+    if (fly) map.flyTo({ center: [b.lon, b.lat], zoom: Math.max(map.getZoom(), 16), speed: 1.4 });
+    history.replaceState(null, "", "#" + id);
+    panel.classList.remove("empty");
+    const units = UNITS[id] || [];
+    const str = STR_BY_ID.get(id);
+    inner.innerHTML = `
+      <div class="row-between">
+        <div>
+          <div class="eyebrow">${esc(b.hood)}</div>
+          <h2>${esc(b.addr)}</h2>
+        </div>
+        <button class="close" id="close" aria-label="Close">✕ Close</button>
+      </div>
+      <div class="facts">
+        <div class="fact"><div class="k">Rental units</div><div class="v">${b.n}</div></div>
+        <div class="fact"><div class="k">Est. current rent</div><div class="v">${money(b.median) ?? "—"}</div></div>
+        <div class="fact"><div class="k">Est. asking rent</div><div class="v">${money(b.offered)}</div></div>
+        <div class="fact"><div class="k">Building type</div><div class="v txt">${esc(b.type)}</div></div>
+        <div class="fact"><div class="k">Year built</div><div class="v">${b.year_built || "—"}</div></div>
+        <div class="fact"><div class="k">Owner</div><div class="v txt">${esc(b.owner_type || "—")}</div></div>
+      </div>
+      ${b.median != null ? `<p class="note" style="margin:0">If listed today, the typical unit here would ask about <b>${money(b.offered - b.median)}</b> a month more than its tenant likely pays now (building medians).</p>` : ""}
+      ${str ? `<div class="callout str">${str.listings} short-term rental listing${str.listings > 1 ? "s" : ""} on this parcel (town STR report, April 2025).</div>` : ""}
+      <div class="row-between" style="align-items:center">
+        <h3>Units</h3>
+        ${units.length > 8 ? `<input class="unit-filter" id="uf" type="search" placeholder="Filter units" aria-label="Filter units">` : ""}
+      </div>
+      <div class="tbl-wrap">
+        <table class="units">
+          <thead><tr><th scope="col">Unit</th><th scope="col">Beds</th><th scope="col">Baths</th><th scope="col">Est. current rent</th><th scope="col">Est. asking rent</th></tr></thead>
+          <tbody id="ubody">${unitRows(units)}</tbody>
+        </table>
+      </div>
+      <p class="note" style="margin:0">Estimates with 95% ranges. A registry would show the rent each landlord reports instead.</p>
+      ${aboutHTML()}`;
+    $("#close").onclick = closeBuilding;
+    const uf = $("#uf");
+    if (uf) uf.oninput = () => {
+      const q = uf.value.trim().toLowerCase();
+      $("#ubody").innerHTML = unitRows(units.filter(u => u.label.toLowerCase().includes(q)));
+    };
+    inner.parentElement.scrollTop = 0;
+  }
+
+  function unitRows(units) {
+    if (!units.length) return `<tr><td colspan="5" class="na">No units match.</td></tr>`;
+    return units.map(u => `<tr>
+      <td>${esc(u.label)}</td>
+      <td>${u.beds ?? "<span class='na'>—</span>"}</td>
+      <td>${u.baths ?? "<span class='na'>—</span>"}</td>
+      <td>${u.cur != null ? `${money(u.cur)}<span class="ci">${range(u.cur_ci)}</span>` : "<span class='na'>no estimate</span>"}</td>
+      <td>${money(u.off)}<span class="ci">${range(u.off_ci)}</span></td>
+    </tr>`).join("");
+  }
+
+  function closeBuilding() {
+    selectedId = null;
+    map.setFilter("sel", ["==", ["get", "id"], ""]);
+    history.replaceState(null, "", location.pathname);
+    renderIntro();
+  }
+
+  // ---------- search
+  const q = $("#q"), results = $("#results");
+  let hits = [], active = -1;
+  const norm = s => s.toLowerCase().replace(/\b(street|st)\b/g, "st").replace(/\b(road|rd)\b/g, "rd").replace(/\b(avenue|ave)\b/g, "ave")
+    .replace(/\b(drive|dr)\b/g, "dr").replace(/\b(lane|ln)\b/g, "ln").replace(/[.,#]/g, " ").replace(/\s+/g, " ").trim();
+  function runSearch() {
+    const s = norm(q.value);
+    if (s.length < 2) { results.hidden = true; q.setAttribute("aria-expanded", "false"); return; }
+    const words = s.split(" ");
+    hits = BUILDINGS.filter(b => words.every(w => b._key.includes(w)))
+      .sort((a, b) => (a._key.startsWith(s) ? 0 : 1) - (b._key.startsWith(s) ? 0 : 1) || b.n - a.n).slice(0, 10);
+    active = hits.length ? 0 : -1;
+    results.innerHTML = hits.length
+      ? hits.map((b, i) => `<li><button role="option" data-i="${i}" aria-selected="${i === active}">${esc(b.addr)}<span class="meta">${b.n} unit${b.n > 1 ? "s" : ""}</span></button></li>`).join("")
+      : `<li class="none">No rental building at that address</li>`;
+    results.hidden = false;
+    q.setAttribute("aria-expanded", "true");
+  }
+  function pick(i) {
+    const b = hits[i];
+    if (!b) return;
+    results.hidden = true;
+    q.value = b.addr;
+    openBuilding(b.account, { fly: true });
+  }
+  q.addEventListener("input", runSearch);
+  q.addEventListener("keydown", e => {
+    if (results.hidden) return;
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      e.preventDefault();
+      active = (active + (e.key === "ArrowDown" ? 1 : -1) + hits.length) % hits.length;
+      results.querySelectorAll("button").forEach((el, i) => el.setAttribute("aria-selected", i === active));
+    } else if (e.key === "Enter") { e.preventDefault(); pick(active); }
+    else if (e.key === "Escape") { results.hidden = true; }
+  });
+  results.addEventListener("click", e => { const el = e.target.closest("button"); if (el) pick(+el.dataset.i); });
+  document.addEventListener("click", e => { if (!e.target.closest(".search")) results.hidden = true; });
+
+  // ---------- coloring
+  function colorExpr() {
+    const s = SCALES[mode];
+    return ["case", ["==", ["get", s.field], null], css("--nodata"),
+      ["step", ["get", s.field], css("--bin1"), s.breaks[0], css("--bin2"), s.breaks[1], css("--bin3"), s.breaks[2], css("--bin4"), s.breaks[3], css("--bin5")]];
+  }
+  function setMode(m) {
+    mode = m;
+    $("#byCur").setAttribute("aria-pressed", m === "cur");
+    $("#byOff").setAttribute("aria-pressed", m === "off");
+    map.setPaintProperty("bld", "circle-color", colorExpr());
+    renderLegend();
+  }
+  function setSTR(on) {
+    strOn = on;
+    $("#strToggle").setAttribute("aria-pressed", on);
+    map.setLayoutProperty("str", "visibility", on ? "visible" : "none");
+  }
+
+  // ---------- map
+  async function init() {
+    const [bjson, units, base, town, roads, strs] = await Promise.all([
+      getJSON("data/buildings.json"), getJSON("data/units.json"), getJSON("data/base.json"),
+      getJSON("data/town.json"), getJSON("data/roads.json"), getJSON("data/strs.json").catch(() => null)
+    ]);
+    META = bjson.meta; BUILDINGS = bjson.buildings; UNITS = units; STRS = strs;
+    BUILDINGS.forEach(b => { b._key = norm(b.addr); BY_ID.set(b.account, b); });
+    if (STRS) STRS.features.forEach(f => STR_BY_ID.set(f.properties.account, f.properties));
+    renderLegend();
+    renderIntro();
+
+    const pts = { type: "FeatureCollection", features: BUILDINGS.map(b => ({
+      type: "Feature", geometry: { type: "Point", coordinates: [b.lon, b.lat] },
+      properties: { id: b.account, addr: b.addr, n: b.n, median: b.median, offered: b.offered } })) };
+
+    map = new maplibregl.Map({
+      container: "map",
+      style: { version: 8, sources: {}, layers: [{ id: "ground", type: "background", paint: { "background-color": css("--map-ground") } }] },
+      bounds: [[-70.09, 43.80], [-69.84, 43.98]], fitBoundsOptions: { padding: 20 },
+      maxBounds: [[-70.35, 43.65], [-69.6, 44.12]], attributionControl: false
+    });
+    map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "bottom-right");
+    map.addControl(new maplibregl.AttributionControl({ compact: true, customAttribution: "Town of Brunswick; U.S. Census TIGER/Line" }));
+
+    map.on("load", () => {
+      map.addSource("town", { type: "geojson", data: town });
+      map.addSource("parcels", { type: "geojson", data: base, tolerance: 0.2 });
+      map.addSource("roads", { type: "geojson", data: roads });
+      map.addSource("bld", { type: "geojson", data: pts });
+      map.addLayer({ id: "parcel-fill", type: "fill", source: "parcels", paint: { "fill-color": css("--parcel") } });
+      map.addLayer({ id: "parcel-line", type: "line", source: "parcels", minzoom: 13.5,
+        paint: { "line-color": css("--parcel-line"), "line-width": ["interpolate", ["linear"], ["zoom"], 13.5, 0.3, 17, 1] } });
+      map.addLayer({ id: "water", type: "fill", source: "town", filter: ["==", ["get", "kind"], "water"], paint: { "fill-color": css("--water") } });
+      map.addLayer({ id: "roads-art", type: "line", source: "roads", filter: ["==", ["get", "kind"], "art"],
+        paint: { "line-color": css("--art"), "line-width": ["interpolate", ["linear"], ["zoom"], 11, 1.5, 16, 5] } });
+      map.addLayer({ id: "roads-hwy-case", type: "line", source: "roads", filter: ["==", ["get", "kind"], "hwy"],
+        paint: { "line-color": css("--hwy-case"), "line-width": ["interpolate", ["linear"], ["zoom"], 11, 3, 16, 9] } });
+      map.addLayer({ id: "roads-hwy", type: "line", source: "roads", filter: ["==", ["get", "kind"], "hwy"],
+        paint: { "line-color": css("--hwy"), "line-width": ["interpolate", ["linear"], ["zoom"], 11, 2, 16, 7] } });
+      map.addLayer({ id: "limit", type: "line", source: "town", filter: ["==", ["get", "kind"], "limit"],
+        paint: { "line-color": css("--limit"), "line-width": 1.2, "line-dasharray": [3, 2] } });
+      // "zoom" must sit in a top-level interpolate, so the selection ring gets its own copy
+      const radius = (pad = 0) => ["interpolate", ["linear"], ["zoom"],
+        11, ["+", 2.5 + pad, ["*", 0.6, ["sqrt", ["get", "n"]]]],
+        16, ["+", 5 + pad, ["*", 1.6, ["sqrt", ["get", "n"]]]]];
+      if (STRS) {
+        map.addSource("strs", { type: "geojson", data: STRS });
+        map.addLayer({ id: "str", type: "circle", source: "strs", layout: { visibility: "none" },
+          paint: { "circle-color": css("--str"), "circle-opacity": 0.85, "circle-stroke-color": "#fff", "circle-stroke-width": 1,
+                   "circle-radius": ["interpolate", ["linear"], ["zoom"], 11, ["+", 2.5, ["sqrt", ["get", "listings"]]], 16, ["+", 5, ["*", 2, ["sqrt", ["get", "listings"]]]]] } });
+        $("#strN").textContent = STRS.features.length;
+        $("#strToggle").hidden = false;
+      }
+      map.addLayer({ id: "bld", type: "circle", source: "bld",
+        paint: { "circle-color": colorExpr(), "circle-radius": radius(), "circle-stroke-color": "#fff", "circle-stroke-width": 1 } });
+      map.addLayer({ id: "sel", type: "circle", source: "bld", filter: ["==", ["get", "id"], ""],
+        paint: { "circle-color": "rgba(0,0,0,0)", "circle-radius": radius(3), "circle-stroke-color": css("--accent"), "circle-stroke-width": 2.5 } });
+
+      // tooltip
+      const tip = document.createElement("div");
+      tip.className = "tooltip"; tip.hidden = true;
+      $("#map").appendChild(tip);
+      const hover = layer => {
+        map.on("mousemove", layer, e => {
+          const p = e.features[0].properties;
+          map.getCanvas().style.cursor = "pointer";
+          tip.innerHTML = layer === "bld"
+            ? `<b>${esc(p.addr)}</b><br><span class="m">${p.n} unit${p.n > 1 ? "s" : ""} · est. ${mode === "cur" ? "current" : "asking"} ${money(mode === "cur" ? (p.median == null ? null : +p.median) : +p.offered) ?? "n/a"}</span>`
+            : `<b>${esc(p.address)}</b><br><span class="m">${p.listings} STR listing${p.listings > 1 ? "s" : ""}</span>`;
+          tip.style.left = (e.point.x + 14) + "px"; tip.style.top = (e.point.y + 10) + "px"; tip.hidden = false;
+        });
+        map.on("mouseleave", layer, () => { map.getCanvas().style.cursor = ""; tip.hidden = true; });
+      };
+      hover("bld");
+      if (STRS) hover("str");
+      map.on("click", "bld", e => openBuilding(e.features[0].properties.id));
+      map.on("click", e => {
+        if (!map.queryRenderedFeatures(e.point, { layers: ["bld"] }).length && selectedId) closeBuilding();
+      });
+
+      $("#byCur").onclick = () => setMode("cur");
+      $("#byOff").onclick = () => setMode("off");
+      $("#strToggle").onclick = () => setSTR(!strOn);
+      $("#loading").hidden = true;
+
+      const id = decodeURIComponent(location.hash.slice(1));
+      if (BY_ID.has(id)) openBuilding(id, { fly: true });
+    });
+  }
+
+  init().catch(err => {
+    $("#loading").textContent = "Couldn't load the map data (" + err.message + ").";
+  });
+})();
+</script>
+</body>
+</html>
