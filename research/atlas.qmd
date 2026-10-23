@@ -46,7 +46,31 @@ Places analyzed with the [voting-bloc model](voting-blocs.qmd). Each of the sixt
                display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .85rem; }
 .bloc-name { font-weight: 600; line-height: 1.2; }
 .bloc-meta { font-size: .8rem; color: #666; }
+.atlas-zoom { position: relative; overflow: hidden; touch-action: none; cursor: grab; border: 1px solid #e3e3e3; border-radius: 4px; background: #fff; }
+.atlas-zoom.dragging { cursor: grabbing; }
+.atlas-zoom img { display: block; margin: 0; transform-origin: 0 0; user-select: none; -webkit-user-drag: none; will-change: transform; }
+.atlas-zoom-ctl { position: absolute; top: .4rem; right: .4rem; display: flex; flex-direction: column; gap: 2px; z-index: 1; }
+.atlas-zoom-ctl button { width: 1.9rem; height: 1.9rem; border: 1px solid #bbb; border-radius: 3px; background: rgba(255,255,255,.92);
+                         font-size: 1.05rem; line-height: 1; cursor: pointer; color: #222; padding: 0; }
+.atlas-zoom-ctl button:hover { background: #fff; border-color: #222; }
+.atlas-pca[role=button] { cursor: pointer; border-radius: 4px; }
+.atlas-pca[role=button]:hover img, .atlas-pca[role=button]:focus-visible img { outline: 2px solid #222; outline-offset: 2px; }
+.atlas-pca[role=button]:focus { outline: none; }
+.atlas-pca[aria-expanded=true] img { outline: 2px solid #222; outline-offset: 2px; }
+.atlas-demog { margin-top: 1.5rem; border-top: 1px dashed #ccc; padding-top: 1rem; scroll-margin-top: 4rem; }
+.atlas-demog > img { display: block; width: 100%; height: auto; }
+.atlas-demog-keys { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-top: .5rem; }
+.atlas-demog-keys h3 { font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: #555; margin: 0 0 .4rem; border: 0; }
+.atlas-demog-keys p, .atlas-demog-note { font-size: .8rem; color: #666; margin: .3rem 0 0; }
+.atlas-ramp { height: 12px; border-radius: 2px; }
+.atlas-ticks { position: relative; height: 1.1rem; font-size: .75rem; color: #555; }
+.atlas-ticks span { position: absolute; top: 2px; transform: translateX(-50%); white-space: nowrap; }
+.atlas-ticks span:first-child { transform: none; }
+.atlas-ticks span:last-child:not(:first-child) { transform: translateX(-100%); }
+.atlas-race { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: .15rem .8rem; font-size: .8rem; }
+.atlas-race span { display: inline-block; width: .8rem; height: .8rem; border-radius: 50%; margin-right: .4rem; vertical-align: -1px; }
 @media (max-width: 900px) {
+  .atlas-demog-keys { grid-template-columns: 1fr; }
   .atlas-panel-grid { grid-template-columns: 1fr; }
   .atlas-state-map { order: -1; }
 }
@@ -62,6 +86,66 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".atlas-hot [data-state]").forEach(p => {
     p.addEventListener("click", () => show(p.dataset.state));
     p.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); show(p.dataset.state); } });
+  });
+  // clicking a panel's PCA opens, below it, the same points colored by density, race and education
+  document.querySelectorAll(".atlas-panel").forEach(panel => {
+    const fig = panel.querySelector(".atlas-pca"), demog = panel.querySelector(".atlas-demog");
+    if (!fig || !demog) return;
+    fig.tabIndex = 0;
+    fig.setAttribute("role", "button");
+    fig.setAttribute("aria-controls", demog.id);
+    fig.setAttribute("aria-expanded", "false");
+    const toggle = () => {
+      const open = demog.hidden;
+      if (open) { const img = demog.querySelector("img[data-src]"); if (img && !img.src) img.src = img.dataset.src; }
+      demog.hidden = !open;
+      fig.setAttribute("aria-expanded", String(open));
+      if (open) demog.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+    fig.addEventListener("click", toggle);
+    fig.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
+  });
+  // zoomable bloc maps: wheel / pinch / double-click to zoom about the pointer, drag to pan, buttons for +, -, reset.
+  // The high-resolution image is swapped in the first time a map is zoomed.
+  document.querySelectorAll(".atlas-zoom").forEach(box => {
+    const img = box.querySelector("img"), MAX = 10;
+    let k = 1, x = 0, y = 0;
+    const ctl = document.createElement("div"); ctl.className = "atlas-zoom-ctl";
+    ctl.innerHTML = '<button type="button" aria-label="Zoom in">+</button><button type="button" aria-label="Zoom out">&minus;</button><button type="button" aria-label="Reset zoom">&#8634;</button>';
+    box.appendChild(ctl);
+    const apply = () => {
+      const w = img.offsetWidth, h = img.offsetHeight;
+      x = Math.min(0, Math.max(w - w * k, x)); y = Math.min(0, Math.max(h - h * k, y));   // keep the map filling the frame
+      img.style.transform = `translate(${x}px, ${y}px) scale(${k})`;
+      if (k > 1 && img.dataset.hi) { img.src = img.dataset.hi; delete img.dataset.hi; }
+    };
+    const zoomAt = (f, px, py) => {                // px, py: point in the frame that stays put
+      const k1 = Math.min(MAX, Math.max(1, k * f)); f = k1 / k;
+      x = px - (px - x) * f; y = py - (py - y) * f; k = k1; apply();
+    };
+    const local = e => { const r = box.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+    const centre = () => [box.clientWidth / 2, box.clientHeight / 2];
+    const [bIn, bOut, bReset] = ctl.querySelectorAll("button");
+    bIn.addEventListener("click", () => zoomAt(1.6, ...centre()));
+    bOut.addEventListener("click", () => zoomAt(1 / 1.6, ...centre()));
+    bReset.addEventListener("click", () => { k = 1; x = 0; y = 0; apply(); });
+    ctl.addEventListener("pointerdown", e => e.stopPropagation());
+    ctl.addEventListener("dblclick", e => e.stopPropagation());
+    box.addEventListener("wheel", e => { e.preventDefault(); zoomAt(Math.exp(-e.deltaY * (e.deltaMode ? 0.05 : 0.0025)), ...local(e)); }, { passive: false });
+    box.addEventListener("dblclick", e => zoomAt(e.shiftKey ? 1 / 2 : 2, ...local(e)));
+    const pts = new Map(); let last = null;
+    box.addEventListener("pointerdown", e => { box.setPointerCapture(e.pointerId); pts.set(e.pointerId, local(e)); box.classList.add("dragging"); last = null; });
+    box.addEventListener("pointermove", e => {
+      if (!pts.has(e.pointerId)) return;
+      const prev = pts.get(e.pointerId), cur = local(e); pts.set(e.pointerId, cur);
+      if (pts.size === 1) { x += cur[0] - prev[0]; y += cur[1] - prev[1]; apply(); return; }
+      const [a, b] = [...pts.values()], d = Math.hypot(a[0] - b[0], a[1] - b[1]), m = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+      if (last) { x += m[0] - last.m[0]; y += m[1] - last.m[1]; zoomAt(d / last.d, ...m); }
+      last = { d, m };
+    });
+    const up = e => { pts.delete(e.pointerId); last = null; if (!pts.size) box.classList.remove("dragging"); };
+    box.addEventListener("pointerup", up); box.addEventListener("pointercancel", up);
+    window.addEventListener("resize", apply);
   });
   document.querySelectorAll(".atlas-close").forEach(b => b.addEventListener("click", () => {
     b.closest(".atlas-panel").hidden = true;
