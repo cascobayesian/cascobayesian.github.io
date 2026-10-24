@@ -22,3 +22,11 @@ page-layout: full
   <p>Your browser can't display the PDF here. <a href="files/cv_jobrien_2026.pdf">Download the CV</a> instead.</p>
 </object>
 ```
+
+## Representative papers
+
+<ul class="pub-list">
+<li>John D. O'Brien. 2023. <span class="pub-title">"A Bayesian mixture model captures temporal and spatial structure of voting blocs within longitudinal referendum data."</span> <span class="pub-venue">arXiv</span>:2301.01677. [<a href="https://arxiv.org/abs/2301.01677">arXiv</a>]</li>
+<li>John D. O'Brien, Kathryn Lin, Scott MacEachern. 2015. <span class="pub-title">"Mixture model of pottery distributions from Lake Chad Basin archaeological sites reveals ancient segregation patterns."</span> <span class="pub-venue">arXiv</span>:1511.05185. [<a href="https://arxiv.org/abs/1511.05185">arXiv</a>]</li>
+<li>John D. O'Brien, Xavier Didelot, Zamin Iqbal, Lucas Amenga-Etego, Bartu Ahiska, Daniel Falush. 2013. <span class="pub-title">"A Bayesian approach to inferring the phylogenetic structure of communities from metagenomic data."</span> <span class="pub-venue">arXiv</span>:1306.6313. [<a href="https://arxiv.org/abs/1306.6313">arXiv</a>]</li>
+</ul>
