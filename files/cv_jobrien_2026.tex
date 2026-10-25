@@ -1,0 +1,885 @@
+
+\documentclass[10pt]{article}
+\usepackage{calc}
+\reversemarginpar
+\usepackage[paper=letterpaper,
+            %includefoot, % Uncomment to put page number above margin
+            marginparwidth=1.2in,     % Length of section titles
+            marginparsep=.05in,       % Space between titles and text
+            margin=1in,               % 1 inch margins
+            includemp]{geometry}
+
+\setlength{\parindent}{0in}
+
+\usepackage{lipsum}
+\usepackage{fancyhdr}
+\usepackage{datetime}
+
+
+
+\usepackage{multirow}
+\usepackage{paralist}
+
+\usepackage{fancyhdr,lastpage}
+\pagestyle{fancy}
+%\pagestyle{empty}      % Uncomment this to get rid of page numbers
+\fancyhf{}\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\date}
+
+\fancyfootoffset{\marginparsep+\marginparwidth}
+\newlength{\footpageshift}
+\setlength{\footpageshift}
+          {0.5\textwidth+0.5\marginparsep+0.5\marginparwidth-2in}
+\lfoot{    \parbox{4in}{\, \hfill %
+%                    \arabic{page} of \protect\pageref*{LastPage} % +LP
+%                    \arabic{page}                               % -LP
+                    \hfill \,}}
+
+% Finally, give us PDF bookmarks
+\usepackage{color,hyperref}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.3}
+\hypersetup{colorlinks,breaklinks,
+            linkcolor=darkblue,urlcolor=darkblue,
+            anchorcolor=darkblue,citecolor=darkblue}
+
+% Place at top of document. It should be the first thing.
+\newcommand{\makeheading}[1]%
+        {\hspace*{-\marginparsep minus \marginparwidth}%
+         \begin{minipage}[t]{\textwidth+\marginparwidth+\marginparsep}%
+                {\large \bfseries #1 \hspace{7.5cm} \normalsize{Updated:  Oct. 2026 }}\\[-0.15\baselineskip] 
+                 \rule{\columnwidth}{0.5pt}%
+         \end{minipage}}
+
+\renewcommand{\section}[2]%
+        {\pagebreak[2]\vspace{1.3\baselineskip}%
+         \phantomsection\addcontentsline{toc}{section}{#1}%
+         \hspace{0in}%
+         \marginpar{
+         \raggedright \scshape #1}#2}
+
+% An itemize-style list with lots of space between items
+\newenvironment{outerlist}[1][\enskip\textbullet]%
+        {\begin{itemize}[#1]}{\end{itemize}%
+         \vspace{-.6\baselineskip}}
+
+% An environment IDENTICAL to outerlist that has better pre-list spacing
+% when used as the first thing in a \section 
+\newenvironment{lonelist}[1][\enskip\textbullet]%
+        {\vspace{-\baselineskip}\begin{list}{#1}{%
+        \setlength{\partopsep}{0pt}%
+        \setlength{\topsep}{0pt}}}
+        {\end{list}\vspace{-.6\baselineskip}}
+
+% An itemize-style list with little space between items
+\newenvironment{innerlist}[1][\enskip\textbullet]%
+        {\begin{compactitem}[#1]}{\end{compactitem}}
+
+% To add some paragraph space between lines.
+% This also tells LaTeX to preferably break a page on one of these gaps
+% if there is a needed pagebreak nearby.
+\newcommand{\blankline}{\quad\pagebreak[2]}
+
+%%%%%%%%%%%%%%%%%%%%%%%% End Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Begin CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%\lipsum
+
+\makeheading{Dr. John D. O'Brien}
+
+\section{Contact Information}
+%
+% NOTE: Mind where the & separators and \\ breaks are in the following
+%       table.
+%
+% ALSO: \rcollength is the width of the right column of the table 
+%       (adjust it to your liking; default is 1.85in).
+%
+\newlength{\rcollength}\setlength{\rcollength}{2.2in}%
+%
+\begin{tabular}[t]{@{}p{\textwidth-\rcollength}p{\rcollength}}
+\href{http://www.bowdoin.edu/math/}%
+     {Department of Mathematics} & \textit{Voice:} (+001) 207-798-4247 \\
+\href{http://www.bowdoin.edu}{Bowdoin College}  & \textit{E-mail:}
+\href{mailto:jobrien@bowdoin.edu}{jobrien@bowdoin.edu}\\
+ 8600 College Station               & \textit{Web:} \href{https://cascobayesian.github.io/}{cascobayesian.github.io}\\
+Brunswick, Maine 04011 USA 
+\end{tabular}
+
+\section{Citizenship}
+%
+USA
+
+\section{Research Interests}
+%
+Phylogenetics, Bayesian statistics, mixture models, statistical genetics, Markov chain Monte Carlo methods,  statistical methods for social science
+
+\section{Education}
+%
+\href{http://www.ucla.edu/}{\textbf{University of California, Los Angeles}}, 
+Los Angeles, CA 90095 USA
+\begin{outerlist}
+
+\item[] Ph.D., 
+        \href{http://www.biomath.ucla.edu/}
+             {Biomathematics}, 2008
+        \begin{innerlist}
+        \item Thesis: Robust statistical methods for estimating the substitution distances and rates of change for genes from rapidly-evolving organisms
+        \item Advisors: 
+                   {Professor Marc A. Suchard, Professor Zhen-Su She}
+        \item Area of Study: Statistics, genetics
+        \end{innerlist}
+
+\item[] M.Sc., 
+        \href{http://www.biomath.ucla.edu/}
+             {Biomathematics}, 2005
+\end{outerlist}
+\vspace{0.1cm}
+\href{http://www.pomona.edu/}{\textbf{Pomona College}}, 
+Claremont, CA 91711 USA
+\begin{outerlist}
+\item[] B.A., 
+        \href{http://www.math.pomona.edu/}
+             {Mathematics (Honors)}, 2002
+        \begin{innerlist}
+        \item Thesis: The topological symmetry groups of complete graphs
+        \item Advisor: 
+                   {Professor Erica Flapan}
+        \item Area of Study: Knot theory
+        \end{innerlist}
+\end{outerlist}
+
+\blankline
+
+\section{Professional History}
+\textbf{Bowdoin College} \\
+Department of Mathematics \\
+Searles Science Building \\
+Brunswick, Maine 04011 USA
+
+\begin{outerlist}
+\item[] \textit{Associate Professor}%
+        \hfill {August 2018--present}
+
+\begin{innerlist}
+\item Instructor for statistics,  data science, and Bayesian statistics
+\item Research work in genetics, sociology,  and political science
+\end{innerlist}
+
+\end{outerlist}
+
+
+\begin{outerlist}
+\item[] \textit{Assistant Professor}%
+        \hfill {August 2012--July 2018}
+
+\begin{innerlist}
+\item Instructor for probability and biostatistics
+\item Research work in statistical genetics and ecology
+\end{innerlist}
+
+\end{outerlist}
+\blankline
+
+\textbf{University of Oxford} \\
+Centre for Genomics and Global Health \\
+Wellcome Trust Centre for Human Genetics \\
+Oxford, OX3 7BN UK
+
+\begin{outerlist}
+\item[] \textit{Senior Statistician}%
+        \hfill {June 2010--July 2012}
+
+\begin{innerlist}
+\item Implemented and tested next-generation sequencing pipelines for field-isolated \emph{Plasmodium falciparum} genomes
+\item Using phylogenetic models to infer recombination, migration and gene flow for \emph{Plasmodium falciparum}
+%\item Instructor for year-long introduction to statistics seminar
+%\item Partial supervision of two graduate students
+\end{innerlist}
+
+\end{outerlist}
+\blankline
+
+\textbf{University of Bristol} \\
+Department of Mathematics \\
+Bristol, BS8 1TW UK
+
+\begin{outerlist}
+\item[] \textit{Research Associate in Statistical Genetics}%
+        \hfill {August 2008--June 2010}
+
+\begin{innerlist}
+\item Designed and implemented Bayesian methods for community metagenomics
+\item Lectured for \emph{Introduction to Statistics}
+\item Co-organized \verb+Statworks+ conference on network inference
+\end{innerlist}
+
+\end{outerlist}
+\blankline
+
+\textbf{University of California, Los Angeles} \\
+Department of Biomathematics \\
+Los Angeles, CA 90095 USA
+
+\begin{outerlist}
+\item[] \textit{Graduate Student}%
+        \hfill {September 2003--June 2008}
+\begin{innerlist}
+\item Extensive coursework in stochastic processes, statistics, genetics and ecology
+\item Teaching praeceptor for \emph{Statistical Phylogenetics}
+\item Lecturer for \emph{Calculus II} and \emph{Introduction to Applied Mathematics}
+\end{innerlist}
+\end{outerlist}
+
+\blankline
+
+\textbf{Peking University} \\
+Center for Theoretical Biology \\
+Beijing, PRC
+
+\begin{outerlist}
+\item[] \textit{Visiting Scholar}%
+        \hfill {Summers 2004, 2005 and 2006}
+\begin{innerlist}
+\item Developed the TREBLE algorithm for estimating the rate of substitution and phylogenies for time-sampled sequence data
+\end{innerlist}
+\end{outerlist}
+
+\blankline
+
+\textbf{West Land Competence Center} \\
+Bergen, Norway 
+\begin{outerlist}
+\item[] \textit{Fulbright Scholar}%
+        \hfill {June 2002--August 2003}
+\begin{innerlist}
+\item Developed a dictionary of mathematics terms for Norwegian Sign Language
+\end{innerlist}
+\end{outerlist}
+
+\section{In draft}
+John O'Brien.  ``The topological analysis of mixture models.''  \\
+
+John O'Brien and Aaron Kauffman.  ``The shape of local political space.''  \\
+
+\section{Peer-reviewed Publications}
+
+
+John D. O'Brien.  2026. ``A Bayesian mixture model captures temporal and spatial structure of voting blocs within longitudinal referendum data.''  \emph{Political Science Research and Methods}. 1--22. doi:10.1017/psrm.2025.10050. [\href{https://www.cambridge.org/core/journals/political-science-research-and-methods/article/bayesian-mixture-model-captures-temporal-and-spatial-structure-of-voting-blocs-within-longitudinal-referendum-data/B2C9A113D969277325F9EDAC4F90E83F}{link}]\\
+
+McBride, Felicia, Nur Schettino, John D. O’Brien, Wilder Harwood, Liz Perot, Grant Temple, Hugo Ayalo Solares et al.  2025. ``A radio-quiet AGN as a candidate counterpart to neutrino event IceCube--200615A.'' \emph{Monthly Notices of the Royal Astronomical Society}. 541(2):1613--1627.  [\href{https://academic.oup.com/mnras/article/541/2/1613/8175000}{link}]\\
+
+Dhiraj Murthy, John D. O’Brien, Alex Gross, Nathan Meyers.  2021. ``Variations in the Temporal Structure of Sociability across American Cities.'' \emph{Sociology.}  55 (1), 30-55 (21 pages) : \textbf{\emph{Nominated for paper of the year by the British Sociological Association.}} \\
+
+Nicholas Record, John D. O'Brien, Karen Stamieszkin, and Jeffrey A. Runge.  2017. ``Omic-style statistical clustering reveals old and new patterns in the Gulf of Maine ecosystem.''  \emph{Canadian Journal of Fisheries and Aquatic Sciences}. 74(7):973--979. (7 pages) \\
+
+CM Ndila,  S Uyoga,  AW Macharia,  G Nyutu, N  Peshu,  J Ojal,  M Shebe,  \emph{et al.} 2018. ``Human candidate gene polymorphisms and risk of severe malaria in children in Kilifi, Kenya: a case-control association study.'' \emph{The Lancet Haematology}. 
+Volume 5, Issue 8, August 2018, Pages e333-e345.  (13 pages)\\
+
+John D. O'Brien, Lucas Amenga-Etego, and Ruiqi Li. 2016. ``Approaches to estimating inbreeding coefficients in clinical isolates of \emph{Plasmodium falciparum} from genomic sequence data.'' \emph{Malaria Journal}. 15:473. (10 pages) \\
+
+Alistair Miles, Zamin Iqbal, Paul Vauterin, Richard Pearson, Susanna Campino, Marie Theron, Keith Gould, Danial Mead, Elizabeth Drury, John D. O'Brien, Valentin Rubio, \emph{et al.} 2016. ``Indels, structural variation, and recombination drive genomic diversity in \emph{Plasmodium falciparum}.'' \emph{Genome Research.} 26(9):1288-99.  (13 pages) \\
+
+John D. O'Brien, Kathryn Lin, and Scott MacEachern. 2016. ``Mixture model of pottery decorations from Lake Chad Basin archaeological sites reveals ancient segregation patterns.'' \emph{Proceedings of the Royal Society B}. 283(1827):20152824. (8 pages)\\
+
+John D. O'Brien, Zamin Iqbal, Jason Wendler and Lucas Amenga-Etego. 2016. ``Inferring strain mixture within clinical \emph{Plasmodium falciparum} isolates from genomic sequence data.'' \emph{PLoS Computational Biology}. 12(6):e1004824.  (20 pages)\\
+
+Vladimir Douhovnikoff, Samuel Taylor, Eric Hazelton, Cindi Smith and John D. O'Brien. 2016. ``Maximal stomatal conductance to water and plasticity in stomatal traits differ between native and invasive introduced lineages of \emph{Phragmites australis} in North America.'' \emph{AoB Plants}, 8:plw006.  (11 pages) \\
+
+John D. O'Brien, Xavier Didelot, Zamin Iqbal, Lucas Amenga-Etego, Bartu Ahiska, and Daniel Falush. 2014. ``A Bayesian approach to inferring the phylogenetic structure of communities from metagenomic data.'' \emph{Genetics}. 197(3):925--937. (13 pages) \\
+
+Jason Wendler, John Okombo, Roberto Amato, Olivo Miotto, Steven Kiara, Leah Mwai, Lewa Pole, John D. O'Brien, Magnus Manske, Daniel Alcock, \emph{et al.}, 2014. ``A Genome-wide association study of \emph{Plasmodium falciparum} susceptibility to 22 antimalarial drugs in Kenya.'' \emph{PLoS ONE}. 9(5):e96486. (9 pages)\\
+
+Olivo Miotto, Jacob Almagro-Garcia, Magnus Manske, Bronwyn MacInnis, Susana Campino, Kirk A. Rockett, Chanaki Amaratunga, \emph{et al.} 2013. ``Multiple populations of artemisinin-resistant \emph{Plasmodium falciparum} in Cambodia.'' \emph{Nature Genetics}. 45(6) 648-655. (26 pages) \\
+
+Samuel Oyola, Yong Gu, Magnus Manske, Thomas Otto, John D. O'Brien, Daniel Alcock, Bronwyn MacInnis, Matthew Berriman, Chris Newbold, Dominic Kwiatkowski, \emph{et al.} 2013. ``Efficient depletion of host DNA contamination in malaria clinical sequencing.'' \emph{Journal of Clinical Microbiology}. 51(3):745-751. (7 pages) \\
+
+Magnus Manske, Olivo Miotto, Susanna Campino, Sarah Auburn, Jacob Almagro-Garcia, Gareth Maslen, John D. O'Brien, Abdoulaye Djimde, \emph{et al.} 2012. ``Analysis of \emph{Plasmodium falciparum} diversity in natural infections by deep sequencing.'' \emph{Nature}. 487(7407):375-9.  (5 pages) \\
+
+Vladimir Minin, John D. O'Brien and Arseni Seregin. 2011. ``Imputation estimators partially correct for model misspecification.'' \emph{Statistical Applications in Genetics and Molecular Biology}. 10(1). doi:10.2202/1544-6115.1650.\\
+
+Dwayne Chambers, Erica Flapan and John D. O'Brien. 2011. ``Topological symmetry groups of $K_{4r+3}$.'' \emph{Discrete and Continuous Dynamical Systems -- Series S}. 4(6):1401--1411. (11 pages)\\
+
+John D. O'Brien, Vladimir N. Minin, and Marc A. Suchard. 2009. ``Learning to count: robust estimates for labeled distances between molecular sequences.'' \emph{Molecular Biology and Evolution}. 26(4):801--814. (14 pages)  \\
+
+John D. O'Brien, Zhen-Su She, and Marc A Suchard. 2008. ``Dating the time of viral subtype divergence.'' \emph{BMC Evolutionary Biology}. 8:172. (9 pages) \\
+
+Zhu Yang, John D. O'Brien (joint first author), Xiao-Bin Zheng, Huai-Qu Zhu, and Zhen-Su She. 2007. ``Tree and rate estimation by local evaluation of heterochronous nucleotide data.'' \emph{Bioinformatics}. 23(2):169--176. (8 pages)\\
+
+Greg Lakatos, John D. O'Brien, and Tom Chou. 2006. ``Hydrodynamic mean field solutions of 1D exclusion processes with spatially varying hopping rates.'' \emph{Journal of Physics A: Mathematical and General}. 39(10):2253-2264.  (13 pages)\\
+
+
+\section{External Awards} 
+\href{http://royalsociety.org/}{Royal Society}
+\begin{innerlist}
+\item International Travel Grant, 2009
+\end{innerlist}
+\blankline
+
+\href{http://www.universityofcalifornia.edu/}{University of California}
+\begin{innerlist}
+\item Chancellor's Fellowship, 2003-2004 and 2007-2008
+\end{innerlist}
+\blankline
+
+National Institutes of Health
+\begin{innerlist}
+\item NIH Systems and Integrative Biology Fellowship, 2004-2007
+\end{innerlist}
+\blankline
+
+United States Department of State
+\begin{innerlist}
+\item Fulbright Scholar, 2002-2003
+\end{innerlist}
+\blankline
+
+Pomona College, Department of Mathematics
+\begin{innerlist}
+\item Honors Thesis, 2002
+\end{innerlist}
+
+%\section{In preparation} 
+%$John D. O'Brien and Serian Sumner. ''Bayesian methods for inferring behavioral patterns of social insects using radio frequency identification data.''  
+\section{Courses taught} 
+
+\subsection*{Bowdoin College}
+\begin{outerlist}
+\item[] \textit{Biostatistics}%
+        \hfill {Each semester : Fall 2012--Spring 2015, Fall 2017}
+\begin{innerlist}
+\item Accelerated introductory statistics with computation
+\item Intensive use of \verb+R+ computational environment
+\item Extensive outside readings in the social and natural sciences
+\end{innerlist}
+\end{outerlist} 
+
+\begin{outerlist}
+\item[] \textit{Probability}%
+        \hfill {Fall 2012, Spring 2013, Fall 2016, Fall 2018, Fall 2021}
+\begin{innerlist}
+\item Introductory probability course 
+\item Proof-based development finishing with central limit theorem 
+\item Introduction to \verb+R+ computational environment
+\end{innerlist}
+\end{outerlist} 
+
+
+\begin{outerlist}
+\item[] \textit{Statistics}%
+        \hfill {Spring 2014 - Spring 2024}
+\begin{innerlist}
+\item A survey of techniques in statistics and probabilistic machine learning
+\item Covers theoretical statistical concepts and applied techniques for data analysis
+\item Intensive use of \verb+R+ computational environment
+\end{innerlist}
+\end{outerlist} 
+
+\begin{outerlist}
+\item[] \textit{Advanced topics in statistics}%
+        \hfill {Fall 2013, Fall 2014, Fall 2017, Fall 2019, Fall 2023, Spring 2024}
+\begin{innerlist}
+\item Applied Bayesian statistics with computation
+\item Theoretical discussion of Bayesian statistical approach followed by development of Markov chain Monte Carlo techniques for practical inference
+\item Intensive use of \verb+R+ computational environment
+\end{innerlist}
+\end{outerlist} 
+
+\subsection*{University of Oxford}
+
+\begin{outerlist}
+\item[] \textit{Instructor for Seminar in Statistics}%
+        \hfill {Spring 2011--Spring 2012}
+\begin{innerlist}
+\item Led weekly seminar for students and employees at the Wellcome Trust Center for Human Genetics
+\item Used data from existing research projects to develop course concepts
+\end{innerlist}
+\end{outerlist} 
+
+\begin{outerlist}
+\item[] \textit{Instructor for Cape Town Workshop in Genetic Epidemiology}%
+        \hfill {March 2011}
+\begin{innerlist}
+\item Led short course for African researchers investigating the genetic basis of malaria
+\item Worked closely with several graduate students to develop research projects
+\end{innerlist}
+\end{outerlist} 
+
+
+\subsection*{University of Bristol}	
+\begin{outerlist}
+\item[] \textit{Instructor for Introductory Statistics}%
+        \hfill {Spring 2009, Spring 2010}
+\begin{innerlist}
+\item Taught eight week course in introductory statistics for biology students
+\item Used  \verb+R+ computational environment for exploring course concepts
+\end{innerlist}
+\end{outerlist} 
+
+\subsection*{University of California, Los Angeles}
+\begin{outerlist}
+\item[] \textit{Teaching Praeceptor for Statistical Phylogenetics}%
+        \hfill {Spring 2007}
+\begin{innerlist}
+\item Assisted with instruction for graduate course in phylogenetics methods
+\item Instructed lectures for unit on evolutionary models
+\end{innerlist}
+\end{outerlist} 
+	
+
+
+
+\section{Thesis Supervision}
+
+
+\begin{outerlist}
+\item[] \textit{Nathan Kellerman}%
+        \hfill {Fall 2025--Spring 2026}
+\begin{innerlist}
+\item Honors thesis in mathematics: \emph{``A Rapid Algorithm for Inferring Latent Mixture Structure in Replicate Social Science Data''}
+\end{innerlist}
+\end{outerlist} 
+
+\begin{outerlist}
+\item[] \textit{Avery Cutler}%
+        \hfill {Fall 2025--Spring 2026}
+\begin{innerlist}
+\item Honors thesis in mathematics: \emph{``Beyond the Docket: A Bayesian Exploration of Settlement Outcomes in Boston Evictions''}
+\end{innerlist}
+\end{outerlist} 
+
+\begin{outerlist}
+\item[] \textit{Brian Liu}%
+        \hfill {Fall 2024-Spring 2025}
+\begin{innerlist}
+\item Honors thesis in mathematics: \emph{``Chains for Change: Mathematical Modeling of Boston's Eviction Court Cases''}
+\end{innerlist}
+\end{outerlist} 
+
+
+\begin{outerlist}
+\item[] \textit{Max Hukill}%
+        \hfill {Fall 2019-Spring 2021}
+\begin{innerlist}
+\item Honors thesis in mathematics: \emph{``A Bayesian Hierarchical Mixture Model with Continuous-Time Markov Chains to Capture Bumblebee Foraging Behavior''}
+\end{innerlist}
+\end{outerlist} 
+
+\begin{outerlist}
+\item[] \textit{Nan Ding}%
+        \hfill {Fall 2018--Spring 2019}
+\begin{innerlist}
+\item Honors thesis in mathematics: \emph{``Rein Control Homeostasis and the Dynamics of Complex Ecosystem Stability''}
+\end{innerlist}
+\end{outerlist} 
+
+\begin{outerlist}
+\item[] \textit{Jacob Spertus}%
+        \hfill {Fall 2014--Spring 2015}
+\begin{innerlist}
+\item Honors thesis in mathematics: \emph{``A Bayesian Exploration of the Arabidopsis thaliana Chloroplast Genome''}
+\item Development of Markov chain Monte Carlo techniques to model haplotype structure in mixed genomes
+\item Broad readings from primary biological literature
+\end{innerlist}
+\end{outerlist} 
+
+\begin{outerlist}
+\item[] \textit{Chunyi Zhao}%
+        \hfill {Fall 2014--Spring 2015}
+\begin{innerlist}
+\item Honors thesis in mathematics: \emph{``The Card Swiper's Coloring Book: Bayesian Inference of Social Networks on Spatio-temporal Data''}
+\item Hidden Markov model for inferring social structures from dining hall swipe data
+\item Use of \verb+R+ for visualization and inference
+\end{innerlist}
+\end{outerlist} 
+
+\begin{outerlist}
+\item[] \textit{Zoe Karp}%
+        \hfill {Fall 2013--Spring 2014}
+\begin{innerlist}
+\item Honors thesis in mathematics: \emph{``Bayesian Parameter Estimation without Likelihoods: An Example in Lobster Heart Modeling''}
+\item Approximate Bayesian inference scheme for inferring parameters in differential system from experimental data
+\end{innerlist}
+\end{outerlist} 
+
+\begin{outerlist}
+\item[] \textit{Nathan Meyers }%
+        \hfill {Fall 2012--Spring 2013}
+\begin{innerlist}
+\item Honors thesis in mathematics: \emph{``The 
+Twitterscape in Time and Space''}
+\item Cluster analysis for large-scale sociological spatio-temporal data
+\item Extensive use of \verb+R+ for visualization and hypothesis testing
+\end{innerlist}
+\end{outerlist} 
+
+
+
+\section{Consulting projects}
+\begin{outerlist}
+\item[] \textit{CLYNK}%
+        \hfill {January 2021 -- June 2025}
+\begin{innerlist}
+\item Developed statistical techniques to move Maine's largest recycling program to an AI-assisted sampling program.
+\item Provided explanatory additional resources for legislators, businesses,  and regulators.
+\end{innerlist}
+\end{outerlist} 
+
+
+\begin{outerlist}
+\item[] \textit{Legal Consulting}%
+        \hfill {March 2017}
+\begin{innerlist}
+\item Investigated the structure of errors in administrative oversight
+\item Provided statistical summary of the probability of administrative errors 
+\end{innerlist}
+\end{outerlist} 
+
+\begin{outerlist}
+\item[] \textit{Expert Witness }%
+        \hfill {January 2014}
+\begin{innerlist}
+\item Created bibliography on measurement of skill in games of chance
+\item Provided testimony on the amount of skill involved in poker
+\end{innerlist}
+\end{outerlist} 
+
+
+
+
+\section{Computing Environments}
+\begin{outerlist}
+\item[] {C++, C, Java, R, Python, Matlab, Unix, MacOS X, Windows }
+\end{outerlist}
+
+
+\section{Presentations and workshops}
+
+
+\begin{outerlist}
+\item[] \textit{Conference on Computational Social Science}%
+        \hfill {Philadelphia, PA, July 2024}
+\begin{innerlist}
+\item ``The persistent structure of political ideology from referendum data''  (\emph{Reviewed})
+\end{innerlist}
+\end{outerlist} 
+
+\begin{outerlist}
+\item[] \textit{Symposium on Data Science and Statistics}%\\
+	\hfill{Richmond, VA, June 2024}
+\begin{innerlist}
+\item ``The topology of mixture models''  (\emph{Reviewed})
+\end{innerlist}
+\end{outerlist} 
+
+
+\begin{outerlist}
+\item[] \textit{Colby Bates Bowdoin Mathematics Meeting}%
+        \hfill {Waterville, ME, October 2023}
+\begin{innerlist}
+\item ``Inferring the shape of Maine's political ideology with referendum data''  (\emph{Invited})
+\end{innerlist}
+\end{outerlist} 
+
+
+
+\begin{outerlist}
+\item[] \textit{Political and Computational Social Science}%
+        \hfill {Cambridge, MA, June 2022}
+\begin{innerlist}
+\item ``Inferring the structure of political ideology with a Bayesian model of referendum data''  (\emph{Contributed})
+\end{innerlist}
+\end{outerlist} 
+
+\begin{outerlist}
+\item[] \textit{Meeting of the Indian Statistical Association}%
+        \hfill {Gainesville, FL, August 2018}
+\begin{innerlist}
+\item ``Bayesian mixtures of mixture for metagenomic data''  (\emph{Contributed})
+\end{innerlist}
+\end{outerlist} 
+
+\begin{outerlist}
+\item[] \textit{Joint Statistical Meeting}%
+        \hfill {Baltimore, MD, August 2017}
+\begin{innerlist}
+\item ``All is everywhere: latent Dirichlet dispersion for ecological count data''  (\emph{Contributed})
+\end{innerlist}
+\end{outerlist} 
+
+\begin{outerlist}
+\item[] \textit{Joint Statistical Meeting}%
+        \hfill {Chicago, IL, August 2016}
+\begin{innerlist}
+\item ``What's in that ecology? A latent factor Dirichlet-multinomial model for metagenomic count data''  (\emph{Contributed})
+\end{innerlist}
+\end{outerlist} 
+
+\begin{outerlist}
+\item[] \textit{Genetic Epidemiology of Malaria Workshop}%
+        \hfill {June 2015}
+\begin{innerlist}
+\item  Working group: Merging population genetics with epidemiology  (\emph{Invited})
+\end{innerlist}
+\end{outerlist} 
+
+\begin{outerlist}
+\item[] \textit{Bigelow Laboratories for Ocean Science}%
+        \hfill {December 2014}
+\begin{innerlist}
+\item ``Regression in complex microbial ecosystems''  (\emph{Invited})
+\end{innerlist}
+\end{outerlist}
+
+\begin{outerlist}
+\item[] \textit{Joint Statistical Meeting}%
+        \hfill {August 2014}
+\begin{innerlist}
+\item ``A Bayesian approach to inferring community structure and evolutionary history from whole-genome metagenomic data''  (\emph{Invited})
+\end{innerlist}
+\end{outerlist} 
+
+\begin{outerlist}
+\item[] \textit{Newton Institute Workshop on Metagenomics}%
+        \hfill {March 2014}
+\begin{innerlist}
+\item ``The lineage model: A Bayesian approach to inferring ecology and evolution''  (\emph{Invited})
+\end{innerlist}
+\end{outerlist} 
+
+
+\begin{outerlist}
+\item[] \textit{Colby-Bates-Bowdoin Seminar}%
+        \hfill {November 2013}
+\begin{innerlist}
+\item ``Measurably evolving ecologies: statistical methods for metagenomic sequence data''  (\emph{Invited})
+\end{innerlist}
+\end{outerlist} 
+
+
+\begin{outerlist}
+\item[] \textit{Joint Statistical Meeting}%
+        \hfill {August 2013}
+\begin{innerlist}
+\item ``The lineage model: inferring ecoevolutionary dynamics from metagenomic data''  (\emph{Contributed})
+\end{innerlist}
+\end{outerlist} 
+
+\begin{outerlist}
+\item[] \textit{Genetic Epidemiology of Malaria Conference}%
+        \hfill {June 2012}
+\begin{innerlist}
+\item ``Testing pipelines with crosses''  (\emph{Invited})
+\end{innerlist}
+\end{outerlist} 
+
+
+\begin{outerlist}
+\item[] \textit{International Biogeographic Society Conference}%
+        \hfill {September 2011}
+\begin{innerlist}
+\item ``Towards a reconstruction of the historical migration patterns of \emph{P. falciparum} through its organelles''  (\emph{Contributed})
+\end{innerlist}
+\end{outerlist} 
+
+\begin{outerlist}
+\item[] \textit{Bristol Complexity Seminar}%
+        \hfill {March 2010}
+\begin{innerlist}
+\item ``Simultaneously estimating microbial ecology and evolution''  (\emph{Invited})
+\end{innerlist}
+\end{outerlist} 
+
+\begin{outerlist}
+\item[] \textit{Oxford Mathematical Biology Seminar}%
+        \hfill {November 2009}
+\begin{innerlist}
+\item ``The lineage model for microbial community composition''  (\emph{Invited})
+\end{innerlist}
+\end{outerlist} 
+
+
+\begin{outerlist}
+\item[] \textit{Joint Statistical Meeting}%
+        \hfill {August 2009}
+\begin{innerlist}
+\item ``The lineage model for microbial community composition''  (\emph{Contributed})
+\end{innerlist}
+\end{outerlist} 
+
+
+\begin{outerlist}
+\item[] \textit{Stochastic Processes and their Applications General Meeting }%
+        \hfill {August 2009}
+\begin{innerlist}
+\item ``A more general model of the evolution of influenza subtypes''  (\emph{Contributed})
+\end{innerlist}
+\end{outerlist} 
+
+\begin{outerlist}
+\item[] \textit{Gordon Research Conference in Applied Microbiology}%
+        \hfill {July 2009}
+\begin{innerlist}
+\item ``A Bayesian model for metagenomic population structure''  (\emph{Contributed})
+\end{innerlist}
+\end{outerlist} 
+
+\begin{outerlist}
+\item[] \textit{University of Bath}%
+        \hfill {June 2009}
+\begin{innerlist}
+\item ``Phylogenetics and GMRFs to model conformational changes'' (\emph{Invited})
+\end{innerlist}
+\end{outerlist} 
+
+\begin{outerlist}
+\item[] \textit{European Bioinformatics Institute }%
+        \hfill {October 2008}
+\begin{innerlist}
+\item ``Robust counting for unusual distances''  (\emph{Invited})
+\end{innerlist}
+\end{outerlist} 
+
+\begin{outerlist}
+\item[] \textit{Centers for Disease Control - Influenza Division}%
+        \hfill {April 2008}
+\begin{innerlist}
+\item ``Modeling distance, rates and non-neutrality in viral systems''  (\emph{Invited})
+\end{innerlist}
+\end{outerlist} 
+
+
+\begin{outerlist}
+\item[] \textit{Joint Statistical Meeting}%
+        \hfill {July 2007}
+\begin{innerlist}
+\item ``Counting codon changes carefully: Markov-chain-induced counting processes for robust distance estimation'' (\emph{Contributed})
+\end{innerlist}
+\end{outerlist}
+
+\begin{outerlist}
+\item[] \textit{Peking University - Center for Theoretical Biology}%
+        \hfill {July 2006}
+\begin{innerlist}
+\item ``Watching change in influenza A viruses'' (\emph{Invited})
+\end{innerlist}
+\end{outerlist} 
+
+\begin{outerlist}
+\item[] \textit{ DIMACS Workshop on Rapidly Evolving Pathogens}%
+        \hfill {July 2006}
+\begin{innerlist}
+\item ``Characterizing the rate of nucleotide substitution along branches in influenza phylogenies'' (\emph{Contributed})
+\end{innerlist}
+\end{outerlist} 
+
+\begin{outerlist}
+\item[] \textit{Society for Molecular Biology and Evolution General Meeting}%
+        \hfill {May 2006}
+\begin{innerlist}
+\item ``Breaking the molecular clock (assumption)'' (\emph{Contributed})
+\end{innerlist}
+\end{outerlist} 
+
+\begin{outerlist}
+\item[] \textit{University of Bergen - Department of Linguistics}%
+        \hfill {March 2003}
+\begin{innerlist}
+\item ``Cognitive aspects of the grammar of Norwegian Sign Language'' (\emph{Invited})
+\end{innerlist}
+\end{outerlist} 
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% End CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Teaching Experience}
+
+\blankline
+
+\small{{SEMINAR IN INTRODUCTORY STATISTICS}}\\
+
+\begin{outerlist}
+\item[] \textit{University of Oxford}%
+        \hfill \textbf{June 2010 to September 2011}
+\begin{innerlist}
+\item Instructor
+\item Seminar for biologists, working through data sets generated within the institute
+\item Textbook: Casella and Berger, \emph{Statistical inference}
+\item Level: introductory
+\end{innerlist}
+\end{outerlist}
+
+\blankline
+
+\small{{SHORT COURSE IN STATISTICAL GENETICS }}\\
+
+\begin{outerlist}
+\item[] \textit{Wellcome Trust Capetown Meeting}%
+        \hfill \textbf{March 2011}
+\begin{innerlist}
+\item Working seminar for field biologists
+\item Level: introductory
+\end{innerlist}
+\end{outerlist}
+
+\blankline
+
+\small{{INTRODUCTION TO STATISTICS FOR SCIENTISTS}}\\
+
+\begin{outerlist}
+\item[] \textit{University of Bristol}%
+        \hfill \textbf{February 2009 to June 2010}
+\begin{innerlist}
+\item Instructor
+\item Traditional statistics course covering frequentist methods for scientists
+\item Textbook: Verzani, \emph{Using R for Introductory Statistics}
+\item Level: introductory
+\end{innerlist}
+\end{outerlist}
+
+\blankline
+
+\small{{STATISTICAL PHYLOGENETICS}}\\
+
+\begin{outerlist}
+\item[] \textit{University of California, Los Angeles}%
+        \hfill \textbf{January 2007 to May 2007}
+\begin{innerlist}
+\item Teaching praeceptorship (taught module within course)
+\item Textbook: Felstein, \emph{Inferring phylogenies}
+\item Level: graduate
+\end{innerlist}
+\end{outerlist}
+
+\blankline
+
+\small{{INTRODUCTION TO APPLIED MATH}}\\
+\begin{outerlist}
+\item[] \textit{University of California, Los Angeles}%
+        \hfill \textbf{September 2006 to December 2006}
+\begin{innerlist}
+\item Teaching assistant
+\item Textbook: none
+\item Level: late undergraduate
+\end{innerlist}
+\end{outerlist}
+
+\blankline
+
+\small{{CALCULUS II}}\\
+\begin{outerlist}
+\item[] \textit{University of California, Los Angeles}%
+        \hfill \textbf{September 2005 to January 2006}
+\begin{innerlist}
+\item Teaching assistant
+\item Textbook: varied
+\item Level: introductory
+\end{innerlist}
+\end{outerlist}
+
+
+
+
+

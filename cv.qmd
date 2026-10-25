@@ -1,6 +1,6 @@
 ---
 title: "Curriculum Vitae"
-subtitle: "Updated March 2026"
+subtitle: "Updated October 2026"
 page-layout: full
 ---
 
