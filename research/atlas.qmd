@@ -48,7 +48,12 @@ Places analyzed with the [voting-bloc model](voting-blocs.qmd). Each of the sixt
 .bloc-meta { font-size: .8rem; color: #666; }
 .atlas-zoom { position: relative; overflow: hidden; touch-action: none; cursor: grab; border: 1px solid #e3e3e3; border-radius: 4px; background: #fff; }
 .atlas-zoom.dragging { cursor: grabbing; }
-.atlas-zoom img { display: block; margin: 0; transform-origin: 0 0; user-select: none; -webkit-user-drag: none; will-change: transform; }
+.atlas-zoom-stage { position: relative; transform-origin: 0 0; will-change: transform; }
+.atlas-zoom img { display: block; margin: 0; user-select: none; -webkit-user-drag: none; }
+.atlas-zoom img.atlas-zoom-lines { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; pointer-events: none; }
+.atlas-zoom-labels { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.atlas-zoom-labels span { position: absolute; left: 0; top: 0; color: #fff; font: 600 11px/1 system-ui, -apple-system, "Segoe UI", sans-serif;
+                          white-space: nowrap; text-shadow: 0 0 2px rgba(0,0,0,.8), 0 0 5px rgba(0,0,0,.45); }
 .atlas-zoom-ctl { position: absolute; top: .4rem; right: .4rem; display: flex; flex-direction: column; gap: 2px; z-index: 1; }
 .atlas-zoom-ctl button { width: 1.9rem; height: 1.9rem; border: 1px solid #bbb; border-radius: 3px; background: rgba(255,255,255,.92);
                          font-size: 1.05rem; line-height: 1; cursor: pointer; color: #222; padding: 0; }
@@ -106,18 +111,66 @@ document.addEventListener("DOMContentLoaded", () => {
     fig.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
   });
   // zoomable bloc maps: wheel / pinch / double-click to zoom about the pointer, drag to pan, buttons for +, -, reset.
-  // The high-resolution image is swapped in the first time a map is zoomed.
+  // The high-resolution image is swapped in the first time a map is zoomed. Zooming in fades in the units'
+  // boundaries (a transparent image laid out like the map) and then town names, kept at a fixed screen size:
+  // a name shows once its town is about as wide on screen as the name (less for cities, which are small for
+  // their size), most populous towns first, never overlapping each other or the zoom buttons.
+  const LINES_FROM = 1.5, LINES_FULL = 4, LINES_MAX = 0.75, LABELS_FROM = 2.2;
+  const measure = document.createElement("canvas").getContext("2d");
   document.querySelectorAll(".atlas-zoom").forEach(box => {
     const img = box.querySelector("img"), MAX = 10;
     let k = 1, x = 0, y = 0;
+    const stage = document.createElement("div"); stage.className = "atlas-zoom-stage";
+    img.before(stage); stage.appendChild(img);
+    let lines = null, labels = null, labelBox = null, queued = false;
     const ctl = document.createElement("div"); ctl.className = "atlas-zoom-ctl";
     ctl.innerHTML = '<button type="button" aria-label="Zoom in">+</button><button type="button" aria-label="Zoom out">&minus;</button><button type="button" aria-label="Reset zoom">&#8634;</button>';
     box.appendChild(ctl);
+    const loadOverlays = () => {
+      if (img.dataset.lines) {
+        lines = document.createElement("img"); lines.className = "atlas-zoom-lines"; lines.alt = ""; lines.draggable = false;
+        lines.src = img.dataset.lines; stage.appendChild(lines); delete img.dataset.lines;
+      }
+      if (img.dataset.labels) {
+        labelBox = document.createElement("div"); labelBox.className = "atlas-zoom-labels"; ctl.before(labelBox);
+        fetch(img.dataset.labels).then(r => r.ok ? r.json() : []).then(rows => {
+          const probe = labelBox.appendChild(document.createElement("span"));
+          measure.font = getComputedStyle(probe).font; probe.remove();   // the labels' own font
+          labels = rows.map(r => ({ ...r, tw: measure.measureText(r.n).width + 2, el: null }));
+          placeLabels();
+        }).catch(() => {});
+        delete img.dataset.labels;
+      }
+    };
+    const placeLabels = () => {
+      queued = false;
+      if (!labels) return;
+      const w = img.offsetWidth, h = img.offsetHeight, bw = box.clientWidth, bh = box.clientHeight, TH = 13,
+            c = ctl.getBoundingClientRect(), b0 = box.getBoundingClientRect(),
+            placed = [[c.left - b0.left - 4, c.top - b0.top - 4, c.right - b0.left + 4, c.bottom - b0.top + 4]];
+      for (const l of labels) {
+        let show = k >= LABELS_FROM && l.w * w * k >= (l.p >= 50000 ? 0.2 : l.p >= 20000 ? 0.4 : 0.8) * l.tw;
+        let left, top;
+        if (show) {
+          left = x + l.x * w * k - l.tw / 2; top = y + l.y * h * k - TH / 2;
+          show = left > 2 && top > 2 && left + l.tw < bw - 2 && top + TH < bh - 2 &&
+            !placed.some(b => left < b[2] && left + l.tw > b[0] && top < b[3] && top + TH > b[1]);
+        }
+        if (show) {
+          placed.push([left - 3, top - 2, left + l.tw + 3, top + TH + 2]);
+          if (!l.el) { l.el = document.createElement("span"); l.el.textContent = l.n; labelBox.appendChild(l.el); }
+          l.el.style.transform = `translate(${left.toFixed(1)}px, ${top.toFixed(1)}px)`;
+          l.el.hidden = false;
+        } else if (l.el) l.el.hidden = true;
+      }
+    };
     const apply = () => {
       const w = img.offsetWidth, h = img.offsetHeight;
       x = Math.min(0, Math.max(w - w * k, x)); y = Math.min(0, Math.max(h - h * k, y));   // keep the map filling the frame
-      img.style.transform = `translate(${x}px, ${y}px) scale(${k})`;
-      if (k > 1 && img.dataset.hi) { img.src = img.dataset.hi; delete img.dataset.hi; }
+      stage.style.transform = `translate(${x}px, ${y}px) scale(${k})`;
+      if (k > 1 && img.dataset.hi) { img.src = img.dataset.hi; delete img.dataset.hi; loadOverlays(); }
+      if (lines) lines.style.opacity = LINES_MAX * Math.min(1, Math.max(0, (k - LINES_FROM) / (LINES_FULL - LINES_FROM)));
+      if (labels && !queued) { queued = true; requestAnimationFrame(placeLabels); }
     };
     const zoomAt = (f, px, py) => {                // px, py: point in the frame that stays put
       const k1 = Math.min(MAX, Math.max(1, k * f)); f = k1 / k;
