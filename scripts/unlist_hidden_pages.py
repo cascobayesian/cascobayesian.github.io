@@ -2,7 +2,7 @@
 # so search engines aren't pointed at them. Add a page's path to HIDDEN to hide it the same way.
 import os, re
 
-HIDDEN = ["todo.html", "research/atlas.html"]
+HIDDEN = ["todo.html", "research/atlas.html", "research/atlas-cities.html"]
 
 path = os.path.join(os.environ.get("QUARTO_PROJECT_OUTPUT_DIR", "docs"), "sitemap.xml")
 if os.path.exists(path):
