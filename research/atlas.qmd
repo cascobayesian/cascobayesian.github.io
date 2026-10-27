@@ -9,13 +9,15 @@ search: false
 
 {{< include _atlas_coverage.md >}}
 
-{{< include _atlas_map.html >}}
+{{< include _atlas_fused_map.html >}}
 
 ::: {.atlas-caption}
-Places analyzed with the [voting-bloc model](voting-blocs.qmd). Each of the sixteen statewide fits is colored by its precinct- or town-level voting blocs, from red (most Republican) to violet (most Democratic); points mark city and county fits; Maricopa and Pima Counties in Arizona, one joint fit around Phoenix and Tucson, are filled like a state. In California (30 blocs) and Washington (14) the colors rank each state's own blocs. Everywhere else they follow each bloc's 2020 Biden vote on one shared scale (2024 Harris vote in Maine), so neighboring blocs match across state lines. **Click any colored state or orange point** to explore its blocs. City panels rank each city's own blocs the same way, except the metro areas cut out of a statewide fit, which keep their state's colors: Seattle and San Diego (their county), Greater New Orleans (eight parishes), Greater Boston (MAPC's 101 cities and towns), and Greater Atlanta, Denver, Detroit and Charlotte (their regional councils' counties; North Carolina's only, for Charlotte). Phoenix and Tucson share one panel on the shared scale.
+Places analyzed with the [voting-bloc model](voting-blocs.qmd), colored on **one scale for every place**, the same as the [city atlas](atlas-cities.qmd). Each bloc runs from blue to red by its Trump 2024 two-party share (2020 for Chicago, Salt Lake and Utah); Asian-plurality blocs run from teal to olive and Latino-plurality blocs from sand to orange instead, and five ethnically specific blocs take their own colors. Points mark city and county fits; Maricopa and Pima Counties in Arizona, one joint fit around Phoenix and Tucson, are filled like a state. **Click any colored state or point** to explore its blocs; bloc names and numbers are each fit's own.
 :::
 
-{{< include _atlas_panels.html >}}
+{{< include _atlas_fused_key.html >}}
+
+{{< include _atlas_fused_panels.html >}}
 
 ```{=html}
 <style>
