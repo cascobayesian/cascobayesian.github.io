@@ -11,6 +11,7 @@
 <style>
 /* Layout: a district spine (Board → Superintendent) feeding four reporting lanes, then a school grid; names open a bio sheet. */
 :root{
+  --est-bg:#fff3d6; --est-ink:#7a4f00;
   --bg:#f2f5f6; --surface:#ffffff; --ink:#15212a; --muted:#56656f; --line:#c6d1d8; --soft:#e6ecef;
   --accent:#0d5a74; --accent-ink:#ffffff;
   --acad:#2a78d6; --ops:#eb6834; --fin:#1baf7a; --hr:#eda100; --gov:#3c4a55;
@@ -24,13 +25,13 @@
   --bg:#0e1419; --surface:#162029; --ink:#e4ebef; --muted:#9aa9b3; --line:#2d3b46; --soft:#1d2933;
   --accent:#6bbfdc; --accent-ink:#0e1419;
   --acad:#3987e5; --ops:#d95926; --fin:#199e70; --hr:#c98500; --gov:#a9b7c2;
-  --hit:#6d5a12; --hit-ink:#fff6cf; color-scheme:dark;
+  --hit:#6d5a12; --hit-ink:#fff6cf; --est-bg:#3a2c0b; --est-ink:#ffcf70; color-scheme:dark;
 }}
 :root[data-theme="dark"]{
   --bg:#0e1419; --surface:#162029; --ink:#e4ebef; --muted:#9aa9b3; --line:#2d3b46; --soft:#1d2933;
   --accent:#6bbfdc; --accent-ink:#0e1419;
   --acad:#3987e5; --ops:#d95926; --fin:#199e70; --hr:#c98500; --gov:#a9b7c2;
-  --hit:#6d5a12; --hit-ink:#fff6cf; color-scheme:dark;
+  --hit:#6d5a12; --hit-ink:#fff6cf; --est-bg:#3a2c0b; --est-ink:#ffcf70; color-scheme:dark;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -148,6 +149,9 @@ section.notes{padding-block:34px 10px;border-top:1px solid var(--line);margin-to
 .notes ol li{word-break:break-word}
 footer{padding-block:20px 40px;color:var(--muted);font-size:12.5px;border-top:1px solid var(--line);margin-top:20px}
 
+.est{display:inline-block;font:600 10.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.06em;padding:4px 6px;border-radius:3px;background:var(--est-bg);color:var(--est-ink);border:1px dashed var(--est-ink);margin-right:6px;vertical-align:1px}
+.estv{font-weight:600}
+.estnote{display:block;font-size:12.5px;color:var(--muted);margin-top:4px}
 /* bio sheet */
 dialog#bio{border:0;padding:0;margin:0 0 0 auto;height:100%;max-height:100%;width:min(520px,100%);max-width:100%;background:var(--surface);color:var(--ink);
   box-shadow:-12px 0 40px rgba(0,0,0,.25)}
@@ -306,6 +310,14 @@ section.arrivals>*{min-width:0}
     </table></div>
     <p class="fine">“Left per other FTE” is the line minus the known salaries, divided by the remaining FTE. Several known salaries come from hires made after the budget was adopted (Beck, Brown and Strobel in fall 2026), so they show what the line now has to cover, not what the budget assumed. The Secondary ESOL director's salary (Lee, $110,000) is budgeted on the Multilingual page; the special education directors are on the Special Education page.</p>
 
+    <h3 class="sub">Estimated salaries: senior leaders with no published pay</h3>
+    <p class="fine"><span class="est">Estimate</span>These figures are estimates, not reported salaries. Each one is built from PPS's own pay levels (assistant superintendents and the CFO hired at $157,500; directors at $100,000–$130,000) and from what comparable districts in Maine, New Hampshire and Vermont pay similar roles. Select a name for the full reasoning and sources.</p>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Leader</th><th class="num">Estimated salary</th><th class="num">Range</th><th>Main anchor</th></tr></thead>
+      <tbody id="est-rows"></tbody>
+    </table></div>
+    <p class="fine">Check against the budget: the superintendent and chief of schools estimates together (about $385,000) leave roughly $298,000 of the Superintendent's Office FY27 salary line ($683,439, 8 FTE) for its other six positions, about $50,000 each. That is plausible for assistants and partial-year or part-time roles.</p>
+
     <h3 class="sub">Principals and assistant principals</h3>
     <div class="tblwrap"><table>
       <thead><tr><th>Measure</th><th class="num">Figure</th><th>Source</th></tr></thead>
@@ -426,6 +438,7 @@ function open(id){
       ${reports?`<dt>Reports to</dt><dd>${reports}</dd>`:''}
       <dt>Joined</dt><dd>${esc(x.j||NF)}</dd>
       ${x.s?`<dt>Salary at hire</dt><dd class="mono" style="font-family:var(--body)">${esc(x.s)}</dd>`:''}
+      ${x.est?`<dt>Estimated salary${x.s?' now':''}</dt><dd><span class="est">Estimate</span><span class="estv">${esc(x.est.v)}</span> <span class="estnote">Range ${esc(x.est.range)}. ${esc(x.est.basis)}</span></dd>`:''}
     </dl>
     <div class="blk"><h3>Responsibilities</h3><ul>${(x.r||[]).map(v=>`<li>${esc(v)}</li>`).join('')}</ul></div>
     <div class="blk"><h3>Education</h3>${edu}</div>
@@ -522,6 +535,12 @@ const TL={
     const w=tip.offsetWidth; tip.style.left=Math.min(e.clientX+14,innerWidth-w-8)+'px'; tip.style.top=(e.clientY+16)+'px';
   });
   document.getElementById('tl').addEventListener('mouseleave',()=>{tip.hidden=true;});
+})();
+
+/* estimated salaries table */
+(function(){
+  const anchor={scallon:'$200,000 start in 2023; peer superintendents $187k–$203k',proctor:'Above the $157,500 assistant superintendents she supervises',warren:'Peer chief; CFO at $157,500',ahmed:'Two assistant superintendents hired at $157,500',slabbinck:'Between directors ($100k–$130k) and the $157,500 tier',valenzuela:'Multilingual directors elsewhere $124k–$145k',didriksen:'Above the director band of $100k–$130k',soucy:'Above her $120,000 Pre-K director; Burlington scale $125k–$152k'};
+  document.getElementById('est-rows').innerHTML=Object.keys(EST).map(id=>`<tr><td>${btn(id)}<span class="t">${esc(P[id].t)}</span></td><td class="num"><b>${esc(EST[id].v)}</b></td><td class="num">${esc(EST[id].range)}</td><td>${esc(anchor[id])}</td></tr>`).join('');
 })();
 
 /* search */

@@ -317,3 +317,25 @@ const SCHOOLS={
   {n:'Portland Adult Education',m:'207.874.8155',p:['hersom','schouvieller'],note:'Interim leadership.'}]}
 };
 
+
+/* Salary ESTIMATES for senior leaders whose pay is not published (Oct 28, 2026).
+   These are estimates built from PPS pay anchors and peer districts, not reported figures. */
+Object.assign(SRC,{
+  c_ph23:['Portland Press Herald, “Portland hires new superintendent of schools” (June 6, 2023)','https://www.pressherald.com/2023/06/06/portland-hires-new-superintendent-of-schools/'],
+  c_lew:['Sun Journal, Lewiston superintendent renews contract early (June 10, 2025)','https://www.sunjournal.com/2025/06/10/lewiston-schools-superintendent-renews-contract-early-amid-recruitment-efforts/'],
+  c_nh:['New Hampshire DOE, SAU administrator salaries 2025–26','https://www.education.nh.gov/sites/g/files/ehbemt326/files/inline-documents/sonh/admin-sal-25-26.pdf'],
+  c_pmth:['Portsmouth (N.H.) superintendent employment agreement, FY26–FY28','https://files.portsmouthnh.gov/hr/Fully+Executed+Superintendent+ZM+Agreement.pdf'],
+  c_wb:['Westbrook (Maine) School Department administrators contract, 2025–28','https://core-docs.s3.us-east-1.amazonaws.com/documents/asset/uploaded_file/3071/WSD/5789159/Admin_Contract_25-28_Approved_04_09_2025.pdf'],
+  c_btv:['Burlington (Vt.) School District administrators agreement, 2023–26','https://www.bsdvt.org/wp-content/uploads/2024/09/2023-2026-BAA-Bargaining-Agreement.pdf']
+});
+const EST={
+  scallon:{v:'$215,000',range:'$200,000–$225,000',basis:'Started at $200,000 in July 2023 on a contract that allowed annual raises; the Board approved a new contract in Aug 2025 without publishing terms. Assumes typical 2–4% yearly raises since 2023. Peer superintendents, 2025–26: Lewiston $190,000; Nashua, N.H. $191,248; Portsmouth, N.H. $186,817; Manchester, N.H. $203,359.',src:['c_ph23','c_lew','c_nh','c_pmth','fy27book']},
+  proctor:{v:'$170,000',range:'$160,000–$185,000',basis:'Supervises both assistant superintendents, who were hired at $157,500 in June 2026, so likely paid above them. Deputy-level pay in comparable New England districts runs $132,000–$164,000 (Portsmouth, N.H. assistant superintendent $164,327). Recruited from a deputy superintendent post in a much larger district.',src:['c_nh','b_hol','b_ste']},
+  warren:{v:'$165,000',range:'$155,000–$180,000',basis:'Peer of the Chief of Schools and Academics; hired in 2023 as executive director of operations and later made a chief. Business and operations heads in comparable N.H. districts earn $132,500–$156,903; the PPS CFO, who sits at a similar level, was hired at $157,500.',src:['c_nh','b_bec']},
+  ahmed:{v:'$157,500',range:'$150,000–$165,000',basis:'Same title level as the two assistant superintendents hired at $157,500 in June 2026. The FY27 budget priced this new position at $188,000 with benefits, about $153,000 in salary. Long PPS service may place him toward the top of the range.',src:['b_hol','b_ste','fy27']},
+  slabbinck:{v:'$140,000',range:'$130,000–$150,000',basis:'Executive director level: above PPS directors hired at $100,000–$130,000 and below the $157,500 assistant superintendents and CFO. Supervises the Director of HR Compliance, hired at $100,000.',src:['b_s25','b_bec','b_hol']},
+  valenzuela:{v:'$135,000',range:'$125,000–$150,000',basis:'Executive director with decades of PPS service and a doctorate. Multilingual program directors elsewhere: Westbrook, Maine $123,530 (FY26); Burlington, Vt. about $125,000–$145,000.',src:['c_wb','c_btv']},
+  didriksen:{v:'$132,000',range:'$120,000–$145,000',basis:'Senior director over three directors (IT, data and analytics, student records). PPS directors hired in 2025–26 earn $100,000–$130,000; a senior director likely sits at or above the top of that band.',src:['b_a26','b_bro','b_wat']},
+  soucy:{v:'$132,000',range:'$125,000–$145,000',basis:'Senior director over the Director of Pre-K (hired at $120,000) and the Director of Early Childhood Special Education ($110,000). Burlington, Vt.’s early education director scale runs $124,900–$152,400 (FY26).',src:['b_irv','b_ste','c_btv']}
+};
+Object.entries(EST).forEach(([id,e])=>{ P[id].est=e; e.src.forEach(k=>{ if(!P[id].src.includes(k)) P[id].src.push(k); }); });
