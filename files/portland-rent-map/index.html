@@ -25,7 +25,7 @@
   --hwy: #eba7a2; --hwy-case: #cf817b; --art: #f1d3d0;   /* MaineDOT major roads, soft red */
   --ptu: #d1312b;             /* PTU audit layer */
   /* compliance highlights (one active at a time) */
-  --f-over: #a3191f; --f-viol: #e2662b; --f-turn: #c4458a; --f-issue: #7b52c7; --f-exempt: #1f8585;
+  --f-over: #a3191f; --f-pover: #dd7d82; --f-viol: #e2662b; --f-turn: #c4458a; --f-issue: #7b52c7; --f-exempt: #1f8585;
   --f-str: #6b8e23;           /* short-term rental licenses */
   --district: #3b2f86;        /* selected council district outline */
   --parcel: #f7f8f9;
@@ -146,7 +146,8 @@ header.top {
 .flags { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
 .flags li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 9px; align-items: baseline; border-left: 3px solid var(--line); padding: 2px 0 2px 9px; }
 .flags li.v { border-left-color: var(--f-viol); }
-.flags li.o { border-left-color: var(--f-over); }
+.flags li.c { border-left-color: var(--f-over); }
+.flags li.o { border-left-color: var(--f-pover); }
 .flags li.u { border-left-color: var(--f-turn); }
 .flags .kind { font-size: 10.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
 .flags .what { font-weight: 500; }
@@ -222,6 +223,7 @@ aside.panel { background: var(--surface); border-left: 1px solid var(--line); ov
 .chip.cov { border-left-color: var(--cov); } .chip.exm { border-left-color: var(--exm); background: var(--exm-bg); } .chip.unk { border-left-color: var(--unk); }
 /* rent-controlled units: the most severe current flag on the unit's latest registration */
 .chip.s-over { border-left-color: var(--f-over); background: color-mix(in srgb, var(--f-over) 11%, var(--surface)); }
+.chip.s-pover { border-left-color: var(--f-pover); background: color-mix(in srgb, var(--f-pover) 11%, var(--surface)); }
 .chip.s-viol { border-left-color: var(--f-viol); background: color-mix(in srgb, var(--f-viol) 11%, var(--surface)); }
 .chip.s-turn { border-left-color: var(--f-turn); background: color-mix(in srgb, var(--f-turn) 12%, var(--surface)); }
 .chip.s-issue { border-left-color: var(--f-issue); }
@@ -399,7 +401,8 @@ details li { margin-bottom: 3px; }
   const HL = {
     none: { label: "Nothing (rent colors)" },
     ptu: { label: "PTU Zillow audit, Mar 2026", color: "--ptu", noun: "with audited listings" },
-    over: { label: "Overcharged rent", color: "--f-over", noun: "overcharged" },
+    clear: { label: "Overcharged rent", color: "--f-over", noun: "overcharged" },
+    over: { label: "Possible overcharge", color: "--f-pover", noun: "possibly overcharged" },
     viol: { label: "Any violation", color: "--f-viol", noun: "with a violation" },
     turn: { label: "Legal only if tenants left voluntarily", color: "--f-turn", noun: "legal only after a voluntary move-out" },
     issue: { label: "Any compliance issue", color: "--f-issue", noun: "with any compliance issue" },
@@ -408,6 +411,7 @@ details li { margin-bottom: 3px; }
   };
   // compliance flags: [kind, label, explanation]; kind o = overcharge, v = other violation, u = unclear
   const FLAG = {
+    clr: ["c", "Rent clearly above the maximum allowable rent", "At least $100 and 10% above base rent plus every increase allowed since 2020, even assuming a new tenancy every year, with a base rent and rent history that hang together (§6-235.1)"],
     o10: ["o", "Increase over the 10% cap", "The rent rose more than 10% in one year (§6-234(c))"],
     oent: ["o", "Increase above what the ordinance allows", "More than the allowable increase + 5% of base rent + banked rent"],
     oceil: ["o", "Rent above the maximum allowable rent", "Above base rent plus every increase allowed since 2020, even assuming a new tenancy every year (§6-235.1)"],
@@ -461,7 +465,7 @@ details li { margin-bottom: 3px; }
           <p>"Previous" and "current" rent refer to different dates in each year's file. Each year column shows the city's own label. The 2024 file has no tax-rate column.</p>
           <p>Buildings are placed using the city's <a href="https://gis.portlandmaine.gov/maps/rest/services/planningCadastre/Tax_Parcels/FeatureServer/11" target="_blank" rel="noopener">tax parcel layer</a>, matched on parcel ID, or on street address when the parcel ID didn't match. The base map is drawn from the same parcels, so the gaps between parcels are streets. Water, neighboring towns, and the dashed city limit come from the Maine GeoLibrary's town boundary layer.</p>
           ${PTU ? `<p>The red layer is the <a href="${esc(PTU.source.sheet)}" target="_blank" rel="noopener">Portland Tenants Union's March 2026 audit</a> of new Zillow listings (<a href="${esc(PTU.source.article)}" target="_blank" rel="noopener">Press Herald story</a>). PTU checked each listing's 2026 registration and compared its asking rent with the rent PTU calculated as allowed. Results are shown as PTU recorded them. Listings were placed by street address. ${PTU.listings.length} of ${PTU.listings.length + PTU.unplaced.length} audited listings are on the map. PTU excluded listings it couldn't tie to an address, and they aren't shown.</p>` : ""}
-          ${COMP ? `<p>The compliance highlights check each unit's registrations against the rent control ordinance (City Code Ch. 6, Art. XII). <b>Overcharged</b>: an increase over the 10% cap, over the allowable increase plus the 5% new-tenancy and banked-rent allowances, or rent above base rent plus every increase allowed since 2020. <b>Any violation</b> adds miscalculated or unreported increases, overstated banked rent and deposits over the legal limit. <b>Legal only if tenants left voluntarily</b>: the rent is within the limits only with the new-tenancy increase, which requires that the previous tenants moved out voluntarily. The registry doesn't show that. <b>Any compliance issue</b> adds unclear records such as missing base rents and figures that contradict earlier years. The highlights count only the current registration (license year ${COMP.current_year}, rents as of November ${COMP.current_year - 1}), one count per unit; rows the city's PDF repeats count once. <b>Exempted units</b> claim an exemption in that registration. The other four highlights count only units that don't claim one. The city's deposit cap of one month's rent still applies to exempt units, except in hospital, religious or care facilities, so an exempt unit's own panel can show a deposit flag. A unit's panel also lists flags from earlier years. Flags are leads from what landlords reported, not legal findings.</p>` : ""}
+          ${COMP ? `<p>The compliance highlights check each unit's registrations against the rent control ordinance (City Code Ch. 6, Art. XII). <b>Overcharged rent</b>: rent clearly above the most it could legally be. That means at least $100 a month and 10% above base rent plus every increase allowed since 2020, even assuming a new tenancy (and its 5% increase) every year, in a registration whose base rent and rent history hang together. <b>Possible overcharge</b>: every other unit with an increase over the 10% cap, over the allowable increase plus the 5% new-tenancy and banked-rent allowances, or rent above that maximum. Most of these are close enough to the limit that turnovers, an unreported tax-rate increase or a paperwork error could explain them. <b>Any violation</b> adds miscalculated or unreported increases, overstated banked rent and deposits over the legal limit. <b>Legal only if tenants left voluntarily</b>: the rent is within the limits only with the new-tenancy increase, which requires that the previous tenants moved out voluntarily. The registry doesn't show that. <b>Any compliance issue</b> adds unclear records such as missing base rents and figures that contradict earlier years. The highlights count only the current registration (license year ${COMP.current_year}, rents as of November ${COMP.current_year - 1}), one count per unit; rows the city's PDF repeats count once. <b>Exempted units</b> claim an exemption in that registration. The other four highlights count only units that don't claim one. The city's deposit cap of one month's rent still applies to exempt units, except in hospital, religious or care facilities, so an exempt unit's own panel can show a deposit flag. A unit's panel also lists flags from earlier years. Flags are leads from what landlords reported, not legal findings.</p>` : ""}
           ${DISTRICTS ? `<p>Council districts come from the city's <a href="https://gis.portlandmaine.gov/maps/rest/services/Political/Council_Districts/MapServer/112" target="_blank" rel="noopener">council districts layer</a>, retrieved October 2026. Each building is assigned to the district its parcel point falls in.</p>` : ""}
           ${STR ? `<p>Short-term rental licenses come from the City's <a href="${esc(STR.source.info)}" target="_blank" rel="noopener">short-term rental registry</a>, as listed in its public <a href="${esc(STR.source.portal)}" target="_blank" rel="noopener">Citizen Self Service</a> license search (retrieved ${esc(fmtDate((STR.source.retrieved || "").slice(0, 10)))}). "Current" means a license with status Issued for 2026. They are placed by parcel ID or street address; ${STR.totals.current_parcel_only} current licenses are on parcels with no long-term registration and get their own dots.</p>` : ""}
           <p>Water, town lines and major roads come from the State of Maine (Maine GeoLibrary and MaineDOT).</p>
@@ -563,7 +567,7 @@ details li { margin-bottom: 3px; }
           <h3>${d.units.length} unit entries</h3>
           ${d.units.length > 10 ? `<input id="unitFilter" type="search" placeholder="Filter units" aria-label="Filter units">` : ""}
         </div>
-        <div class="keyrow">${COMP ? `<span><i style="background:var(--f-over)"></i>Overcharged</span><span><i style="background:var(--f-viol)"></i>Other violation</span><span><i style="background:var(--f-turn)"></i>Legal only after voluntary move-out</span><span><i style="background:var(--f-issue)"></i>Unclear record</span><span><i style="background:var(--cov)"></i>Rent controlled, no issue</span>` : `<span><i style="background:var(--cov)"></i>Rent controlled</span>`}${STR ? `<span><i style="background:var(--f-str)"></i>Short-term rental license</span>` : ""}<span><i style="background:var(--exm)"></i>Exemption claimed</span><span><i style="background:var(--unk)"></i>Not reported</span></div>
+        <div class="keyrow">${COMP ? `<span><i style="background:var(--f-over)"></i>Overcharged</span><span><i style="background:var(--f-pover)"></i>Possible overcharge</span><span><i style="background:var(--f-viol)"></i>Other violation</span><span><i style="background:var(--f-turn)"></i>Legal only after voluntary move-out</span><span><i style="background:var(--f-issue)"></i>Unclear record</span><span><i style="background:var(--cov)"></i>Rent controlled, no issue</span>` : `<span><i style="background:var(--cov)"></i>Rent controlled</span>`}${STR ? `<span><i style="background:var(--f-str)"></i>Short-term rental license</span>` : ""}<span><i style="background:var(--exm)"></i>Exemption claimed</span><span><i style="background:var(--unk)"></i>Not reported</span></div>
         ${COMP ? `<div class="note">Each unit is colored by the most serious problem with its latest reported rent.</div>` : ""}
         <div class="unitbar" id="unitbar" role="toolbar" aria-label="Units in this building"></div>
         <div class="note">Unit numbers are as typed by landlords and can change between years, so one apartment may appear as two entries.</div>
@@ -689,7 +693,8 @@ details li { margin-bottom: 3px; }
     const s = ((COMP.buildings[bid] || {}).r || {})[`${r[F.year]}|${r[F.page]}|${r[F.row]}`];
     const kinds = new Set((s || "").split(",").filter(Boolean).map(p => p.split(":")[0]).filter(c => FLAG[c])
       .map(c => c === "turn" ? "t" : FLAG[c][0]));
-    if (kinds.has("o")) return { cls: "s-over", tag: `Overcharged (${r[F.year]})` };
+    if (kinds.has("c")) return { cls: "s-over", tag: `Overcharged (${r[F.year]})` };
+    if (kinds.has("o")) return { cls: "s-pover", tag: `Possible overcharge (${r[F.year]})` };
     if (kinds.has("v")) return { cls: "s-viol", tag: `Violation (${r[F.year]})` };
     if (kinds.has("t")) return { cls: "s-turn", tag: `Legal only after a voluntary move-out (${r[F.year]})` };
     if (kinds.has("u")) return { cls: "s-issue", tag: `Unclear record (${r[F.year]})` };
@@ -702,7 +707,7 @@ details li { margin-bottom: 3px; }
     return `
       <div class="comp">
         <div class="eyebrow">Current compliance, ${COMP.current_year} registration · Council District ${c.d}</div>
-        ${c.n ? `<div class="comp-grid">${["over", "viol", "turn", "issue", "exempt"].map(cell).join("")}</div>
+        ${c.n ? `<div class="comp-grid">${["clear", "over", "viol", "turn", "issue", "exempt"].map(cell).join("")}</div>
         <div class="note">Units out of ${c.n} in this building's ${COMP.current_year} registration (rents as of November ${COMP.current_year - 1}). Pick a unit to see its flags, including earlier years. These are leads from what landlords reported, not legal findings.</div>`
         : `<div class="note">This building has no ${COMP.current_year} registration, so there is nothing current to check. Pick a unit to see flags from earlier years.</div>`}
       </div>`;
@@ -722,7 +727,7 @@ details li { margin-bottom: 3px; }
       });
     });
     if (!byFlag.size) return `<div class="comp"><div class="eyebrow">Compliance check</div><div class="note">No flags for this unit in 2021–2025.</div></div>`;
-    const order = { o: 0, v: 1, u: 2 }, kindName = { o: "Overcharge", v: "Violation", u: "Unclear" };
+    const order = { c: 0, o: 1, v: 2, u: 3 }, kindName = { c: "Overcharge", o: "Possible overcharge", v: "Violation", u: "Unclear" };
     const items = [...byFlag].filter(([code]) => FLAG[code]).sort((a, b) => order[FLAG[a[0]][0]] - order[FLAG[b[0]][0]]);
     const curYr = COMP.current_year, isCur = hits => hits.some(h => h.y === curYr);
     const list = its => `<ul class="flags">${its.map(([code, hits]) => {
@@ -1057,7 +1062,7 @@ details li { margin-bottom: 3px; }
         const c = (COMP && COMP.buildings[b.id]) || {};
         return { type: "Feature", geometry: { type: "Point", coordinates: [b.lon, b.lat] },
           properties: { id: b.id, n: b.nUnits, median: b.median ?? -1, ptu: PTU_BY_B.has(b.id) ? 1 : 0, d: c.d || 0,
-            over: c.over || 0, viol: c.viol || 0, turn: c.turn || 0, issue: c.issue || 0, exempt: c.exempt || 0,
+            clear: c.clear || 0, over: c.over || 0, viol: c.viol || 0, turn: c.turn || 0, issue: c.issue || 0, exempt: c.exempt || 0,
             str: (STR && STR.buildings[b.id] && STR.buildings[b.id].n) || 0 } };
       }),
     };
