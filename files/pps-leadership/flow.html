@@ -53,21 +53,21 @@ svg#chart.dragging{cursor:grabbing}
 .edge.board{stroke-dasharray:5 4}
 .arrow{fill:var(--line)}
 .node{cursor:pointer}
-.node circle.ring{fill:var(--surface);stroke:var(--c);stroke-width:3}
+.node circle.ring{fill:color-mix(in srgb,var(--c) 9%,var(--surface));stroke:var(--c);stroke-width:3}
 .node.group circle.ring{stroke:var(--muted);stroke-width:1.5;stroke-dasharray:4 3;fill:var(--bg)}
 .node.vacant circle.ring{stroke:var(--muted);stroke-width:1.5;stroke-dasharray:3 3}
 .node.school circle.ring{fill:var(--soft);stroke:var(--c);stroke-width:1.5}
 .node.gov circle.ring{stroke:var(--ink)}
-.node .role{font:600 10.5px/1 var(--body);fill:var(--ink);text-anchor:middle}
-.node.big .role{font-size:12px}
-.node .who{font:500 11px/1 var(--body);fill:var(--muted);text-anchor:middle}
+.node .area{font:700 16px/1 var(--body);fill:var(--ink);text-anchor:middle;letter-spacing:-.01em}
+.node .rank{font:500 11px/1 var(--body);fill:var(--muted);text-anchor:middle}
+.node .who{font:500 12px/1 var(--body);fill:var(--muted);text-anchor:middle}
 .node:hover circle.ring,.node:focus-visible circle.ring{stroke-width:4.5}
 .node:focus-visible{outline:none}
 .node:focus-visible circle.ring{stroke:var(--accent)}
 .node.group,.node.vacant,.node.school{cursor:default}
 .tog{cursor:pointer}
 .tog circle{fill:var(--ink)}
-.tog text{font:600 10.5px/1 var(--mono);fill:var(--surface);text-anchor:middle}
+.tog text{font:600 21px/1 var(--mono);fill:var(--surface);text-anchor:middle;letter-spacing:-.04em}
 .tog:hover circle,.tog:focus-visible circle{fill:var(--accent)}
 .tog:focus-visible{outline:none}
 .foot{font-size:12px;color:var(--muted);padding-bottom:14px}
@@ -199,7 +199,7 @@ const count=n=>n.kids.reduce((a,c)=>a+1+count(c),0);
 /* ---------- layout: left to right ----------
    Each level is a column. Leaves stack down the page; a parent sits level with the middle of its children. */
 const R=n=>n.kind==='board'?60:(n.depth<=2?54:n.kind==='group'?40:n.kind==='school'?42:n.depth===3?46:40);
-const COL=270, ROWGAP=18, FOOT=30, BADGE=n=>R(n)+15;
+const COL=340, ROWGAP=18, FOOT=30, TOGR=30, BADGE=n=>R(n)+TOGR+6;
 function layout(){
   let cursor=0;
   (function place(n,x){
@@ -217,24 +217,77 @@ const edgesG=document.getElementById('edges'), nodesG=document.getElementById('n
 const el=(tag,attrs)=>{const e=document.createElementNS(SVGNS,tag); for(const k in attrs) e.setAttribute(k,attrs[k]); return e;};
 const laneVar=l=>l==='gov'?'var(--ink)':`var(--${l})`;
 function wrap(text,maxChars){
-  const words=text.split(' '), lines=[]; let cur='';
+  const words=text.replace(/ & /g,' &\u00a0').split(' '), lines=[]; let cur='';   // keep '&' with the next word
   words.forEach(w=>{ if((cur+' '+w).trim().length>maxChars && cur){lines.push(cur);cur=w;} else cur=(cur+' '+w).trim(); });
   if(cur) lines.push(cur);
   if(lines.length>4){ lines.length=4; lines[3]=lines[3].replace(/.{0,2}$/,'…'); }
   return lines;
 }
+/* ---------- circle labels: a small rank line over a large, plain-words area ---------- */
+const AREA=[
+  [/^Schools and Academics$/,'Schools & Academics'],[/^Strategy and Operations$/,'Operations'],
+  [/Student, Family, and Community Partnerships|Family and Community Partnerships/,'Families & Community'],
+  [/^Elementary Schools$/,'Elementary'],[/^Secondary Schools$/,'Secondary'],[/^Human Resources$/,'HR'],
+  [/^Civil Rights Compliance$/,'Civil Rights'],[/^Data and Technology$/,'Data & Tech'],[/^Early Childhood Education$/,'Early Childhood'],
+  [/^School Meals$/,'School Meals'],[/^Elementary Academics$/,'Elem. Academics'],[/^Elementary Culture and Climate$/,'Elem. Culture'],
+  [/^Special Education, Elementary$/,'Elem. Special Ed'],[/^Secondary Academics$/,'Sec. Academics'],[/^ESOL, Secondary$/,'Sec. ESOL'],
+  [/^Secondary Programs and Student Outcomes$/,'Sec. Programs'],[/^Special Education, Secondary$/,'Sec. Special Ed'],
+  [/^Information Technology$/,'IT'],[/^Data and Analytics$/,'Data'],[/^Student Records and Data Systems$/,'Student Records'],
+  [/^Specialized Programs$/,'Special Programs'],[/^Pre-K Programs$/,'Pre-K'],[/^Early Childhood Special Education$/,'Early Ch. Special Ed'],
+  [/^Human Resources Compliance$/,'HR Compliance'],[/^People and Culture$/,'People & Culture'],[/^Recruitment and Staff Development$/,'Recruitment'],
+  [/ and /g,' & ']
+];
+const MANUAL={
+  scallon:['','Superintendent'],beck:['Chief','Finance'],brown:['','Controller'],applegate:['Sr. Director','Special Ed'],
+  hersom:['Interim Exec. Dir.','Adult Ed'],schouvieller:['Interim Asst. Dir.','Adult Ed'],moses:['Interim','Support'],
+  hopper:['Coordinator','Wabanaki & Black History'],pday:['Coordinator','Outdoor Learning'],shibles:['Teacher','Makerspace'],
+  rounds:['Asst. Director','Tech Systems'],gervais:['Engineer','Data Systems'],breton:['Engineer','Network'],carroll:['Specialist','Classroom Tech'],
+  edes:['Specialist','Data'],borland:['Specialist','Family Messages'],golini:['Coordinator','Programs'],collacchi:['Coordinator','Breathe'],
+  frans:['Coordinator','Multilingual Sp. Ed'],bay:['Coordinator','Out of District'],dyer:['Specialist','MaineCare'],skovran:['Manager','Sp. Ed Data'],
+  kball:['Coordinator','Gifted'],peavey:['Strategist','Transitions'],veilleux:['Coordinator','Nursing'],
+  clancy:['Coordinator','Language Access'],bitencourt:['Social Worker','Housing'],spencerreed:['Manager','Housing Grant'],
+  wissa:['Specialist','Make It Happen'],senior:['Specialist','Outreach'],pham:['Secretary','Multilingual'],casale:['Manager','Enrollment'],
+  jball:['Asst. Director','Facilities'],lamb:['Asst. Director','Transport'],nueslein:['','Dispatch'],beatham:['Manager','Kitchen'],
+  nacelewicz:['Coordinator','News & Media'],nguy:['Manager','Web & Video'],hared:['','Accountant'],lima:['Accountant','Grants'],
+  marchilli:['Manager','Payroll'],mason:['Manager','Payroll'],arseneau:['Manager','Purchasing'],kilroy:['Specialist','Bills'],
+  avignon:['Manager','Adult Ed Finance'],vaughan:['Manager','Training'],rodd:['Coordinator','Staff Learning'],patt:['Manager','Benefits'],
+  tosi:['Analyst','HR'],redwood:['Analyst','HR'],greenwood:['Coordinator','HR']
+};
+const GROUPS={'Special education & student support':'Special Ed & Support','Coordinators':'Coordinators','Payroll':'Payroll','Communications':'Communications','Elem. districtwide':'Districtwide'};
+function labelOf(n){
+  if(n.kind==='board') return ['','Board'];
+  if(n.kind==='school') return ['School',n.role.replace(/^Portland Arts and Technology$/,'PATHS')];
+  if(n.kind==='group') return ['Team',GROUPS[n.role]||n.role];
+  if(n.kind==='vacant') return ['Vacant',n.who.replace(/^Dir\., /,'')];
+  if(MANUAL[n.id]) return MANUAL[n.id];
+  const t=P[n.id].t, school=/Principal|Lead Teacher|^Director, Portland Arts/.test(t);
+  if(school){ const s=t.replace(/,.*$/,''); return s.startsWith('Interim ')?['Interim',s.slice(8).replace('Assistant','Asst.')]:['',s.replace('Co-Assistant','Co-Asst.').replace('Assistant','Asst.')]; }
+  const RANKS=[[/^Chief of /,'Chief'],[/^Assistant Superintendent (of|for) /,'Asst. Supt.'],[/^Executive Director of /,'Exec. Director'],
+    [/^Senior Director of /,'Sr. Director'],[/^Interim Director of /,'Interim Director'],[/^Director of /,'Director']];
+  for(const [re,rank] of RANKS){ if(re.test(t)){ let a=t.replace(re,''); for(const [r2,s2] of AREA) a=a.replace(r2,s2); return [rank,a]; } }
+  return ['',t];
+}
+/* Fit text inside the circle: shrink a line until it fits the chord at its height. */
+function fitLine(tx,r,y,max,min){
+  let fs=max; tx.style.fontSize=fs+'px';
+  const chord=2*Math.sqrt(Math.max(0,r*r-y*y))-14;
+  while(fs>min && tx.getComputedTextLength()>chord){ fs-=0.5; tx.style.fontSize=fs+'px'; }
+}
 function create(n){
   const r=R(n), g=el('g',{class:`node ${n.kind}${n.depth<=2?' big':''}`,style:`--c:${laneVar(n.lane)}`});
   g.appendChild(el('circle',{class:'ring',r}));
-  const lines=wrap(n.role,Math.max(9,Math.floor(r/3.6))), lh=n.depth<=2?13:12, y0=-(lines.length-1)*lh/2+4;
-  lines.forEach((t,i)=>{const tx=el('text',{class:'role',y:y0+i*lh}); tx.textContent=t; g.appendChild(tx);});
+  const [rank,area]=labelOf(n), big=Math.round(r*0.36), lines=wrap(area,Math.max(8,Math.floor(r/5.2))).slice(0,3);
+  const lh=big*1.05, block=(rank?15:0)+lines.length*lh, top=-block/2;
+  nodesG.appendChild(g);                                   // in the DOM so text can be measured
+  if(rank){ const rt=el('text',{class:'rank',y:top+9}); rt.textContent=rank; g.appendChild(rt); fitLine(rt,r,top+5,11,8); }
+  lines.forEach((t,i)=>{ const y=top+(rank?15:0)+lh*(i+0.78); const tx=el('text',{class:'area',y}); tx.textContent=t; g.appendChild(tx); fitLine(tx,r,y-big*0.35,big,9); });
   if(n.who){ const w=el('text',{class:'who',y:r+16}); w.textContent=n.who; g.appendChild(w); }
   if(n.kind==='person'){ g.setAttribute('tabindex','0'); g.setAttribute('role','button'); g.setAttribute('aria-label',`${P[n.id].n}, ${P[n.id].t}. Open profile`); g.dataset.id=n.id; }
   else g.setAttribute('aria-label',n.role+(n.who?`, ${n.who}`:''));
   nodesG.appendChild(g); n.g=g;
   if(n.kids.length){
     const t=el('g',{class:'tog',tabindex:'0',role:'button'}); t.dataset.uid=n.uid;
-    t.appendChild(el('circle',{r:12})); t.appendChild(el('text',{y:4}));
+    t.appendChild(el('circle',{r:TOGR})); t.appendChild(el('text',{y:7}));
     nodesG.appendChild(t); n.tog=t;
   }
   if(n.parent){ n.edge=el('path',{class:'edge','marker-end':'url(#ah)'}); edgesG.appendChild(n.edge); }
@@ -246,7 +299,6 @@ function badge(n){
   n.tog.setAttribute('aria-expanded',String(n.open));
   n.tog.setAttribute('aria-label',`${n.open?'Hide':'Show'} ${c} people under ${n.who||n.role}`);
   n.tog.querySelector('text').textContent=n.open?'−':'+'+c;
-  n.tog.querySelector('circle').setAttribute('r',n.open?9:12);
 }
 
 /* ---------- camera: world point at the screen centre plus a zoom factor ---------- */
@@ -259,7 +311,7 @@ function paint(){
     n.g.setAttribute('transform',`translate(${n.cx},${n.cy})`); n.g.style.opacity=n.co;
     if(n.tog){ n.tog.setAttribute('transform',`translate(${n.cx+BADGE(n)},${n.cy})`); n.tog.style.opacity=n.co; }
     if(n.edge){
-      const p=n.parent, x1=p.cx+BADGE(p)+(p.open?9:12), x2=n.cx-R(n)-3, mx=x1+(x2-x1)*0.5;
+      const p=n.parent, x1=p.cx+BADGE(p)+TOGR+2, x2=n.cx-R(n)-3, mx=x1+(x2-x1)*0.5;
       n.edge.setAttribute('d',`M${x1},${p.cy} C${mx},${p.cy} ${mx},${n.cy} ${x2},${n.cy}`);
       n.edge.style.opacity=Math.min(n.co,p.co);
     }
@@ -415,6 +467,7 @@ sheet.addEventListener('click',e=>{ const b=e.target.closest('[data-bio]'); if(b
 dlg.addEventListener('click',e=>{ if(e.target===dlg) dlg.close(); });
 
 measure(); render('fit',true);
+if(document.fonts) document.fonts.ready.then(()=>{ all.forEach(n=>{ if(n.g) destroy(n); }); render(null,true); });   // re-measure labels in the web font
 addEventListener('resize',()=>{ measure(); paint(); });
 })();
 </script>
