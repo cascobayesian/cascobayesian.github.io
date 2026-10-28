@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>PPS Leadership Flowchart</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a full-height canvas holding a top-down flowchart of circles joined by arrows; names open the same bio sheet as the outline view. */
+:root{
+  --bg:#f2f5f6; --surface:#ffffff; --ink:#15212a; --muted:#56656f; --line:#b9c6cf; --soft:#e6ecef;
+  --accent:#0d5a74;
+  --acad:#2a78d6; --ops:#eb6834; --fin:#1baf7a; --hr:#eda100; --gov:#3c4a55;
+  --display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --body:"IBM Plex Sans",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0e1419; --surface:#162029; --ink:#e4ebef; --muted:#9aa9b3; --line:#3a4a56; --soft:#1d2933;
+  --accent:#6bbfdc; --acad:#3987e5; --ops:#d95926; --fin:#199e70; --hr:#c98500; --gov:#a9b7c2; color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0e1419; --surface:#162029; --ink:#e4ebef; --muted:#9aa9b3; --line:#3a4a56; --soft:#1d2933;
+  --accent:#6bbfdc; --acad:#3987e5; --ops:#d95926; --fin:#199e70; --hr:#c98500; --gov:#a9b7c2; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 var(--body);display:flex;flex-direction:column;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:env(safe-area-inset-top,0px) env(safe-area-inset-bottom,0px)}
+a{color:var(--accent)}
+header{padding-block:18px 10px;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:flex-end;justify-content:space-between}
+.eyebrow{font:500 11.5px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font:800 clamp(24px,3.4vw,34px)/1 var(--display);font-stretch:80%;margin:4px 0 0;text-wrap:balance}
+.hint{color:var(--muted);font-size:13px;margin:6px 0 0;max-width:62ch}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding-block:6px 10px}
+.bar button{all:unset;cursor:pointer;font:500 12.5px var(--mono);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:5px;padding:6px 10px}
+.bar button:hover{border-color:var(--ink)}
+.bar button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--muted);margin-left:auto}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;border:2.5px solid var(--c);background:var(--surface)}
+.legend i.dash{border-style:dashed;border-color:var(--muted)}
+.stage{flex:1;min-height:480px;position:relative;background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:16px}
+svg#chart{width:100%;height:100%;display:block;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}
+svg#chart.dragging{cursor:grabbing}
+.edge{fill:none;stroke:var(--line);stroke-width:1.6}
+.edge.board{stroke-dasharray:5 4}
+.arrow{fill:var(--line)}
+.node{cursor:pointer}
+.node circle.ring{fill:var(--surface);stroke:var(--c);stroke-width:3}
+.node.group circle.ring{stroke:var(--muted);stroke-width:1.5;stroke-dasharray:4 3;fill:var(--bg)}
+.node.vacant circle.ring{stroke:var(--muted);stroke-width:1.5;stroke-dasharray:3 3}
+.node.school circle.ring{fill:var(--soft);stroke:var(--c);stroke-width:1.5}
+.node.gov circle.ring{stroke:var(--ink)}
+.node .role{font:600 10.5px/1 var(--body);fill:var(--ink);text-anchor:middle}
+.node.big .role{font-size:12px}
+.node .who{font:500 11px/1 var(--body);fill:var(--muted);text-anchor:middle}
+.node:hover circle.ring,.node:focus-visible circle.ring{stroke-width:4.5}
+.node:focus-visible{outline:none}
+.node:focus-visible circle.ring{stroke:var(--accent)}
+.node.group,.node.vacant,.node.school{cursor:default}
+.tog{cursor:pointer}
+.tog circle{fill:var(--ink)}
+.tog text{font:600 10.5px/1 var(--mono);fill:var(--surface);text-anchor:middle}
+.tog:hover circle,.tog:focus-visible circle{fill:var(--accent)}
+.tog:focus-visible{outline:none}
+.foot{font-size:12px;color:var(--muted);padding-bottom:14px}
+
+/* bio sheet (same as outline view) */
+dialog#bio{border:0;padding:0;margin:0 0 0 auto;height:100%;max-height:100%;width:min(520px,100%);max-width:100%;background:var(--surface);color:var(--ink);box-shadow:-12px 0 40px rgba(0,0,0,.25)}
+dialog#bio::backdrop{background:rgba(10,16,20,.45)}
+.sheet{height:100%;overflow:auto;padding:22px max(22px,env(safe-area-inset-right,0px)) calc(28px + env(safe-area-inset-bottom,0px)) 22px;display:grid;gap:18px;align-content:start}
+.sheet-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding-top:env(safe-area-inset-top,0px)}
+.sheet .kicker{font:600 11px/1.3 var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:6px}
+.sheet .kicker::before{content:"";width:9px;height:9px;border-radius:2px;background:var(--c)}
+.sheet h2{font:800 30px/1.05 var(--display);font-stretch:80%;margin:4px 0 0}
+.sheet .title{font-size:15px;color:var(--muted);margin-top:4px}
+.x{all:unset;cursor:pointer;font:500 13px var(--mono);border:1px solid var(--line);border-radius:4px;padding:6px 10px;color:var(--muted)}
+.x:hover,.x:focus-visible{color:var(--ink);border-color:var(--ink)}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0;font-size:14px}
+.facts dt{font:500 11.5px/1.6 var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.facts dd{margin:0;min-width:0}
+.blk h3{font:600 11.5px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:0 0 6px}
+.blk ul{margin:0;padding-left:18px;display:grid;gap:3px;font-size:14px}
+.blk p{margin:0;font-size:14px}
+.conf{display:inline-block;font:500 10.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.04em;padding:4px 6px;border-radius:3px;margin-bottom:6px}
+.conf.v{background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent)}
+.conf.s{color:var(--muted);border:1px dashed var(--line)}
+.conf.n{background:var(--soft);color:var(--muted)}
+.srcs{border-top:1px solid var(--line);padding-top:14px}
+.srcs ol{margin:0;padding-left:20px;display:grid;gap:5px;font-size:13px}
+.srcs li{word-break:break-word}
+.p{all:unset;cursor:pointer;font-weight:600;border-bottom:1px solid color-mix(in srgb,var(--accent) 45%,transparent)}
+.p:hover{color:var(--accent)}
+@media (max-width:640px){ dialog#bio{width:100%;box-shadow:none} .legend{margin-left:0} }
+@media (prefers-reduced-motion: no-preference){
+  dialog#bio[open]{animation:slide .18s ease-out}
+  @keyframes slide{from{transform:translateX(24px);opacity:.6}to{transform:none;opacity:1}}
+  #vp{transition:transform .25s ease}
+  svg#chart.dragging #vp{transition:none}
+}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <div class="eyebrow">Portland, Maine · 2026–27 · flowchart mock-up</div>
+    <h1>PPS Leadership Flowchart</h1>
+    <p class="hint">Each circle is a role; arrows point from a leader to the people who report to them. Select a circle for the person's full profile. Use the small +/− badges to open or close a branch. Drag to move around and scroll or pinch to zoom. <a href="./">Switch to the outline view</a></p>
+  </div>
+</header>
+<div class="bar">
+  <button type="button" id="b-fit">Fit to screen</button>
+  <button type="button" id="b-in" aria-label="Zoom in">+</button>
+  <button type="button" id="b-out" aria-label="Zoom out">−</button>
+  <button type="button" id="b-lead">Leadership only</button>
+  <button type="button" id="b-all">Open every branch</button>
+  <div class="legend">
+    <span><i style="--c:var(--ink)"></i>Superintendent's office</span>
+    <span><i style="--c:var(--acad)"></i>Schools &amp; Academics</span>
+    <span><i style="--c:var(--ops)"></i>Strategy &amp; Operations</span>
+    <span><i style="--c:var(--fin)"></i>Finance</span>
+    <span><i style="--c:var(--hr)"></i>Human Resources</span>
+    <span><i class="dash"></i>Team or vacancy</span>
+  </div>
+</div>
+<div class="stage" id="stage">
+  <svg id="chart" role="group" aria-label="Organization flowchart">
+    <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrow" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+    <g id="vp"><g id="edges"></g><g id="nodes"></g></g>
+  </svg>
+</div>
+<div class="foot">Independent research compilation from public district pages, Board records and local news, Oct 27, 2026. Not an official district publication.</div>
+
+<dialog id="bio" aria-labelledby="bio-name"><div class="sheet" id="sheet"></div></dialog>
+
+<script src="data.js"></script>
+<script>
+(function(){
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const SVGNS='http://www.w3.org/2000/svg';
+
+/* ---------- build the tree from the shared data ---------- */
+let uid=0;
+const mk=(o)=>Object.assign({uid:'n'+(uid++),kids:[]},o);
+const short=t=>t
+  .replace(/^Assistant Superintendent (of|for) /,'Asst. Supt., ')
+  .replace(/^Senior Director of /,'Sr. Dir., ').replace(/^Executive Director of /,'Exec. Dir., ')
+  .replace(/^Interim Executive Director, /,'Interim Exec. Dir., ').replace(/^Director of /,'Dir., ')
+  .replace(/^Interim Director of /,'Interim Dir., ').replace(/^Assistant Director of /,'Asst. Dir., ')
+  .replace(/^Interim Assistant Director, /,'Interim Asst. Dir., ')
+  .replace(/^Chief of /,'Chief, ').replace(/Human Resources/g,'HR').replace(/Information Technology/g,'IT')
+  .replace(/Special Education/g,'Special Ed').replace(/Elementary/g,'Elem.').replace(/Secondary/g,'Secondary')
+  .replace(/Coordinator/g,'Coord.').replace(/Specialist/g,'Spec.').replace(/ and /g,' & ').replace(/Portland Adult Education/,'Adult Ed')
+  .replace(/, Student, Family, and Community Partnerships/,', Family & Community').replace(/Student, Family, and Community Partnerships/,'Family & Community')
+  .replace(/Student, Family, & Community Partnerships/,'Family & Community').replace(/ \(transitioning out\)/,' (leaving)').replace(/, Multilingual Center/,'').replace(/, Student Homelessness Prevention/,'');
+const laneOf={proctor:'acad',warren:'ops',beck:'fin',slabbinck:'hr'};
+
+function person(id,lane,extra){ const x=P[id]; return mk(Object.assign({kind:'person',id,lane:lane||x.L,role:short(x.t),who:x.n.replace(/,.*$/,'')},extra||{})); }
+function fromLane(n,lane){
+  if(n.id){ const p=person(n.id,lane); (n.k||[]).forEach(c=>{ if(c.jump) schoolsInto(p,c.jump==='net-elem'?'elem':'sec',lane); else p.kids.push(fromLane(c,lane)); }); return p; }
+  if(n.g){ const g=mk({kind:'group',role:n.g.replace(/^Elementary districtwide roles$/,'Elem. districtwide'),lane}); n.k.forEach(c=>g.kids.push(fromLane(c,lane))); return g; }
+  if(n.v) return mk({kind:'vacant',role:'Vacant',who:n.v.replace(/ \(hiring\)$/,'').replace(/^Director of English Language Learning, Elementary$/,'Dir., Elem. ESOL'),lane});
+  return null;
+}
+function schoolsInto(parent,key,lane){
+  const seen=new Set();
+  SCHOOLS[key].list.forEach(s=>{
+    if(s.n==='Portland Adult Education') return;            // already under the assistant superintendent
+    if(s.p[0]==='anton'){ if(seen.has('anton')) return; seen.add('anton'); s={...s,n:'Peaks & Cliff Island'}; }
+    const sn=mk({kind:'school',role:s.n.replace(/ (Elementary|Middle|High|Community) School$/,'').replace(/^Portland Arts and Technology High School$/,'PATHS').replace(/ School$/,''),lane});
+    if(/Lead Teacher/.test(P[s.p[0]].t)){ s.p.forEach(id=>sn.kids.push(person(id,lane,{role:'Lead teacher'}))); }
+    else{
+      const head=person(s.p[0],lane,{role:P[s.p[0]].t.replace(/,.*$/,'')});
+      s.p.slice(1).forEach(id=>head.kids.push(person(id,lane,{role:P[id].t.replace(/,.*$/,'')})));
+      if(s.vac) head.kids.push(mk({kind:'vacant',role:'Vacant',who:'Asst. principal',lane}));
+      sn.kids.push(head);
+    }
+    parent.kids.push(sn);
+  });
+}
+const board=mk({kind:'board',role:'Board of Public Education',who:'Elected',lane:'gov'});
+const supt=person('scallon','gov'); board.kids.push(supt);
+const civ=person('mackinnon','gov'); civ.alsoBoard=true; supt.kids.push(civ);
+LANES.forEach(l=>{ const chief=person(l.head,l.key); l.k.forEach(n=>{const c=fromLane(n,l.key); if(c) chief.kids.push(c);}); supt.kids.push(chief); });
+
+/* parent links and default open state */
+(function walk(n,parent,depth){ n.parent=parent; n.depth=depth; n.open=depth<=1; n.kids.forEach(c=>walk(c,n,depth+1)); })(board,null,0);
+const all=[]; (function f(n){all.push(n); n.kids.forEach(f);})(board);
+const count=n=>n.kids.reduce((a,c)=>a+1+count(c),0);
+
+/* ---------- layout ----------
+   Subtrees sit side by side with each parent centered over its children. When every visible child
+   is itself a closed branch or a leaf, the children stack in one column under the parent instead,
+   joined by a trunk line, so wide teams stay narrow. */
+const R=n=>n.kind==='board'?60:(n.depth<=2?54:n.kind==='group'?40:n.kind==='school'?42:n.depth===3?46:40);
+const GAP=26, LEVEL=215, LEAFW=118, STEP=n=>2*R(n)+(n.kids.length?62:44);
+function layout(){
+  let cursor=0;
+  (function place(n,y){
+    const vis=n.open?n.kids:[];
+    n.y=y; n.stack=false;
+    if(!vis.length){ const w=Math.max(2*R(n),LEAFW); n.x=cursor+w/2; cursor+=w+GAP; return; }
+    if(vis.length>=2 && n.depth>=2 && vis.every(c=>!c.open||!c.kids.length)){
+      n.stack=true;
+      const rc=Math.max(...vis.map(R)), w=Math.max(2*R(n),2*rc+70,LEAFW+40);
+      n.x=cursor+w/2; cursor+=w+GAP;
+      let cy=y+R(n)+(n.who?40:24)+30;
+      n.trunk=n.x+18-rc-22;
+      vis.forEach(c=>{ c.x=n.x+18; c.y=cy+R(c); c.stack=false; cy+=STEP(c); });
+      return;
+    }
+    vis.forEach(c=>place(c,y+LEVEL));
+    n.x=(vis[0].x+vis[vis.length-1].x)/2;
+  })(board,0);
+}
+
+/* ---------- drawing ---------- */
+const edgesG=document.getElementById('edges'), nodesG=document.getElementById('nodes');
+const el=(tag,attrs)=>{const e=document.createElementNS(SVGNS,tag); for(const k in attrs) e.setAttribute(k,attrs[k]); return e;};
+const laneVar=l=>l==='gov'?'var(--ink)':`var(--${l})`;
+function wrap(text,maxChars){
+  const words=text.split(' '), lines=[]; let cur='';
+  words.forEach(w=>{ if((cur+' '+w).trim().length>maxChars && cur){lines.push(cur);cur=w;} else cur=(cur+' '+w).trim(); });
+  if(cur) lines.push(cur);
+  if(lines.length>4){ lines.length=4; lines[3]=lines[3].replace(/.{0,2}$/,'…'); }
+  return lines;
+}
+function draw(){
+  layout();
+  edgesG.replaceChildren(); nodesG.replaceChildren();
+  const vis=[]; (function f(n){vis.push(n); if(n.open) n.kids.forEach(f);})(board);
+  vis.forEach(n=>{
+    if(n.parent && vis.includes(n.parent)){
+      const p=n.parent;
+      if(p.stack){
+        const y1=p.y+R(p)+(p.who?40:24)+(p.kids.length?14:0), trunk=p.trunk;
+        edgesG.appendChild(el('path',{class:'edge',d:`M${p.x},${y1} V${y1+10} H${trunk} V${n.y} H${n.x-R(n)-3}`,'marker-end':'url(#ah)'}));
+      }else{
+        const y1=p.y+R(p)+(p.who?40:24)+(p.kids.length?14:0), y2=n.y-R(n)-3, my=y1+(y2-y1)/2;
+        edgesG.appendChild(el('path',{class:'edge',d:`M${p.x},${y1} V${my} H${n.x} V${y2}`,'marker-end':'url(#ah)'}));
+      }
+    }
+    if(n.alsoBoard){
+      const b=board, x1=b.x+R(b)*0.8, y1=b.y+R(b)*0.6, y2=n.y-R(n)-3;
+      edgesG.appendChild(el('path',{class:'edge board',d:`M${x1},${y1} C${x1+60},${y1+40} ${n.x},${y2-70} ${n.x},${y2}`,'marker-end':'url(#ah)'}));
+    }
+  });
+  vis.forEach(n=>{
+    const r=R(n), g=el('g',{class:`node ${n.kind}${n.depth<=2?' big':''}`,transform:`translate(${n.x},${n.y})`,style:`--c:${laneVar(n.lane)}`});
+    g.appendChild(el('circle',{class:'ring',r}));
+    const lines=wrap(n.role, Math.max(9,Math.floor(r/3.6)));
+    const lh=n.depth<=2?13:12, y0=-(lines.length-1)*lh/2+4;
+    lines.forEach((t,i)=>{const tx=el('text',{class:'role',y:y0+i*lh}); tx.textContent=t; g.appendChild(tx);});
+    if(n.who){ const w=el('text',{class:'who',y:r+16}); w.textContent=n.who; g.appendChild(w); }
+    if(n.kind==='person'){
+      g.setAttribute('tabindex','0'); g.setAttribute('role','button');
+      g.setAttribute('aria-label',`${P[n.id].n}, ${P[n.id].t}. Open profile`);
+      g.dataset.id=n.id;
+    }else{
+      g.setAttribute('aria-label',n.role+(n.who?`, ${n.who}`:''));
+    }
+    nodesG.appendChild(g);
+    if(n.kids.length){
+      const ty=r+(n.who?34:18), t=el('g',{class:'tog',transform:`translate(${n.x},${n.y+ty})`,tabindex:'0',role:'button',
+        'aria-expanded':String(n.open),'aria-label':`${n.open?'Hide':'Show'} ${count(n)} people under ${n.who||n.role}`});
+      t.dataset.uid=n.uid;
+      t.appendChild(el('circle',{r:n.open?9:12}));
+      const tt=el('text',{y:4}); tt.textContent=n.open?'−':'+'+count(n); t.appendChild(tt);
+      nodesG.appendChild(t);
+    }
+  });
+}
+
+/* ---------- pan & zoom ---------- */
+const svg=document.getElementById('chart'), vp=document.getElementById('vp');
+let k=1,tx=0,ty=0;
+const apply=()=>vp.setAttribute('transform',`translate(${tx},${ty}) scale(${k})`);
+function fit(){
+  const b=nodesG.getBBox(), W=svg.clientWidth, H=svg.clientHeight, pad=30;
+  if(W<80||H<80||!b.width) return;
+  k=Math.min((W-2*pad)/b.width,(H-2*pad)/(b.height+40),1.1); k=Math.max(k,0.15);
+  tx=(W-b.width*k)/2-b.x*k; ty=pad-b.y*k; apply();
+}
+function zoomAt(f,cx,cy){ const nk=Math.min(2.5,Math.max(0.12,k*f)); tx=cx-(cx-tx)*(nk/k); ty=cy-(cy-ty)*(nk/k); k=nk; apply(); }
+function centerOn(n){ const W=svg.clientWidth,H=svg.clientHeight; tx=W/2-n.x*k; ty=Math.min(H*0.3,H/2-n.y*k); apply(); }
+svg.addEventListener('wheel',e=>{e.preventDefault(); const r=svg.getBoundingClientRect(); zoomAt(Math.exp(-e.deltaY*0.0015),e.clientX-r.left,e.clientY-r.top);},{passive:false});
+const ptrs=new Map(); let moved=0, pinch0=null;
+svg.addEventListener('pointerdown',e=>{ ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY}); moved=0; if(ptrs.size===2){const [a,b]=[...ptrs.values()]; pinch0={d:Math.hypot(a.x-b.x,a.y-b.y),k};} });
+svg.addEventListener('pointermove',e=>{
+  if(!ptrs.has(e.pointerId)) return;
+  const prev=ptrs.get(e.pointerId), dx=e.clientX-prev.x, dy=e.clientY-prev.y; ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(ptrs.size===1){ moved+=Math.abs(dx)+Math.abs(dy); if(moved>4){ svg.classList.add('dragging'); if(!svg.hasPointerCapture(e.pointerId)) svg.setPointerCapture(e.pointerId); } tx+=dx; ty+=dy; apply(); }
+  else if(ptrs.size===2&&pinch0){ moved=99; const [a,b]=[...ptrs.values()], r=svg.getBoundingClientRect(); const d=Math.hypot(a.x-b.x,a.y-b.y);
+    zoomAt((pinch0.k*d/pinch0.d)/k,(a.x+b.x)/2-r.left,(a.y+b.y)/2-r.top); }
+});
+const up=e=>{ ptrs.delete(e.pointerId); if(ptrs.size<2) pinch0=null; if(!ptrs.size) svg.classList.remove('dragging'); };
+svg.addEventListener('pointerup',up); svg.addEventListener('pointercancel',up);
+
+/* ---------- interactions ---------- */
+const byUid=Object.fromEntries(all.map(n=>[n.uid,n]));
+function toggle(n){ n.open=!n.open; draw(); if(n.open&&k<0.85){ k=0.85; } centerOn(n); }
+function activate(target){
+  const t=target.closest('.tog'); if(t){ toggle(byUid[t.dataset.uid]); return true; }
+  const g=target.closest('.node[data-id]'); if(g){ openBio(g.dataset.id); return true; }
+  return false;
+}
+svg.addEventListener('click',e=>{ if(moved>4) return; activate(e.target); });
+svg.addEventListener('keydown',e=>{ if((e.key==='Enter'||e.key===' ')&&activate(e.target)) e.preventDefault(); });
+document.getElementById('b-fit').onclick=fit;
+document.getElementById('b-in').onclick=()=>zoomAt(1.25,svg.clientWidth/2,svg.clientHeight/2);
+document.getElementById('b-out').onclick=()=>zoomAt(0.8,svg.clientWidth/2,svg.clientHeight/2);
+document.getElementById('b-lead').onclick=()=>{ all.forEach(n=>n.open=n.depth<=1); draw(); fit(); };
+document.getElementById('b-all').onclick=()=>{ all.forEach(n=>n.open=true); draw(); fit(); };
+
+/* ---------- bio sheet ---------- */
+const dlg=document.getElementById('bio'), sheet=document.getElementById('sheet');
+const laneName={gov:'Office of the Superintendent',acad:'Schools & Academics',ops:'Strategy & Operations',fin:'Finance',hr:'Human Resources'};
+const confTxt={v:'Verified from a published bio or release',s:'Unconfirmed: seen only in a profile search excerpt',n:'Not found in public sources'};
+const nodeOf={}; all.forEach(n=>{ if(n.id&&!nodeOf[n.id]) nodeOf[n.id]=n; });
+function chain(id){ const out=[]; let n=nodeOf[id]&&nodeOf[id].parent; while(n){ if(n.kind==='person') out.push(n.id); n=n.parent; } return out; }
+const inl=id=>`<button class="p" type="button" data-bio="${id}">${esc(P[id].n)}</button>`;
+function openBio(id){
+  const x=P[id], n=nodeOf[id], lane=n?n.lane:'gov', up=chain(id);
+  const reports=id==='scallon'?'Portland Board of Public Education':id==='mackinnon'?`${inl('scallon')} and the Board`:up.map(inl).join(' → ');
+  const edu=x.e&&x.e.length?`<span class="conf ${x.ec}">${confTxt[x.ec]}</span><ul>${x.e.map(v=>`<li>${esc(v)}</li>`).join('')}</ul>`:`<span class="conf n">${confTxt.n}</span>`;
+  sheet.style.setProperty('--c',laneVar(lane));
+  sheet.innerHTML=`
+    <div class="sheet-top"><div><div class="kicker">${esc(laneName[lane]||'')}</div><h2 id="bio-name">${esc(x.n)}</h2><div class="title">${esc(x.t)}</div></div>
+      <button class="x" type="button" id="close">Close</button></div>
+    <dl class="facts">
+      ${reports?`<dt>Reports to</dt><dd>${reports}</dd>`:''}
+      <dt>Joined</dt><dd>${esc(x.j||'Not found in public sources')}</dd>
+      ${x.s?`<dt>Salary at hire</dt><dd>${esc(x.s)}</dd>`:''}
+    </dl>
+    <div class="blk"><h3>Responsibilities</h3><ul>${(x.r||[]).map(v=>`<li>${esc(v)}</li>`).join('')}</ul></div>
+    <div class="blk"><h3>Education</h3>${edu}</div>
+    ${x.b?`<div class="blk"><h3>Background</h3><p>${esc(x.b)}</p></div>`:''}
+    <div class="srcs blk"><h3>Sources</h3><ol>${(x.src||[]).filter(k=>SRC[k]).map(k=>`<li><a href="${SRC[k][1]}" target="_blank" rel="noopener">${esc(SRC[k][0])}</a></li>`).join('')}</ol></div>`;
+  if(!dlg.open) dlg.showModal();
+  sheet.scrollTop=0; document.getElementById('close').focus();
+}
+sheet.addEventListener('click',e=>{ const b=e.target.closest('[data-bio]'); if(b) openBio(b.dataset.bio); if(e.target.id==='close') dlg.close(); });
+dlg.addEventListener('click',e=>{ if(e.target===dlg) dlg.close(); });
+
+draw(); fit();
+let rt; addEventListener('resize',()=>{clearTimeout(rt); rt=setTimeout(fit,150);});
+})();
+</script>
+</body>
+</html>
