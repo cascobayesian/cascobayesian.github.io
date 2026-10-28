@@ -1,12 +1,11 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,-apple-system,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
+<meta charset="utf-8">
 <title>Portland Rent Registry Map</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600&display=swap">
 <style>
-/* Layout: one-screen app. Header strip, parcel map filling the left, record panel on the right (bottom sheet on phones). */
+/* Layout: one-screen app. Header strip, parcel map on the left half, record panel on the right half (bottom sheet on phones). */
 :root {
   --bg: #f4f6f8;
   --surface: #ffffff;
@@ -24,16 +23,23 @@
   --town-label: #7d8590;
   --hwy: #eba7a2; --hwy-case: #cf817b; --art: #f1d3d0;   /* MaineDOT major roads, soft red */
   --ptu: #d1312b;             /* PTU audit layer */
+  /* compliance highlights (one active at a time) */
+  --f-over: #a3191f; --f-viol: #e2662b; --f-turn: #c4458a; --f-issue: #7b52c7; --f-exempt: #1f8585;
+  --f-str: #6b8e23;           /* short-term rental licenses */
+  --district: #3b2f86;        /* selected council district outline */
   --parcel: #f7f8f9;
   --parcel-line: #c3cad3;
   --parcel-reg: #e6ecf4;
   --nodata: #a3abb5;
   --bin1: #86b6ef; --bin2: #5598e7; --bin3: #2a78d6; --bin4: #1c5cab; --bin5: #104281;
-  --warn-bg: #fff4e5; --warn-fg: #7a3d00;
+  --warn-bg: #fff4e5; --warn-fg: #7a3d00; --warn-line: #f0c48a;
+  /* rent-control status of a unit */
+  --cov-bg: #e7f3ec; --cov-fg: #1d5a33; --cov: #2f8a4f;          /* covered */
+  --exm-bg: #fff0d4; --exm-fg: #6e4300; --exm: #d98a00;          /* exemption claimed */
+  --unk-bg: #eef1f4; --unk-fg: #4a5563; --unk: #8e98a5;          /* not reported */
   --font-ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-head: "IBM Plex Sans Condensed", "IBM Plex Sans", system-ui, sans-serif;
   --font-data: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
-  --panel-w: 440px;
   color-scheme: light;
 }
 </style>
@@ -43,7 +49,7 @@ html, body { height: 100%; }
 body { background: var(--bg); color: var(--fg); font-family: var(--font-ui); font-size: 14px; line-height: 1.45; }
 .app { height: 100%; display: grid; grid-template-rows: auto 1fr; grid-template-columns: minmax(0, 1fr); }
 header.top {
-  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px;
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 8px 20px;
   padding-block: 10px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
   background: var(--surface); border-bottom: 1px solid var(--line);
 }
@@ -64,12 +70,18 @@ header.top {
 .results li button { all: unset; box-sizing: border-box; width: 100%; display: flex; justify-content: space-between; gap: 12px; padding: 7px 12px; cursor: pointer; }
 .results li button:hover, .results li button[aria-selected="true"] { background: var(--surface-2); }
 .results .meta { color: var(--muted); font-size: 12px; white-space: nowrap; }
-.legend { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; font-size: 12px; color: var(--muted); }
+.legend { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; font-size: 12px; color: var(--muted); }
+.disclaimer {
+  grid-column: 3; grid-row: 1; max-width: 360px; font-size: 12px; line-height: 1.4;
+  background: var(--warn-bg); color: var(--warn-fg); border: 1px solid var(--warn-line); border-radius: 6px; padding: 6px 10px;
+}
+.disclaimer b { font-weight: 600; }
+.disclaimer a { color: inherit; font-weight: 500; }
 .legend .title { color: var(--fg); font-weight: 500; }
 .legend .sw { display: inline-flex; align-items: center; gap: 5px; font-variant-numeric: tabular-nums; }
 .legend .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 1.5px var(--surface); }
 
-.main { position: relative; display: grid; grid-template-columns: 1fr var(--panel-w); min-height: 0; }
+.main { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: 0; }
 #map { position: relative; min-height: 0; background: var(--map-ground); }
 .loading {
   position: absolute; inset: 0; display: grid; place-items: center; z-index: 5; background: var(--map-ground); color: var(--muted);
@@ -82,20 +94,67 @@ header.top {
   max-width: 260px;
 }
 .tooltip b { font-weight: 600; }
-.ptu-toggle {
-  position: absolute; top: 10px; right: 10px; z-index: 4; display: flex; align-items: center; gap: 8px;
-  font: inherit; font-size: 13px; font-weight: 500; color: var(--fg); background: var(--surface); cursor: pointer;
-  border: 1px solid var(--line); border-radius: 6px; padding: 7px 11px; box-shadow: 0 2px 8px rgb(0 0 0 / .12);
+/* map filters: highlight (PTU audit or a compliance category) and council district */
+.filters {
+  position: absolute; top: 10px; right: 10px; z-index: 4; width: 250px; max-width: calc(100% - 70px); box-sizing: border-box;
+  display: flex; flex-direction: column; gap: 8px; background: var(--surface); color: var(--fg);
+  border: 1px solid var(--line); border-radius: 8px; padding: 10px 11px; box-shadow: 0 2px 8px rgb(0 0 0 / .12); font-size: 13px;
 }
-.ptu-toggle .box { width: 14px; height: 14px; border-radius: 3px; border: 1.5px solid var(--muted); display: grid; place-items: center; flex: none; }
-.ptu-toggle[aria-pressed="true"] .box { background: var(--ptu); border-color: var(--ptu); }
-.ptu-toggle[aria-pressed="true"] .box::after { content: ""; width: 4px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0; transform: translateY(-1px) rotate(45deg); }
-.ptu-toggle .n { color: var(--muted); font-weight: 400; font-variant-numeric: tabular-nums; }
-.ptu-toggle:hover { border-color: var(--muted); }
-.ptu-toggle:focus-visible { outline: 2px solid var(--series); outline-offset: 2px; }
+.filters[hidden] { display: none; }
+.filters label { display: flex; flex-direction: column; gap: 3px; }
+.filters select {
+  font: inherit; font-size: 13px; color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 5px;
+  padding: 5px 6px; width: 100%; min-width: 0;
+}
+.filters select:focus-visible { outline: 2px solid var(--series); outline-offset: 1px; }
+.filters .chk { flex-direction: row; align-items: center; gap: 7px; cursor: pointer; font-size: 12.5px; }
+.filters .chk input { margin: 0; accent-color: var(--district); }
+.dist-label {
+  pointer-events: none; font-family: var(--font-head); font-size: 13px; font-weight: 600; color: var(--district);
+  background: color-mix(in srgb, var(--surface) 85%, transparent); border: 1.5px solid var(--district); border-radius: 4px; padding: 0 5px;
+}
+.fcount { display: flex; align-items: flex-start; gap: 7px; color: var(--muted); font-size: 12.5px; line-height: 1.35; font-variant-numeric: tabular-nums; }
+.fcount i { flex: none; width: 10px; height: 10px; border-radius: 50%; margin-top: 3px; }
+.fcount b { color: var(--fg); font-weight: 600; }
+.fbody { display: flex; flex-direction: column; gap: 8px; }
+.ftoggle { display: none; }
+.disclaimer .short { display: none; }
+@media (max-width: 760px) {
+  .filters { top: 8px; right: 8px; width: auto; max-width: min(240px, calc(100% - 64px)); padding: 0; gap: 0; }
+  .ftoggle {
+    all: unset; box-sizing: border-box; cursor: pointer; display: flex; align-items: center; gap: 6px; width: 100%;
+    padding: 7px 10px; font-size: 12.5px; font-weight: 500; color: var(--fg); white-space: nowrap; overflow: hidden;
+  }
+  .ftoggle span#fToggleTxt { overflow: hidden; text-overflow: ellipsis; }
+  .ftoggle i { flex: none; width: 10px; height: 10px; border-radius: 50%; }
+  .ftoggle .chev { margin-left: auto; color: var(--muted); transition: transform .15s; }
+  .ftoggle[aria-expanded="true"] .chev { transform: rotate(180deg); }
+  .ftoggle:focus-visible { outline: 2px solid var(--series); outline-offset: -2px; border-radius: 8px; }
+  .fbody { padding: 0 10px 10px; gap: 6px; }
+  .filters:not(.open) .fbody { display: none; }
+  .disclaimer .long { display: none; }
+  .disclaimer .short { display: inline; }
+}
+
+/* compliance blocks in the panel */
+.comp { display: flex; flex-direction: column; gap: 8px; }
+.comp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); gap: 8px; }
+.comp-cell { border: 1px solid var(--line); border-top: 3px solid var(--c, var(--line)); border-radius: 6px; padding: 7px 9px; min-width: 0; }
+.comp-cell .v { font-family: var(--font-data); font-size: 20px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.comp-cell .k { font-size: 12px; color: var(--muted); line-height: 1.3; }
+.flags { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.flags li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 9px; align-items: baseline; border-left: 3px solid var(--line); padding: 2px 0 2px 9px; }
+.flags li.v { border-left-color: var(--f-viol); }
+.flags li.o { border-left-color: var(--f-over); }
+.flags li.u { border-left-color: var(--f-turn); }
+.flags .kind { font-size: 10.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+.flags .what { font-weight: 500; }
+.flags .det { grid-column: 2; font-size: 12.5px; color: var(--muted); }
 .ptu-block { display: flex; flex-direction: column; gap: 8px; }
 .ptu-block .eyebrow { display: flex; align-items: center; gap: 6px; }
 .ptu-block .eyebrow i { width: 9px; height: 9px; border-radius: 50%; background: var(--ptu); }
+.str-block .eyebrow i { background: var(--f-str); }
+.str-block .ptu-card { border-left-color: var(--f-str); }
 .ptu-card { border: 1px solid var(--line); border-left: 3px solid var(--ptu); border-radius: 6px; padding: 9px 11px; display: flex; flex-direction: column; gap: 6px; }
 .ptu-card .head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
 .badge { font-size: 11.5px; font-weight: 600; border-radius: 4px; padding: 2px 7px; white-space: nowrap; }
@@ -108,15 +167,38 @@ header.top {
 .tooltip .m { color: var(--muted); font-variant-numeric: tabular-nums; }
 
 aside.panel { background: var(--surface); border-left: 1px solid var(--line); overflow-y: auto; min-width: 0; display: flex; flex-direction: column; }
-.panel-inner { padding: 16px max(16px, env(safe-area-inset-right, 0px)) 24px 18px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.panel-inner { padding: 20px max(24px, env(safe-area-inset-right, 0px)) 28px 24px; display: flex; flex-direction: column; gap: 18px; min-width: 0; font-size: 15px; }
 .eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 500; }
-.panel h2 { margin: 2px 0 0; font-family: var(--font-head); font-weight: 600; font-size: 22px; line-height: 1.15; text-wrap: balance; }
-.panel h3 { margin: 0; font-family: var(--font-head); font-weight: 600; font-size: 17px; }
-.facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
-.fact { background: var(--surface-2); border-radius: 6px; padding: 8px 10px; min-width: 0; }
-.fact .k { font-size: 11px; color: var(--muted); }
-.fact .v { font-family: var(--font-data); font-size: 14px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
-.close { all: unset; cursor: pointer; color: var(--muted); font-size: 13px; padding: 4px 6px; border-radius: 4px; }
+.panel h2 { margin: 2px 0 0; font-family: var(--font-head); font-weight: 600; font-size: 28px; line-height: 1.15; text-wrap: balance; }
+.panel h3 { margin: 0; font-family: var(--font-head); font-weight: 600; font-size: 18px; }
+.facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.fact { background: var(--surface-2); border-radius: 8px; padding: 10px 12px; min-width: 0; }
+.fact .k { font-size: 12px; color: var(--muted); }
+.fact .v { font-family: var(--font-data); font-size: 22px; font-weight: 500; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.owner { display: flex; flex-direction: column; gap: 2px; border-left: 3px solid var(--line); padding: 2px 0 2px 12px; }
+.owner .name { font-size: 17px; font-weight: 600; }
+
+/* unit card: status banner, rent row, expandable detail */
+.status { display: flex; align-items: center; gap: 10px; border-radius: 8px; padding: 10px 12px; border: 1px solid; border-left-width: 5px; }
+.status .tag { font-size: 11.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+.status .why { font-size: 15px; font-weight: 500; }
+.status.cov { background: var(--cov-bg); color: var(--cov-fg); border-color: var(--cov); }
+.status.exm { background: var(--exm-bg); color: var(--exm-fg); border-color: var(--exm); }
+.status.unk { background: var(--unk-bg); color: var(--unk-fg); border-color: var(--unk); }
+.rents { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.rents .fact .v { font-size: 26px; }
+.rents .fact .s { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.rents .fact.na .v { font-family: var(--font-ui); font-size: 15px; font-weight: 400; color: var(--muted); }
+.more-btn {
+  all: unset; box-sizing: border-box; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;
+  padding: 10px 14px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface-2); font-weight: 500;
+}
+.more-btn:hover { border-color: var(--muted); }
+.more-btn .chev { transition: transform .15s; }
+.more-btn[aria-expanded="true"] .chev { transform: rotate(180deg); }
+#moreData { display: flex; flex-direction: column; gap: 14px; }
+#moreData[hidden] { display: none; }
+.close { all: unset; cursor: pointer; color: var(--muted); font-size: 13px; padding: 4px 6px; border-radius: 4px; white-space: nowrap; }
 .close:hover { color: var(--fg); background: var(--surface-2); }
 .row-between { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
 
@@ -135,10 +217,21 @@ aside.panel { background: var(--surface); border-left: 1px solid var(--line); ov
 }
 .chip .u { font-weight: 600; font-size: 13px; max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .chip .r { font-family: var(--font-data); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.chip { border-left-width: 4px; }
+.chip.cov { border-left-color: var(--cov); } .chip.exm { border-left-color: var(--exm); background: var(--exm-bg); } .chip.unk { border-left-color: var(--unk); }
+/* rent-controlled units: the most severe current flag on the unit's latest registration */
+.chip.s-over { border-left-color: var(--f-over); background: color-mix(in srgb, var(--f-over) 11%, var(--surface)); }
+.chip.s-viol { border-left-color: var(--f-viol); background: color-mix(in srgb, var(--f-viol) 11%, var(--surface)); }
+.chip.s-turn { border-left-color: var(--f-turn); background: color-mix(in srgb, var(--f-turn) 12%, var(--surface)); }
+.chip.s-issue { border-left-color: var(--f-issue); }
+.chip.s-str { border-left-color: var(--f-str); background: color-mix(in srgb, var(--f-str) 13%, var(--surface)); }
+.status.str { background: color-mix(in srgb, var(--f-str) 12%, var(--surface)); color: #3d5214; border-color: var(--f-str); }
+.keyrow { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--muted); }
+.keyrow i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
 .chip:hover { border-color: var(--muted); }
-.chip[aria-pressed="true"] { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.chip[aria-pressed="true"] { border-top-color: var(--accent); border-right-color: var(--accent); border-bottom-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
 
-.spark { width: 100%; height: auto; display: block; }
+.spark { width: 100%; max-width: 520px; height: auto; display: block; }
 .spark text { fill: var(--muted); font-family: var(--font-data); font-size: 10px; }
 .spark .ln { stroke: var(--series); stroke-width: 2; fill: none; }
 .spark .dt { fill: var(--series); stroke: var(--surface); stroke-width: 2; }
@@ -174,7 +267,21 @@ details li { margin-bottom: 3px; }
 
 @media (max-width: 760px) {
   .main { grid-template-columns: 1fr; grid-template-rows: minmax(0, 1fr) auto; }
-  aside.panel { border-left: 0; border-top: 1px solid var(--line); max-height: 46vh; }
+  aside.panel { border-left: 0; border-top: 1px solid var(--line); max-height: 55vh; }
+  header.top { grid-template-columns: minmax(0, 1fr); }
+  .disclaimer { grid-column: 1; grid-row: auto; max-width: none; font-size: 11.5px; padding: 4px 8px; }
+  /* while a building is open, give the map the room the header notes would take */
+  .app:has(aside.panel:not(.empty)) :is(.disclaimer, .legend) { display: none; }
+  header.top { padding-block: 8px; gap: 6px; }
+  .brand h1 { font-size: 17px; }
+  .panel-inner { font-size: 14px; }
+  .panel h2 { font-size: 22px; }
+  .fact .v { font-size: 17px; }
+  .rents .fact .v { font-size: 18px; }
+  .comp-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .comp-cell { padding: 5px 7px; }
+  .comp-cell .v { font-size: 16px; }
+  .comp-cell .k { font-size: 11px; }
   aside.panel.empty { max-height: 26vh; }
   .brand .sub { display: none; }
   .legend { min-width: 0; max-width: 100%; flex-wrap: nowrap; overflow-x: auto; white-space: nowrap; padding-bottom: 2px; scrollbar-width: none; }
@@ -195,6 +302,10 @@ details li { margin-bottom: 3px; }
       <input id="q" type="search" placeholder="Find an address, e.g. 66 Exeter St" autocomplete="off" aria-controls="results" aria-expanded="false">
       <ul id="results" class="results" role="listbox" hidden></ul>
     </div>
+    <aside class="disclaimer" role="note">
+      <b>Unofficial data.</b> <span class="long">Scraped from the City's published PDFs and may contain mistakes. For a definitive record, check with the</span><span class="short">May contain mistakes; check with the</span>
+      <a href="https://www.portlandmaine.gov/rent-history" target="_blank" rel="noopener">City of Portland<span class="long"> (portlandmaine.gov/rent-history)</span></a>.
+    </aside>
     <div class="legend" aria-label="Map legend">
       <span class="title">Median current rent, latest year</span>
       <span class="sw"><i class="dot" style="background:var(--bin1)"></i>&lt;$1,400</span>
@@ -208,7 +319,15 @@ details li { margin-bottom: 3px; }
   </header>
   <div class="main">
     <div id="map">
-      <button class="ptu-toggle" id="ptuToggle" aria-pressed="false" hidden title="Color the buildings in the Portland Tenants Union's March 2026 Zillow audit red"><span class="box"></span>PTU Zillow audit <span class="n" id="ptuN"></span></button>
+      <div class="filters" id="filters" role="group" aria-label="Map filters" hidden>
+        <!-- phones: the box collapses to this button so it doesn't cover the map -->
+        <button class="ftoggle" id="fToggle" aria-expanded="false" aria-controls="fBody"><i id="fSwatch" hidden></i><span id="fToggleTxt">Highlight</span><span class="chev" aria-hidden="true">▾</span></button>
+        <div class="fbody" id="fBody">
+          <label><span class="eyebrow">Highlight buildings with</span><select id="hlSel"></select></label>
+          <label class="chk" id="distLinesWrap" hidden><input type="checkbox" id="distLines">Show council district outlines</label>
+          <div class="fcount" id="fcount" aria-live="polite"></div>
+        </div>
+      </div>
       <div class="loading" id="loading">Loading 25,000 parcels and 5,300 registered buildings…</div>
     </div>
     <aside class="panel empty" id="panel" aria-live="polite"><div class="panel-inner" id="panelInner"><div class="note">Loading the registry…</div></div></aside>
@@ -223,11 +342,51 @@ details li { margin-bottom: 3px; }
   const money = v => v == null ? null : "$" + Number(v).toLocaleString("en-US", { minimumFractionDigits: Number.isInteger(v) ? 0 : 2, maximumFractionDigits: 2 });
   const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
   const titleCase = s => String(s || "").toLowerCase().replace(/\b([a-z])/g, m => m.toUpperCase());
-  const F = { year: 0, base: 1, prev: 2, a: 3, tax: 4, b: 5, c: 6, d: 7, total: 8, cur: 9, banked: 10, dep: 11, other: 12, beds: 13, baths: 14, kit: 15, ex: 16, page: 17, row: 18, recon: 19 };
+  const F = { year: 0, base: 1, prev: 2, a: 3, tax: 4, b: 5, c: 6, d: 7, total: 8, cur: 9, banked: 10, dep: 11, other: 12, beds: 13, baths: 14, kit: 15, ex: 16, page: 17, row: 18, recon: 19, allowLo: 20, allowHi: 21 };
   const BREAKS = [1400, 1700, 2000, 2500];
 
   let META, BUILDINGS, BY_ID = new Map(), chunks = new Map(), map, selectedId = null;
-  let PTU = null, PTU_BY_B = new Map(), PTU_EXTRA = new Map(), ptuOn = false;
+  let PTU = null, PTU_BY_B = new Map(), PTU_EXTRA = new Map();
+  let STR = null, STR_EXTRA = new Map();  // short-term rental licenses, from scripts/build_str_layer.py
+  let COMP = null, DISTRICTS = null, hl = "none";  // compliance layer, council districts, active highlight
+
+  // highlight choices; compliance categories come from scripts/build_compliance_layer.py
+  const HL = {
+    none: { label: "Nothing (rent colors)" },
+    ptu: { label: "PTU Zillow audit, Mar 2026", color: "--ptu", noun: "with audited listings" },
+    over: { label: "Overcharged rent", color: "--f-over", noun: "overcharged" },
+    viol: { label: "Any violation", color: "--f-viol", noun: "with a violation" },
+    turn: { label: "Legal only if tenants left voluntarily", color: "--f-turn", noun: "legal only after a voluntary move-out" },
+    issue: { label: "Any compliance issue", color: "--f-issue", noun: "with any compliance issue" },
+    exempt: { label: "Exempted units", color: "--f-exempt", noun: "claiming an exemption" },
+    str: { label: "Short-term rentals (2026 licenses)", color: "--f-str", noun: "short-term rental licenses" },
+  };
+  // compliance flags: [kind, label, explanation]; kind o = overcharge, v = other violation, u = unclear
+  const FLAG = {
+    o10: ["o", "Increase over the 10% cap", "The rent rose more than 10% in one year (§6-234(c))"],
+    oent: ["o", "Increase above what the ordinance allows", "More than the allowable increase + 5% of base rent + banked rent"],
+    oceil: ["o", "Rent above the maximum allowable rent", "Above base rent plus every increase allowed since 2020, even assuming a new tenancy every year (§6-235.1)"],
+    unrep: ["v", "Rent increase not reported", "The rent rose by more than the increase the landlord reported"],
+    aipx: ["v", "Allowable increase miscalculated", "(a) is larger than that year's Allowable Increase Percentage of the previous rent"],
+    ntx: ["v", "New-tenancy increase miscalculated", "(b) is larger than 5% of the base rent"],
+    bank: ["v", "Banked rent overstated", "Rent plus banked rent is more than the ordinance could ever allow"],
+    dep2: ["v", "Deposit over two months' rent", "Above the state limit (14 M.R.S. §6032)"],
+    dep1: ["v", "Deposit over one month's rent", "Above the city limit from Nov 2022 (§6-223.2); older tenancies may be grandfathered"],
+    turn: ["u", "Legal only if the previous tenants left voluntarily", "The increase needs the 5% new-tenancy allowance, which applies only after a voluntary move-out"],
+    start: ["u", "Rent above base rent at the start", "Rent was already above the June 2020 base rent by January 2021"],
+    basech: ["u", "Base rent changed", "Base rent should stay fixed except after 5 years off the market or a Rent Board decision"],
+    nobase: ["u", "No base rent reported", "The maximum allowable rent can't be checked"],
+    prev: ["u", "Previous rent contradicts last year's report", "This year's \"previous rent\" isn't the rent registered last year"],
+    cols: ["u", "Increase columns don't add up", "(a)–(d) don't sum to the total, or the total doesn't match the rent change"],
+    bankuse: ["u", "Banked rent used without a record", "More banked rent used than was reported banked the year before"],
+    tax: ["u", "Tax-rate increase claimed", "Allowed only under the pre-2022 ordinance; its amount can't be checked"],
+    board: ["u", "Rent Board increase claimed", "Check against Rent Board orders"],
+    norent: ["u", "No rent reported", "A rent-controlled unit registered with no rent"],
+    bad: ["u", "Implausible amounts", "Rent figures look like data-entry errors"],
+    left: ["u", "Left rent control with a large increase", "Covered last year, claims an exemption now, and rent rose more than 10%"],
+    dup: ["u", "Unit can't be followed between years", "Several units share the same label"],
+  };
+  let moreOpen = false;  // "all reported data" stays open across units once opened
   const panel = $("#panel"), inner = $("#panelInner");
 
   // ---------- panel: default view
@@ -252,10 +411,14 @@ details li { margin-bottom: 3px; }
       <details>
         <summary>About the data</summary>
         <div class="prose note" style="margin-top:8px">
-          <p>Rents come from the City of Portland's yearly <a href="https://www.portlandmaine.gov/rent-history" target="_blank" rel="noopener">Long Term Rental Registration Data</a> PDFs (license years 2021–2025). Landlords report these figures when they register or renew. They are shown as reported; nothing was recalculated.</p>
+          <p>Rents come from the City of Portland's yearly <a href="https://www.portlandmaine.gov/rent-history" target="_blank" rel="noopener">Long Term Rental Registration Data</a> PDFs (license years 2021–2025). Landlords report these figures when they register or renew. They are shown as reported. The one calculated figure is the allowable rent: the June 2020 base rent carried forward by each year's Allowable Increase Percentage plus reported tax-rate and Rent Board increases, as a range with and without new-tenancy increases. It is an estimate, not a legal determination.</p>
+          <p>Owners are the owner of record in the City assessor's <a href="https://gis.portlandmaine.gov/maps/rest/services/planningCadastre/Tax_Parcels_and_Values/MapServer/1" target="_blank" rel="noopener">tax parcel and values layer</a>, which may be an LLC or trust rather than the person who manages the building.</p>
           <p>"Previous" and "current" rent refer to different dates in each year's file. Each year column shows the city's own label. The 2024 file has no tax-rate column.</p>
           <p>Buildings are placed using the city's <a href="https://gis.portlandmaine.gov/maps/rest/services/planningCadastre/Tax_Parcels/FeatureServer/11" target="_blank" rel="noopener">tax parcel layer</a>, matched on parcel ID, or on street address when the parcel ID didn't match. The base map is drawn from the same parcels, so the gaps between parcels are streets. Water, neighboring towns, and the dashed city limit come from the Maine GeoLibrary's town boundary layer.</p>
           ${PTU ? `<p>The red layer is the <a href="${esc(PTU.source.sheet)}" target="_blank" rel="noopener">Portland Tenants Union's March 2026 audit</a> of new Zillow listings (<a href="${esc(PTU.source.article)}" target="_blank" rel="noopener">Press Herald story</a>). PTU checked each listing's 2026 registration and compared its asking rent with the rent PTU calculated as allowed. Results are shown as PTU recorded them. Listings were placed by street address. ${PTU.listings.length} of ${PTU.listings.length + PTU.unplaced.length} audited listings are on the map. PTU excluded listings it couldn't tie to an address, and they aren't shown.</p>` : ""}
+          ${COMP ? `<p>The compliance highlights check each unit's registrations against the rent control ordinance (City Code Ch. 6, Art. XII). <b>Overcharged</b>: an increase over the 10% cap, over the allowable increase plus the 5% new-tenancy and banked-rent allowances, or rent above base rent plus every increase allowed since 2020. <b>Any violation</b> adds miscalculated or unreported increases, overstated banked rent and deposits over the legal limit. <b>Legal only if tenants left voluntarily</b>: the rent is within the limits only with the new-tenancy increase, which requires that the previous tenants moved out voluntarily. The registry doesn't show that. <b>Any compliance issue</b> adds unclear records such as missing base rents and figures that contradict earlier years. The highlights count only the current registration (license year ${COMP.current_year}, rents as of November ${COMP.current_year - 1}), one count per unit; rows the city's PDF repeats count once. <b>Exempted units</b> claim an exemption in that registration. The other four highlights count only units that don't claim one. The city's deposit cap of one month's rent still applies to exempt units, except in hospital, religious or care facilities, so an exempt unit's own panel can show a deposit flag. A unit's panel also lists flags from earlier years. Flags are leads from what landlords reported, not legal findings.</p>` : ""}
+          ${DISTRICTS ? `<p>Council districts come from the city's <a href="https://gis.portlandmaine.gov/maps/rest/services/Political/Council_Districts/MapServer/112" target="_blank" rel="noopener">council districts layer</a>, retrieved October 2026. Each building is assigned to the district its parcel point falls in.</p>` : ""}
+          ${STR ? `<p>Short-term rental licenses come from the City's <a href="${esc(STR.source.info)}" target="_blank" rel="noopener">short-term rental registry</a>, as listed in its public <a href="${esc(STR.source.portal)}" target="_blank" rel="noopener">Citizen Self Service</a> license search (retrieved ${esc(fmtDate((STR.source.retrieved || "").slice(0, 10)))}). "Current" means a license with status Issued for 2026. They are placed by parcel ID or street address; ${STR.totals.current_parcel_only} current licenses are on parcels with no long-term registration and get their own dots.</p>` : ""}
           <p>Water, town lines and major roads come from the State of Maine (Maine GeoLibrary and MaineDOT).</p>
           <p>The current license year (2026) isn't published in bulk. Look it up by address in the city's Citizen Self Service portal.</p>
         </div>
@@ -288,20 +451,40 @@ details li { margin-bottom: 3px; }
   // ---------- building + unit views
   function latestRec(u) { return u.recs[u.recs.length - 1]; }
 
+  // plain-language version of the registry's exemption wording
+  const EX_SHORT = {
+    "2to4 unit building one of which landlord occupies": "Owner-occupied 2–4 unit building",
+    "In hospital, religious facility or care facility": "Hospital, religious or care facility",
+    "Publicly rent-controlled or subsidized": "Subsidized or publicly rent-controlled housing",
+    "Accessory dwelling unit defined in Ch14 City Code": "Accessory dwelling unit (ADU)",
+    "Affiliated with a municipal housing authority": "Housing authority unit",
+    "Dormitory for higher education or Portland School": "Student dormitory",
+  };
+  function status(r) {
+    const t = META.exemptions[r[F.ex]] || "";
+    if (t === "None of the above") return { cls: "cov", tag: "Rent controlled", why: "No exemption claimed" };
+    if (!t) return { cls: "unk", tag: "Status unknown", why: "Exemption question left blank" };
+    return { cls: "exm", tag: "Exempt", why: EX_SHORT[t] || t };
+  }
+  // 0 bed / 0 bath is how a blank form reads, so it shows nothing
+  const bedBath = r => r[F.beds] == null || (!r[F.beds] && !r[F.baths]) ? "" : `${r[F.beds] === 0 ? "Studio" : r[F.beds] + " BD"} / ${r[F.baths] ?? "—"} BA`;
+
   async function openBuilding(id, { fly = false } = {}) {
     selectedId = id;
     const b = BY_ID.get(id);
     if (map && map.getLayer("sel")) map.setFilter("sel", ["==", ["get", "id"], id]);
     panel.classList.remove("empty");
-    if (map) requestAnimationFrame(() => {
+    // move the map once the panel has its final height (on phones it grows as the units load, which would
+    // resize the map mid-flight and stop the animation short)
+    const center = () => { if (map) requestAnimationFrame(() => {
       map.resize();
       if (fly) map.flyTo({ center: [b.lon, b.lat], zoom: Math.max(map.getZoom(), 16.2), essential: true });
       else if (!map.getBounds().contains([b.lon, b.lat])) map.easeTo({ center: [b.lon, b.lat] });
-    });
+    }); };
     inner.innerHTML = `<div class="note">Loading units…</div>`;
     let d;
     try { d = await getBuilding(id); }
-    catch (e) { inner.innerHTML = `<div class="callout">Couldn't load this building's units (${esc(e.message)}). Try clicking it again.</div>`; return; }
+    catch (e) { inner.innerHTML = `<div class="callout">Couldn't load this building's units (${esc(e.message)}). Try clicking it again.</div>`; center(); return; }
     if (selectedId !== id) return;
     const addrs = d.addr.map(titleCase);
     const multi = d.units.length > 1;
@@ -317,8 +500,17 @@ details li { margin-bottom: 3px; }
       <div class="facts">
         <div class="fact"><div class="k">Units in ${d.latestYear}</div><div class="v">${d.nLatest}</div></div>
         <div class="fact"><div class="k">Median rent ${d.latestYear}</div><div class="v">${d.median ? money(d.median) : "—"}</div></div>
-        <div class="fact"><div class="k">Built</div><div class="v">${d.yrBuilt || "—"}</div></div>
+        <div class="fact"><div class="k">Year built</div><div class="v">${d.yrBuilt || "—"}</div></div>
       </div>
+      <div class="owner">
+        <div class="eyebrow">Owner of record (City assessor)</div>
+        ${d.owner ? `<div class="name">${esc(d.owner.name)}</div>
+        ${d.owner.mail ? `<div class="note">Mailing address: ${esc(d.owner.mail)}</div>` : ""}`
+        : `<div class="note">Not available for this parcel.</div>`}
+      </div>
+      ${exemptSummary(d)}
+      ${compBuildingHTML(d.id)}
+      ${strHTML(STR && STR.buildings[d.id])}
       <div class="note">${esc(titleCase(d.landUse || ""))}${d.landUse ? " · " : ""}License${d.lic.length > 1 ? "s" : ""} <span class="mono">${d.lic.map(esc).join(", ")}</span> · placed by ${esc(d.matchedBy.join(" / "))}</div>
       ${multi ? `
       <div class="unitbar-wrap">
@@ -326,11 +518,14 @@ details li { margin-bottom: 3px; }
           <h3>${d.units.length} unit entries</h3>
           ${d.units.length > 10 ? `<input id="unitFilter" type="search" placeholder="Filter units" aria-label="Filter units">` : ""}
         </div>
+        <div class="keyrow">${COMP ? `<span><i style="background:var(--f-over)"></i>Overcharged</span><span><i style="background:var(--f-viol)"></i>Other violation</span><span><i style="background:var(--f-turn)"></i>Legal only after voluntary move-out</span><span><i style="background:var(--f-issue)"></i>Unclear record</span><span><i style="background:var(--cov)"></i>Rent controlled, no issue</span>` : `<span><i style="background:var(--cov)"></i>Rent controlled</span>`}${STR ? `<span><i style="background:var(--f-str)"></i>Short-term rental license</span>` : ""}<span><i style="background:var(--exm)"></i>Exemption claimed</span><span><i style="background:var(--unk)"></i>Not reported</span></div>
+        ${COMP ? `<div class="note">Each unit is colored by the most serious problem with its latest reported rent.</div>` : ""}
         <div class="unitbar" id="unitbar" role="toolbar" aria-label="Units in this building"></div>
         <div class="note">Unit numbers are as typed by landlords and can change between years, so one apartment may appear as two entries.</div>
       </div>` : ""}
       <div id="unitDetail"></div>
       ${aboutHTML()}`;
+    center();
     $("#closeBtn").onclick = closeBuilding;
     if (multi) {
       const bar = $("#unitbar");
@@ -338,8 +533,9 @@ details li { margin-bottom: 3px; }
         const f = filter.trim().toLowerCase();
         bar.innerHTML = d.units.map((u, i) => {
           if (f && !u.label.toLowerCase().includes(f)) return "";
-          const r = latestRec(u);
-          return `<button class="chip" data-i="${i}" aria-pressed="false" title="${esc(u.label)}">
+          const r = latestRec(u), sl = strForUnit(d, u), cs = chipSeverity(d.id, r);
+          const sv = sl.length ? { cls: "s-str", tag: `Short-term rental license ${sl.map(x => x[0]).join(", ")} · ${cs.tag}` } : cs;
+          return `<button class="chip ${sv.cls}" data-i="${i}" aria-pressed="false" title="${esc(u.label)} · ${esc(sv.tag)}">
             <span class="u">${esc(u.label)}</span>
             <span class="r">${r[F.cur] ? money(r[F.cur]) : "no rent"} · ${r[F.year]}</span></button>`;
         }).join("") || `<span class="note">No units match.</span>`;
@@ -365,18 +561,137 @@ details li { margin-bottom: 3px; }
     const u = d.units[i];
     document.querySelectorAll("#unitbar .chip").forEach(c => c.setAttribute("aria-pressed", String(+c.dataset.i === i)));
     if (scroll) { const c = document.querySelector(`#unitbar .chip[data-i="${i}"]`); if (c) c.scrollIntoView({ block: "nearest", inline: "nearest" }); }
-    const L = latestRec(u);
-    const ex = META.exemptions[L[F.ex]] || "";
+    const L = latestRec(u), st = status(L), bb = bedBath(L);
     $("#unitDetail").innerHTML = `
-      <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;flex-direction:column;gap:14px">
         <div>
           <div class="eyebrow">Unit</div>
-          <h3 style="font-size:20px">${esc(u.label)}</h3>
-          <div class="note">License <span class="mono">${esc(u.lic)}</span> · ${L[F.beds] ?? "—"} bed / ${L[F.baths] ?? "—"} bath in ${L[F.year]} · ${ex && ex !== "None of the above" ? "Exemption claimed: " + esc(ex) : "No exemption claimed"}</div>
+          <h3 style="font-size:22px">${esc(u.label)}${bb ? ` <span class="note" style="font-family:var(--font-ui);font-size:15px;font-weight:500">· ${bb}</span>` : ""}</h3>
+          <div class="note">License <span class="mono">${esc(u.lic)}</span> · as registered in ${L[F.year]}</div>
         </div>
-        ${sparkline(u)}
+        <div class="status ${st.cls}"><span class="tag">${esc(st.tag)}</span><span class="why">${esc(st.why)}${st.cls === "exm" && bb ? ` · ${bb}` : ""}</span></div>
+        ${strForUnit(d, u).map(x => `<div class="status str"><span class="tag">Short-term rental</span><span class="why">License ${esc(x[0])} · ${esc((STR.classes[x[1]] || "").replace(/\s+/g, " "))}${x[5] ? ` · expires ${esc(fmtDate(x[5]))}` : ""}${d.units.length === 1 && !x[3] ? `<br><span class="note" style="color:inherit">The license names no unit; this is the only registered unit at the parcel.</span>` : ""}</span></div>`).join("")}
+        ${rentRow(L, st)}
+        ${compUnitHTML(d.id, u)}
+        <button class="more-btn" id="moreBtn" aria-expanded="${moreOpen}" aria-controls="moreData">
+          <span>${moreOpen ? "Hide" : "Show"} all reported data, ${u.recs[0][F.year]}–${L[F.year]}</span><span class="chev" aria-hidden="true">▾</span></button>
+        <div id="moreData"${moreOpen ? "" : " hidden"}>
+          ${sparkline(u)}
+          ${yearTable(u)}
+        </div>
         ${ptuHTML(d.id)}
-        ${yearTable(u)}
+      </div>`;
+    $("#moreBtn").onclick = () => {
+      moreOpen = !moreOpen;
+      $("#moreBtn").setAttribute("aria-expanded", String(moreOpen));
+      $("#moreBtn span").textContent = `${moreOpen ? "Hide" : "Show"} all reported data, ${u.recs[0][F.year]}–${L[F.year]}`;
+      $("#moreData").hidden = !moreOpen;
+    };
+  }
+
+  // how many of the building's latest-year units claim an exemption
+  function exemptSummary(d) {
+    const recs = d.units.map(latestRec).filter(r => r[F.year] === d.latestYear);
+    const n = { cov: 0, exm: 0, unk: 0 };
+    recs.forEach(r => n[status(r).cls]++);
+    if (!n.exm && !n.unk) return "";
+    const kinds = [...new Set(recs.filter(r => status(r).cls === "exm").map(r => status(r).why))];
+    const parts = [];
+    if (n.exm) parts.push(`<b>${n.exm} of ${recs.length}</b> unit${recs.length > 1 ? "s" : ""} claim${n.exm === 1 ? "s" : ""} an exemption (${kinds.map(esc).join("; ")})`);
+    if (n.unk) parts.push(`${n.unk} left the exemption question blank`);
+    return `<div class="status ${n.exm ? "exm" : "unk"}" style="font-size:14px"><span>${parts.join(" · ")} in ${d.latestYear}.</span></div>`;
+  }
+
+  // reported rent beside the rent the ordinance allows (range from scripts/compliance_check.py)
+  function rentRow(L, st) {
+    const cur = L[F.cur], lo = L[F.allowLo], hi = L[F.allowHi];
+    const label = (META.labels[L[F.year]] || [])[1] || "";
+    let allow;
+    if (st.cls === "exm") allow = { na: true, v: "No limit: unit claims an exemption" };
+    else if (!META.haveAllowable) allow = { na: true, v: "Not calculated yet" };
+    else if (lo == null) allow = { na: true, v: "Can't calculate: no usable base rent reported" };
+    else allow = {
+      v: lo === hi ? money(lo) : `${money(lo)}–${money(hi)}`,
+      s: (lo === hi ? "Base rent plus allowed yearly increases" : "Low end: no new tenancies. High end: a 5% new-tenancy increase every year")
+        + (st.cls === "unk" ? ". Applies only if the unit is covered" : ""),
+    };
+    const over = !allow.na && cur > 0 && cur > hi + 1 ? cur - hi : 0;
+    return `
+      <div class="rents">
+        <div class="fact${cur > 0 ? "" : " na"}"><div class="k">Reported rent, ${L[F.year]}</div>
+          <div class="v">${cur > 0 ? money(cur) : "Not reported"}</div>
+          <div class="s">${esc(label)}${over ? `<br><b style="color:var(--warn-fg)">${money(Math.round(over))} above the calculated maximum</b>` : ""}</div></div>
+        <div class="fact${allow.na ? " na" : ""}"><div class="k">Allowable rent under the ordinance</div>
+          <div class="v">${allow.v}</div>${allow.s ? `<div class="s">${esc(allow.s)}</div>` : ""}</div>
+      </div>`;
+  }
+
+  // ---------- compliance (scripts/compliance_check.py → build_compliance_layer.py)
+  // chip color for a unit: exempt / not reported as before; rent-controlled units by their most serious flag on
+  // the latest record: overcharge > other violation > legal only after voluntary move-out > other unclear > none
+  // current short-term rental licenses that can be pinned to this unit: the license names the unit, or the
+  // building has only one unit. Licenses without a unit in multi-unit buildings stay building-level (strHTML).
+  const unitKey = s => String(s || "").toUpperCase().replace(/\s+/g, " ").trim().replace(/^(UNIT|APT\.?|APARTMENT|NO\.?|#)\s*/, "").replace(/#/g, "").trim();
+  function strForUnit(d, u) {
+    const e = STR && STR.buildings[d.id];
+    if (!e || !e.cur || !e.cur.length) return [];
+    if (d.units.length === 1) return e.cur;
+    return e.cur.filter(x => x[3] && unitKey(x[3]) === unitKey(u.label));
+  }
+  function chipSeverity(bid, r) {
+    const st = status(r);
+    if (!COMP || st.cls !== "cov") return st;
+    const s = ((COMP.buildings[bid] || {}).r || {})[`${r[F.year]}|${r[F.page]}|${r[F.row]}`];
+    const kinds = new Set((s || "").split(",").filter(Boolean).map(p => p.split(":")[0]).filter(c => FLAG[c])
+      .map(c => c === "turn" ? "t" : FLAG[c][0]));
+    if (kinds.has("o")) return { cls: "s-over", tag: `Overcharged (${r[F.year]})` };
+    if (kinds.has("v")) return { cls: "s-viol", tag: `Violation (${r[F.year]})` };
+    if (kinds.has("t")) return { cls: "s-turn", tag: `Legal only after a voluntary move-out (${r[F.year]})` };
+    if (kinds.has("u")) return { cls: "s-issue", tag: `Unclear record (${r[F.year]})` };
+    return { cls: "cov", tag: `Rent controlled, no issue found (${r[F.year]})` };
+  }
+  function compBuildingHTML(id) {
+    const c = COMP && COMP.buildings[id];
+    if (!c) return "";
+    const cell = k => `<div class="comp-cell" style="--c:var(${HL[k].color})"><div class="v">${c[k]}</div><div class="k">${esc(HL[k].label)}</div></div>`;
+    return `
+      <div class="comp">
+        <div class="eyebrow">Current compliance, ${COMP.current_year} registration · Council District ${c.d}</div>
+        ${c.n ? `<div class="comp-grid">${["over", "viol", "turn", "issue", "exempt"].map(cell).join("")}</div>
+        <div class="note">Units out of ${c.n} in this building's ${COMP.current_year} registration (rents as of November ${COMP.current_year - 1}). Pick a unit to see its flags, including earlier years. These are leads from what landlords reported, not legal findings.</div>`
+        : `<div class="note">This building has no ${COMP.current_year} registration, so there is nothing current to check. Pick a unit to see flags from earlier years.</div>`}
+      </div>`;
+  }
+
+  function compUnitHTML(bid, u) {
+    const c = COMP && COMP.buildings[bid];
+    if (!c || !c.r) return "";
+    const byFlag = new Map();  // code -> [{year, excess}]
+    u.recs.forEach(r => {
+      const s = c.r[`${r[F.year]}|${r[F.page]}|${r[F.row]}`];
+      if (!s) return;
+      s.split(",").forEach(p => {
+        const [code, x] = p.split(":");
+        if (!byFlag.has(code)) byFlag.set(code, []);
+        byFlag.get(code).push({ y: r[F.year], x: x ? +x : null });
+      });
+    });
+    if (!byFlag.size) return `<div class="comp"><div class="eyebrow">Compliance check</div><div class="note">No flags for this unit in 2021–2025.</div></div>`;
+    const order = { o: 0, v: 1, u: 2 }, kindName = { o: "Overcharge", v: "Violation", u: "Unclear" };
+    const items = [...byFlag].filter(([code]) => FLAG[code]).sort((a, b) => order[FLAG[a[0]][0]] - order[FLAG[b[0]][0]]);
+    const curYr = COMP.current_year, isCur = hits => hits.some(h => h.y === curYr);
+    const list = its => `<ul class="flags">${its.map(([code, hits]) => {
+      const [k, what, why] = FLAG[code];
+      const yrs = hits.map(h => h.y + (h.x ? ` (${money(h.x)}/mo)` : "")).join(", ");
+      return `<li class="${k}"><span class="kind">${kindName[k]}</span><span class="what">${esc(what)}</span><span class="det">${esc(why)}. License year ${esc(yrs)}.</span></li>`;
+    }).join("")}</ul>`;
+    const now = items.filter(([, h]) => isCur(h)), past = items.filter(([, h]) => !isCur(h));
+    return `
+      <div class="comp">
+        <div class="eyebrow">Current compliance (${curYr} registration)</div>
+        ${now.length ? list(now) : `<div class="note">No flags in the ${curYr} registration${u.recs.some(r => r[F.year] === curYr) ? "" : " (this unit isn't in it)"}.</div>`}
+        ${past.length ? `<details style="border-top:0;padding-top:0"><summary class="note">Earlier years only (${past.length} flag${past.length > 1 ? "s" : ""})</summary>${list(past)}</details>` : ""}
+        <div class="note">Dollar figures are per month. For overcharges and violations they are the amount over the limit. For unclear flags they are the amount in question: how much of the rent depends on the new-tenancy increase, or how much a figure changed. Checked against what the landlord reported; a lead, not a legal finding.</div>
       </div>`;
   }
 
@@ -411,6 +726,47 @@ details li { margin-bottom: 3px; }
         </div>`).join("")}
         <p class="note" style="margin:0">PTU marks a listing non-compliant if the unit is unregistered, the asking rent is above PTU's calculated allowable rent, or the registration math is wrong. Advertising a rent above the allowed amount isn't illegal in itself; signing a lease at that rent is.</p>
       </div>`;
+  }
+
+  // ---------- short-term rental licenses (City's Citizen Self Service portal)
+  function strHTML(e) {
+    if (!e) return "";
+    const rec = r => {
+      const [lic, ci, status, unit, issued, expires] = r;
+      return `<div class="ptu-card">
+          <div class="head"><div><b>${unit ? "Unit " + esc(unit) : "Unit not given"}</b> <span class="note">· ${esc(STR.classes[ci])}</span></div>
+            <span class="badge ${status === STR.current_status ? "ok" : ""}">${esc(status === STR.current_status ? "Licensed for 2026" : status)}</span></div>
+          <div class="note">License <span class="mono">${esc(lic)}</span>${issued ? ` · issued ${esc(fmtDate(issued))}` : ""}${expires && !expires.startsWith("2999") ? ` · expires ${esc(fmtDate(expires))}` : ""}</div>
+        </div>`;
+    };
+    return `
+      <div class="ptu-block str-block">
+        <div class="eyebrow"><i></i>Short-term rentals · ${e.n ? `${e.n} current license${e.n > 1 ? "s" : ""}` : "no current license"}</div>
+        ${e.cur.map(rec).join("")}
+        ${e.past.length ? `<details style="border-top:0;padding-top:0"><summary class="note">Earlier licenses (${e.past.length}): expired, revoked or void</summary>
+          <div style="display:flex;flex-direction:column;gap:6px;margin-top:6px">${e.past.map(rec).join("")}</div></details>` : ""}
+        <p class="note" style="margin:0">From the City's short-term rental registry (stays under 30 days), which is separate from the long-term registry above. Retrieved ${esc(fmtDate((STR.source.retrieved || "").slice(0, 10)))}.</p>
+      </div>`;
+  }
+
+  function openStrOnly(id) {
+    selectedId = id;
+    const b = STR_EXTRA.get(id);
+    if (map && map.getLayer("sel")) map.setFilter("sel", ["==", ["get", "id"], ""]);
+    panel.classList.remove("empty");
+    if (map) requestAnimationFrame(() => map.resize());
+    inner.innerHTML = `
+      <div class="row-between">
+        <div style="min-width:0">
+          <div class="eyebrow">Not in the 2021–2025 long-term registry · parcel <span class="mono">${esc(id)}</span></div>
+          <h2>${esc(titleCase(b.addr[0]))}</h2>
+        </div>
+        <button class="close" id="closeBtn" aria-label="Close building">Close ✕</button>
+      </div>
+      ${strHTML(b)}
+      ${PTU_BY_B.has(id) ? ptuHTML(id) : ""}
+      ${aboutHTML()}`;
+    $("#closeBtn").onclick = closeBuilding;
   }
 
   function openAuditOnly(id) {
@@ -477,6 +833,8 @@ details li { margin-bottom: 3px; }
       ["Total increase", r => cell(r[F.total])],
       ["Total adds up as", r => `<td style="font-family:var(--font-ui);font-size:11.5px">${esc(META.reconciles[r[F.recon]] || "")}</td>`],
       ["Current rent", r => cell(r[F.cur]), "key"],
+      ["Allowable rent (calculated)", r => status(r).cls === "exm" ? `<td class="na">exempt</td>` : r[F.allowLo] == null ? `<td class="na">—</td>`
+        : `<td>${r[F.allowLo] === r[F.allowHi] ? money(r[F.allowLo]) : money(r[F.allowLo]) + "–<br>" + money(r[F.allowHi])}</td>`],
       ["Banked rent remaining", r => cell(r[F.banked])],
       ["Base rent (June 2020)", r => cell(r[F.base])],
       ["Security deposit", r => cell(r[F.dep])],
@@ -498,7 +856,7 @@ details li { margin-bottom: 3px; }
             <tbody>${rows.map(([lab, fn, cls]) => `<tr${cls ? ` class="${cls}"` : ""}><th scope="row">${lab}</th>${recs.map(fn).join("")}</tr>`).join("")}</tbody>
           </table>
         </div>
-        <p class="note" style="margin:6px 0 0">n/r = column not in that year's PDF. Years missing from the table weren't reported under this unit number.</p>
+        <p class="note" style="margin:6px 0 0">n/r = column not in that year's PDF. Years missing from the table weren't reported under this unit number. Allowable rent is this site's calculation, not a figure from the City.</p>
       </div>`;
   }
 
@@ -546,19 +904,59 @@ details li { margin-bottom: 3px; }
     return ["case", ["<", ["get", "median"], 0], css("--nodata"),
       ["step", ["get", "median"], css("--bin1"), BREAKS[0], css("--bin2"), BREAKS[1], css("--bin3"), BREAKS[2], css("--bin4"), BREAKS[3], css("--bin5")]];
   }
+  // a building matches the highlight if it has at least one unit in the category (ptu: any audited listing)
   function bldColor() {
-    return ptuOn ? ["case", ["==", ["get", "ptu"], 1], css("--ptu"), colorExpr()] : colorExpr();
+    return hl === "none" ? colorExpr() : ["case", [">", ["get", hl], 0], css(HL[hl].color), colorExpr()];
   }
-  function setPTU(on) {
-    ptuOn = on;
-    $("#ptuToggle").setAttribute("aria-pressed", String(on));
+  function setHighlight(h) {
+    hl = HL[h] ? h : "none";
+    $("#hlSel").value = hl;
+    // collapsed filter button (phones) names the active highlight
+    $("#fToggleTxt").textContent = hl === "none" ? "Highlight" : HL[hl].label;
+    $("#fSwatch").hidden = hl === "none";
+    if (hl !== "none") $("#fSwatch").style.background = `var(${HL[hl].color})`;
+    updateCount();
     if (!map || !map.getLayer("bld")) return;
+    const on = hl !== "none", hit = [">", ["get", hl], 0];
     map.setPaintProperty("bld", "circle-color", bldColor());
-    map.setPaintProperty("bld", "circle-opacity", on ? ["case", ["==", ["get", "ptu"], 1], 1, 0.4] : 1);
-    map.setPaintProperty("bld", "circle-stroke-opacity", on ? ["case", ["==", ["get", "ptu"], 1], 1, 0.4] : 1);
-    // audited buildings draw on top while the layer is on
-    map.setLayoutProperty("bld", "circle-sort-key", on ? ["+", ["*", ["get", "ptu"], 100000], ["-", 0, ["get", "n"]]] : ["-", 0, ["get", "n"]]);
-    if (map.getLayer("ptux")) map.setLayoutProperty("ptux", "visibility", on ? "visible" : "none");
+    map.setPaintProperty("bld", "circle-opacity", on ? ["case", hit, 1, 0.35] : 1);
+    map.setPaintProperty("bld", "circle-stroke-opacity", on ? ["case", hit, 1, 0.35] : 1);
+    // highlighted buildings draw on top
+    map.setLayoutProperty("bld", "circle-sort-key", on ? ["+", ["*", ["case", hit, 1, 0], 100000], ["-", 0, ["get", "n"]]] : ["-", 0, ["get", "n"]]);
+    if (map.getLayer("ptux")) map.setLayoutProperty("ptux", "visibility", hl === "ptu" ? "visible" : "none");
+    if (map.getLayer("strx")) map.setLayoutProperty("strx", "visibility", hl === "str" ? "visible" : "none");
+  }
+  // all five council district outlines and their numbers, on or off together
+  let distLinesOn = false, distMarkers = [];
+  function setDistLines(on) {
+    distLinesOn = on;
+    $("#distLines").checked = on;
+    if (!map || !map.getLayer("dist-line")) return;
+    map.setLayoutProperty("dist-line", "visibility", on ? "visible" : "none");
+    distMarkers.forEach(m => m.getElement().hidden = !on);
+  }
+  // "N buildings · M units" for the active highlight
+  function updateCount() {
+    const el = $("#fcount");
+    if (!el || !BUILDINGS) return;
+    const bs = BUILDINGS, where = "Portland";
+    if (hl === "none") { el.innerHTML = `<span><b>${bs.length.toLocaleString()}</b> registered buildings in ${where}</span>`; return; }
+    let nb = 0, nu = 0;
+    if (hl === "ptu") {
+      bs.forEach(b => { const n = (PTU_BY_B.get(b.id) || []).length; if (n) { nb++; nu += n; } });
+      PTU_EXTRA.forEach(b => { nb++; nu += PTU_BY_B.get(b.id).length; });
+      el.innerHTML = `<i style="background:var(--ptu)"></i><span><b>${nb}</b> buildings, <b>${nu}</b> audited listings in ${where}</span>`;
+      return;
+    }
+    if (hl === "str") {
+      bs.forEach(b => { const n = (STR.buildings[b.id] || {}).n; if (n) { nb++; nu += n; } });
+      let xb = 0;
+      STR_EXTRA.forEach(b => { xb++; nu += b.n; });
+      el.innerHTML = `<i style="background:var(--f-str)"></i><span><b>${nu}</b> current short-term rental licenses in ${where}: <b>${nb}</b> registered buildings plus <b>${xb}</b> parcels with no long-term registration</span>`;
+      return;
+    }
+    bs.forEach(b => { const c = COMP && COMP.buildings[b.id]; if (c && c[hl]) { nb++; nu += c[hl]; } });
+    el.innerHTML = `<i style="background:var(${HL[hl].color})"></i><span><b>${nu.toLocaleString()}</b> units ${esc(HL[hl].noun)}, in <b>${nb.toLocaleString()}</b> of ${bs.length.toLocaleString()} buildings in ${where}, current (${COMP.current_year}) registration</span>`;
   }
   function applyTheme() {
     if (!map || !map.getLayer("bld")) return;
@@ -578,7 +976,9 @@ details li { margin-bottom: 3px; }
     try {
       // towns are context only; the map still works without them
       [idx, parcels, towns, roads] = await Promise.all([getJSON("data/index.json"), getJSON("data/parcels.json"), getJSON("data/towns.json").catch(() => null),
-        getJSON("data/roads.json").catch(() => null), getJSON("data/ptu.json").then(d => PTU = d).catch(() => null)]);
+        getJSON("data/roads.json").catch(() => null), getJSON("data/ptu.json").then(d => PTU = d).catch(() => null),
+        getJSON("data/compliance.json").then(d => COMP = d).catch(() => null), getJSON("data/districts.json").then(d => DISTRICTS = d).catch(() => null),
+        getJSON("data/str.json").then(d => STR = d).catch(() => null)]);
     } catch (e) {
       $("#loading").textContent = `Couldn't load the map data (${e.message}). Reload the page to try again.`;
       return;
@@ -588,16 +988,33 @@ details li { margin-bottom: 3px; }
     if (PTU) {
       PTU.listings.forEach(l => { if (!PTU_BY_B.has(l.b)) PTU_BY_B.set(l.b, []); PTU_BY_B.get(l.b).push(l); });
       PTU.extra.forEach(b => PTU_EXTRA.set(b.id, b));
-      $("#ptuN").textContent = `${PTU_BY_B.size} buildings`;
-      $("#ptuToggle").hidden = false;
-      $("#ptuToggle").onclick = () => setPTU(!ptuOn);
     }
+    if (STR) STR.extra.forEach(b => STR_EXTRA.set(b.id, b));
+    // filter controls: only the choices whose data loaded
+    $("#hlSel").innerHTML = Object.entries(HL).filter(([k]) => k === "none" || ({ ptu: PTU, str: STR }[k] ?? COMP))
+      .map(([k, v]) => `<option value="${k}">${esc(v.label)}</option>`).join("");
+    if (DISTRICTS) {
+      $("#distLinesWrap").hidden = false;
+      $("#distLines").onchange = e => setDistLines(e.target.checked);
+    }
+    $("#hlSel").onchange = e => setHighlight(e.target.value);
+    $("#fToggle").onclick = () => {
+      const open = $("#filters").classList.toggle("open");
+      $("#fToggle").setAttribute("aria-expanded", String(open));
+    };
+    $("#filters").hidden = false;
+    updateCount();
     renderIntro();
 
     const pts = {
       type: "FeatureCollection",
-      features: BUILDINGS.map(b => ({ type: "Feature", geometry: { type: "Point", coordinates: [b.lon, b.lat] },
-        properties: { id: b.id, n: b.nUnits, median: b.median ?? -1, ptu: PTU_BY_B.has(b.id) ? 1 : 0 } })),
+      features: BUILDINGS.map(b => {
+        const c = (COMP && COMP.buildings[b.id]) || {};
+        return { type: "Feature", geometry: { type: "Point", coordinates: [b.lon, b.lat] },
+          properties: { id: b.id, n: b.nUnits, median: b.median ?? -1, ptu: PTU_BY_B.has(b.id) ? 1 : 0, d: c.d || 0,
+            over: c.over || 0, viol: c.viol || 0, turn: c.turn || 0, issue: c.issue || 0, exempt: c.exempt || 0,
+            str: (STR && STR.buildings[b.id] && STR.buildings[b.id].n) || 0 } };
+      }),
     };
     let w = 180, s = 90, e = -180, n = -90;
     BUILDINGS.forEach(b => { w = Math.min(w, b.lon); e = Math.max(e, b.lon); s = Math.min(s, b.lat); n = Math.max(n, b.lat); });
@@ -647,6 +1064,17 @@ details li { margin-bottom: 3px; }
       if (towns) map.addLayer({ id: "limit", type: "line", source: "towns", filter: ["==", ["get", "kind"], "limit"],
         layout: { "line-join": "round" },
         paint: { "line-color": css("--limit"), "line-dasharray": [4, 2], "line-width": ["interpolate", ["linear"], ["zoom"], 10, 1.2, 15, 2.5] } });
+      if (DISTRICTS) {
+        // outlines of all council districts (toggle)
+        map.addSource("districts", { type: "geojson", data: DISTRICTS });
+        map.addLayer({ id: "dist-line", type: "line", source: "districts", layout: { visibility: "none", "line-join": "round" },
+          paint: { "line-color": css("--district"), "line-opacity": 0.8, "line-width": ["interpolate", ["linear"], ["zoom"], 11, 1.3, 15, 2.2] } });
+        distMarkers = DISTRICTS.features.map(f => {
+          const el = document.createElement("div");
+          el.className = "dist-label"; el.textContent = `District ${f.properties.d}`; el.hidden = true;
+          return new maplibregl.Marker({ element: el }).setLngLat([f.properties.lx, f.properties.ly]).addTo(map);
+        });
+      }
       map.addLayer({ id: "bld", type: "circle", source: "bld",
         layout: { "circle-sort-key": ["-", 0, ["get", "n"]] },
         paint: {
@@ -672,13 +1100,36 @@ details li { margin-bottom: 3px; }
         map.on("mouseleave", "ptux", () => { map.getCanvas().style.cursor = ""; tip.hidden = true; });
         map.on("click", "ptux", ev => { tip.hidden = true; openAuditOnly(ev.features[0].properties.id); });
       }
+      if (STR && STR.extra.length) {
+        map.addSource("strx", { type: "geojson", data: { type: "FeatureCollection",
+          features: STR.extra.map(b => ({ type: "Feature", geometry: { type: "Point", coordinates: [b.lon, b.lat] }, properties: { id: b.id } })) } });
+        map.addLayer({ id: "strx", type: "circle", source: "strx", layout: { visibility: "none" },
+          paint: { "circle-radius": ["interpolate", ["linear"], ["zoom"], 11, 2.5, 14, 4, 17, 7], "circle-color": css("--f-str"),
+                   "circle-stroke-color": css("--surface"), "circle-stroke-width": ["interpolate", ["linear"], ["zoom"], 11, 0.5, 15, 1.5] } });
+        map.on("mousemove", "strx", ev => {
+          map.getCanvas().style.cursor = "pointer";
+          const b = STR_EXTRA.get(ev.features[0].properties.id);
+          tip.innerHTML = `<b>${esc(titleCase(b.addr[0]))}</b><br><span class="m">${b.n} short-term rental license${b.n > 1 ? "s" : ""} · no long-term registration</span>`;
+          tip.hidden = false;
+          const p = ev.point, mw = $("#map").clientWidth;
+          tip.style.left = Math.min(p.x + 14, mw - 270) + "px"; tip.style.top = (p.y + 14) + "px";
+        });
+        map.on("mouseleave", "strx", () => { map.getCanvas().style.cursor = ""; tip.hidden = true; });
+        map.on("click", "strx", ev => { tip.hidden = true; openStrOnly(ev.features[0].properties.id); });
+      }
       map.addLayer({ id: "sel", type: "circle", source: "bld", filter: ["==", ["get", "id"], ""],
         paint: {
           "circle-radius": ["interpolate", ["linear"], ["zoom"], 11, ["+", 3, ["*", 0.55, R]], 14, ["+", 4, ["*", 0.9, R]], 17, ["+", 5, ["*", 1.7, R]]],
           "circle-color": "rgba(0,0,0,0)", "circle-stroke-width": 3, "circle-stroke-color": css("--accent"),
         } });
       applyTheme();
-      setPTU(ptuOn);
+      // compact attribution starts expanded; on a phone it would cover the bottom of the map
+      if (matchMedia("(max-width: 760px)").matches) {
+        const at = document.querySelector(".maplibregl-ctrl-attrib");
+        if (at) at.classList.remove("maplibregl-compact-show");
+      }
+      setHighlight(hl);
+      setDistLines(distLinesOn);
       $("#loading").hidden = true;
       if (selectedId) map.setFilter("sel", ["==", ["get", "id"], selectedId]);
 
@@ -686,7 +1137,9 @@ details li { margin-bottom: 3px; }
         map.getCanvas().style.cursor = "pointer";
         const f = ev.features[0]; const b = BY_ID.get(f.properties.id);
         const np = (PTU_BY_B.get(b.id) || []).length;
-        tip.innerHTML = `<b>${esc(titleCase(b.addr[0]))}</b><br><span class="m">${b.nLatest} unit${b.nLatest === 1 ? "" : "s"} in ${b.latestYear} · ${b.median ? "median " + money(b.median) : "no rent reported"}${np ? ` · PTU audit: ${np} listing${np > 1 ? "s" : ""}` : ""}</span>`;
+        const c = COMP && COMP.buildings[b.id];
+        const ch = c && hl !== "none" && hl !== "ptu" && c.n ? `<br><span class="m">${c[hl]} of ${c.n} units ${esc(HL[hl].noun)}</span>` : "";
+        tip.innerHTML = `<b>${esc(titleCase(b.addr[0]))}</b><br><span class="m">${b.nLatest} unit${b.nLatest === 1 ? "" : "s"} in ${b.latestYear} · ${b.median ? "median " + money(b.median) : "no rent reported"}${np ? ` · PTU audit: ${np} listing${np > 1 ? "s" : ""}` : ""}${c && c.d ? ` · District ${c.d}` : ""}${STR && STR.buildings[b.id] && STR.buildings[b.id].n ? ` · ${STR.buildings[b.id].n} short-term rental license${STR.buildings[b.id].n > 1 ? "s" : ""}` : ""}</span>${ch}`;
         tip.hidden = false;
         const p = ev.point, mw = $("#map").clientWidth;
         tip.style.left = Math.min(p.x + 14, mw - 270) + "px"; tip.style.top = (p.y + 14) + "px";
@@ -703,5 +1156,3 @@ details li { margin-bottom: 3px; }
   }
 })();
 </script>
-
-</body></html>
