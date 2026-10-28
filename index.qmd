@@ -11,21 +11,49 @@ toc: false
 </div>
 <div class="hero-grid column-screen-inset">
   <div class="hero-viz">
-    <div class="viz-pair">
-      <img src="files/images/netherlands_1971_map.png" alt="Map of Dutch municipalities colored by their 1971 voting bloc">
-      <video src="files/images/netherlands_1971_pca.mp4" poster="files/images/netherlands_1971_pca.png" autoplay muted loop playsinline preload="auto" aria-label="The same municipalities placed by how they voted in 1971, rotating in three dimensions"></video>
-      <ul class="viz-legend" aria-label="Voting blocs">
-        <li style="--c:#E8B75C">Catholic heartland</li>
-        <li style="--c:#E2A7FF">Catholic/Labour towns</li>
-        <li style="--c:#E4827C">Catholic/mixed countryside</li>
-        <li style="--c:#64A1E8">Bible Belt</li>
-        <li style="--c:#9CA503">Orthodox north</li>
-        <li style="--c:#71D379">Labour towns &amp; north</li>
-        <li style="--c:#00B892">Big cities/mixed towns</li>
-        <li style="--c:#00D4E9">Large mixed cities</li>
-      </ul>
+    <div class="viz-carousel" aria-roledescription="carousel" aria-label="Voting bloc figures">
+    <div class="viz-track">
+      <div class="viz-slide" aria-roledescription="slide" aria-label="1 of 2">
+        <div class="viz-pair">
+          <img src="files/images/netherlands_1971_map.png" alt="Map of Dutch municipalities colored by their 1971 voting bloc">
+          <video src="files/images/netherlands_1971_pca.mp4" poster="files/images/netherlands_1971_pca.png" autoplay muted loop playsinline preload="auto" aria-label="The same municipalities placed by how they voted in 1971, rotating in three dimensions"></video>
+          <ul class="viz-legend" aria-label="Voting blocs">
+            <li style="--c:#E8B75C">Catholic heartland</li>
+            <li style="--c:#E2A7FF">Catholic/Labour towns</li>
+            <li style="--c:#E4827C">Catholic/mixed countryside</li>
+            <li style="--c:#64A1E8">Bible Belt</li>
+            <li style="--c:#9CA503">Orthodox north</li>
+            <li style="--c:#71D379">Labour towns &amp; north</li>
+            <li style="--c:#00B892">Big cities/mixed towns</li>
+            <li style="--c:#00D4E9">Large mixed cities</li>
+          </ul>
+        </div>
+      </div>
+      <div class="viz-slide" aria-roledescription="slide" aria-label="2 of 2" inert>
+        <img class="viz-cities" src="files/images/six_cities.png" alt="Voting bloc maps of Seattle, San Francisco, Los Angeles, Dallas, Atlanta and New York City">
+      </div>
     </div>
-    <p class="viz-caption">Dutch municipalities in 1971: (left) map of voting blocs, (right) electoral positions of voting blocs.<!-- link removed for now: <a href="research/worldwide.html">More on the Netherlands</a> --></p>
+    <button class="viz-arrow viz-prev" type="button" aria-label="Previous figure">&#8249;</button>
+    <button class="viz-arrow viz-next" type="button" aria-label="Next figure">&#8250;</button>
+    </div>
+    <script>
+    (() => {
+      const c = document.currentScript.previousElementSibling, slides = c.querySelectorAll('.viz-slide'); let i = 0;
+      const go = n => {
+        i = (n + slides.length) % slides.length;
+        c.querySelector('.viz-track').style.transform = `translateX(${-100 * i}%)`;
+        slides.forEach((s, j) => s.inert = j !== i);
+        c.parentElement.querySelectorAll('.viz-caption').forEach((p, j) => p.classList.toggle('viz-off', j !== i));
+      };
+      c.querySelector('.viz-prev').onclick = () => go(i - 1);
+      c.querySelector('.viz-next').onclick = () => go(i + 1);
+      c.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') go(i - 1); if (e.key === 'ArrowRight') go(i + 1); });
+    })();
+    </script>
+    <div class="viz-captions">
+      <p class="viz-caption">Dutch municipalities in 1971: (left) map of voting blocs, (right) electoral positions of voting blocs.<!-- link removed for now: <a href="research/worldwide.html">More on the Netherlands</a> --></p>
+      <p class="viz-caption viz-off">Map of the voting bloc structure of six US cities using referendum data (2012-2024).</p>
+    </div>
   </div>
   <div class="hero-text">
     <p>I am an applied statistician, a data scientist, and an <a href="https://www.bowdoin.edu/profiles/faculty/jobrien/">associate professor of mathematics</a> at <a href="https://en.wikipedia.org/wiki/Bowdoin_College">Bowdoin College</a>. My research is on how mixture models and similar approaches can be used to analyze social science data like <a href="https://royalsocietypublishing.org/rspb/article/283/1827/20152824/84418/Mixture-model-of-pottery-decorations-from-Lake">pottery sherds</a>, <a href="https://arxiv.org/abs/2301.01677">election results</a>, and <a href="https://journals.sagepub.com/doi/abs/10.1177/0038038520956940">tweets</a> to create interpretable formulations of complex social phenomena. I also study housing and rent dynamics, both statistically and as a way to advance a just society.</p>

@@ -198,6 +198,22 @@ h2::after { content: ""; display: block; width: 2.5rem; height: 3px; margin-top:
   .viz-legend { font-size: min(.95rem, 3.6cqi); justify-content: center; }
 }
 .hero-viz .viz-caption { color: var(--jo-muted); font-size: .88rem; margin: 1.3rem 0 0; text-align: center; text-wrap: balance; }
+/* The visualization is a carousel of slides; the arrows wrap around from the last slide to the first. */
+.viz-carousel { position: relative; overflow: hidden; }
+.viz-track { display: flex; transition: transform .45s ease; }
+.viz-slide { flex: 0 0 100%; min-width: 0; display: flex; flex-direction: column; }
+/* The cities image has no intrinsic height (contain: size), so it is fitted into the Dutch slide's height. */
+.viz-cities { flex: 1; min-height: 0; width: 100%; contain: size; object-fit: contain; display: block; }
+/* One caption per slide, stacked in one cell so the column keeps the taller caption's height. */
+.viz-captions { display: grid; } .viz-captions > * { grid-area: 1 / 1; } .viz-captions .viz-off { visibility: hidden; }
+.viz-arrow {
+  position: absolute; top: 45%; transform: translateY(-50%); z-index: 2; width: 2.2rem; height: 2.2rem; padding: 0;
+  border: 1px solid var(--jo-rule); border-radius: 50%; background: rgba(255,255,255,.9); color: #333;
+  font-size: 1.6rem; line-height: 1; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,.12);
+}
+.viz-arrow:hover { border-color: var(--bs-link-color); color: var(--bs-link-color); }
+.viz-prev { left: .3rem; } .viz-next { right: .3rem; }
+@media (prefers-reduced-motion: reduce) { .viz-track { transition: none; } }
 .hero-text { grid-area: text; font-size: .94rem; line-height: 1.55; }
 .hero-text p { margin-bottom: .8rem; }
 .hero-text .hero-links { gap: .4rem; margin-top: .6rem; flex-wrap: wrap; }
