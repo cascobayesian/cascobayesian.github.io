@@ -101,8 +101,6 @@ dialog#bio::backdrop{background:rgba(10,16,20,.45)}
 @media (prefers-reduced-motion: no-preference){
   dialog#bio[open]{animation:slide .18s ease-out}
   @keyframes slide{from{transform:translateX(24px);opacity:.6}to{transform:none;opacity:1}}
-  #vp{transition:transform .25s ease}
-  svg#chart.dragging #vp{transition:none}
 }
 </style>
 </head>
@@ -111,7 +109,7 @@ dialog#bio::backdrop{background:rgba(10,16,20,.45)}
   <div>
     <div class="eyebrow">Portland, Maine · 2026–27 · flowchart mock-up</div>
     <h1>PPS Leadership Flowchart</h1>
-    <p class="hint">Each circle is a role; arrows point from a leader to the people who report to them. Select a circle for the person's full profile. Use the small +/− badges to open or close a branch. Drag to move around and scroll or pinch to zoom. <a href="./">Switch to the outline view</a></p>
+    <p class="hint">Each circle is a role; arrows run left to right, from a leader to the people who report to them. Select a circle for the person's full profile. Use the small +/− badges to open or close a branch. Drag to move around and scroll or pinch to zoom. <a href="./">Switch to the outline view</a></p>
   </div>
 </header>
 <div class="bar">
@@ -194,33 +192,23 @@ LANES.forEach(l=>{ const chief=person(l.head,l.key); l.k.forEach(n=>{const c=fro
 const all=[]; (function f(n){all.push(n); n.kids.forEach(f);})(board);
 const count=n=>n.kids.reduce((a,c)=>a+1+count(c),0);
 
-/* ---------- layout ----------
-   Subtrees sit side by side with each parent centered over its children. When every visible child
-   is itself a closed branch or a leaf, the children stack in one column under the parent instead,
-   joined by a trunk line, so wide teams stay narrow. */
+/* ---------- layout: left to right ----------
+   Each level is a column. Leaves stack down the page; a parent sits level with the middle of its children. */
 const R=n=>n.kind==='board'?60:(n.depth<=2?54:n.kind==='group'?40:n.kind==='school'?42:n.depth===3?46:40);
-const GAP=26, LEVEL=215, LEAFW=118, STEP=n=>2*R(n)+(n.kids.length?62:44);
+const COL=270, ROWGAP=18, FOOT=30, BADGE=n=>R(n)+15;
 function layout(){
   let cursor=0;
-  (function place(n,y){
+  (function place(n,x){
     const vis=n.open?n.kids:[];
-    n.y=y; n.stack=false;
-    if(!vis.length){ const w=Math.max(2*R(n),LEAFW); n.x=cursor+w/2; cursor+=w+GAP; return; }
-    if(vis.length>=2 && n.depth>=2 && vis.every(c=>!c.open||!c.kids.length)){
-      n.stack=true;
-      const rc=Math.max(...vis.map(R)), w=Math.max(2*R(n),2*rc+70,LEAFW+40);
-      n.x=cursor+w/2; cursor+=w+GAP;
-      let cy=y+R(n)+(n.who?40:24)+30;
-      n.trunk=n.x+18-rc-22;
-      vis.forEach(c=>{ c.x=n.x+18; c.y=cy+R(c); c.stack=false; cy+=STEP(c); });
-      return;
-    }
-    vis.forEach(c=>place(c,y+LEVEL));
-    n.x=(vis[0].x+vis[vis.length-1].x)/2;
+    n.x=x;
+    if(!vis.length){ n.y=cursor+R(n); cursor+=2*R(n)+FOOT+ROWGAP; return; }
+    vis.forEach(c=>place(c,x+COL));
+    n.y=(vis[0].y+vis[vis.length-1].y)/2;
   })(board,0);
 }
+const visibleNodes=()=>{ const v=[]; (function f(n){ v.push(n); if(n.open) n.kids.forEach(f); })(board); return v; };
 
-/* ---------- drawing ---------- */
+/* ---------- drawing: elements persist between updates so they can move ---------- */
 const edgesG=document.getElementById('edges'), nodesG=document.getElementById('nodes');
 const el=(tag,attrs)=>{const e=document.createElementNS(SVGNS,tag); for(const k in attrs) e.setAttribute(k,attrs[k]); return e;};
 const laneVar=l=>l==='gov'?'var(--ink)':`var(--${l})`;
@@ -231,80 +219,153 @@ function wrap(text,maxChars){
   if(lines.length>4){ lines.length=4; lines[3]=lines[3].replace(/.{0,2}$/,'…'); }
   return lines;
 }
-function draw(){
-  layout();
-  edgesG.replaceChildren(); nodesG.replaceChildren();
-  const vis=[]; (function f(n){vis.push(n); if(n.open) n.kids.forEach(f);})(board);
-  vis.forEach(n=>{
-    if(n.parent && vis.includes(n.parent)){
-      const p=n.parent;
-      if(p.stack){
-        const y1=p.y+R(p)+(p.who?40:24)+(p.kids.length?14:0), trunk=p.trunk;
-        edgesG.appendChild(el('path',{class:'edge',d:`M${p.x},${y1} V${y1+10} H${trunk} V${n.y} H${n.x-R(n)-3}`,'marker-end':'url(#ah)'}));
-      }else{
-        const y1=p.y+R(p)+(p.who?40:24)+(p.kids.length?14:0), y2=n.y-R(n)-3, my=y1+(y2-y1)/2;
-        edgesG.appendChild(el('path',{class:'edge',d:`M${p.x},${y1} V${my} H${n.x} V${y2}`,'marker-end':'url(#ah)'}));
-      }
-    }
-    if(n.alsoBoard){
-      const b=board, x1=b.x+R(b)*0.8, y1=b.y+R(b)*0.6, y2=n.y-R(n)-3;
-      edgesG.appendChild(el('path',{class:'edge board',d:`M${x1},${y1} C${x1+60},${y1+40} ${n.x},${y2-70} ${n.x},${y2}`,'marker-end':'url(#ah)'}));
-    }
-  });
-  vis.forEach(n=>{
-    const r=R(n), g=el('g',{class:`node ${n.kind}${n.depth<=2?' big':''}`,transform:`translate(${n.x},${n.y})`,style:`--c:${laneVar(n.lane)}`});
-    g.appendChild(el('circle',{class:'ring',r}));
-    const lines=wrap(n.role, Math.max(9,Math.floor(r/3.6)));
-    const lh=n.depth<=2?13:12, y0=-(lines.length-1)*lh/2+4;
-    lines.forEach((t,i)=>{const tx=el('text',{class:'role',y:y0+i*lh}); tx.textContent=t; g.appendChild(tx);});
-    if(n.who){ const w=el('text',{class:'who',y:r+16}); w.textContent=n.who; g.appendChild(w); }
-    if(n.kind==='person'){
-      g.setAttribute('tabindex','0'); g.setAttribute('role','button');
-      g.setAttribute('aria-label',`${P[n.id].n}, ${P[n.id].t}. Open profile`);
-      g.dataset.id=n.id;
-    }else{
-      g.setAttribute('aria-label',n.role+(n.who?`, ${n.who}`:''));
-    }
-    nodesG.appendChild(g);
-    if(n.kids.length){
-      const ty=r+(n.who?34:18), t=el('g',{class:'tog',transform:`translate(${n.x},${n.y+ty})`,tabindex:'0',role:'button',
-        'aria-expanded':String(n.open),'aria-label':`${n.open?'Hide':'Show'} ${count(n)} people under ${n.who||n.role}`});
-      t.dataset.uid=n.uid;
-      t.appendChild(el('circle',{r:n.open?9:12}));
-      const tt=el('text',{y:4}); tt.textContent=n.open?'−':'+'+count(n); t.appendChild(tt);
-      nodesG.appendChild(t);
-    }
-  });
+function create(n){
+  const r=R(n), g=el('g',{class:`node ${n.kind}${n.depth<=2?' big':''}`,style:`--c:${laneVar(n.lane)}`});
+  g.appendChild(el('circle',{class:'ring',r}));
+  const lines=wrap(n.role,Math.max(9,Math.floor(r/3.6))), lh=n.depth<=2?13:12, y0=-(lines.length-1)*lh/2+4;
+  lines.forEach((t,i)=>{const tx=el('text',{class:'role',y:y0+i*lh}); tx.textContent=t; g.appendChild(tx);});
+  if(n.who){ const w=el('text',{class:'who',y:r+16}); w.textContent=n.who; g.appendChild(w); }
+  if(n.kind==='person'){ g.setAttribute('tabindex','0'); g.setAttribute('role','button'); g.setAttribute('aria-label',`${P[n.id].n}, ${P[n.id].t}. Open profile`); g.dataset.id=n.id; }
+  else g.setAttribute('aria-label',n.role+(n.who?`, ${n.who}`:''));
+  nodesG.appendChild(g); n.g=g;
+  if(n.kids.length){
+    const t=el('g',{class:'tog',tabindex:'0',role:'button'}); t.dataset.uid=n.uid;
+    t.appendChild(el('circle',{r:12})); t.appendChild(el('text',{y:4}));
+    nodesG.appendChild(t); n.tog=t;
+  }
+  if(n.parent){ n.edge=el('path',{class:'edge','marker-end':'url(#ah)'}); edgesG.appendChild(n.edge); }
+  if(n.alsoBoard){ n.bedge=el('path',{class:'edge board','marker-end':'url(#ah)'}); edgesG.appendChild(n.bedge); }
+}
+function destroy(n){ [n.g,n.tog,n.edge,n.bedge].forEach(e=>e&&e.remove()); n.g=n.tog=n.edge=n.bedge=null; }
+function badge(n){
+  if(!n.tog) return; const c=count(n);
+  n.tog.setAttribute('aria-expanded',String(n.open));
+  n.tog.setAttribute('aria-label',`${n.open?'Hide':'Show'} ${c} people under ${n.who||n.role}`);
+  n.tog.querySelector('text').textContent=n.open?'−':'+'+c;
+  n.tog.querySelector('circle').setAttribute('r',n.open?9:12);
 }
 
-/* ---------- pan & zoom ---------- */
+/* ---------- camera: world point at the screen centre plus a zoom factor ---------- */
 const svg=document.getElementById('chart'), vp=document.getElementById('vp');
-let k=1,tx=0,ty=0;
-const apply=()=>vp.setAttribute('transform',`translate(${tx},${ty}) scale(${k})`);
-function fit(){
-  const b=nodesG.getBBox(), W=svg.clientWidth, H=svg.clientHeight, pad=30;
-  if(W<80||H<80||!b.width) return;
-  k=Math.min((W-2*pad)/b.width,(H-2*pad)/(b.height+40),1.1); k=Math.max(k,0.15);
-  tx=(W-b.width*k)/2-b.x*k; ty=pad-b.y*k; apply();
+const cam={k:1,cx:0,cy:0}; let W=0,H=0;
+const measure=()=>{ W=svg.clientWidth; H=svg.clientHeight; };
+function paint(){
+  for(const n of all){
+    if(!n.g) continue;
+    n.g.setAttribute('transform',`translate(${n.cx},${n.cy})`); n.g.style.opacity=n.co;
+    if(n.tog){ n.tog.setAttribute('transform',`translate(${n.cx+BADGE(n)},${n.cy})`); n.tog.style.opacity=n.co; }
+    if(n.edge){
+      const p=n.parent, x1=p.cx+BADGE(p)+(p.open?9:12), x2=n.cx-R(n)-3, mx=x1+(x2-x1)*0.5;
+      n.edge.setAttribute('d',`M${x1},${p.cy} C${mx},${p.cy} ${mx},${n.cy} ${x2},${n.cy}`);
+      n.edge.style.opacity=Math.min(n.co,p.co);
+    }
+    if(n.bedge){
+      const b=board, y1=b.cy-R(b), y2=n.cy-R(n)-3, top=Math.min(y1,y2)-50;
+      n.bedge.setAttribute('d',`M${b.cx},${y1} C${b.cx},${top} ${n.cx},${top} ${n.cx},${y2}`);
+      n.bedge.style.opacity=Math.min(n.co,b.co);
+    }
+  }
+  vp.setAttribute('transform',`translate(${W/2-cam.cx*cam.k},${H/2-cam.cy*cam.k}) scale(${cam.k})`);
 }
-function zoomAt(f,cx,cy){ const nk=Math.min(2.5,Math.max(0.12,k*f)); tx=cx-(cx-tx)*(nk/k); ty=cy-(cy-ty)*(nk/k); k=nk; apply(); }
-function centerOn(n){ const W=svg.clientWidth,H=svg.clientHeight; tx=W/2-n.x*k; ty=Math.min(H*0.3,H/2-n.y*k); apply(); }
-svg.addEventListener('wheel',e=>{e.preventDefault(); const r=svg.getBoundingClientRect(); zoomAt(Math.exp(-e.deltaY*0.0015),e.clientX-r.left,e.clientY-r.top);},{passive:false});
+
+/* ---------- motion: one animation loop drives node moves and camera moves ---------- */
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const DUR=reduce?0:560;
+const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+let nodeTw=null, camTw=null, raf=0;
+function tick(now){
+  raf=0; let more=false;
+  if(nodeTw){
+    const t=nodeTw.dur?Math.min(1,(now-nodeTw.t0)/nodeTw.dur):1, e=ease(t);
+    for(const n of nodeTw.ns){ n.cx=n.sx+(n.tx-n.sx)*e; n.cy=n.sy+(n.ty-n.sy)*e; n.co=n.so+(n.to-n.so)*e; }
+    if(t<1) more=true; else { nodeTw.ns.forEach(n=>{ if(n.leaving){ destroy(n); n.leaving=false; } }); nodeTw=null; }
+  }
+  if(camTw){
+    const t=camTw.dur?Math.min(1,(now-camTw.t0)/camTw.dur):1, e=ease(t), a=camTw.from, b=camTw.to;
+    cam.k=a.k*Math.pow(b.k/a.k,e); cam.cx=a.cx+(b.cx-a.cx)*e; cam.cy=a.cy+(b.cy-a.cy)*e;
+    if(t<1) more=true; else camTw=null;
+  }
+  paint();
+  if(more) raf=requestAnimationFrame(tick);
+}
+const kick=()=>{ if(!raf) raf=requestAnimationFrame(tick); };
+function moveCam(to,dur){ if(!to) return; camTw={from:{...cam},to,t0:performance.now(),dur:dur??DUR}; kick(); }
+
+function boundsOf(ns){
+  let x0=Infinity,y0=Infinity,x1=-Infinity,y1=-Infinity;
+  ns.forEach(n=>{ const r=R(n); x0=Math.min(x0,n.x-Math.max(r,80)); x1=Math.max(x1,n.x+Math.max(r+30,80)); y0=Math.min(y0,n.y-r-14); y1=Math.max(y1,n.y+r+FOOT); });
+  return {x:x0,y:y0,w:x1-x0,h:y1-y0};
+}
+function frame(bb,kmin,kmax){
+  if(W<80||H<80) return null;
+  const pad=28, kk=Math.max(kmin,Math.min(kmax,(W-2*pad)/bb.w,(H-2*pad)/bb.h));
+  return {k:kk,cx:bb.x+bb.w/2,cy:bb.y+bb.h/2};
+}
+function camTarget(focus){
+  if(focus==='fit') return frame(boundsOf(visibleNodes()),0.08,1.1);
+  if(focus&&focus.expand){
+    const n=focus.expand, sub=[]; (function f(m){ sub.push(m); if(m.open) m.kids.forEach(f); })(n);
+    const bb=boundsOf(sub), t=frame(bb,0.4,1); if(!t) return null;
+    if(W/t.k<bb.w) t.cx=bb.x+(W/2)/t.k;                          // too wide: keep the opened leader at the left edge
+    if(H/t.k<bb.h) t.cy=n.y;                                      // too tall: keep the opened leader mid-screen
+    return t;
+  }
+  if(focus&&focus.collapse){                                      // keep the closed leader where it is on screen
+    const n=focus.collapse, sx=(n.cx-cam.cx)*cam.k, sy=(n.cy-cam.cy)*cam.k;
+    return {k:cam.k,cx:n.x-sx/cam.k,cy:n.y-sy/cam.k};
+  }
+  return null;
+}
+
+/* ---------- update: lay out, then animate every node from where it is to where it belongs ---------- */
+function render(focus,instant){
+  layout();
+  const vis=visibleNodes(), vs=new Set(vis), ns=[];
+  vis.forEach(n=>{
+    if(!n.g){ create(n); const a=n.parent; n.cx=a?a.cx:n.x; n.cy=a?a.cy:n.y; n.co=0; }
+    n.leaving=false; n.sx=n.cx; n.sy=n.cy; n.so=n.co; n.tx=n.x; n.ty=n.y; n.to=1; badge(n); ns.push(n);
+  });
+  all.forEach(n=>{
+    if(n.g&&!vs.has(n)){ let a=n.parent; while(a&&!vs.has(a)) a=a.parent;
+      n.leaving=true; n.sx=n.cx; n.sy=n.cy; n.so=n.co; n.tx=a.x; n.ty=a.y; n.to=0; ns.push(n); }
+  });
+  const to=camTarget(focus);
+  if(instant||!DUR){                                               // no animation: jump straight to the end state
+    ns.forEach(n=>{ n.cx=n.tx; n.cy=n.ty; n.co=n.to; if(n.leaving){ destroy(n); n.leaving=false; } });
+    if(to) Object.assign(cam,to);
+    nodeTw=null; camTw=null; paint(); return;
+  }
+  nodeTw={ns,t0:performance.now(),dur:DUR};
+  moveCam(to,DUR);
+  kick();
+}
+
+/* ---------- pan & zoom by hand ---------- */
+function zoomAt(f,sx,sy){                                          // sx,sy: screen point relative to the svg
+  const nk=Math.min(2.5,Math.max(0.06,cam.k*f)), wx=cam.cx+(sx-W/2)/cam.k, wy=cam.cy+(sy-H/2)/cam.k;
+  cam.k=nk; cam.cx=wx-(sx-W/2)/nk; cam.cy=wy-(sy-H/2)/nk; camTw=null; paint();
+}
+svg.addEventListener('wheel',e=>{ e.preventDefault(); const r=svg.getBoundingClientRect(); zoomAt(Math.exp(-e.deltaY*0.0015),e.clientX-r.left,e.clientY-r.top); },{passive:false});
 const ptrs=new Map(); let moved=0, pinch0=null;
-svg.addEventListener('pointerdown',e=>{ ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY}); moved=0; if(ptrs.size===2){const [a,b]=[...ptrs.values()]; pinch0={d:Math.hypot(a.x-b.x,a.y-b.y),k};} });
+svg.addEventListener('pointerdown',e=>{ ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY}); moved=0; if(ptrs.size===2){ const [a,b]=[...ptrs.values()]; pinch0={d:Math.hypot(a.x-b.x,a.y-b.y),k:cam.k}; } });
 svg.addEventListener('pointermove',e=>{
   if(!ptrs.has(e.pointerId)) return;
   const prev=ptrs.get(e.pointerId), dx=e.clientX-prev.x, dy=e.clientY-prev.y; ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
-  if(ptrs.size===1){ moved+=Math.abs(dx)+Math.abs(dy); if(moved>4){ svg.classList.add('dragging'); if(!svg.hasPointerCapture(e.pointerId)) svg.setPointerCapture(e.pointerId); } tx+=dx; ty+=dy; apply(); }
-  else if(ptrs.size===2&&pinch0){ moved=99; const [a,b]=[...ptrs.values()], r=svg.getBoundingClientRect(); const d=Math.hypot(a.x-b.x,a.y-b.y);
-    zoomAt((pinch0.k*d/pinch0.d)/k,(a.x+b.x)/2-r.left,(a.y+b.y)/2-r.top); }
+  if(ptrs.size===1){
+    moved+=Math.abs(dx)+Math.abs(dy);
+    if(moved>4){ svg.classList.add('dragging'); if(!svg.hasPointerCapture(e.pointerId)) svg.setPointerCapture(e.pointerId); }
+    camTw=null; cam.cx-=dx/cam.k; cam.cy-=dy/cam.k; paint();
+  }else if(ptrs.size===2&&pinch0){
+    moved=99; const [a,b]=[...ptrs.values()], r=svg.getBoundingClientRect(), d=Math.hypot(a.x-b.x,a.y-b.y);
+    zoomAt((pinch0.k*d/pinch0.d)/cam.k,(a.x+b.x)/2-r.left,(a.y+b.y)/2-r.top);
+  }
 });
 const up=e=>{ ptrs.delete(e.pointerId); if(ptrs.size<2) pinch0=null; if(!ptrs.size) svg.classList.remove('dragging'); };
 svg.addEventListener('pointerup',up); svg.addEventListener('pointercancel',up);
 
 /* ---------- interactions ---------- */
 const byUid=Object.fromEntries(all.map(n=>[n.uid,n]));
-function toggle(n){ n.open=!n.open; draw(); if(n.open&&k<0.85){ k=0.85; } centerOn(n); }
+function toggle(n){ n.open=!n.open; render(n.open?{expand:n}:{collapse:n}); }
 function activate(target){
   const t=target.closest('.tog'); if(t){ toggle(byUid[t.dataset.uid]); return true; }
   const g=target.closest('.node[data-id]'); if(g){ openBio(g.dataset.id); return true; }
@@ -312,11 +373,11 @@ function activate(target){
 }
 svg.addEventListener('click',e=>{ if(moved>4) return; activate(e.target); });
 svg.addEventListener('keydown',e=>{ if((e.key==='Enter'||e.key===' ')&&activate(e.target)) e.preventDefault(); });
-document.getElementById('b-fit').onclick=fit;
-document.getElementById('b-in').onclick=()=>zoomAt(1.25,svg.clientWidth/2,svg.clientHeight/2);
-document.getElementById('b-out').onclick=()=>zoomAt(0.8,svg.clientWidth/2,svg.clientHeight/2);
-document.getElementById('b-lead').onclick=()=>{ all.forEach(n=>n.open=n.depth<=1); draw(); fit(); };
-document.getElementById('b-all').onclick=()=>{ all.forEach(n=>n.open=true); draw(); fit(); };
+document.getElementById('b-fit').onclick=()=>moveCam(camTarget('fit'));
+document.getElementById('b-in').onclick=()=>moveCam({k:Math.min(2.5,cam.k*1.3),cx:cam.cx,cy:cam.cy},260);
+document.getElementById('b-out').onclick=()=>moveCam({k:Math.max(0.06,cam.k/1.3),cx:cam.cx,cy:cam.cy},260);
+document.getElementById('b-lead').onclick=()=>{ all.forEach(n=>n.open=n.depth<=1); render('fit'); };
+document.getElementById('b-all').onclick=()=>{ all.forEach(n=>n.open=true); render('fit'); };
 
 /* ---------- bio sheet ---------- */
 const dlg=document.getElementById('bio'), sheet=document.getElementById('sheet');
@@ -348,8 +409,8 @@ function openBio(id){
 sheet.addEventListener('click',e=>{ const b=e.target.closest('[data-bio]'); if(b) openBio(b.dataset.bio); if(e.target.id==='close') dlg.close(); });
 dlg.addEventListener('click',e=>{ if(e.target===dlg) dlg.close(); });
 
-draw(); fit();
-let rt; addEventListener('resize',()=>{clearTimeout(rt); rt=setTimeout(fit,150);});
+measure(); render('fit',true);
+addEventListener('resize',()=>{ measure(); paint(); });
 })();
 </script>
 </body>
