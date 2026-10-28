@@ -289,6 +289,50 @@ details li { margin-bottom: 3px; }
   .panel-inner { padding: 12px max(16px, env(safe-area-inset-right, 0px)) calc(16px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
   .legend { width: 100%; }
 }
+/* phones: larger type throughout. Inputs and selects at 16px also keep iOS from zooming on focus. */
+@media (max-width: 760px) {
+  body { font-size: 16px; }
+  .search input, .filters select, .unitbar-head input { font-size: 16px; }
+  .brand h1 { font-size: 19px; }
+  .disclaimer { font-size: 13px; }
+  .legend { font-size: 13px; }
+  .results li button { font-size: 16px; padding: 10px 12px; }
+  .results .meta { font-size: 13.5px; }
+  .tooltip { font-size: 14px; }
+  .ftoggle { font-size: 14.5px; padding: 9px 12px; }
+  .fcount { font-size: 13.5px; }
+  .filters .eyebrow { font-size: 12px; }
+
+  .panel-inner { font-size: 16px; gap: 20px; }
+  .eyebrow { font-size: 12.5px; }
+  .note, .prose p, details ul { font-size: 14.5px; }
+  details summary { font-size: 16px; }
+  .panel h2 { font-size: 25px; }
+  .panel h3 { font-size: 20px; }
+  .fact .k { font-size: 13.5px; }
+  .fact .v { font-size: 21px; }
+  .owner .name { font-size: 18px; }
+  .status .tag { font-size: 13px; }
+  .status .why { font-size: 16.5px; }
+  .rents .fact .v { font-size: 23px; }
+  .rents .fact .s { font-size: 13.5px; }
+  .rents .fact.na .v { font-size: 16px; }
+  .more-btn { font-size: 16px; padding: 12px 14px; }
+  .keyrow { font-size: 13.5px; }
+  .chip .u { font-size: 15px; }
+  .chip .r { font-size: 13.5px; }
+  .comp-cell .v { font-size: 19px; }
+  .comp-cell .k { font-size: 12.5px; }
+  .flags { font-size: 14.5px; }
+  .badge { font-size: 13px; }
+  .ptu-dl { font-size: 14.5px; }
+  table.yrs { font-size: 14px; }
+  table.yrs thead th { font-size: 15px; }
+  table.yrs tr.lbl td { font-size: 13px; }
+  table.yrs tr.src td { font-size: 12.5px; }
+  .spark text { font-size: 12px; }
+  .close { font-size: 15px; }
+}
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
 </style>
 
