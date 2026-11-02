@@ -82,6 +82,7 @@ Places analyzed with the [voting-bloc model](voting-blocs.qmd), colored on **one
   .atlas-state-map { order: -1; }
 }
 </style>
+<link rel="stylesheet" href="../files/atlas/bloc_profiles.css">
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const show = (state) => {
@@ -208,4 +209,5 @@ document.addEventListener("DOMContentLoaded", () => {
   }));
 });
 </script>
+<script src="../files/atlas/bloc_profiles.js"></script>
 ```
