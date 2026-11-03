@@ -112,6 +112,8 @@
       ctx.putImageData(out, 0, 0);
     };
     const select = async b => {
+      if (!b && !cur) return;                    // nothing open: closing needs no data
+      if (b) closeOthers(panel, "bloc");
       await load();
       if (b && !liOf.has(b)) b = 0;
       cur = b; paint(b);
@@ -142,5 +144,22 @@
       showTip(`<b>${b}</b> ${liOf.get(b).querySelector(".bloc-name").innerHTML}`, e.clientX, e.clientY);
     });
     zoom.addEventListener("pointerleave", () => { hideTip(); zoom.style.cursor = ""; });
+  }));
+
+  // one demographic panel open at a time: opening a bloc's profile closes the PCA demographics (this place's and any
+  // other place's) and other places' bloc profiles; opening the PCA demographics closes every bloc profile
+  const closeDemog = p => {
+    const d = p.querySelector(".atlas-demog"), fig = p.querySelector(".atlas-pca");
+    if (d && !d.hidden) { d.hidden = true; if (fig) fig.setAttribute("aria-expanded", "false"); }
+  };
+  function closeOthers(panel, opened) {
+    document.querySelectorAll(".atlas-panel").forEach(p => {
+      if (p !== panel || opened === "bloc") closeDemog(p);
+      if (p !== panel || opened === "pca") p.dispatchEvent(new CustomEvent("bloc-select", { detail: 0 }));
+    });
+  }
+  document.addEventListener("DOMContentLoaded", () => document.querySelectorAll(".atlas-panel").forEach(panel => {
+    const d = panel.querySelector(".atlas-demog");
+    if (d) new MutationObserver(() => { if (!d.hidden) closeOthers(panel, "pca"); }).observe(d, { attributes: true, attributeFilter: ["hidden"] });
   }));
 })();
