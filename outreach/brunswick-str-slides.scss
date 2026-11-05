@@ -1,0 +1,60 @@
+/*-- scss:defaults --*/
+// Reveal.js theme for the Brunswick housing notes: plain white, with Beamer's blue for terms.
+$body-bg: #ffffff;
+$body-color: #1d232b;
+$link-color: #2a5db0;
+$presentation-heading-color: #23308a;
+$presentation-heading-font-weight: 600;
+$presentation-h2-font-size: 1.45em;
+$presentation-font-size-root: 30px;
+$presentation-line-height: 1.3;
+
+/*-- scss:rules --*/
+$term: #3333b3;
+$alert: #c8102e;
+
+.reveal .slides section { text-align: left; }
+.reveal h2 { margin-bottom: 0.5em; }
+.reveal ul, .reveal ol { margin-left: 1.1em; }
+.reveal li { margin-bottom: 0.35em; }
+
+.term { color: $term; font-weight: 700; }
+.small { font-size: 0.75em; color: #4a5361; display: block; }
+.tiny  { font-size: 0.5em; color: #4a5361; display: block; line-height: 1.3; }
+.big   { font-size: 1.35em; }
+.centered { display: block; text-align: center; margin: 0.2em 0 0.6em; }
+.callout-red { color: $alert; display: block; text-align: center; margin-top: 0.6em; font-weight: 500; }
+.v-center { align-self: center; }
+.reveal .columns { display: flex; gap: 2%; }
+
+// Figures: centred, sized to the space left under the slide title.
+.reveal img { display: block; margin: 0 auto; }
+.reveal .fig-full img, .reveal img.fig-full { max-height: 560px; width: auto; }
+.reveal .fig-tall img, .reveal img.fig-tall { max-height: 470px; width: auto; }
+.reveal .fig-mid img,  .reveal img.fig-mid  { max-height: 400px; width: auto; }
+.reveal .quarto-figure, .reveal p:has(> img) { margin: 0 0 0.4em; }
+
+// Tables in the style of booktabs.
+.reveal table { font-size: 0.8em; border-collapse: collapse; margin: 0.5em 0; }
+.reveal table th, .reveal table td { padding: 0.25em 0.7em; border: none; }
+.reveal table thead tr { border-top: 2px solid #1d232b; border-bottom: 1px solid #1d232b; }
+.reveal table tbody tr:last-child { border-bottom: 2px solid #1d232b; }
+.reveal .str-table table { font-size: 0.6em; }
+
+// Title and section slides.
+.title-slide-custom h2 { display: none; }
+.title-slide-custom { text-align: center !important; }
+.deck-title { display: block; font-size: 1.5em; font-weight: 600; color: $presentation-heading-color; margin-top: 0.2em; }
+.deck-subtitle { display: block; font-size: 1em; color: #4a5361; margin-bottom: 0.3em; }
+.deck-date { display: block; font-size: 0.75em; color: #4a5361; }
+.reveal img.title-map { max-height: 430px; width: auto; }
+
+.reveal .section-slide { text-align: center !important; padding-top: 220px; }
+.reveal .section-slide h2 { font-size: 1.8em; color: $presentation-heading-color; }
+.reveal .section-slide p { font-size: 1.1em; }
+
+.reveal .sources ul, .reveal .sources p { font-size: 0.6em; }
+.sources li { margin-bottom: 0.15em; }
+
+.reveal .footer { font-size: 0.45em; }
+.reveal .slide-number { font-size: 0.5em; }

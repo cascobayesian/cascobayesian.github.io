@@ -31,7 +31,18 @@ Brunswick has no rent registry, so I built one: the town's rental housing, unit 
 </a>
 ```
 
-[*Some statistical notes on housing in Brunswick*](files/brunswick-housing/brunswick_housing_slides_v2.pdf) (slides, October 2026) covers renters, vacancy rates and short-term rentals. One commented [R script](files/brunswick-housing/brunswick_housing_analysis.R) makes every figure and table in the slides.
+## Brunswick Short-term Rentals
+
+Brunswick is in a rental crisis. Short-term rentals (STR) are taking nearly all of the vacancies in Brunswick, keeping upward pressure on rents. Here, I break down how bad the crisis is and how easily the town could stop it:
+
+```{=html}
+<a class="map-link" href="outreach/brunswick-str-slides.html" target="_blank" rel="noopener">
+  <img src="files/images/brunswick_str_slides_thumb.jpg" alt="Map of Brunswick, Maine, with a dot for each short-term rental listing, from the title slide of the deck">
+  <span class="map-link-label">Open the slides: Some statistical notes on housing in Brunswick &rarr;</span>
+</a>
+```
+
+The slides (October 2026) cover renters, vacancy rates and short-term rentals; they are also available as a [PDF](files/brunswick-housing/brunswick_housing_slides_v2.pdf). One commented [R script](files/brunswick-housing/brunswick_housing_analysis.R) makes every figure and table in them.
 
 ## PMP
 
