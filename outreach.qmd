@@ -22,13 +22,16 @@ Portland's landlords report every unit's rent to the city each year. I mapped fi
 
 ## Brunswick rent registry
 
-Brunswick has no rent registry, so I built one: the town's rental housing, unit by unit, from the assessor's records, with current rents estimated from Census data and asking rents from Zillow listings. The report covers housing units, rentals and short-term rentals.
+Brunswick has no rent registry, so I built one: the town's rental housing, unit by unit, from the assessor's records, with current rents estimated from Census data and asking rents from Zillow listings. The [report](files/brunswick_housing_report.pdf) covers housing units, rentals and short-term rentals.
 
 ```{=html}
-<div class="map-link" style="pointer-events: none;">
+<a class="map-link" href="files/brunswick_registry/index.html" target="_blank" rel="noopener">
   <img src="files/images/brunswick_rent_map_thumb.jpg" alt="Map of Brunswick, Maine, with a dot for each rental unit, shaded by estimated current rent">
-</div>
+  <span class="map-link-label">Open the Brunswick rent registry map &rarr;</span>
+</a>
 ```
+
+Some statistical notes on housing in Brunswick (October 2026) covers renters, vacancy rates and short-term rentals. One commented [R script](files/brunswick-housing/brunswick_housing_analysis.R) makes every figure and table in the slides.
 
 ## PMP
 
