@@ -31,7 +31,7 @@ Brunswick has no rent registry, so I built one: the town's rental housing, unit 
 </a>
 ```
 
-Some statistical notes on housing in Brunswick (October 2026) covers renters, vacancy rates and short-term rentals. One commented [R script](files/brunswick-housing/brunswick_housing_analysis.R) makes every figure and table in the slides.
+[*Some statistical notes on housing in Brunswick*](files/brunswick-housing/brunswick_housing_slides_v2.pdf) (slides, October 2026) covers renters, vacancy rates and short-term rentals. One commented [R script](files/brunswick-housing/brunswick_housing_analysis.R) makes every figure and table in the slides.
 
 ## PMP
 
