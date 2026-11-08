@@ -646,7 +646,7 @@ content: "</";
   <title>Voting Blocs in Maine</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style type="text/css">
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -2958,6 +2958,38 @@ window.QuartoSupport = function () {
           RevealSearch,
           RevealZoom
         ]
+      });
+    </script>
+    <!-- Phone support: on a narrow screen held upright, reveal.js shows the slides
+         stacked in a scrolling column, each shrunk to the phone's width. This banner
+         suggests turning the phone sideways (full-size slides, swipe to move) and can
+         be dismissed. It is outside .reveal so the slide scaling does not shrink it. -->
+    <div id="phone-hint" role="note">
+      <span>Turn your phone sideways to see the slides full size, or pinch to zoom.</span>
+      <button type="button" aria-label="Dismiss this message">×</button>
+    </div>
+    <style>
+#phone-hint { display: none; }
+@media (max-width: 600px) and (orientation: portrait) {
+#phone-hint {
+display: flex; align-items: center; justify-content: space-between; gap: 10px;
+position: fixed; left: 0; right: 0; top: 0; z-index: 1000;
+background: #1d3557; color: #fff;
+font: 15px/1.35 Lato, "Helvetica Neue", Arial, sans-serif;
+padding: calc(10px + env(safe-area-inset-top, 0px))
+max(12px, env(safe-area-inset-right, 0px)) 10px
+max(14px, env(safe-area-inset-left, 0px));
+}
+#phone-hint button {
+background: none; border: 0; color: #fff; font-size: 24px; line-height: 1;
+padding: 4px 8px; cursor: pointer;
+}
+}
+#phone-hint.dismissed { display: none !important; }
+</style>
+    <script>
+      document.querySelector("#phone-hint button").addEventListener("click", function () {
+        document.getElementById("phone-hint").classList.add("dismissed");
       });
     </script>
     
