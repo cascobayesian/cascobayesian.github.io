@@ -20,10 +20,10 @@ The Beta-binomial mixture model. How to fit it. How to nail down the number of b
 
 ::: {.pcard}
 ::: {.pcard-img}
-![](files/images/research/maine_pies_7_3_card.jpg){fig-alt=""}
+[![](files/images/research/maine_pies_7_3_card.jpg){fig-alt="Map of Maine towns coloured by voting bloc"}](research/voting_bloc_slides.html)
 :::
 ::: {.pcard-body}
-### Mapping voting blocs <!-- link: research/voting-blocs.qmd -->
+### [Mapping voting blocs](research/voting_bloc_slides.html) <!-- link: research/voting-blocs.qmd (page being written); for now opens the Maine slides -->
 
 How to map voting blocs? Blocs are neither left nor right but highly spatial and stable across elections. Maine politics redux.
 :::

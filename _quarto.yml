@@ -4,6 +4,7 @@ project:
   post-render: scripts/unlist_hidden_pages.py
   resources:
     - files/**
+    - research/voting_bloc_slides.html
 
 description-meta: "Jack O'Brien: statistician and data scientist, Bowdoin College"
 author-meta: "Jack O'Brien"
