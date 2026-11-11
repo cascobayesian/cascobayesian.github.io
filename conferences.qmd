@@ -1,0 +1,622 @@
+---
+pagetitle: "Conferences"
+title: "Conferences, 2026–27"
+subtitle: "Meetings I'm considering: where they are, when they meet, and what's due"
+page-layout: full
+# Not linked from anywhere on the site, and kept out of the site search and sitemap; reach it at /conferences.html.
+search: false
+---
+
+::: {.conf-note}
+Working list, last checked **November 11, 2026**. A **filled** marker is a date the organizer has posted. A **hollow** marker is my estimate from past years. Deadlines that have already passed are listed in the tables, not on the timeline. Hover over or tap a marker for details.
+:::
+
+```{=html}
+<div class="conf-legend" aria-hidden="true">
+  <span><svg width="26" height="12"><rect x="1" y="2" width="24" height="8" rx="4" class="lg-bar"/></svg> Conference</span>
+  <span><svg width="14" height="14"><path d="M7 1 L13 7 L7 13 L1 7Z" class="lg-mark"/></svg> Submission deadline</span>
+  <span><svg width="14" height="14"><circle cx="7" cy="7" r="5.5" class="lg-mark"/></svg> Registration deadline</span>
+  <span><svg width="14" height="14"><circle cx="7" cy="7" r="5" class="lg-est"/></svg> Estimated date</span>
+  <span class="lg-disc"><i style="background:var(--c-stats)"></i>Statistics</span>
+  <span class="lg-disc"><i style="background:var(--c-polisci)"></i>Political science</span>
+  <span class="lg-disc"><i style="background:var(--c-comp)"></i>Comparative &amp; international</span>
+  <span class="lg-disc"><i style="background:var(--c-soc)"></i>Sociology</span>
+  <span class="lg-disc"><i style="background:var(--c-hist)"></i>History</span>
+  <span class="lg-disc"><i style="background:var(--c-css)"></i>Computational social science</span>
+  <span class="lg-disc"><i style="background:var(--c-eco)"></i>Ecology</span>
+  <span class="lg-disc"><i style="background:var(--c-ecoecon)"></i>Ecological economics</span>
+  <span class="lg-disc"><i style="background:var(--c-other)"></i>Committed</span>
+</div>
+<div class="conf-chips" role="group" aria-label="Show fields">
+  <span class="chips-label">Show:</span>
+  <button type="button" class="chip" data-b="stats" aria-pressed="true"><i style="background:var(--c-stats)"></i>Statistics</button>
+  <button type="button" class="chip" data-b="polisci" aria-pressed="true"><i style="background:var(--c-polisci)"></i>Political science</button>
+  <button type="button" class="chip" data-b="soc" aria-pressed="true"><i style="background:var(--c-soc)"></i>Sociology</button>
+  <button type="button" class="chip" data-b="hist" aria-pressed="true"><i style="background:var(--c-hist)"></i>History</button>
+  <button type="button" class="chip" data-b="other" aria-pressed="true"><i style="background:conic-gradient(var(--c-css) 0 33%, var(--c-eco) 0 66%, var(--c-ecoecon) 0)"></i>Social science &amp; other</button>
+  <button type="button" class="chip-all" id="chip-all">Show all</button>
+</div>
+<label class="conf-filter"><input type="checkbox" id="conf-open"><span>Only conferences still taking contributed talks (<span id="conf-open-n"></span>)</span><span class="conf-filter-note">Submission deadline still ahead. Hollow diamonds are calls that aren't posted yet.</span></label>
+<div class="conf-scroll"><div id="conf-timeline" role="img" aria-label="Timeline of conference dates and deadlines, November 2026 to December 2027. The tables below give the same information."></div></div>
+<div id="conf-tip" role="tooltip"></div>
+```
+
+## Next up
+
+```{=html}
+<ol id="conf-next" class="conf-next"></ol>
+```
+
+::: {.conf-sec .disc-stats}
+## Statistics
+
+| Conference | When | Where | Submission | Registration |
+|---|---|---|---|---|
+| **[NESS Symposium](https://symposium.nestat.org/)** (New England Statistical Society; 40th symposium) | Late May / early June 2027 (not posted) | Host not posted. UConn hosts every other year and hosted in 2026 (May 27–29); Yale hosted in 2025. | Not posted. In 2026: invited sessions **Apr 20**, student research and poster awards **May 1**, abstracts **May 15** | With abstracts (May 15 in 2026) |
+| **[ENAR Spring Meeting](https://www.enar.org/meetings/spring2027/)** | Mar 14–17, 2027 | Boston, Marriott Copley Place | Contributed abstracts and posters **closed Oct 29, 2026** | Early registration through **Dec 31, 2026** |
+| **[SDSS](https://ww2.amstat.org/meetings/sdss/2027/)** (ASA Symposium on Data Science and Statistics) | Apr 27–29, 2027 | Pittsburgh | Refereed abstracts **Nov 30, 2026**; panel proposals **Dec 10**; lightning talks and e-posters **Jan 7 – Feb 5, 2027** | Opens Jan 7; early and speaker registration **Mar 25, 2027** |
+| **[BayesComp 2027](https://bayescomp2027.org/)** (ISBA) | May 18–20, 2027 | College Station, TX (Texas A&M) | Contributed talks and posters open; deadline not posted. The [Aussois mirror meeting](https://sites.google.com/view/bayescomp27mirror) (May 17–21, France) takes talks until **Nov 30, 2026**. | To be announced |
+| **[SSC Annual Meeting](https://ssc.ca/en/meetings/annual/2027-ssc-annual-meeting-quebec)** (Statistical Society of Canada) | May 30 – Jun 2, 2027 | Québec City, Université Laval | Not posted (early 2027) | Not posted |
+| **[WNAR/IMS](https://wnar.org/wnar2027)** | Jun 13–16, 2027 | Honolulu, Waikiki Beach Marriott | Invited sessions **Dec 31, 2026**; contributed talks and posters **Feb 15, 2027**; student papers **Apr 1** | Not posted |
+| **[ICSA Applied Statistics Symposium](https://symposium2027.icsa.org/)** | Jun 13–16, 2027 | Pittsburgh (University of Pittsburgh) | Invited sessions and short courses **Feb 1, 2027**; invited abstracts Apr 1; student papers Apr 15; posters **May 15** | Early bird **Apr 15, 2027** |
+| **Joint Research Conference** (QPRC + Spring Research Conference) | Jun 21–24, 2027 | UConn, Storrs, CT | Not posted (contributed papers were due Apr 1 at an earlier UConn meeting) | Not posted |
+| **[Spatial Statistics 2027](https://www.elsevier.com/events/conferences/all/spatial-statistics)** | Jul 22–25, 2027 | Beijing, China Agricultural University | Abstracts **Jan 29, 2027**; workshop proposals Mar 12 | Author and early bird **Apr 23, 2027** |
+| **[JSM 2027](https://ww2.amstat.org/meetings/jsm/2027/keydates.cfm)** (also the IMS Annual Meeting) | Aug 8–12, 2027 | Chicago, McCormick Place | Topic-contributed sessions **Nov 17 – Dec 10, 2026**; abstracts for all sessions **Dec 1, 2026 – Feb 1, 2027** | Opens Apr 29; early and speaker registration **Jun 1, 2027** |
+| **[ISI World Statistics Congress](https://www.isi-next.org/conferences/isi-wsc2027/)** | Jul 11–15, 2027 | Lusaka, Zambia | **Closed Oct 8, 2026**; notifications Dec 1 | Early-bird window Nov 2, 2026 – **Mar 12, 2027** (the site also says registration isn't open yet) |
+| **[ASA Women in Statistics and Data Science](https://www.amstat.org/meetings/women-in-statistics-and-data-science)** | Oct 18–20, 2027 | Virtual | Not posted | Not posted |
+| **[CFE-CMStatistics 2026](https://cmstatistics.org/CFECMStatistics2026/)** | Dec 12–14, 2026 | Berlin (hybrid), the weekend before Split | Closed Sep 10 | Presenting authors closed Sep 12 |
+| **IMS New Researchers Conference** | Late July 2027 (not posted; ran just before JSM in 2026) | — | Not posted | — |
+:::
+
+::: {.conf-sec .disc-polisci}
+## Political science
+
+| Conference | When | Where | Submission | Registration |
+|---|---|---|---|---|
+| **[APSA Annual Meeting](https://connect.apsanet.org/apsa2027/)** | Sep 2–5, 2027 | Washington, DC | **Jan 13, 2027**, 11:59 p.m. Pacific (confirmed; the submission system is open) | Not posted. Presenters had to register by Jun 8 in 2026, so expect early June. |
+| **[MPSA](https://www.mpsanet.org/conference/important-dates-and-deadlines/)** | Apr 1–4, 2027 | Chicago, Palmer House (hybrid) | Main call **closed Oct 27, 2026**. Subfield lightning-talk and undergraduate-poster sections are due **Dec 1, 2026**. | Early rate through **Jan 20, 2027**; regular rate Jan 21 – **Mar 17**; on-site rate after that |
+| **[IPSA World Congress](https://wc2027.ipsa.org/wc/important-dates)** | Jul 24–28, 2027 | Rome (Luiss Guido Carli) | Papers and closed panels **extended to Nov 11, 2026 (today)** | Opens Jan 22; early bird **Mar 18**; final **May 5, 2027**. IPSA membership is required. |
+| **[EPSA](https://www.eps-academic.org/conference-2027)** (European Political Science Association; new website) | Jul 8–9, 2027 | Vienna, WU Vienna University of Economics and Business | **Jan 10, 2027**; decisions Feb 10 | Presenters by **Apr 15, 2027** |
+| **[ECPR General Conference](https://ecpr.eu/GeneralConference)** | Sep 7–10, 2027 | Barcelona, Pompeu Fabra University | Panels and papers **Nov 17, 2026 – Jan 8, 2027**; decisions by Feb 10 | Opens **Mar 17, 2027** |
+| **[ISA (International Studies)](https://www.isanet.org/Conferences/ISA2027)** | Online Mar 2–5; in person Mar 21–24, 2027 | Atlanta, Marriott Marquis | Main call closed Jun 1, 2026. **Supplemental papers due Dec 1, 2026.** | Program participants had to pre-register by Oct 28, 2026 |
+| **[SPSA](https://spsa.net/annual-meeting/2027-conference-information/)** (Southern Political Science Association) | Jan 13–16, 2027 | St. Pete Beach, FL | Closed Sep 1, 2026 | Early bird **Nov 30, 2026** |
+| **[WPSA](https://www.wpsanet.org/meeting-information)** (Western Political Science Association) | Mar 25–27, 2027 | Denver, Hyatt Regency | Closed Sep 25, 2026. Workshop requests accepted through January if space allows. | Not posted |
+| **[State Politics and Policy Conference](https://connect.apsanet.org/s22/sppc-conference/)** | Jun 3–5, 2027 | Buffalo, NY (University at Buffalo) | Not posted; Jan 15 in 2026 | Not posted |
+| **[PolMeth Summer Meeting](https://polmeth.org/conferences)** (Society for Political Methodology) | Mid-July 2027 (est.) | Host not announced (Michigan State in 2026) | Not posted; was **Mar 26** in 2026 | Not posted |
+| **[PolMeth Europe VI](https://polmeth.org/europe)** | Spring 2027 (May in past years) | Hertie School, Berlin | Not posted; abstracts were due **Nov 15** last year, so the call may appear any day | Not posted |
+| **[Asian PolMeth](https://ppa.hku.hk/news-and-events/call-for-proposals-14th-annual-meeting-of-asian-political-methodology/)** (14th meeting) | Jan 8–9, 2027 | University of Hong Kong | **Closed Oct 9, 2026**; decisions were sent Oct 31 | Registration **Nov 1–15, 2026**, no fee. Papers due **Dec 21** (not posters). |
+:::
+
+::: {.conf-sec .disc-polisci}
+## Comparative and international politics
+
+| Conference | When | Where | Submission | Registration |
+|---|---|---|---|---|
+| **[ECPR Joint Sessions of Workshops](https://ecpr.eu/Events/369)** | Jun 1–4, 2027 | Trieste, University of Trieste (in person) | **Dec 14, 2026.** You apply to one accepted workshop of about 12–20 papers, and some workshops are methods-focused. | Opens March 2027; funding applications Feb 1–17 |
+| **[CES, International Conference of Europeanists](https://councilforeuropeanstudies.org/2027-ces-conference/)** | Jun 16–18, 2027 | Leiden & The Hague | **Closed Oct 23, 2026** (extended); decisions by Dec 18 | Not posted |
+| **[EUSA Biennial](https://eustudies.org/conference)** (European Union Studies Association) | May 20–22, 2027 | Washington, DC, Johns Hopkins Bloomberg Center | **Nov 11, 2026 (today)** | Not posted |
+| **[LASA Congress](https://lasaweb.org/en/lasa2027/important-dates/)** (Latin American Studies Association) | Jun 16–20, 2027 | Mexico City (UNAM), in person only | **Closed Sep 9, 2026**; decisions by Nov 16 | Presenters must register by **Apr 1, 2027** |
+| **[Peace Science Society](http://peacessi.org/)** | Fall 2027 (Nov 5–7 at Pittsburgh in 2026) | Not posted | Not posted | Not posted |
+| **[IPES](https://www.internationalpoliticaleconomysociety.org/)** (International Political Economy Society) | Nov 5–6, 2027 (about 75 papers) | Washington University in St. Louis | Not posted; mid-April in 2024 | Not posted |
+| **[EISA Pan-European Conference on IR](https://eisa-net.org/)** | Sep 14–17, 2027 | Ljubljana, University of Ljubljana | Section proposals closed Nov 9; paper and panel call not yet posted | Not posted |
+| **[ISA Midyear, Reykjavik](https://www.isanet.org/Conferences/ISA-Reykjavik-2027)** (International Studies Association) | Jun 23–25, 2027 | University of Iceland | Closed Oct 30, 2026 (extended) | Opens after the preliminary program; $200 members, $330 non-members |
+| **[ISA 2028 Annual Convention](https://www.isanet.org/Conferences/Upcoming)** | Mar 1–4, 2028 | New Orleans | Not posted; the 2027 call closed **Jun 1, 2026**, so expect about **Jun 1, 2027** | Not posted |
+| **[ISA regional meetings](https://www.isanet.org/Conferences/Upcoming)** (Northeast, Midwest, West, South) | Fall 2027 (2026: West, Pasadena Sep 25–26; South, Greensboro Oct 9–10; Northeast, Pittsburgh Nov 13–14; Midwest, St. Louis Nov 20–22) | Not posted | Calls in June (Northeast **Jun 19** and Midwest **Jun 26** in 2026) | Pre-registration in mid-September |
+| **[ISA-APSA International Security Studies](https://www.isanet.org/Conferences/ISA-APSA-Security-2026)** | Fall 2027 (Oct 3–5, 2026 at UCLA) | Not posted | Not posted; was Jul 6 in 2026 | — |
+:::
+
+::: {.conf-sec .disc-soc}
+## Sociology
+
+| Conference | When | Where | Submission | Registration |
+|---|---|---|---|---|
+| **[ASA Annual Meeting](https://www.asanet.org/annual-meeting/2027-annual-meeting-overview/)** | Aug 6–10, 2027 | Chicago | Regular papers not posted; usually late Jan / early Feb | Not posted |
+| **[ISA World Congress of Sociology](https://www.isa-sociology.org/en/conferences/world-congress/gwangju-2027)** | Jul 4–10, 2027 | Gwangju, South Korea (in person only) | **Closed Oct 14, 2026** (no extensions) | Opens **Dec 4, 2026**; grant applications due **Jan 27, 2027**; presenters must pay by **Mar 23, 2027** or be dropped from the program |
+| **[European Sociological Association](https://www.europeansociology.org/)** | 2028 | — | Main conference is every two years (Warsaw, 2026); only research-network meetings in 2027 | — |
+:::
+
+::: {.conf-sec .disc-hist}
+## History
+
+| Conference | When | Where | Submission | Registration |
+|---|---|---|---|---|
+| **[AHA Annual Meeting](https://www.historians.org/event/2027-aha-annual-meeting/)** | Jan 7–10, 2027 | New Orleans | **Closed Feb 15, 2026**. The 2028 call is usually due mid-February 2027. | Preregistration rate ended Dec 15 in past years; expect about **Dec 15, 2026** |
+| **[OAH](https://www.oah.org/)** | Apr 1–4, 2027 | San Francisco | Very likely closed (2026's was Apr 29, 2025) | Not posted |
+| **[European Social Science History Conference](https://esshc.iisg.amsterdam/en)** | Apr 21–24, 2027 | Lyon (ENS Lyon) | **Closed Apr 22, 2026** | No deadline posted. Full refund (less €20) if you cancel before **Mar 1, 2027**. |
+| **[Social Science History Association](https://ssha.org/)** | Nov 2027 | Not posted | Not posted; usually about Mar 1, 2027 | Not posted |
+:::
+
+::: {.conf-sec .disc-other}
+## Computational social science
+
+| Conference | When | Where | Submission | Registration |
+|---|---|---|---|---|
+| **[IC2S2](https://www.uvm.edu/socks/node/252)** (International Conference on Computational Social Science) | Summer 2027 (late July recently) | Milan, Italy | Not posted; Mar 3 in 2026, so expect about **Mar 1, 2027** | Not posted |
+| **[Sunbelt](https://www.insna.org/events/sunbelt-2027-montreal)** (International Network for Social Network Analysis) | Late June 2027; workshops Jun 21–23 | Montréal, Le Centre Sheraton | **Feb 1, 2027** | Opens January 2027 |
+| **[PaCSS](https://cssi.umass.edu/node/314)** (Politics and Computational Social Science) | Probably Sep 1, 2027, a one-day APSA pre-conference | Probably Washington, DC (with APSA) | Not posted | Not posted |
+| **[TADA](https://www.aclweb.org/portal/content/cfp-tada-2026-new-directions-analyzing-text-data-uc-berkeley-extended-deadline)** (New Directions in Analyzing Text as Data) | Autumn 2027 | Not posted (Berkeley in 2026) | Not posted; early August in past years | Not posted |
+:::
+
+::: {.conf-sec .disc-other}
+## Ecology with a methods focus
+
+| Conference | When | Where | Submission | Registration |
+|---|---|---|---|---|
+| **[ISEC, International Statistical Ecology Conference](https://statisticalecology.org/)** | Jan 8–15, 2027 (workshops Jan 8–9) | Mérida, México (Universidad Autónoma de Yucatán) | **Closed May 1, 2026** | Early bird **closed Oct 15, 2026**; regular registration still open ($550, or $400 for students from the Global North). Workshops are $30 for a half day and $60 for a full day. |
+| **[ESA Annual Meeting](https://esa.org/toronto2027/program/important-dates/)** (Ecological Society of America) | Jul 25–30, 2027 | Toronto, Metro Toronto Convention Centre | Workshop, short-course and special-session proposals **Dec 3, 2026**; contributed abstracts **Feb 18, 2027** (call opens early January); invited symposia and organized oral sessions **Mar 11**; late-breaking posters **Apr 22** | Early bird **Jun 17, 2027**; regular **Jul 8** |
+| **[EFI, Ecological Forecasting Initiative](https://ecoforecast.org/efi-2027-conference/)** | May 24–27, 2027 | Minneapolis, Augsburg University | Working-group and workshop proposals **Jan 22, 2027**; abstracts open **Dec 1**, due **Jan 27, 2027** | Opens **Feb 22**; early bird **Mar 19**; full registration **Apr 23, 2027** |
+| **[CSEE, Canadian Society for Ecology and Evolution](https://csee-scee.ca/)** | May 17–20, 2027 (confirm) | Halifax, Nova Scotia | Not posted | Not posted |
+:::
+
+::: {.conf-sec .disc-other}
+## Ecological economics
+
+The North American ecological-economics societies (USSEE, CANSEE) both met in 2026 and meet every two years, so their next meetings are in 2028. ISEE should meet in 2027, but the host hasn't been announced. The closest North American meeting in 2027 is AERE's, which covers environmental and resource economics.
+
+| Society | Last meeting | Next expected | Notes |
+|---|---|---|---|
+| **[USSEE](https://www.ussee.org/)** (U.S. Society for Ecological Economics) | Jun 18–21, 2026, Oberlin College | 2028 | 2026 abstracts were due Dec 15, 2025 (extended to Jan 16), so expect a call around December 2027 |
+| **[CANSEE](https://cansee.ca/)** (Canadian Society for Ecological Economics) | Oct 2026, Cape Breton University | 2028 | |
+| **[AERE](https://www.aere.org/summer-conference)** (Association of Environmental and Resource Economists) | Summer Conference, June 2026 | June 2027, venue not posted | Submissions accepted **Dec 1, 2026 – early/mid-January 2027**; registration opens mid-March. Mainstream environmental economics rather than ecological economics. |
+| **[ISEE](https://www.isecoeco.org/events/future-events-of-the-isee)** (International Society for Ecological Economics) | Jun 24–27, 2025, Oslo (with the Degrowth conference) | 2027? | A biennial pattern points to 2027, but ISEE lists no upcoming events. Not necessarily in North America. |
+:::
+
+::: {.conf-sec .disc-always}
+## Already committed
+
+| Conference | When | Where | Notes |
+|---|---|---|---|
+| **[IMS-ICSDS 2026](https://sites.google.com/view/ims-icsds2026)** (IMS International Conference on Statistics and Data Science) | Dec 15–18, 2026 | Split, Croatia | **Registered; giving a contributed talk.** $750 fee, paid from conference funds. It starts the Dec 15 – Mar 5 Europe trip. |
+:::
+
+::: {.conf-sources}
+**Sources.**
+[APSA section dates](https://apsanet.org/wp-content/uploads/2026/08/26-27-OS-Dates.pdf) ·
+[MPSA registration](https://www.mpsanet.org/conference/registration-information/) ·
+[IPSA 2027 call](https://www.ipsa.org/na/news/call-papers-2027-ipsa-world-congress-now-open) ·
+[ECPR](https://ecpr.eu/GeneralConference) ·
+[APSA 2027](https://connect.apsanet.org/apsa2027/) ·
+[MPSA dates](https://www.mpsanet.org/conference/important-dates-and-deadlines/) ·
+[IPSA dates](https://wc2027.ipsa.org/wc/important-dates) ·
+[EPSA 2027](https://www.eps-academic.org/conference-2027) ·
+[ISA 2027](https://www.isanet.org/Conferences/ISA2027) ·
+[ISA upcoming conferences](https://www.isanet.org/Conferences/Upcoming) ·
+[ISA Reykjavik 2027](https://www.isanet.org/Conferences/ISA-Reykjavik-2027) ·
+[SPSA 2027](https://spsa.net/annual-meeting/2027-conference-information/) ·
+[WPSA](https://www.wpsanet.org/meeting-information) ·
+[SPPC](https://connect.apsanet.org/s22/sppc-conference/) ·
+[EUSA](https://eustudies.org/conference) ·
+[IPES](https://www.internationalpoliticaleconomysociety.org/) ·
+[PolMeth summer meetings](https://polmeth.org/spm-central) ·
+[PolMeth Europe](https://polmeth.org/europe) ·
+[Asian PolMeth 2027](https://ppa.hku.hk/news-and-events/call-for-proposals-14th-annual-meeting-of-asian-political-methodology/) ·
+[ISA childcare (Atlanta venue)](https://www.jotform.com/kiddiecorp/isakids) ·
+[JSM 2027 key dates](https://ww2.amstat.org/meetings/jsm/2027/keydates.cfm) ·
+[NESS](https://nestat.org/news/) ·
+[ENAR 2027](https://www.enar.org/meetings/spring2027/) ·
+[SDSS 2027](https://ww2.amstat.org/meetings/sdss/2027/) ·
+[BayesComp 2027](https://bayescomp2027.org/) ·
+[SSC 2027](https://ssc.ca/en/meetings/annual/2027-ssc-annual-meeting-quebec) ·
+[WNAR 2027](https://wnar.org/wnar2027) ·
+[ICSA 2027](https://symposium2027.icsa.org/) ·
+[Spatial Statistics 2027](https://www.elsevier.com/events/conferences/all/spatial-statistics) ·
+[CMStatistics 2026](https://cmstatistics.org/CFECMStatistics2026/) ·
+[JSM 2026 registration](https://ww2.amstat.org/meetings/jsm/2026/registration.cfm) ·
+[ISI WSC 2027 key dates](https://www.isi-next.org/conferences/isi-wsc2027/key-dates/) ·
+[ASA 2027](https://www.asanet.org/annual-meeting/2027-annual-meeting-overview/) ·
+[ISA Congress timeline](https://www.isa-sociology.org/en/conferences/world-congress/gwangju-2027/xxi-isa-congress-guidelines/duties-deadlines-27/xxi-isa-congress-timeline-rd) ·
+[ISA Congress registration](https://www.isa-sociology.org/en/conferences/world-congress/gwangju-2027/registration-27) ·
+[AHA 2027](https://www.historians.org/event/2027-aha-annual-meeting/) ·
+[S-USIH on OAH 2027](https://s-usih.org/?p=26049) ·
+[ESSHC registration](https://esshc.iisg.amsterdam/information-registration) ·
+[ESSHC 2027](https://posthumusinstitute.org/2026/02/25/esshc2027-iish-enslyon/) ·
+[ISEC 2027](https://statisticalecology.org/) ·
+[ISEC registration](https://statisticalecology.org/registration/) ·
+[ESA 2027 dates](https://esa.org/toronto2027/program/important-dates/) ·
+[EFI 2027](https://ecoforecast.org/efi-2027-conference/) ·
+[USSEE 2026](https://sites.google.com/oberlin.edu/ussee2026/important-dates) ·
+[CANSEE 2026](https://cansee.ca/cape-breton-2026/) ·
+[ISEE events](https://www.isecoeco.org/events/future-events-of-the-isee) ·
+[USSEE conferences](https://ussee.org/conferences/) ·
+[ECPR Joint Sessions](https://ecpr.eu/JointSessions) ·
+[CES 2027](https://councilforeuropeanstudies.org/2027-ces-conference/) ·
+[EUSA 2027](https://councilforeuropeanstudies.org/?p=11984) ·
+[LASA2027 dates](https://lasaweb.org/en/lasa2027/important-dates/) ·
+[LASA2027 FAQ](https://carlow.lasaweb.org/en/lasa2027/faqs_generalinfo) ·
+[Peace Science Society](http://peacessi.org/) ·
+[IPES 2024 (EUI)](https://eui.eu/events?id=566918) ·
+[IC2S2 2026 (UVM)](https://www.uvm.edu/socks/node/252) ·
+[Sunbelt 2027](https://www.insna.org/events/sunbelt-2027-montreal) ·
+[PaCSS 2026](https://cssi.umass.edu/node/314) ·
+[TADA 2026](https://www.aclweb.org/portal/content/cfp-tada-2026-new-directions-analyzing-text-data-uc-berkeley-extended-deadline) ·
+[AERE Summer Conference](https://www.aere.org/summer-conference) ·
+[IMS-ICSDS 2026](https://sites.google.com/view/ims-icsds2026) ·
+[IMS announcement](https://imstat.org/2026/09/30/ims-icsds-in-split-croatia/)
+:::
+
+```{=html}
+<style>
+:root {
+  --c-polisci: #2a78d6;  /* categorical slots 1–4 of the validated default palette, plus neutral */
+  --c-stats:   #eb6834;
+  --c-soc:     #1baf7a;
+  --c-hist:    #eda100;
+  --c-eco:     #e87ba4;
+  --c-ecoecon: #008300;
+  --c-comp:    #6250d6;
+  --c-css:     #e34948;
+  --c-other:   #6b7480;
+}
+.conf-note { color: var(--jo-muted); font-size: .92rem; max-width: 46rem; }
+.conf-legend { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; font-size: .85rem; color: var(--jo-muted); margin: 1rem 0 .4rem; align-items: center; }
+.conf-legend span { display: inline-flex; align-items: center; gap: .35rem; }
+.conf-legend .lg-bar { fill: #9aa3ad; }
+.conf-legend .lg-mark { fill: #5d6a76; stroke: #fff; stroke-width: 1.5; }
+.conf-legend .lg-est { fill: #fff; stroke: #5d6a76; stroke-width: 2; }
+.conf-legend .lg-disc i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; }
+.conf-chips { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; margin: .2rem 0 .7rem; }
+.chips-label { font-size: .85rem; color: var(--jo-muted); margin-right: .1rem; }
+.chip { display: inline-flex; align-items: center; gap: .4rem; font: inherit; font-size: .85rem; padding: .25rem .7rem; border-radius: 999px;
+  border: 1px solid var(--jo-rule); background: #fff; color: var(--jo-muted); cursor: pointer; text-transform: none; letter-spacing: normal; }
+.chip i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; opacity: .35; }
+.chip[aria-pressed="true"] { border-color: #9aa6b0; color: #1d2733; background: #f4f7f9; font-weight: 500; }
+.chip[aria-pressed="true"] i { opacity: 1; }
+.chip:focus-visible, .chip-all:focus-visible { outline: 2px solid var(--jo-mark); outline-offset: 2px; }
+.chip-all { font: inherit; font-size: .8rem; background: none; border: 0; color: var(--jo-mark); text-decoration: underline; cursor: pointer; padding: .25rem .3rem; text-transform: none; letter-spacing: normal; }
+.conf-sec.is-hidden { display: none; }
+.conf-filter { display: flex; flex-wrap: wrap; align-items: center; gap: .2rem .5rem; font-size: .9rem; font-weight: 500; margin: .2rem 0 .6rem; cursor: pointer; }
+.conf-filter input { width: 1.05rem; height: 1.05rem; accent-color: var(--jo-mark); cursor: pointer; }
+.conf-filter-note { flex-basis: 100%; padding-left: 1.55rem; font-weight: 400; font-size: .8rem; color: var(--jo-muted); }
+.conf-scroll { max-width: calc(100vw - 32px); overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--jo-rule); border-radius: 6px; background: #fff; }
+#conf-timeline { min-width: 820px; }
+#conf-timeline svg { display: block; width: 100%; height: auto; font-family: inherit; }
+#conf-timeline .grid { stroke: #ecebe6; }
+#conf-timeline .month { fill: #5d6a76; font-size: 11px; }
+#conf-timeline .year { fill: #1d2733; font-size: 11px; font-weight: 600; }
+#conf-timeline .row-label { fill: #1d2733; font-size: 12px; }
+#conf-timeline .row-link .row-label { fill: var(--jo-mark); text-decoration: underline; text-decoration-color: #c9d3da; }
+#conf-timeline .row-link:hover .row-label, #conf-timeline .row-link:focus .row-label { text-decoration-color: currentColor; }
+#conf-timeline .group-label { fill: #5d6a76; font-size: 10.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+#conf-timeline .today { stroke: #c0392b; stroke-width: 1.5; stroke-dasharray: 3 3; }
+#conf-timeline .where { fill: #5d6a76; font-size: 11px; }
+#conf-timeline .today-label { fill: #c0392b; font-size: 10.5px; font-weight: 600; }
+#conf-timeline .row-hit { fill: transparent; }
+#conf-timeline .row-hit:hover { fill: #f6f5f1; }
+#conf-timeline .mark { cursor: pointer; }
+#conf-timeline .mark:hover .shape, #conf-timeline .mark:focus .shape { stroke: #1d2733; stroke-width: 2; }
+#conf-timeline .mark:focus { outline: none; }
+#conf-tip { position: fixed; z-index: 50; pointer-events: none; display: none; max-width: 260px;
+  background: #1d2733; color: #fff; font-size: .8rem; line-height: 1.35; padding: .45rem .6rem; border-radius: 5px;
+  box-shadow: 0 3px 10px rgba(0,0,0,.18); }
+#conf-tip b { display: block; }
+.conf-next { list-style: none; padding: 0; margin: .5rem 0 1rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: .6rem; }
+.conf-next li { border: 1px solid var(--jo-rule); border-left: 4px solid var(--c); border-radius: 5px; padding: .5rem .7rem; font-size: .88rem; background: #fff; }
+.conf-next .when { font-weight: 600; }
+.conf-next .days { color: var(--jo-muted); font-size: .8rem; }
+.conf-next .est { color: var(--jo-muted); font-style: italic; }
+main table { font-size: .9rem; }
+@media (max-width: 700px) { main table { display: block; overflow-x: auto; max-width: calc(100vw - 32px); } }
+main table td:first-child { min-width: 10rem; }
+.conf-sources { font-size: .8rem; color: var(--jo-muted); margin-top: 2rem; }
+</style>
+
+<script>
+(() => {
+  // type: "conf" (span), "sub" (submission), "reg" (registration). est: an estimate from past years.
+  const G = {
+    polisci: ["Political science", "var(--c-polisci)"],
+    stats:   ["Statistics",        "var(--c-stats)"],
+    soc:     ["Sociology",         "var(--c-soc)"],
+    hist:    ["History",           "var(--c-hist)"],
+    eco:     ["Ecology & methods", "var(--c-eco)"],
+    ecoecon: ["Ecological economics", "var(--c-ecoecon)"],
+    comp:    ["Comparative & IR", "var(--c-comp)"],
+    css:     ["Computational social sci.", "var(--c-css)"],
+    other:   ["Committed",         "var(--c-other)"],
+  };
+  // Which "Show" button controls each group; the committed meeting is always shown.
+  const BUCKET = { stats: "stats", polisci: "polisci", comp: "polisci", soc: "soc", hist: "hist",
+                   css: "other", eco: "other", ecoecon: "other", other: "always" };
+  const ORDER = ["other", "stats", "polisci", "comp", "soc", "hist", "css", "eco", "ecoecon"];
+  const ROWS = [
+    { g: "other",   name: "IMS-ICSDS", url: "https://sites.google.com/view/ims-icsds2026", where: "Split, Croatia", ev: [
+      { t: "conf", s: "2026-12-15", e: "2026-12-18", note: "IMS International Conference on Statistics and Data Science. Registered; giving a contributed talk." } ] },
+    { g: "polisci", name: "APSA", url: "https://connect.apsanet.org/apsa2027/", where: "Washington, DC", ev: [
+      { t: "sub", d: "2027-01-13", note: "Proposals due 11:59 p.m. Pacific; submission system now open" },
+      { t: "reg", d: "2027-06-07", est: true, note: "Presenter registration (Jun 8 in 2026)" },
+      { t: "conf", s: "2027-09-02", e: "2027-09-05" } ] },
+    { g: "polisci", name: "MPSA", url: "https://www.mpsanet.org/conference/important-dates-and-deadlines/", where: "Chicago (hybrid)", ev: [
+      { t: "sub", d: "2026-12-01", note: "Subfield lightning-talk and undergraduate-poster sections only (main call closed Oct 27)" },
+      { t: "reg", d: "2027-01-20", note: "Early registration rate ends" },
+      { t: "reg", d: "2027-03-17", note: "Regular rate ends; on-site rate after" },
+      { t: "conf", s: "2027-04-01", e: "2027-04-04" } ] },
+    { g: "polisci", name: "IPSA World Congress", url: "https://wc2027.ipsa.org/wc/important-dates", where: "Rome (Luiss)", ev: [
+      { t: "sub", d: "2026-11-11", note: "Extended deadline for papers and closed panels: today" },
+      { t: "reg", d: "2027-03-18", note: "Early-bird registration ends (opens Jan 22)" },
+      { t: "reg", d: "2027-05-05", note: "Final registration; unregistered participants withdrawn" },
+      { t: "conf", s: "2027-07-24", e: "2027-07-28" } ] },
+    { g: "polisci", name: "EPSA", url: "https://www.eps-academic.org/conference-2027", where: "Vienna (WU)", ev: [
+      { t: "sub", d: "2027-01-10", note: "Papers and pre-organised panels; decisions Feb 10" },
+      { t: "reg", d: "2027-04-15", note: "Presenter registration deadline" },
+      { t: "conf", s: "2027-07-08", e: "2027-07-09" } ] },
+    { g: "polisci", name: "ECPR General Conference", url: "https://ecpr.eu/GeneralConference", where: "Barcelona (Pompeu Fabra)", ev: [
+      { t: "sub", d: "2027-01-08", note: "Panels and papers, Nov 17 – Jan 8 (midnight UK time); decisions by Feb 10" },
+      { t: "reg", d: "2027-03-17", note: "Registration opens" },
+      { t: "conf", s: "2027-09-07", e: "2027-09-10" } ] },
+    { g: "polisci", name: "ISA (International Studies)", url: "https://www.isanet.org/Conferences/ISA2027", where: "Atlanta", ev: [
+      { t: "sub", d: "2026-12-01", note: "Supplemental paper submissions (main call closed Jun 1)" },
+      { t: "conf", s: "2027-03-02", e: "2027-03-05", nolabel: true, note: "Online segment" },
+      { t: "conf", s: "2027-03-21", e: "2027-03-24", note: "In person, Atlanta" } ] },
+    { g: "polisci", name: "SPSA", url: "https://spsa.net/annual-meeting/2027-conference-information/", where: "St. Pete Beach, FL", ev: [
+      { t: "reg", d: "2026-11-30", note: "Early-bird registration (proposals closed Sep 1)" },
+      { t: "conf", s: "2027-01-13", e: "2027-01-16" } ] },
+    { g: "polisci", name: "WPSA", url: "https://www.wpsanet.org/meeting-information", where: "Denver", ev: [
+      { t: "conf", s: "2027-03-25", e: "2027-03-27", note: "Proposals closed Sep 25; workshop requests through January if space allows" } ] },
+    { g: "polisci", name: "State Politics & Policy Conf.", url: "https://connect.apsanet.org/s22/sppc-conference/", where: "Buffalo, NY", ev: [
+      { t: "sub", d: "2027-01-15", est: true, note: "Not posted; Jan 15 in 2026" },
+      { t: "conf", s: "2027-06-03", e: "2027-06-05" } ] },
+    { g: "polisci", name: "PolMeth Summer Meeting", url: "https://polmeth.org/conferences", where: "Host not announced", ev: [
+      { t: "sub", d: "2027-03-26", est: true, note: "Was Mar 26 in 2026" },
+      { t: "conf", s: "2027-07-15", e: "2027-07-17", est: true, note: "Mid-July (Jul 15–18 at Michigan State in 2026)" } ] },
+    { g: "polisci", name: "PolMeth Europe VI", url: "https://polmeth.org/europe", where: "Hertie School, Berlin", ev: [
+      { t: "sub", d: "2026-11-15", est: true, note: "Abstracts were due Nov 15 last year; 2027 call not yet posted" },
+      { t: "conf", s: "2027-05-13", e: "2027-05-14", est: true, note: "Mid-May (May 14–15 in Dublin in 2026)" } ] },
+    { g: "polisci", name: "Asian PolMeth", url: "https://ppa.hku.hk/news-and-events/call-for-proposals-14th-annual-meeting-of-asian-political-methodology/", where: "Univ. of Hong Kong", ev: [
+      { t: "reg", d: "2026-11-15", note: "Registration window Nov 1–15; no fee" },
+      { t: "conf", s: "2027-01-08", e: "2027-01-09" } ] },
+    { g: "stats", name: "NESS Symposium", url: "https://symposium.nestat.org/", where: "Host not posted", ev: [
+      { t: "sub", d: "2027-04-20", est: true, talk: false, note: "Invited-session proposals (Apr 20 in 2026)" },
+      { t: "sub", d: "2027-05-15", est: true, note: "Abstracts and registration (May 15 in 2026); student awards May 1" },
+      { t: "conf", s: "2027-05-27", e: "2027-05-29", est: true, note: "40th New England Statistics Symposium; late May / early June (UConn May 27–29, 2026)" } ] },
+    { g: "stats", name: "ENAR", url: "https://www.enar.org/meetings/spring2027/", where: "Boston (Marriott Copley)", ev: [
+      { t: "reg", d: "2026-12-31", note: "Early registration ends (abstracts closed Oct 29)" },
+      { t: "conf", s: "2027-03-14", e: "2027-03-17" } ] },
+    { g: "stats", name: "SDSS (ASA)", url: "https://ww2.amstat.org/meetings/sdss/2027/", where: "Pittsburgh", ev: [
+      { t: "sub", d: "2026-11-30", note: "Refereed abstracts" },
+      { t: "sub", d: "2026-12-10", talk: false, note: "Panel session proposals" },
+      { t: "sub", d: "2027-02-05", note: "Lightning talks and e-posters (open Jan 7)" },
+      { t: "reg", d: "2027-03-25", note: "Early and speaker registration" },
+      { t: "conf", s: "2027-04-27", e: "2027-04-29" } ] },
+    { g: "stats", name: "BayesComp (ISBA)", url: "https://bayescomp2027.org/", where: "College Station, TX", ev: [
+      { t: "conf", s: "2027-05-18", e: "2027-05-20", note: "Texas A&M; contributed talks and posters open, deadline not posted. A mirror meeting in Aussois, France takes talks until Nov 30." } ] },
+    { g: "stats", name: "SSC Annual Meeting", url: "https://ssc.ca/en/meetings/annual/2027-ssc-annual-meeting-quebec", where: "Québec City (Laval)", ev: [
+      { t: "conf", s: "2027-05-30", e: "2027-06-02", note: "Statistical Society of Canada; abstract deadline early 2027, not posted" } ] },
+    { g: "stats", name: "WNAR/IMS", url: "https://wnar.org/wnar2027", where: "Honolulu", ev: [
+      { t: "sub", d: "2026-12-31", talk: false, note: "Invited session proposals" },
+      { t: "sub", d: "2027-02-15", note: "Contributed talks, posters, student competition" },
+      { t: "conf", s: "2027-06-13", e: "2027-06-16" } ] },
+    { g: "stats", name: "ICSA Applied Stats Symposium", url: "https://symposium2027.icsa.org/", where: "Pittsburgh", ev: [
+      { t: "sub", d: "2027-02-01", talk: false, note: "Invited session and short-course proposals" },
+      { t: "reg", d: "2027-04-15", note: "Early-bird registration; student papers due" },
+      { t: "sub", d: "2027-05-15", talk: false, note: "Posters" },
+      { t: "conf", s: "2027-06-13", e: "2027-06-16" } ] },
+    { g: "stats", name: "Joint Research Conference", url: "https://imstat.org/meetings-calendar/", where: "UConn, Storrs, CT", ev: [
+      { t: "conf", s: "2027-06-21", e: "2027-06-24", note: "QPRC + Spring Research Conference; dates from the IMS calendar; deadlines not posted" } ] },
+    { g: "stats", name: "Spatial Statistics", url: "https://www.elsevier.com/events/conferences/all/spatial-statistics", where: "Beijing", ev: [
+      { t: "sub", d: "2027-01-29", note: "Abstracts; workshop proposals Mar 12" },
+      { t: "reg", d: "2027-04-23", note: "Author and early-bird registration" },
+      { t: "conf", s: "2027-07-22", e: "2027-07-25" } ] },
+    { g: "stats", name: "JSM / IMS Annual Meeting", url: "https://ww2.amstat.org/meetings/jsm/2027/keydates.cfm", where: "Chicago (McCormick Place)", ev: [
+      { t: "sub", d: "2026-12-10", note: "Topic-contributed session proposals (Nov 17 – Dec 10)" },
+      { t: "sub", d: "2027-02-01", note: "Abstracts for all session types (open Dec 1)" },
+      { t: "reg", d: "2027-06-01", note: "Early and speaker registration (opens Apr 29)" },
+      { t: "conf", s: "2027-08-08", e: "2027-08-12", note: "JSM 2027 is also the IMS Annual Meeting" } ] },
+    { g: "stats", name: "Women in Stats & Data Sci.", url: "https://www.amstat.org/meetings/women-in-statistics-and-data-science", where: "Virtual", ev: [
+      { t: "conf", s: "2027-10-18", e: "2027-10-20", note: "ASA WSDS; deadlines not posted" } ] },
+    { g: "stats", name: "ISI World Statistics Congress", url: "https://www.isi-next.org/conferences/isi-wsc2027/", where: "Lusaka, Zambia", ev: [
+      { t: "reg", d: "2027-03-12", note: "Early-bird registration ends" },
+      { t: "conf", s: "2027-07-11", e: "2027-07-15" } ] },
+    { g: "soc", name: "ASA", url: "https://www.asanet.org/annual-meeting/2027-annual-meeting-overview/", where: "Chicago", ev: [
+      { t: "sub", d: "2027-02-01", est: true, note: "Regular papers; usually late Jan / early Feb" },
+      { t: "conf", s: "2027-08-06", e: "2027-08-10" } ] },
+    { g: "soc", name: "ISA World Congress of Sociology", url: "https://www.isa-sociology.org/en/conferences/world-congress/gwangju-2027", where: "Gwangju, South Korea", ev: [
+      { t: "reg", d: "2027-01-27", note: "Registration grant applications due" },
+      { t: "reg", d: "2027-03-23", note: "Presenters must pay; no extensions" },
+      { t: "conf", s: "2027-07-04", e: "2027-07-10" } ] },
+    { g: "hist", name: "AHA", url: "https://www.historians.org/event/2027-aha-annual-meeting/", where: "New Orleans", ev: [
+      { t: "reg", d: "2026-12-15", est: true, note: "Preregistration rate ends" },
+      { t: "conf", s: "2027-01-07", e: "2027-01-10" } ] },
+    { g: "hist", name: "AHA 2028 (call)", url: "https://www.historians.org/", where: "Jan 2028 meeting", ev: [
+      { t: "sub", d: "2027-02-15", est: true, note: "Proposals for the January 2028 meeting; usually mid-February" } ] },
+    { g: "hist", name: "OAH", url: "https://www.oah.org/", where: "San Francisco", ev: [
+      { t: "conf", s: "2027-04-01", e: "2027-04-04" } ] },
+    { g: "hist", name: "ESSHC", url: "https://esshc.iisg.amsterdam/en", where: "Lyon", ev: [
+      { t: "reg", d: "2027-03-01", note: "Last day to cancel for a refund" },
+      { t: "conf", s: "2027-04-21", e: "2027-04-24" } ] },
+    { g: "hist", name: "SSHA", url: "https://ssha.org/", where: "Venue not posted", ev: [
+      { t: "sub", d: "2027-03-01", est: true, note: "Usually about Mar 1" },
+      { t: "conf", s: "2027-11-11", e: "2027-11-14", est: true, note: "November" } ] },
+    { g: "eco", name: "ISEC (Statistical Ecology)", url: "https://statisticalecology.org/", where: "Mérida, México", ev: [
+      { t: "conf", s: "2027-01-08", e: "2027-01-15", note: "Workshops Jan 8–9; main conference Jan 10–15" } ] },
+    { g: "eco", name: "ESA Annual Meeting", url: "https://esa.org/toronto2027/program/important-dates/", where: "Toronto", ev: [
+      { t: "sub", d: "2026-12-03", talk: false, note: "Workshop, short-course and special-session proposals" },
+      { t: "sub", d: "2027-02-18", note: "Contributed abstracts (call opens early January)" },
+      { t: "sub", d: "2027-03-11", note: "Invited symposia, organized oral and Inspire sessions" },
+      { t: "reg", d: "2027-06-17", note: "Early-bird registration ends" },
+      { t: "reg", d: "2027-07-08", note: "Regular registration ends" },
+      { t: "conf", s: "2027-07-25", e: "2027-07-30" } ] },
+    { g: "eco", name: "EFI (Ecological Forecasting)", url: "https://ecoforecast.org/efi-2027-conference/", where: "Minneapolis (Augsburg Univ.)", ev: [
+      { t: "sub", d: "2027-01-22", talk: false, note: "Working-group and workshop proposals" },
+      { t: "sub", d: "2027-01-27", note: "Abstracts and travel scholarships (open Dec 1)" },
+      { t: "reg", d: "2027-03-19", note: "Early-bird registration ends (opens Feb 22)" },
+      { t: "reg", d: "2027-04-23", note: "Full registration deadline" },
+      { t: "conf", s: "2027-05-24", e: "2027-05-27" } ] },
+    { g: "eco", name: "CSEE (Ecology & Evolution)", url: "https://csee-scee.ca/", where: "Halifax", ev: [
+      { t: "conf", s: "2027-05-17", e: "2027-05-20", note: "Dates from a CSEE listing; confirm on the society's site" } ] },
+    { g: "ecoecon", name: "AERE Summer Conference", url: "https://www.aere.org/summer-conference", where: "Venue not posted", ev: [
+      { t: "sub", d: "2027-01-15", est: true, note: "Submissions open Dec 1, close early to mid-January" },
+      { t: "reg", d: "2027-03-15", est: true, note: "Registration opens mid-March" },
+      { t: "conf", s: "2027-06-09", e: "2027-06-11", est: true, note: "June 2027; exact dates not posted" } ] },
+    { g: "ecoecon", name: "ISEE Biennial Conference", url: "https://www.isecoeco.org/events/future-events-of-the-isee", where: "Not announced", ev: [
+      { t: "conf", s: "2027-06-22", e: "2027-06-25", est: true, note: "Due in 2027 (alternates with USSEE); Oslo was Jun 24–27, 2025. Not necessarily in North America." } ] },
+    { g: "ecoecon", name: "USSEE 2028 (call)", url: "https://ussee.org/conferences/", where: "2028 meeting", ev: [
+      { t: "sub", d: "2027-12-15", est: true, note: "Abstracts for the 2028 biennial; the 2026 call was due Dec 15, 2025" } ] },
+    { g: "comp", name: "ECPR Joint Sessions", url: "https://ecpr.eu/Events/369", where: "Trieste", ev: [
+      { t: "sub", d: "2026-12-14", note: "Paper proposals, submitted to one accepted workshop" },
+      { t: "reg", d: "2027-03-01", est: true, note: "Registration opens in March; funding applications Feb 1–17" },
+      { t: "conf", s: "2027-06-01", e: "2027-06-04" } ] },
+    { g: "comp", name: "EUSA Biennial", url: "https://eustudies.org/conference", where: "Washington, DC (Johns Hopkins)", ev: [
+      { t: "sub", d: "2026-11-11", note: "Proposal deadline: today" },
+      { t: "conf", s: "2027-05-20", e: "2027-05-22" } ] },
+    { g: "comp", name: "CES Europeanists", url: "https://councilforeuropeanstudies.org/2027-ces-conference/", where: "Leiden & The Hague", ev: [
+      { t: "conf", s: "2027-06-16", e: "2027-06-18", note: "Council for European Studies; proposals closed Oct 23, decisions by Dec 18" } ] },
+    { g: "comp", name: "LASA Congress", url: "https://lasaweb.org/en/lasa2027/important-dates/", where: "Mexico City (UNAM)", ev: [
+      { t: "reg", d: "2027-04-01", note: "Presenters must register (proposals closed Sep 9; decisions by Nov 16)" },
+      { t: "conf", s: "2027-06-16", e: "2027-06-20" } ] },
+    { g: "comp", name: "ISA 2028 (call)", url: "https://www.isanet.org/Conferences/Upcoming", where: "New Orleans, Mar 1–4, 2028", ev: [
+      { t: "sub", d: "2027-06-01", est: true, note: "Proposals for ISA 2028 in New Orleans (Mar 1–4, 2028); the 2027 call closed Jun 1, 2026" } ] },
+    { g: "comp", name: "ISA-Northeast", url: "https://www.isanet.org/Conferences/NE-Pittsburgh-2026", where: "Location not posted", ev: [
+      { t: "sub", d: "2027-06-18", est: true, note: "Was Jun 19 in 2026; workshop proposals Jul 10" },
+      { t: "conf", s: "2027-11-12", e: "2027-11-13", est: true, note: "Mid-November (Nov 13–14, 2026 in Pittsburgh)" } ] },
+    { g: "comp", name: "ISA Reykjavik", url: "https://www.isanet.org/Conferences/ISA-Reykjavik-2027", where: "Univ. of Iceland", ev: [
+      { t: "conf", s: "2027-06-23", e: "2027-06-25", note: "ISA's summer meeting; submissions closed Oct 30" } ] },
+    { g: "comp", name: "EISA Pan-European (IR)", url: "https://eisa-net.org/", where: "Ljubljana", ev: [
+      { t: "conf", s: "2027-09-14", e: "2027-09-17", note: "Section proposals closed Nov 9; paper/panel call not yet posted" } ] },
+    { g: "comp", name: "IPES", url: "https://www.internationalpoliticaleconomysociety.org/", where: "WashU, St. Louis", ev: [
+      { t: "conf", s: "2027-11-05", e: "2027-11-06", note: "International Political Economy Society; call not posted (mid-April in 2024)" } ] },
+    { g: "css", name: "IC2S2", url: "https://www.uvm.edu/socks/node/252", where: "Milan, Italy", ev: [
+      { t: "sub", d: "2027-03-01", est: true, note: "Abstracts; Mar 3 in 2026, Feb 24 in 2025" },
+      { t: "conf", s: "2027-07-20", e: "2027-07-23", est: true, note: "Late July in recent years" } ] },
+    { g: "css", name: "Sunbelt (INSNA)", url: "https://www.insna.org/events/sunbelt-2027-montreal", where: "Montréal", ev: [
+      { t: "sub", d: "2027-02-01", note: "Oral presentations and posters" },
+      { t: "conf", s: "2027-06-21", e: "2027-06-26", est: true, note: "Workshops Jun 21–23; main-conference dates not posted" } ] },
+    { g: "css", name: "PaCSS", url: "https://cssi.umass.edu/node/314", where: "With APSA, Washington", ev: [
+      { t: "conf", s: "2027-09-01", e: "2027-09-01", est: true, note: "One-day APSA pre-conference in recent years (Sep 2, 2026 in Boston)" } ] },
+    { g: "css", name: "TADA (Text as Data)", url: "https://www.aclweb.org/portal/content/cfp-tada-2026-new-directions-analyzing-text-data-uc-berkeley-extended-deadline", where: "Host not posted", ev: [
+      { t: "sub", d: "2027-08-02", est: true, note: "One-page abstracts; early August in 2023 and 2026" },
+      { t: "conf", s: "2027-10-04", e: "2027-10-05", est: true, note: "Autumn; Oct 5 at Berkeley in 2026" } ] },
+  ];
+
+  ROWS.sort((a, b) => ORDER.indexOf(a.g) - ORDER.indexOf(b.g));   // stable: keeps order within a group
+
+  const TODAY = new Date("2026-11-11T12:00");
+  const START = new Date("2026-11-01T00:00"), END = new Date("2028-01-01T00:00");
+  const D = s => new Date(s + "T12:00");
+  const fmt = (d, o = { month: "short", day: "numeric", year: "numeric" }) => d.toLocaleDateString("en-US", o);
+  const TYPE = { conf: "Conference", sub: "Submission deadline", reg: "Registration" };
+
+  const W = 1000, LW = 210, RH = 26, GH = 22, TOP = 40, PAD = 14;
+  const x = d => LW + (d - START) / (END - START) * (W - LW - PAD);
+  const ns = "http://www.w3.org/2000/svg";
+  const el = (tag, attrs, parent) => { const n = document.createElementNS(ns, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); parent && parent.appendChild(n); return n; };
+
+  const tip = document.getElementById("conf-tip");
+  const show = (ev, html) => { tip.innerHTML = html; tip.style.display = "block"; move(ev); };
+  const move = ev => {
+    const p = ev.touches ? ev.touches[0] : ev; const r = tip.getBoundingClientRect();
+    let left = p.clientX + 12, top = p.clientY + 14;
+    if (left + r.width > innerWidth - 8) left = p.clientX - r.width - 12;
+    if (top + r.height > innerHeight - 8) top = p.clientY - r.height - 12;
+    tip.style.left = left + "px"; tip.style.top = top + "px";
+  };
+  const hide = () => { tip.style.display = "none"; };
+
+  // A row is "open" when it still has a submission deadline ahead of today (posted or estimated).
+  const isOpen = r => r.g !== "other" && r.ev.some(e => e.t === "sub" && e.talk !== false && D(e.d) >= TODAY);
+
+  function draw(rows) {
+  let y = TOP; const layout = []; let lastG = null;
+  for (const r of rows) { if (r.g !== lastG) { layout.push({ group: r.g, y: y + 15 }); y += GH; lastG = r.g; } layout.push({ row: r, y }); y += RH; }
+  const H = y + 10;
+  const svg = el("svg", { viewBox: `0 0 ${W} ${H}` });
+
+  // month grid
+  // month grid
+  for (let m = new Date(START); m <= END; m = new Date(m.getFullYear(), m.getMonth() + 1, 1)) {
+    const xx = x(m);
+    el("line", { x1: xx, x2: xx, y1: TOP - 8, y2: H - 6, class: "grid" }, svg);
+    if (m < END) {
+      const mid = x(new Date(m.getFullYear(), m.getMonth(), 15));
+      el("text", { x: mid, y: 30, "text-anchor": "middle", class: "month" }, svg).textContent = fmt(m, { month: "short" });
+      if (m.getMonth() === 0 || +m === +START) el("text", { x: xx + 3, y: 14, class: "year" }, svg).textContent = m.getFullYear();
+    }
+  }
+
+  for (const L of layout) {
+    if (L.group) { el("text", { x: 8, y: L.y, class: "group-label" }, svg).textContent = G[L.group][0]; continue; }
+    const r = L.row, cy = L.y + RH / 2, col = G[r.g][1];
+    el("rect", { x: 0, y: L.y, width: W, height: RH, class: "row-hit" }, svg);
+    const lab = r.url ? el("a", { href: r.url, target: "_blank", rel: "noopener", class: "row-link" }, svg) : svg;
+    el("text", { x: 14, y: cy + 4, class: "row-label" }, lab).textContent = r.name;
+    for (const e of r.ev) {
+      const g = el("g", { class: "mark", tabindex: 0 }, svg);
+      let when, d0;
+      if (e.t === "conf") {
+        const s = D(e.s), en = D(e.e); d0 = s;
+        const x0 = x(s) - 3, x1 = Math.max(x(en) + 3, x0 + 14);
+        el("rect", { x: x0 - 6, y: cy - 10, width: x1 - x0 + 12, height: 20, fill: "transparent" }, g);
+        if (!e.nolabel) {
+        const right = x1 + 6 + r.where.length * 6 < W - PAD;
+        el("text", { x: right ? x1 + 6 : x0 - 6, y: cy + 4, "text-anchor": right ? "start" : "end", class: "where" }, svg).textContent = r.where;
+        }
+        el("rect", { x: x0, y: cy - 7, width: x1 - x0, height: 14, rx: 4, class: "shape",
+          fill: e.est ? "#fff" : col, stroke: col, "stroke-width": e.est ? 2 : 0, "stroke-dasharray": e.est ? "3 2" : "" }, g);
+        when = `${fmt(s, { month: "short", day: "numeric" })} – ${fmt(en)}`;
+      } else {
+        d0 = D(e.d); const cx = x(d0);
+        el("circle", { cx, cy, r: 11, fill: "transparent" }, g);
+        const attrs = { class: "shape", fill: e.est ? "#fff" : col, stroke: e.est ? col : "#fff", "stroke-width": e.est ? 2 : 1.5 };
+        if (e.t === "sub") el("path", { d: `M${cx} ${cy - 7} L${cx + 7} ${cy} L${cx} ${cy + 7} L${cx - 7} ${cy}Z`, ...attrs }, g);
+        else el("circle", { cx, cy, r: 5.5, ...attrs }, g);
+        when = fmt(d0);
+      }
+      const html = `<b>${r.name} · ${TYPE[e.t]}</b>${when}${e.est ? " <i>(estimate)</i>" : ""}<br>${e.note ? e.note + "<br>" : ""}${r.where}`;
+      g.setAttribute("aria-label", html.replace(/<[^>]+>/g, " "));
+      g.addEventListener("mouseenter", ev => show(ev, html));
+      g.addEventListener("mousemove", move);
+      g.addEventListener("mouseleave", hide);
+      g.addEventListener("focus", () => { const b = g.getBoundingClientRect(); show({ clientX: b.right, clientY: b.bottom }, html); });
+      g.addEventListener("blur", hide);
+      g.addEventListener("touchstart", ev => show(ev, html), { passive: true });
+    }
+  }
+
+  // today line
+  const tx = x(TODAY);
+  el("line", { x1: tx, x2: tx, y1: TOP - 6, y2: H - 6, class: "today" }, svg);
+  el("text", { x: tx + 4, y: H - 10, class: "today-label" }, svg).textContent = "Today";
+
+  hide();
+  document.getElementById("conf-timeline").replaceChildren(svg);
+  }
+
+  const box = document.getElementById("conf-open");
+  const chips = [...document.querySelectorAll(".conf-chips .chip")];
+  const on = new Set(chips.map(c => c.dataset.b));
+  try { const saved = JSON.parse(localStorage.getItem("conf-show")); if (Array.isArray(saved)) { on.clear(); saved.forEach(b => on.add(b)); } } catch (e) {}
+  const shown = r => BUCKET[r.g] === "always" || on.has(BUCKET[r.g]);
+
+  function nextUp(rows) {
+    const upcoming = [];
+    for (const r of rows) for (const e of r.ev) { const d0 = D(e.t === "conf" ? e.s : e.d); if (d0 >= TODAY) upcoming.push({ d: d0, r, e }); }
+    const list = document.getElementById("conf-next"); list.replaceChildren();
+    upcoming.sort((a, b) => a.d - b.d).slice(0, 8).forEach(u => {
+      const days = Math.round((u.d - TODAY) / 864e5);
+      const li = document.createElement("li"); li.style.setProperty("--c", G[u.r.g][1]);
+      li.innerHTML = `<div class="when">${fmt(u.d, { month: "short", day: "numeric", year: "numeric" })}${u.e.est ? ' <span class="est">est.</span>' : ""}</div>
+        <div><b>${u.r.url ? `<a href="${u.r.url}" target="_blank" rel="noopener">${u.r.name}</a>` : u.r.name}</b> · ${TYPE[u.e.t].toLowerCase()}</div>
+        <div class="days">${u.e.note || u.r.where} · ${days === 0 ? "today" : days === 1 ? "tomorrow" : "in " + days + " days"}</div>`;
+      list.appendChild(li);
+    });
+  }
+
+  function update() {
+    chips.forEach(c => c.setAttribute("aria-pressed", on.has(c.dataset.b)));
+    document.querySelectorAll(".conf-sec").forEach(sec => {
+      const b = [...sec.classList].find(c => c.startsWith("disc-")).slice(5);
+      sec.classList.toggle("is-hidden", b !== "always" && !on.has(b));
+    });
+    const rows = ROWS.filter(shown);
+    document.getElementById("conf-open-n").textContent = rows.filter(isOpen).length;
+    draw(box.checked ? rows.filter(isOpen) : rows);
+    nextUp(rows);
+    try { localStorage.setItem("conf-show", JSON.stringify([...on])); } catch (e) {}
+  }
+  chips.forEach(c => c.addEventListener("click", () => { on.has(c.dataset.b) ? on.delete(c.dataset.b) : on.add(c.dataset.b); update(); }));
+  document.getElementById("chip-all").addEventListener("click", () => { chips.forEach(c => on.add(c.dataset.b)); update(); });
+  box.addEventListener("change", update);
+  update();
+  document.addEventListener("touchstart", ev => { if (!ev.target.closest || !ev.target.closest("#conf-timeline .mark")) hide(); }, { passive: true });
+})();
+</script>
+```
