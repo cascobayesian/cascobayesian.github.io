@@ -1,0 +1,40 @@
+---
+pagetitle: "Grants"
+title: "Grants"
+subtitle: "Small grants for travel, collaboration and research costs"
+# Not linked from anywhere on the site, and kept out of the site search and sitemap; reach it at /grants.html.
+search: false
+---
+
+[← Logistics](logistics.qmd)
+
+Working list, last checked **November 11, 2026**. Amounts and deadlines come from web searches and some come from third-party listings. Confirm each one on the funder's own page before applying. Dates marked *est.* are guesses from past cycles.
+
+## Coming up
+
+| Deadline | Funder | Program | Amount | Covers | Fit |
+|----------|--------|---------|--------|--------|-----|
+| Jan 27, 2027 | Simons Foundation | [Travel Support for Mathematicians](https://www.simonsfoundation.org/grant/travel-support-for-mathematicians/?tab=rfa) | Up to $42,000 over 5 years (listings conflict; check) | Your travel and visitors' travel, domestic and international | **Strong**, if eligible (see below) |
+| Feb 1, 2027 | IMS | [New Researcher Travel Award](https://imstat.org/ims-awards/ims-new-researcher-travel-award/) | About $500–1,500 | Travel to present at an IMS-sponsored meeting | Only if your PhD is within the last 5 years |
+| ~Mar 15, 2027 *est.* | APSA Centennial Center | [Spring Research Grants](https://connect.apsanet.org/centennialcenter/) | Up to $2,500 | Research costs, including travel and data | **Strong**: faculty in non-PhD departments are eligible; APSA membership required |
+| April *est.* | Bowdoin FDC | [Faculty Research Awards](https://www.bowdoin.edu/academic-affairs/opportunities-for-faculty/funding-opportunities/faculty-development-committee/faculty-research-awards.html) | Varies | Travel, materials, publication costs, student research assistants | **Strong**, after start-up and research funds are spent |
+| Rolling | Bowdoin Dean's office | [Faculty Conference Travel Funds](https://www.bowdoin.edu/academic-affairs/opportunities-for-faculty/funding-opportunities/index.html) | Varies | Meetings of learned societies | **Strong**: covers routine conference travel |
+| ~Jun 1, 2027 *est.* | APSA Centennial Center | Summer Research Grants | Up to $2,500; up to $10,000 for a workshop | Research, conferences, workshops | Strong |
+| Rolling | Oberwolfach (MFO) | [Oberwolfach Research Fellows](https://www.mfo.de/scientific-program/longer-term/oberwolfach-research-fellows) | Room and board at the institute | 1–4 week stays in Germany for small collaborating groups | Good for a Europe collaboration |
+| Check | ICERM | Collaborate@ICERM | Lodging and support at ICERM | 1–2 weeks for teams of 3–6 | Good for computational or statistical teams |
+| Nov 1, 2027 | American Institute of Mathematics | [SQuaREs](https://aimath.org/programs/squares/) | Travel and lodging for the group | Teams of 4–6, up to three yearly week-long meetings | Good for a sustained collaboration (the 2026 deadline has passed) |
+| Roster | Fulbright | [Fulbright Specialist](https://fulbrightspecialist.worldlearning.org/open-calls) | Airfare and a daily honorarium | 2–6 week projects at a host institution abroad | Good once you're on the roster; apply to join the roster first |
+
+## Notes
+
+- **Simons Travel Support for Mathematicians.** This is the best fit for regular travel and collaboration. Applicants need a tenure-track or tenured position in a mathematics department, an active publication record, and no other external grant as PI or co-PI that runs past September 1, 2027. The FAQ addresses whether statistics counts, but I couldn't confirm its answer. Check it before applying. Starting this cycle the money is paid as a grant rather than a gift, so it goes through the Bowdoin Grants Office. Decisions are expected August 1, 2027.
+- **APSA.** These awards have a modest cap but suit precinct-level and local-politics work. The spring deadline has moved between March 15 and May 15 in recent years.
+- **Bowdoin.** The FDC won't pay mileage to sites within 50 miles of campus. The conference travel application asks you to list FDC awards from the past six years.
+
+## Watching, nothing open now
+
+- **Russell Sage Foundation, Sheldon Danziger Pipeline Grants.** Grants run about $35,000–50,000, larger than a small grant. The October 21, 2026 deadline has passed; the next cycle should come around fall 2027.
+- **Spencer Foundation, Small Research Grants on Education.** Grants go up to $50,000. A secondary report says Spencer is pausing new competitions in the first half of 2027 and expects to announce a redesign in June 2027.
+- **MIT Election Data and Science Lab.** Its recent calls ran $25,000–100,000 on set topics, most recently voter list maintenance. No call is open now, but it's worth watching given the precinct work.
+- **PIMS–BIRS Team Up!** This funds two-week team residencies in Banff or Kelowna for groups affected by obstacles to research. The 2026–27 round is closed.
+- **ASA.** Travel awards go almost entirely to students and early-career members (the Student and Early Career Travel Fund and section awards). I found no faculty small-grant program.

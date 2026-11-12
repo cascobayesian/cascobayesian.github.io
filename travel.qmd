@@ -1,0 +1,38 @@
+---
+pagetitle: "Travel"
+title: "Travel"
+subtitle: "Itinerary: Europe, India and Thailand"
+# Not linked from anywhere on the site, and kept out of the site search and sitemap; reach it at /travel.html.
+search: false
+---
+
+Rough plan. Dates and cities to be filled in.
+
+## Europe
+
+**Leg 1:** Croatia → Switzerland → Netherlands → Denmark
+
+**Leg 2:** Czechia → Slovakia → Hungary
+
+**Leg 3:** Romania → Serbia → Bulgaria
+
+| # | Country | Dates | Cities | Notes |
+|--:|---------|-------|--------|-------|
+| 1 | Croatia | | | |
+| 2 | Switzerland | | | |
+| 3 | Netherlands | | | |
+| 4 | Denmark | | | |
+| 5 | Czechia | | | |
+| 6 | Slovakia | | | |
+| 7 | Hungary | | | |
+| 8 | Romania | | | |
+| 9 | Serbia | | | |
+| 10 | Bulgaria | | | |
+
+## India
+
+*To be planned.*
+
+## Thailand
+
+*To be planned.*

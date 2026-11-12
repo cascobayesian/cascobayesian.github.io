@@ -1,0 +1,10 @@
+---
+pagetitle: "Logistics"
+title: "Logistics"
+# Not linked from anywhere on the site, and kept out of the site search and sitemap; reach it at /logistics.html.
+search: false
+---
+
+- [Travel](travel.qmd): itinerary for Europe, India and Thailand
+- [Conferences](conferences.qmd): meetings, dates and deadlines for 2026–27
+- [Grants](grants.qmd): funding opportunities and deadlines
