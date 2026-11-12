@@ -31,10 +31,10 @@ How to map voting blocs? Blocs are neither left nor right but highly spatial and
 
 ::: {.pcard}
 ::: {.pcard-img}
-![](files/images/research/california_rainbow.jpg){fig-alt="" .contain}
+[![](files/images/research/california_rainbow.jpg){fig-alt="Map of California precincts coloured by voting bloc" .contain}](research/local-politics.qmd)
 :::
 ::: {.pcard-body}
-### Local politics <!-- link: research/local-politics.qmd -->
+### [Local politics](research/local-politics.qmd)
 
 How local is politics? Mapping the demographic structure of voting blocs across the US, including California, Miami, and NYC.
 :::
@@ -42,13 +42,17 @@ How local is politics? Mapping the demographic structure of voting blocs across 
 
 ::: {.pcard}
 ::: {.pcard-img}
-![](files/images/research/switzerland_pca_1995_2005.gif){fig-alt="Rotating 3-D plot of Swiss communes on the first three principal coordinates of their referendum votes, 1995–2005, coloured by voting bloc" .contain}
+[![](files/images/research/switzerland_pca_1995_2005.gif){fig-alt="Rotating 3-D plot of Swiss communes on the first three principal coordinates of their referendum votes, 1995–2005, coloured by voting bloc" .contain}](research/worldwide.qmd)
 :::
 ::: {.pcard-body}
-### Politics worldwide <!-- link: research/worldwide.qmd -->
+### [Politics worldwide](research/worldwide.qmd)
 
-What structures voting blocs within and across countries? Case studies in the Netherlands, Switzerland, Croatia, Botswana and Korea (to start).
+What structures voting blocs within and across countries? Case studies of eighty years of Dutch elections and four decades of Swiss referendums, with more countries to come.
 :::
 :::
 
 :::
+
+## Publications and talks
+
+See the full list of [publications](research/publications.qmd) and [talks](research/talks.qmd). I publish as John D. O'Brien.

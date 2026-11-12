@@ -20,7 +20,7 @@ National politics in the United States has collapsed onto a single axis: if you 
 With Aaron Kaufman, I've been applying the [voting-bloc model](voting-blocs.qmd) to precinct- and town-level referendum returns from places across the country. The answer is the same everywhere we've looked so far. Every place has local structure that national partisanship can't reproduce, that structure is strongly spatial, and it comes in a small number of recognizable types.
 
 ::: {.callout-note appearance="simple"}
-**Status:** paper in draft, "The Structure of Conflict in Local Politics" (Kaufman & O'Brien).
+**Status:** paper in draft, "The Structure of Local Politics" (Kaufman & O'Brien).
 :::
 
 ## Maine

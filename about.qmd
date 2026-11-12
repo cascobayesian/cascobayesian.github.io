@@ -2,6 +2,7 @@
 title: "About"
 description-meta: "Reach out to me with questions and comments"
 title-block-banner: false
+draft: true   # placeholder; hidden from the published site
 ---
 
 What's to say about Jack O'Brien? Hard telling, not knowing!

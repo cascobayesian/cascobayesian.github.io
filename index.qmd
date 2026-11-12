@@ -51,7 +51,7 @@ toc: false
     })();
     </script>
     <div class="viz-captions">
-      <p class="viz-caption">Dutch municipalities in 1971: (left) map of voting blocs, (right) electoral positions of voting blocs.<!-- link removed for now: <a href="research/worldwide.html">More on the Netherlands</a> --></p>
+      <p class="viz-caption">Dutch municipalities in 1971: (left) map of voting blocs, (right) electoral positions of voting blocs. <a href="research/worldwide.html">More on the Netherlands</a></p>
       <p class="viz-caption viz-off">Map of the voting bloc structure of six US cities using referendum data (2012-2024).</p>
     </div>
   </div>
@@ -63,6 +63,7 @@ toc: false
       <a href="https://github.com/cascobayesian"><i class="bi bi-github"></i> GitHub</a>
       <a href="https://scholar.google.com/citations?user=eKEAQGUAAAAJ&hl=en"><i class="bi bi-mortarboard"></i> Scholar</a>
     </div>
+    <p class="hero-pubname">I publish as John D. O'Brien.</p>
   </div>
   <img class="hero-portrait" src="files/images/teaching.jpg" alt="Jack O'Brien teaching at Bowdoin">
 </div>

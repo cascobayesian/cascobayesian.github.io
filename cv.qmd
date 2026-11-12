@@ -1,6 +1,6 @@
 ---
 title: "Curriculum Vitae"
-subtitle: "Updated October 2026"
+subtitle: "Updated November 2026"
 page-layout: full
 ---
 
@@ -24,6 +24,8 @@ page-layout: full
 ```
 
 ## Representative papers
+
+<p class="muted">The <a href="research/publications.html">full publication list</a> is on the Research pages.</p>
 
 <ul class="pub-list">
 <li>John D. O'Brien. 2026. <span class="pub-title">"A Bayesian mixture model captures temporal and spatial structure of voting blocs within longitudinal referendum data."</span> <span class="pub-venue">Political Science Research and Methods</span>, 1&ndash;22. [<a href="https://doi.org/10.1017/psrm.2025.10050">doi</a>] [<a href="https://arxiv.org/abs/2301.01677">arXiv</a>]</li>

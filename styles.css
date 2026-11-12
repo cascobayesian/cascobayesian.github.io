@@ -31,6 +31,7 @@ h3 { font-size: 1.15rem; margin-top: 1.6rem; }
   text-decoration: none; font-size: .95rem; background: var(--jo-card-bg);
 }
 .hero-links a:hover { border-color: var(--bs-link-color); }
+.hero-pubname { margin: .7rem 0 0; font-size: .8rem; color: var(--jo-muted); }
 @media (max-width: 720px) {
   .hero { grid-template-columns: 1fr; gap: 1.2rem; text-align: center; }
   .hero img.headshot { margin: 0 auto; width: 160px; height: 160px; }
@@ -46,7 +47,7 @@ h3 { font-size: 1.15rem; margin-top: 1.6rem; }
   overflow: hidden; transition: border-color .15s ease, transform .15s ease;
 }
 /* Hover lift off while the Research cards have no links; restore with the links. */
-/* .pcard:hover { border-color: var(--bs-link-color); transform: translateY(-2px); } */
+.pcard:has(a):hover { border-color: var(--bs-link-color); transform: translateY(-2px); }
 .pcard .pcard-img { height: 150px; background: var(--jo-chip-bg); display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .pcard .pcard-img img { width: 100%; height: 100%; object-fit: cover; margin: 0; }
 .pcard .pcard-img .bi, .pcard .pcard-img i { font-size: 2.6rem; color: var(--bs-link-color); opacity: .75; }
