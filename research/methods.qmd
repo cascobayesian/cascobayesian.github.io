@@ -1,34 +1,10 @@
 ---
 title: "Statistical innovations"
 subtitle: "The models behind the maps"
-toc: true
-toc-location: right
 ---
 
-::: {.callout-note appearance="simple"}
-This page is being written.
-:::
+The work that set all of this in motion was in microbial genetics. Modeling metagenomic samples as mixtures of related strains, my collaborators and I found that mixture models do more than describe subpopulation structure: once the subcomponents are pinned down, you can fit far more complex models on top of them, in that case a phylogeny relating the strains to one another ([O'Brien et al. 2014](https://doi.org/10.1534/genetics.114.161299)). What later proved most useful was thinking carefully about the different *types* of mixture, and about the distinct signature each one leaves in the data ([O'Brien, Record & Countway 2016](https://doi.org/10.1101/045468)). In this regard, I think mixture models in the social sciences are at roughly the point phylogenetic models in evolution were around 2005: moving from bespoke, one-off methodologies toward a general, reproducible Bayesian system of analysis.
 
-## The beta-binomial mixture model
+Since then, I've been carrying these methods into new kinds of data: decorated potsherds from the Lake Chad Basin ([O'Brien, Lin & MacEachern 2016](https://doi.org/10.1098/rspb.2015.2824)), the daily rhythms of tweets across American cities ([Murthy et al. 2021](https://doi.org/10.1177/0038038520956940)), bumblebee foraging (Max Hukill's honors thesis, Bowdoin 2021), and election returns ([O'Brien 2026](https://doi.org/10.1017/psrm.2025.10050)). These models usually take Dirichlet-multinomial (in the two-outcome case, beta-binomial) components, with different hierarchical structures layered on top to capture the relationships among the components. The analogy I've found most compelling, and have built out furthest, is the one between population genetics and political opinion: precincts are mixtures of voting blocs in the way that genomes are mixtures of ancestral populations ([Pritchard, Stephens & Donnelly 2000](https://doi.org/10.1093/genetics/155.2.945)). That analogy underlies the [PSRM paper](https://doi.org/10.1017/psrm.2025.10050) ([arXiv](https://arxiv.org/abs/2301.01677)) and my current collaboration with [Aaron Kaufman](https://aaronrkaufman.com/) on [local political dynamics](local-politics.qmd). A perennial challenge is estimating *K*, the number of blocs, and here I've been experimenting with the recent explosion of methods: mixtures of finite mixtures ([Miller & Harrison 2018](https://doi.org/10.1080/01621459.2016.1255636)) and their telescoping samplers ([Frühwirth-Schnatter, Malsiner-Walli & Grün 2021](https://doi.org/10.1214/21-BA1294)), Newman's approach to counting communities in networks ([Newman & Reinert 2016](https://doi.org/10.1103/PhysRevLett.117.078301)), birth-death MCMC ([Stephens 2000](https://doi.org/10.1214/aos/1016120364)), thermodynamic integration and its stepping-stone refinement for the marginal likelihood ([Lartillot & Philippe 2006](https://doi.org/10.1080/10635150500433722); [Xie et al. 2011](https://doi.org/10.1093/sysbio/syq085)), and tempering, both as a sequential Monte Carlo path from prior to posterior ([Del Moral, Doucet & Jasra 2006](https://doi.org/10.1111/j.1467-9868.2006.00553.x)) and as a coarsened posterior that raises the likelihood to a fractional power, which makes the inferred blocs robust to the small departures from the model that real precincts always show ([Miller & Dunson 2019](https://doi.org/10.1080/01621459.2018.1469995)).
 
-- Fitting it by expectation–maximization
-- A full Bayesian treatment
-- Nailing down the posterior on the number of blocs
-
-### What's next
-
-- Mixture of experts
-- Nonparametric approaches
-- Time and space
-
-## Back to pottery
-
-The same ideas, applied to pottery decoration at Lake Chad Basin sites ([O'Brien, Lin & MacEachern 2016](https://royalsocietypublishing.org/rspb/article/283/1827/20152824/84418/Mixture-model-of-pottery-decorations-from-Lake)).
-
-![Cultural periods by depth across excavation units at Lake Chad Basin sites, from the pottery-decoration mixture model.](../files/images/lake-chad-pottery.png){fig-alt="Stacked colored bars showing inferred cultural periods by depth for excavation units at Lake Chad Basin sites" width="100%"}
-
-<!-- TODO: Jack: confirm this figure is from O'Brien, Lin & MacEachern (2016) -->
-
-## Other examples
-
-- Hannah and propaganda
+For a very non-mathy introduction to voting blocs, check out [these slides](voting_bloc_slides.html).
