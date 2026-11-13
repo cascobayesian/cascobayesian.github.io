@@ -11,7 +11,7 @@ As we confront the disaster of increasing authoritarianism and its computational
 
 ## Rent control in Portland
 
-Portland's landlords report every unit's rent to the city each year. I mapped five years of those filings (2021–2025): 5,353 rental buildings and about 95,000 unit-year records, each placed on its tax parcel. Click a building to see every rent reported for it. Renters can also [check their own rent](files/portland-rent-map/check.html): type in an address and see whether the registered increases look lawful. Both are collected on the [Rent control in Portland](outreach/portland-rent-control.qmd) page.
+Portland, Maine's rent control ordinance specifies that all rental units in the city must be registered, recording the qualities of the units including rent. I mapped all of the filing from the start of the ordinance to most recent year (2021-2025), and produced two tools for renters: a [lookup tool](files/portland-rent-map/check.html) to see if their rent appears to be in compliance with the rent control ordinance; and a [map of all of the units in the city](files/portland-rent-map/index.html), including filters for short-term rentals, various levels of compliance, and other features.
 
 ```{=html}
 <a class="map-link" href="files/portland-rent-map/index.html" target="_blank" rel="noopener">
