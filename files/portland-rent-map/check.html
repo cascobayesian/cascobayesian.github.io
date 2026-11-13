@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Portland Rent Check</title>
+<meta name="description" content="Look up your Portland, Maine address in the city's rent registry and see whether the registered rent increases look lawful.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root {
+  --bg: #fbfbfa; --fg: #18212c; --muted: #6b7584; --line: #d9dde3; --field: #ffffff;
+  --hover: #f1f3f6; --blue: #2a78d6; --mid: #c9c5cf; --red: #d1312b; --focus: #2a78d6;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #15191f; --fg: #e8ebef; --muted: #98a2b0; --line: #333a44; --field: #1d222a;
+    --hover: #262c35; --blue: #3987e5; --mid: #8a8694; --red: #e66767; --focus: #6da7ec;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #15191f; --fg: #e8ebef; --muted: #98a2b0; --line: #333a44; --field: #1d222a;
+  --hover: #262c35; --blue: #3987e5; --mid: #8a8694; --red: #e66767; --focus: #6da7ec;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  background: var(--bg); color: var(--fg);
+  font: 16px/1.5 "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  display: flex; flex-direction: column; min-height: 100%;
+}
+main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 48px 16px; }
+.wrap { width: 100%; max-width: 560px; }
+
+/* search */
+.search { position: relative; }
+#q {
+  width: 100%; font: inherit; font-size: 20px; padding: 16px 22px;
+  border: 1px solid var(--line); border-radius: 999px; background: var(--field); color: var(--fg);
+  outline: none; transition: border-color .15s, box-shadow .15s;
+}
+#q::placeholder { color: var(--muted); opacity: .7; }
+#q:focus { border-color: var(--focus); box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 20%, transparent); }
+#sugg {
+  position: absolute; left: 0; right: 0; top: calc(100% + 6px); z-index: 2; list-style: none; margin: 0; padding: 6px;
+  background: var(--field); border: 1px solid var(--line); border-radius: 16px;
+  box-shadow: 0 8px 24px rgb(0 0 0 / .08);
+}
+#sugg li { padding: 10px 16px; border-radius: 10px; cursor: pointer; }
+#sugg li[aria-selected="true"], #sugg li:hover { background: var(--hover); }
+#sugg li.none { color: var(--muted); cursor: default; background: none; }
+.status { min-height: 1.5em; margin-top: 14px; text-align: center; color: var(--muted); font-size: 14px; }
+
+/* unit step */
+.step h2 { font-size: 15px; font-weight: 500; color: var(--muted); margin: 0 0 4px; text-align: center; }
+.step .addr { font-size: 22px; font-weight: 600; text-align: center; margin: 0 0 20px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.chips button {
+  font: inherit; font-size: 15px; padding: 8px 16px; min-width: 52px; border-radius: 999px;
+  border: 1px solid var(--line); background: var(--field); color: var(--fg); cursor: pointer;
+}
+.chips button:hover { background: var(--hover); }
+.chips button:focus-visible, .link:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.link { font: inherit; font-size: 14px; color: var(--muted); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.center { text-align: center; margin-top: 18px; }
+
+/* result */
+.scale { margin: 28px 0 0; }
+.scale svg { display: block; width: 100%; height: auto; overflow: visible; }
+.ends { display: flex; justify-content: space-between; font-size: 15px; font-weight: 500; margin-top: 6px; }
+.verdict { margin-top: 28px; text-align: center; }
+.verdict .tier { font-size: 20px; font-weight: 600; }
+.verdict .why { color: var(--muted); margin: 6px auto 0; max-width: 46ch; }
+.verdict .rent { margin-top: 10px; font-size: 14px; color: var(--muted); }
+dialog#dist {
+  width: calc(100% - 32px); max-width: 620px; padding: 24px 24px 20px; border: 1px solid var(--line); border-radius: 18px;
+  background: var(--bg); color: var(--fg); box-shadow: 0 20px 50px rgb(0 0 0 / .25);
+}
+dialog#dist::backdrop { background: rgb(10 14 20 / .45); }
+.dist h3 { font-size: 16px; font-weight: 600; margin: 0 0 4px; text-align: center; }
+.dist .sub { font-size: 13px; color: var(--muted); margin: 0 0 14px; text-align: center; }
+.dist svg { display: block; width: 100%; height: auto; }
+.dist text { font-family: inherit; }
+.cta { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 28px; }
+.btn {
+  display: inline-block; padding: 12px 24px; border-radius: 999px; text-decoration: none; cursor: pointer;
+  font: inherit; font-weight: 500; font-size: 15px; line-height: 1.4; transition: opacity .15s, background .15s;
+  border: 1px solid var(--fg); background: var(--fg); color: var(--bg);
+}
+.btn:hover { opacity: .85; }
+.btn.secondary { background: transparent; color: var(--fg); border-color: var(--line); }
+.btn.secondary:hover { opacity: 1; background: var(--hover); }
+.btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+/* not-found page */
+.missing .lede { text-align: center; color: var(--muted); margin: 0 auto 20px; max-width: 44ch; }
+.missing ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; counter-reset: r; }
+.missing li { counter-increment: r; position: relative; padding: 16px 18px 16px 56px; border: 1px solid var(--line); border-radius: 14px; background: var(--field); }
+.missing li::before {
+  content: counter(r); position: absolute; left: 18px; top: 15px; width: 26px; height: 26px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 14px; font-weight: 600; background: var(--hover); color: var(--fg);
+}
+.missing li strong { display: block; margin-bottom: 2px; }
+.missing li span { color: var(--muted); font-size: 15px; }
+[hidden] { display: none !important; }
+
+footer { padding: 16px; text-align: center; font-size: 18.75px; line-height: 1.45; color: var(--muted); }
+footer a { color: inherit; }
+@media (max-width: 480px) { #q { font-size: 18px; padding: 14px 18px; } .step .addr { font-size: 19px; } }
+</style>
+</head>
+<body>
+<main>
+  <div class="wrap">
+    <!-- 1. search -->
+    <section id="s-search">
+      <div class="search">
+        <input id="q" type="text" placeholder="What's your address?" autocomplete="off" spellcheck="false"
+               role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="sugg" aria-label="Your street address in Portland, Maine">
+        <ul id="sugg" role="listbox" hidden></ul>
+      </div>
+      <div class="status" id="status" aria-live="polite"></div>
+    </section>
+
+    <!-- 2. unit prompt -->
+    <section id="s-unit" class="step" hidden>
+      <h2>Which unit is yours?</h2>
+      <p class="addr" id="u-addr"></p>
+      <div class="chips" id="u-chips"></div>
+      <div class="center"><button class="link" id="u-more" hidden>My unit isn't listed</button></div>
+      <div class="center"><button class="link" data-reset>Search another address</button></div>
+    </section>
+
+    <!-- 3. result -->
+    <section id="s-result" class="step" hidden>
+      <h2 id="r-unit"></h2>
+      <p class="addr" id="r-addr"></p>
+      <div class="scale" role="img" id="r-scale">
+        <svg viewBox="0 0 560 64" aria-hidden="true">
+          <defs>
+            <linearGradient id="grad" gradientUnits="userSpaceOnUse" x1="20" x2="540" y1="0" y2="0">
+              <stop offset="0" style="stop-color:var(--blue)"/>
+              <stop offset=".5" style="stop-color:var(--mid)"/>
+              <stop offset="1" style="stop-color:var(--red)"/>
+            </linearGradient>
+          </defs>
+          <!-- double-headed arrow -->
+          <rect x="20" y="24" width="520" height="8" fill="url(#grad)"/>
+          <rect x="18" y="12" width="4" height="32" rx="1" style="fill:var(--blue)"/>
+          <rect x="538" y="12" width="4" height="32" rx="1" style="fill:var(--red)"/>
+          <!-- marker -->
+          <g id="marker" style="transition: transform .6s cubic-bezier(.2,.8,.2,1)">
+            <circle cx="0" cy="28" r="15" style="fill:var(--bg)"/>
+            <circle cx="0" cy="28" r="11" id="marker-dot" style="fill:var(--fg)"/>
+          </g>
+        </svg>
+        <div class="ends"><span>Looks fine.</span><span>Likely rent violation</span></div>
+      </div>
+      <div class="verdict">
+        <div class="tier" id="r-tier"></div>
+        <p class="why" id="r-why"></p>
+        <div class="rent" id="r-rent"></div>
+      </div>
+      <div class="cta">
+        <button class="btn secondary" id="d-open" type="button">How do other units compare?</button>
+        <a class="btn" id="r-data" href="index.html">Look at the data for your address.</a>
+      </div>
+      <div class="center"><button class="link" id="r-other" hidden>Choose a different unit</button></div>
+      <div class="center"><button class="link" data-reset>Search another address</button></div>
+    </section>
+
+    <!-- 4. not in the registry -->
+    <section id="s-missing" class="step missing" hidden>
+      <h2 id="m-kicker">Not in the registry</h2>
+      <p class="addr" id="m-addr"></p>
+      <p class="lede" id="m-lede"></p>
+      <ol>
+        <li><strong id="m-r1-h"></strong><span id="m-r1"></span></li>
+        <li><strong id="m-r2-h"></strong><span id="m-r2"></span></li>
+      </ol>
+      <div class="cta"><button class="btn" id="m-retry" type="button">Try the address again</button></div>
+      <div class="center"><button class="link" data-reset>Search another address</button></div>
+    </section>
+  </div>
+</main>
+
+<dialog id="dist" aria-labelledby="d-title">
+  <figure class="dist" style="margin:0">
+    <h3 id="d-title"></h3>
+    <p class="sub" id="d-sub"></p>
+    <svg viewBox="0 0 560 170" id="d-svg" role="img"></svg>
+  </figure>
+  <div class="cta" style="margin-top:16px"><button class="btn secondary" id="d-close" type="button">Close</button></div>
+</dialog>
+<footer>
+  From the City of Portland's rent registry, 2021–2025. A flag is a lead worth checking, not a legal finding.
+  <a href="index.html">Explore the full map</a>.
+</footer>
+
+<script>
+(() => {
+  const $ = s => document.querySelector(s);
+  const DATA = "data/";
+  const X = pos => 46 + pos * 468;   // marker / bar centre in the 560-wide viewBox; clears both end lines
+  // Tier 1 = clear violation … 6 = nothing found. Position runs blue (0) → red (1).
+  const TIER = {
+    1: { name: "Likely rent violation", pos: 1.00 },
+    2: { name: "Strong possible violation", pos: 0.80 },
+    3: { name: "Worth a closer look", pos: 0.60 },
+    4: { name: "Registration problems", pos: 0.40 },
+    5: { name: "Minor paperwork gaps", pos: 0.20 },
+    6: { name: "Looks fine.", pos: 0.00 },
+  };
+  // Units per tier across all 28,223 unit entries in the 2021–2025 registry (score.R).
+  const COUNTS = { 1: 1174, 2: 1002, 3: 2844, 4: 7670, 5: 3906, 6: 11627 };
+  // Bars in the distribution pop-up: minor gaps (5) and registration problems (4) share one bar.
+  const GROUPS = [
+    { tiers: [6], name: "Looks fine", short: ["Looks", "fine"], pos: 0 },
+    { tiers: [5, 4], name: "Paperwork problems", short: ["Paperwork", "problems"], pos: 0.3 },
+    { tiers: [3], name: "Worth a closer look", short: ["Closer", "look"], pos: 0.6 },
+    { tiers: [2], name: "Strong possible violation", short: ["Strong", "possible"], pos: 0.8 },
+    { tiers: [1], name: "Likely rent violation", short: ["Likely", "violation"], pos: 1 },
+  ];
+
+  function bars(sel) {
+    const n = g => g.tiers.reduce((a, t) => a + COUNTS[t], 0);
+    const total = GROUPS.reduce((a, g) => a + n(g), 0), max = Math.max(...GROUPS.map(n));
+    const H = 92, base = 118, w = 72;
+    let out = `<line x1="8" x2="552" y1="${base + .5}" y2="${base + .5}" style="stroke:var(--line)"/>`;
+    GROUPS.forEach((g, k) => {
+      const x = 56 + k * 112, c = n(g), h = Math.max(2, c / max * H), on = g.tiers.includes(sel);
+      const pct = (100 * c / total).toFixed(c / total < .1 ? 1 : 0) + "%";
+      const ink = `fill:var(${on ? "--fg" : "--muted"});font-weight:${on ? 600 : 400}`;
+      out += `<rect x="${x - w / 2}" y="${base - h}" width="${w}" height="${h}" rx="4" style="fill:${mix(g.pos)};opacity:${on ? 1 : .4}"><title>${g.name}: ${c.toLocaleString()} units (${pct})</title></rect>`;
+      out += `<text x="${x}" y="${base - h - 7}" text-anchor="middle" style="font-size:${on ? 14 : 12}px;${ink}">${pct}</text>`;
+      out += `<text x="${x}" y="${base + 20}" text-anchor="middle" style="font-size:12px;${ink}"><tspan x="${x}">${g.short[0]}</tspan><tspan x="${x}" dy="15">${g.short[1]}</tspan></text>`;
+    });
+    $("#d-svg").innerHTML = out;
+    $("#d-title").textContent = "How other units compare";
+    $("#d-sub").textContent = `All ${total.toLocaleString()} units in Portland's 2021–2025 rent registry. Yours is highlighted.`;
+    $("#d-svg").setAttribute("aria-label", GROUPS.map(g => `${g.name} ${n(g).toLocaleString()} units`).join("; ") + `. This unit: ${GROUPS.find(g => g.tiers.includes(sel)).name}.`);
+  }
+
+  // ---------- address normalisation (applied to both the registry and the query)
+  const SUFFIX = { STREET:"ST", STR:"ST", AVENUE:"AVE", AV:"AVE", ROAD:"RD", DRIVE:"DR", LANE:"LN", PLACE:"PL",
+    COURT:"CT", TERRACE:"TER", TERR:"TER", BOULEVARD:"BLVD", PARKWAY:"PKWY", CIRCLE:"CIR", EXTENSION:"EXT",
+    HIGHWAY:"HWY", SQUARE:"SQ", WHARF:"WHF", POINT:"PT", HEIGHTS:"HTS", MOUNT:"MT", SAINT:"ST",
+    NORTH:"N", SOUTH:"S", EAST:"E", WEST:"W" };
+  const UNIT_RE = /\s*(?:,\s*)?(?:\b(?:APT|APARTMENT|UNIT|STE|SUITE|FL|FLOOR|NO)\.?\s*|#\s*)([A-Z0-9][A-Z0-9-]*)\s*$/;
+  function clean(s) {
+    return s.toUpperCase().replace(/\bPORTLAND\b.*$/, "").replace(/\b(ME|MAINE)\b\s*\d{5}.*$/, "")
+            .replace(/[.,']/g, " ").replace(/\s+/g, " ").trim();
+  }
+  function splitUnit(s) {
+    s = clean(s); const m = s.match(UNIT_RE);
+    return m ? { addr: s.slice(0, m.index).trim(), unit: m[1] } : { addr: s, unit: null };
+  }
+  const norm = s => clean(s).split(" ").map(t => SUFFIX[t] || t).join(" ");
+  const unitKey = s => String(s).toUpperCase().replace(/^(APT|APARTMENT|UNIT|#|NO\.?)\s*/, "").replace(/[^A-Z0-9]/g, "");
+  const title = s => s.toLowerCase().replace(/\b([a-z])/g, c => c.toUpperCase()).replace(/\b(\d+)(St|Nd|Rd|Th)\b/g, (m, n, x) => n + x.toLowerCase());
+
+  // ---------- data
+  let ADDRS = [];               // { key, num, street, display, b }
+  const cache = new Map();
+  async function getJSON(u) { const r = await fetch(u); if (!r.ok) throw new Error(u + ": " + r.status); return r.json(); }
+  async function chunk(k) {
+    const p = String(k).padStart(2, "0");
+    if (!cache.has(k)) cache.set(k, Promise.all([getJSON(`${DATA}units_${p}.json`), getJSON(`${DATA}tiers_${p}.json`)]));
+    return cache.get(k);
+  }
+  const ready = getJSON(DATA + "index.json").then(ix => {
+    for (const b of ix.buildings) for (const a of b.addr) {
+      const key = norm(a), m = key.match(/^(\d+[A-Z]?(?:-\d+[A-Z]?)?)\s+(.*)$/);
+      ADDRS.push({ key, num: m ? m[1] : "", street: m ? m[2] : key, display: title(a), b });
+    }
+  }).catch(e => { $("#status").textContent = "The registry data didn't load. Try reloading the page."; throw e; });
+
+  // ---------- search
+  function search(raw) {
+    const q = norm(splitUnit(raw).addr); if (!q) return [];
+    const m = q.match(/^(\d+[A-Z]?)\s*(.*)$/), num = m ? m[1] : "", st = m ? m[2] : q;
+    const out = [];
+    for (const a of ADDRS) {
+      let score = 0;
+      if (a.key === q) score = 100;
+      else if (num) {
+        const nums = a.num.split("-");
+        if (!(a.num === num || nums.includes(num) || (nums.length === 2 && +num >= +nums[0] && +num <= +nums[1]))) continue;
+        if (!st) score = 30;
+        else if (a.street.startsWith(st)) score = 80;
+        else if (a.street.split(" ").some(w => w.startsWith(st.split(" ")[0]))) score = 50;
+        else continue;
+      } else if (a.street.startsWith(st)) score = 20;
+      else continue;
+      out.push({ a, score });
+    }
+    const seen = new Set();
+    return out.sort((x, y) => y.score - x.score || x.a.key.localeCompare(y.a.key, undefined, { numeric: true }))
+              .filter(o => !seen.has(o.a.b.id + o.a.key) && seen.add(o.a.b.id + o.a.key)).slice(0, 7).map(o => o.a);
+  }
+
+  const q = $("#q"), sugg = $("#sugg");
+  let hits = [], active = -1;
+  function renderSugg() {
+    const open = q.value.trim().length >= 2;
+    sugg.hidden = !open; q.setAttribute("aria-expanded", String(open));
+    if (!open) return;
+    sugg.innerHTML = hits.length
+      ? hits.map((a, i) => `<li role="option" id="o${i}" aria-selected="${i === active}" data-i="${i}">${esc(a.display)}</li>`).join("")
+      : `<li class="none" data-missing>No match in the registry. Press Enter for what that means.</li>`;
+    if (active >= 0) q.setAttribute("aria-activedescendant", "o" + active); else q.removeAttribute("aria-activedescendant");
+  }
+  q.addEventListener("input", async () => { await ready; hits = search(q.value); active = hits.length ? 0 : -1; renderSugg(); $("#status").textContent = ""; });
+  q.addEventListener("keydown", e => {
+    if (e.key === "ArrowDown" && hits.length) { active = (active + 1) % hits.length; renderSugg(); e.preventDefault(); }
+    else if (e.key === "ArrowUp" && hits.length) { active = (active - 1 + hits.length) % hits.length; renderSugg(); e.preventDefault(); }
+    else if (e.key === "Enter") { e.preventDefault(); if (hits[active]) choose(hits[active]); else if (q.value.trim()) missing("address"); }
+    else if (e.key === "Escape") { sugg.hidden = true; }
+  });
+  sugg.addEventListener("mousedown", e => {
+    const li = e.target.closest("li[data-i]"); if (li) { e.preventDefault(); choose(hits[+li.dataset.i]); }
+    else if (e.target.closest("li[data-missing]")) { e.preventDefault(); missing("address"); }
+  });
+  q.addEventListener("blur", () => setTimeout(() => { sugg.hidden = true; q.setAttribute("aria-expanded", "false"); }, 100));
+
+  // ---------- resolve building → unit
+  let cur = null;   // { a, units, tiers, list }
+  async function choose(a) {
+    sugg.hidden = true; $("#status").textContent = "Looking up the registration…";
+    const typedUnit = splitUnit(q.value).unit;
+    let units, tiers;
+    try { [units, tiers] = await chunk(a.b.chunk).then(([U, T]) => [U[a.b.id].units, T[a.b.id]]); }
+    catch { $("#status").textContent = "Something went wrong loading that building. Please try again."; return; }
+    $("#status").textContent = "";
+    const all = units.map((u, i) => ({ i, label: u.label, last: Math.max(...u.recs.map(r => r[0])), t: tiers[i] }));
+    // Units on the building's latest registration, one per label (keep the most recent entry).
+    const latest = Math.max(...all.map(u => u.last));
+    const byLabel = new Map();
+    for (const u of all.filter(u => u.last === latest)) {
+      const k = unitKey(u.label) || "_";
+      if (!byLabel.has(k) || u.t[0] < byLabel.get(k).t[0]) byLabel.set(k, u);
+    }
+    const list = [...byLabel.values()].sort((x, y) => x.label.localeCompare(y.label, undefined, { numeric: true }));
+    cur = { a, all, list };
+    if (typedUnit) {
+      const hit = all.filter(u => unitKey(u.label) === unitKey(typedUnit)).sort((x, y) => y.last - x.last)[0];
+      if (hit) return show(hit);
+    }
+    if (list.length === 1) return show(list[0]);
+    askUnit(list, false);
+  }
+
+  function askUnit(list, everything) {
+    $("#u-addr").textContent = cur.a.display;
+    $("#u-chips").innerHTML = list.map(u => `<button data-i="${u.i}">${esc(prettyLabel(u.label))}${everything ? ` <span style="color:var(--muted)">· ${u.last}</span>` : ""}</button>`).join("");
+    const showingAll = everything || cur.all.length === list.length;
+    $("#u-more").textContent = showingAll ? "My unit still isn't listed" : "My unit isn't listed";
+    $("#u-more").dataset.all = showingAll ? "1" : "";
+    $("#u-more").hidden = false;
+    go("#s-unit");
+    $("#u-chips button")?.focus();
+  }
+  $("#u-chips").addEventListener("click", e => { const b = e.target.closest("button"); if (b) show(cur.all.find(u => u.i === +b.dataset.i)); });
+  $("#u-more").addEventListener("click", () => $("#u-more").dataset.all ? missing("unit") : askUnit([...cur.all].sort((x, y) => y.last - x.last || x.label.localeCompare(y.label, undefined, { numeric: true })), true));
+  const prettyLabel = l => /^\(no unit #\)$/i.test(l) ? "No unit number" : l;
+
+  // ---------- result
+  async function show(u) {
+    const [tier, why] = u.t, T = TIER[tier];
+    const units = (await chunk(cur.a.b.chunk))[0][cur.a.b.id].units[u.i];
+    const last = units.recs.reduce((x, y) => (y[0] > x[0] ? y : x));
+    $("#r-addr").textContent = cur.a.display;
+    $("#r-unit").textContent = cur.list.length > 1 || cur.all.length > 1 ? "Unit " + prettyLabel(u.label) : "Your building";
+    $("#r-tier").textContent = T.name;
+    $("#r-why").textContent = why;
+    $("#r-rent").textContent = last[9] > 0 ? `Registered rent, ${last[0]} registration: $${Math.round(last[9]).toLocaleString()} a month` : "";
+    $("#r-scale").setAttribute("aria-label", `Scale from "Looks fine" to "Likely rent violation". This unit: ${T.name}.`);
+    $("#r-other").hidden = cur.all.length < 2;
+    const marker = $("#marker");
+    marker.style.transform = `translateX(${X(0)}px)`;
+    $("#marker-dot").style.fill = mix(T.pos);
+    bars(tier);
+    $("#r-data").href = `index.html?b=${encodeURIComponent(cur.a.b.id)}&u=${u.i}`;
+    go("#s-result");
+    requestAnimationFrame(() => requestAnimationFrame(() => { marker.style.transform = `translateX(${X(T.pos)}px)`; }));
+  }
+  $("#r-other").addEventListener("click", () => askUnit(cur.list, false));
+  const dlg = $("#dist");
+  $("#d-open").addEventListener("click", () => dlg.showModal());
+  $("#d-close").addEventListener("click", () => dlg.close());
+  dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });   // click on the backdrop
+
+  // marker colour sampled from the same blue → neutral → red ramp
+  function mix(t) {
+    const cs = getComputedStyle(document.documentElement), hex = n => cs.getPropertyValue(n).trim();
+    const [a, b, f] = t <= .5 ? [hex("--blue"), hex("--mid"), t / .5] : [hex("--mid"), hex("--red"), (t - .5) / .5];
+    const p = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+    const A = p(a), B = p(b);
+    return "rgb(" + A.map((v, i) => Math.round(v + (B[i] - v) * f)).join(",") + ")";
+  }
+
+  // ---------- not in the registry
+  const NOT_COVERED = "That doesn't necessarily mean your rent is capped: some units are exempt from the rent limits, for example owner-occupied buildings of two to four units and subsidised housing.";
+  function missing(kind) {
+    sugg.hidden = true; q.setAttribute("aria-expanded", "false"); $("#status").textContent = "";
+    if (kind === "unit") {
+      $("#m-kicker").textContent = "Your unit isn't in the registry";
+      $("#m-addr").textContent = cur.a.display;
+      $("#m-lede").textContent = "We found your building, but not your unit. That usually means one of two things:";
+      $("#m-r1-h").textContent = "Your unit is listed under a different number.";
+      $("#m-r1").textContent = "Landlords type unit labels themselves, so yours may appear as a floor (\"2nd floor\"), a letter, or the street address. Go back and look again at the units listed for your building.";
+      $("#m-retry").textContent = "Back to the list of units";
+    } else {
+      $("#m-kicker").textContent = "Not in the registry";
+      $("#m-addr").textContent = title(clean(q.value));
+      $("#m-lede").textContent = "We couldn't find this address in Portland's rent registry. That usually means one of two things:";
+      $("#m-r1-h").textContent = "The address isn't quite right.";
+      $("#m-r1").textContent = "Check the house number and spelling, or try just the number and street, like \"12 Smith St\". Some buildings are registered under a neighbouring number or a corner address.";
+      $("#m-retry").textContent = "Try the address again";
+    }
+    $("#m-r2-h").textContent = kind === "unit" ? "Your unit isn't registered." : "Your building isn't registered.";
+    $("#m-r2").textContent = "Portland's Tenant Protection Ordinance requires landlords to register their rental units, so a missing registration is a violation in itself. " + NOT_COVERED;
+    $("#m-retry").dataset.kind = kind;
+    go("#s-missing");
+    $("#m-retry").focus();
+  }
+  $("#m-retry").addEventListener("click", () => {
+    if ($("#m-retry").dataset.kind === "unit") return askUnit(cur.list, false);
+    go("#s-search"); q.focus(); q.select();
+  });
+
+  // ---------- navigation
+  function go(sel) {
+    for (const s of ["#s-search", "#s-unit", "#s-result", "#s-missing"]) $(s).hidden = s !== sel;
+  }
+  document.querySelectorAll("[data-reset]").forEach(b => b.addEventListener("click", () => {
+    q.value = ""; hits = []; sugg.hidden = true; $("#status").textContent = ""; go("#s-search"); q.focus();
+  }));
+  function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+  q.focus();
+})();
+</script>
+</body>
+</html>

@@ -11,7 +11,7 @@ As we confront the disaster of increasing authoritarianism and its computational
 
 ## Rent control in Portland
 
-Portland's landlords report every unit's rent to the city each year. I mapped five years of those filings (2021–2025): 5,353 rental buildings and about 95,000 unit-year records, each placed on its tax parcel. Click a building to see every rent reported for it.
+Portland's landlords report every unit's rent to the city each year. I mapped five years of those filings (2021–2025): 5,353 rental buildings and about 95,000 unit-year records, each placed on its tax parcel. Click a building to see every rent reported for it. Renters can also [check their own rent](files/portland-rent-map/check.html): type in an address and see whether the registered increases look lawful. Both are collected on the [Rent control in Portland](outreach/portland-rent-control.qmd) page.
 
 ```{=html}
 <a class="map-link" href="files/portland-rent-map/index.html" target="_blank" rel="noopener">

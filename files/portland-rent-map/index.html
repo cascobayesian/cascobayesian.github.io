@@ -518,7 +518,7 @@ details li { margin-bottom: 3px; }
   // 0 bed / 0 bath is how a blank form reads, so it shows nothing
   const bedBath = r => r[F.beds] == null || (!r[F.beds] && !r[F.baths]) ? "" : `${r[F.beds] === 0 ? "Studio" : r[F.beds] + " BD"} / ${r[F.baths] ?? "—"} BA`;
 
-  async function openBuilding(id, { fly = false } = {}) {
+  async function openBuilding(id, { fly = false, unit = null } = {}) {
     selectedId = id;
     const b = BY_ID.get(id);
     if (map && map.getLayer("sel")) map.setFilter("sel", ["==", ["get", "id"], id]);
@@ -594,7 +594,7 @@ details li { margin-bottom: 3px; }
       const uf = $("#unitFilter");
       if (uf) uf.oninput = () => draw(uf.value);
       const first = d.units.findIndex(u => latestRec(u)[F.cur] > 0);
-      selectUnit(d, first >= 0 ? first : 0, { scroll: false });
+      selectUnit(d, unit != null && d.units[unit] ? unit : first >= 0 ? first : 0, { scroll: unit != null });
     } else {
       selectUnit(d, 0);
     }
@@ -1196,6 +1196,9 @@ details li { margin-bottom: 3px; }
       });
       map.on("mouseleave", "bld", () => { map.getCanvas().style.cursor = ""; tip.hidden = true; });
       map.on("click", "bld", ev => { tip.hidden = true; openBuilding(ev.features[0].properties.id); });
+      // Deep link from the rent check page: index.html?b=<parcel id>&u=<unit index>
+      const qp = new URLSearchParams(location.search), qb = qp.get("b");
+      if (qb && BY_ID.has(qb)) openBuilding(qb, { fly: true, unit: qp.get("u") != null && /^\d+$/.test(qp.get("u")) ? +qp.get("u") : null });
     });
   }
 
