@@ -1,6 +1,5 @@
 ---
 title: "Publications"
-subtitle: "I publish as John D. O'Brien"
 toc: true
 toc-location: right
 ---

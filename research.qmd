@@ -1,5 +1,5 @@
 ---
-title: "Current Research"
+pagetitle: "Research"
 subtitle: "Computational Statistics for Social Science"
 ---
 
@@ -12,7 +12,7 @@ My research develops Bayesian mixture models to find interpretable structures in
 [![](files/images/lake-chad-pottery.png){fig-alt="Inferred cultural periods by depth at Lake Chad Basin excavation sites"}](research/methods.qmd)
 :::
 ::: {.pcard-body}
-### [Statistical innovations](research/methods.qmd)
+### [Statistical carpentry](research/methods.qmd)
 
 The Beta-binomial mixture model. How to fit it. How to nail down the number of blocs. Some pieces of pottery. Extensions.
 :::
