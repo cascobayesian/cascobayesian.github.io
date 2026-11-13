@@ -53,6 +53,9 @@ main { flex: 1; display: flex; flex-direction: column; align-items: center; just
 #sugg li { padding: 10px 16px; border-radius: 10px; cursor: pointer; }
 #sugg li[aria-selected="true"], #sugg li:hover { background: var(--hover); }
 #sugg li.none { color: var(--muted); cursor: default; background: none; }
+.intro { text-align: center; font-size: 22px; font-weight: 600; line-height: 1.35; margin: 0 0 22px; }
+.intro span { display: block; font-size: 17px; font-weight: 400; color: var(--muted); margin-top: 4px; }
+.scale-q { text-align: center; font-size: 16px; font-weight: 600; margin: 28px 0 -16px; }
 .status { min-height: 1.5em; margin-top: 14px; text-align: center; color: var(--muted); font-size: 14px; }
 
 /* unit step */
@@ -117,6 +120,7 @@ footer a { color: inherit; }
   <div class="wrap">
     <!-- 1. search -->
     <section id="s-search">
+      <h1 class="intro">Portland, Maine has rent control.<span>Check if you're being overcharged.</span></h1>
       <div class="search">
         <input id="q" type="text" placeholder="What's your address?" autocomplete="off" spellcheck="false"
                role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="sugg" aria-label="Your street address in Portland, Maine">
@@ -138,6 +142,7 @@ footer a { color: inherit; }
     <section id="s-result" class="step" hidden>
       <h2 id="r-unit"></h2>
       <p class="addr" id="r-addr"></p>
+      <p class="scale-q">How is my rental doing?</p>
       <div class="scale" role="img" id="r-scale">
         <svg viewBox="0 0 560 64" aria-hidden="true">
           <defs>
@@ -157,7 +162,7 @@ footer a { color: inherit; }
             <circle cx="0" cy="28" r="11" id="marker-dot" style="fill:var(--fg)"/>
           </g>
         </svg>
-        <div class="ends"><span>Looks fine.</span><span>Likely rent violation</span></div>
+        <div class="ends"><span style="color:var(--blue)">Full compliance</span><span style="color:var(--red)">Likely overcharged</span></div>
       </div>
       <div class="verdict">
         <div class="tier" id="r-tier"></div>
@@ -377,7 +382,7 @@ footer a { color: inherit; }
     $("#r-tier").textContent = T.name;
     $("#r-why").textContent = why;
     $("#r-rent").textContent = last[9] > 0 ? `Registered rent, ${last[0]} registration: $${Math.round(last[9]).toLocaleString()} a month` : "";
-    $("#r-scale").setAttribute("aria-label", `Scale from "Looks fine" to "Likely rent violation". This unit: ${T.name}.`);
+    $("#r-scale").setAttribute("aria-label", `How is my rental doing? Scale from "Full compliance" to "Likely overcharged". This unit: ${T.name}.`);
     $("#r-other").hidden = cur.all.length < 2;
     const marker = $("#marker");
     marker.style.transform = `translateX(${X(0)}px)`;
