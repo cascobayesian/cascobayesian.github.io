@@ -3,6 +3,8 @@ pagetitle: "Research"
 subtitle: "Computational Statistics for Social Science"
 ---
 
+[<i class="bi bi-github" aria-hidden="true"></i> github.com/cascobayesian](https://github.com/cascobayesian)
+
 My research develops Bayesian mixture models to find interpretable structures in complex data. While I started in statistical phylogenetics and genetics (viral evolution, malaria genomics, microbial metagenomics), these days I work mainly on social science: political structure in election data, cultural patterns in the archaeological record, and the rhythms of social life online.
 
 ::: {.card-grid .two-up}
