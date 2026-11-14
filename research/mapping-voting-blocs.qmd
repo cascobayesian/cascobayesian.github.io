@@ -1,5 +1,5 @@
 ---
-title: "Inferring Voting Blocs"
+title: "Inferring voting blocs"
 ---
 
 A voting bloc — a group of individuals that vote in a similar fashion — is a foundational concept to electoral, legislative, and judicial analysis. However, these analyses are almost always restricted to data where individual votes are directly observed. An excellent example would be a legislative voting record. The Beta-Binomial Mixture model (and subsequent model developments) provides a way to infer voting blocs from a new type of data: voting precincts, thousands of voters all mixed together. Crucially, this allows us to infer voting blocs from real electoral data, which has not previously been done with standard election data. The model works best with referendum data, though candidate data can be used with some constraints. Applied to locations across the US, we find that voting blocs are highly spatial, strongly connected to demographic changes, and consistent across time.
