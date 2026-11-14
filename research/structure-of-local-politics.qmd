@@ -2,7 +2,7 @@
 title: "Local politics"
 ---
 
-What divides voters when the national parties aren't on the ballot? If you listen to the news you might think that all American politics are just about who voted for which president. But across hundreds of states and cities, thousands of local ballot measures are packed with questions parties never take a side on: daylight saving time, a casino, a new state flag. On those questions, how do voters vote? How do these connect with national identification? And what can this tell us about the structure of urban politics?
+What divides voters when the national parties aren't on the ballot? If you listen to the news you might think that all American politics are just about who voted for which president. But across dozens of states and cities, thousands of local ballot measures are packed with questions parties never take a side on: daylight saving time, a casino, a new state flag. On those questions, how do voters vote? How do these connect with national identification? And what can this tell us about the structure of urban politics?
 
 With [Aaron Kaufman](https://aaronrkaufman.com/), I've been applying the voting-bloc model to precinct- and town-level referendum returns from states and cities across the US. What we've learned is remarkable: while there are similarities across cities, the structure of electoral politics within urban America is structurally diverse, strongly consistent across time, and filled with surprising historical, cultural, and sociological conditions.
 
