@@ -1,10 +1,8 @@
 ---
-title: "Mapping Voting Blocs"
+title: "Inferring Voting Blocs"
 ---
 
-## Abstract
-
-The estimation of voting blocs is an important statistical inquiry in political science. However, the scope of these analyses is usually restricted to roll call data where individual votes are directly observed. Here, we examine a Bayesian mixture model with Dirichlet-multinomial components to infer voting blocs within longitudinal referendum data aggregated at the municipal level. As a case study, we analyze vote totals from 423 municipalities in the US state Maine for 54 referendum questions balloted from 2008-2019. Using this model, we recover the posterior distribution on the number of voting blocs, the support for each question within each bloc, and the blocs' mixture within each municipality. We find that these voting blocs are structured by geography and are largely consistent across the study period. Further analysis of the posterior distribution provides three additional findings: voting blocs exhibit both gradients and discontinuities in their overall structure that are consistent with geography and culture; a small number of questions are inconsistent with the statewide bloc structure and these questions' content relate to specific regions; and that the blocs exhibit evidence of increased polarization across blocs during the study period. We conclude with an outline of statistical extensions of this model, connections to other statistical frameworks in political science (such as polling), and detail candidate locations for subsequent applications of the model.
+A voting bloc — a group of individuals that vote in a similar fashion — is a foundational concept to electoral, legislative, and judicial analysis. However, these analyses are almost always restricted to data where individual votes are directly observed. An excellent example would be a legislative voting record. The Beta-Binomial Mixture model (and subsequent model developments) provides a way to infer voting blocs from a new type of data: voting precincts, thousands of voters all mixed together. Crucially, this allows us to infer voting blocs from real electoral data, which has not previously been done with standard election data. The model works best with referendum data, though candidate data can be used with some constraints. Applied to locations across the US, we find that voting blocs are highly spatial, strongly connected to demographic changes, and consistent across time.
 
 John D. O'Brien. 2026. "A Bayesian mixture model captures temporal and spatial structure of voting blocs within longitudinal referendum data." *Political Science Research and Methods*, 1–22. [doi](https://doi.org/10.1017/psrm.2025.10050) · [arXiv](https://arxiv.org/abs/2301.01677)
 
@@ -25,10 +23,10 @@ A non-mathematical introduction: what a voting bloc is, how we find them from re
 
 ::: {.pcard}
 ::: {.pcard-img}
-![](../files/images/research/maine_referendum_heatmap.png){fig-alt="Heatmap of yes shares for Maine towns (rows) on 72 ballot questions (columns), 2008 to 2025, in red and blue." .contain}
+![](../files/images/research/maine_bloc_heatmap.png){fig-alt="Heatmap of yes shares for Maine towns (rows) on 72 ballot questions (columns), with the towns grouped into seven voting blocs, each marked by a colour bar." .contain}
 :::
 ::: {.pcard-body}
-### The model behind the blocs
+### A more thorough introduction
 
 The mathematical version: the beta-binomial mixture model, how it is fitted and how the number of blocs is chosen. Slides coming soon.
 :::
