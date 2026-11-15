@@ -1,0 +1,127 @@
+---
+title: "San Francisco's voting blocs"
+toc: false
+page-layout: full
+# Stand-alone page, not linked from the site menus; kept out of search and the sitemap (scripts/unlist_hidden_pages.py).
+# Left: the SF Chronicle's Progressive Voter Index map (Nami Sumida, Dec. 8 2021), traced from a screenshot onto the
+# atlas's 510 precincts (each precinct takes the most common of the 11 legend steps under it). Right: the atlas's live
+# San Francisco BBMM blocs, each colored on the same ramp by its precincts' resident-weighted average traced score.
+search: false
+---
+
+```{=html}
+<div class="sfp-wrap">
+  <div class="sfp-col">
+    <h2 class="sfp-head">Progressive Voter Index <span>SF Chronicle</span></h2>
+    <div class="sfp-map" id="sfp-map-pvi" role="img" aria-label="San Francisco precincts colored by the SF Chronicle's Progressive Voter Index"></div>
+    <div class="sfp-legend">
+      <div class="sfp-ramp" id="sfp-ramp"></div>
+      <div class="sfp-ends"><span>0 &middot; Less progressive</span><span>More progressive &middot; 100</span></div>
+    </div>
+  </div>
+  <div class="sfp-col">
+    <h2 class="sfp-head">Nine blocs <span>BBMM</span></h2>
+    <div class="sfp-map" id="sfp-map-bbmm" role="img" aria-label="San Francisco precincts in nine BBMM voting blocs, colored by each bloc's average Progressive Voter Index"></div>
+    <div class="sfp-legend"><ol id="sfp-blocs"></ol></div>
+  </div>
+</div>
+<div class="sfp-tip" id="sfp-tip" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script>
+(() => {
+  // The Chronicle's 11 legend steps (sampled from its legend), 0 = less progressive.
+  const PAL = ["#A44D37", "#B36341", "#C27B4A", "#CF9152", "#D9A558", "#E2BA5D", "#B9B067", "#91A574", "#6F9380", "#52768B", "#345A97"];
+  const ramp = d3.piecewise(d3.interpolateLab, PAL);
+  const scoreColor = v => ramp(Math.max(0, Math.min(1, (v / 100 * 11 - 0.5) / 10)));   // step midpoints land on the steps
+  const stepRange = s => `${Math.round(s * 100 / 11)}&ndash;${Math.round((s + 1) * 100 / 11)}`;
+  // BBMM blocs: names and counts from the atlas's live panel; pvi = resident-weighted average traced score.
+  const BLOCS = [
+    { b: 1, name: "Wealthy Progressives",     n: 52, biden: 95, pvi: 75.4 },
+    { b: 2, name: "Progressive Renters",      n: 76, biden: 94, pvi: 82.2 },
+    { b: 3, name: "Young Professionals",      n: 68, biden: 89, pvi: 60.7 },
+    { b: 4, name: "Affluent Renters",         n: 83, biden: 88, pvi: 51.5 },
+    { b: 5, name: "Wealthy Moderates",        n: 33, biden: 85, pvi: 31.8 },
+    { b: 6, name: "Low-Income Renters",       n: 36, biden: 84, pvi: 45.8 },
+    { b: 7, name: "Middle-Class Mixed",       n: 80, biden: 82, pvi: 43.2 },
+    { b: 8, name: "Asian Homeowners",         n: 46, biden: 79, pvi: 28.3 },
+    { b: 9, name: "Asian Immigrant Families", n: 36, biden: 77, pvi: 28.8 } ].map(x => ({ ...x, color: scoreColor(x.pvi) }));
+  const byB = Object.fromEntries(BLOCS.map(x => [x.b, x]));
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+  const ink = c => { const r = d3.rgb(c), l = [r.r, r.g, r.b].map(v => (v / 255) ** 2.2); return 0.2126 * l[0] + 0.7152 * l[1] + 0.0722 * l[2] > 0.3 ? "#111" : "#fff"; };
+
+  document.getElementById("sfp-ramp").innerHTML = PAL.map((c, i) => `<span style="background:${c}" data-s="${i}" title="${stepRange(i).replace("&ndash;", "–")}"></span>`).join("");
+  document.getElementById("sfp-blocs").innerHTML = [...BLOCS].sort((a, b) => b.pvi - a.pvi).map(x => `<li data-b="${x.b}" tabindex="0">
+      <span class="sfp-swatch" style="background:${x.color};color:${ink(x.color)}">${x.b}</span>
+      <span class="sfp-name">${esc(x.name)}</span>
+      <span class="sfp-meta">PVI ${Math.round(x.pvi)} &middot; ${x.n} precincts &middot; Biden 2020 ${x.biden}%</span></li>`).join("");
+
+  const tip = document.getElementById("sfp-tip");
+  Promise.all([d3.json("../files/sf-pvi/precincts.geojson"), d3.json("../files/sf-pvi/blocs.geojson")]).then(([geo, blocs]) => {
+    const W = 600, H = 560;
+    const path = d3.geoPath(d3.geoIdentity().reflectY(true).fitSize([W, H], geo));
+    let focus = null;
+    const mk = (id, fill, outlines) => {
+      const svg = d3.select("#" + id).append("svg").attr("viewBox", `0 0 ${W} ${H}`);
+      const divs = svg.append("g").selectAll("path").data(geo.features).join("path")
+        .attr("d", path).attr("class", "sfp-div").attr("fill", d => fill(d.properties));
+      if (outlines) svg.append("g").selectAll("path").data(blocs.features).join("path").attr("d", path).attr("class", "sfp-bloc");
+      const hot = svg.append("path").attr("class", "sfp-hot");
+      divs.on("pointermove", (ev, d) => show(d, ev)).on("click", (ev, d) => show(d, ev));
+      svg.on("pointerleave", () => show(null));
+      return { divs, hot };
+    };
+    const maps = [mk("sfp-map-pvi", p => PAL[p.s], false), mk("sfp-map-bbmm", p => byB[p.b].color, true)];
+    function show(d, ev) {
+      maps.forEach(m => m.hot.attr("d", d ? path(d) : null));
+      if (!d) { tip.hidden = true; return; }
+      const p = d.properties, B = byB[p.b];
+      tip.innerHTML = `<b>${esc(p.name)}</b>
+        <div class="sfp-trow"><span class="sfp-chip" style="background:${PAL[p.s]}"></span>Chronicle PVI ${stepRange(p.s)}</div>
+        <div class="sfp-trow"><span class="sfp-swatch sm" style="background:${B.color};color:${ink(B.color)}">${B.b}</span>${esc(B.name)} &middot; PVI ${Math.round(B.pvi)}</div>
+        <div class="sfp-tnum">Bloc probability <b>${Math.round(100 * p.p)}%</b></div>`;
+      tip.hidden = false;
+      const r = tip.getBoundingClientRect(), x = ev.clientX + 14, y = ev.clientY + 14;
+      tip.style.left = (x + r.width > innerWidth - 8 ? ev.clientX - r.width - 14 : x) + "px";
+      tip.style.top = (y + r.height > innerHeight - 8 ? ev.clientY - r.height - 10 : y) + "px";
+    }
+    const paint = () => maps.forEach(m => m.divs.attr("opacity", d => focus == null ? 1 :
+      (focus.b ? d.properties.b === focus.b : d.properties.s === focus.s) ? 1 : 0.13));
+    const hover = (el, f) => {
+      const on = () => { focus = f; paint(); }, off = () => { focus = null; paint(); };
+      el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off);
+      el.addEventListener("focus", on); el.addEventListener("blur", off);
+    };
+    document.querySelectorAll("#sfp-blocs li").forEach(li => hover(li, { b: +li.dataset.b }));
+    document.querySelectorAll("#sfp-ramp span").forEach(sp => hover(sp, { s: +sp.dataset.s }));
+  });
+})();
+</script>
+<style>
+.sfp-wrap { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem; align-items: start; margin: 1rem 0 2rem; }
+.sfp-head { font-size: 1.15rem; margin: 0 0 .5rem; border: 0; padding: 0; }
+.sfp-head span { font-weight: 400; color: #777; font-size: .9rem; margin-left: .4rem; }
+.sfp-map svg { display: block; width: 100%; height: auto; max-height: 78vh; }
+.sfp-div { stroke: #fff; stroke-width: .3; transition: opacity .15s; }
+.sfp-bloc { fill: none; stroke: #fff; stroke-width: 1.6; pointer-events: none; }
+.sfp-hot { fill: none; stroke: #111; stroke-width: 2; pointer-events: none; }
+.sfp-legend { margin-top: 1rem; }
+.sfp-ramp { display: flex; height: 16px; max-width: 24rem; }
+.sfp-ramp span { flex: 1; cursor: default; }
+.sfp-ramp span:hover { outline: 2px solid #111; outline-offset: -1px; }
+.sfp-ends { display: flex; justify-content: space-between; max-width: 24rem; font-size: .8rem; color: #555; margin-top: .3rem; }
+.sfp-legend ol { list-style: none; padding: 0; margin: 0; }
+.sfp-legend li { display: grid; grid-template-columns: 1.7rem 1fr; column-gap: .55rem; padding: .22rem .35rem; margin-left: -.35rem; border-radius: 6px; cursor: default; }
+.sfp-legend li:hover, .sfp-legend li:focus-visible { background: #f2f1ee; outline: none; }
+.sfp-swatch { grid-row: span 2; width: 1.7rem; height: 1.7rem; border-radius: 50%; border: 1.5px solid #111; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .78rem; }
+.sfp-swatch.sm { display: inline-flex; width: 1.15rem; height: 1.15rem; font-size: .62rem; margin-right: .4rem; border-width: 1px; }
+.sfp-chip { display: inline-block; width: .8rem; height: .8rem; border-radius: 2px; margin-right: .45rem; }
+.sfp-name { font-weight: 600; font-size: .92rem; line-height: 1.25; }
+.sfp-meta { font-size: .75rem; color: #666; }
+.sfp-tip { position: fixed; z-index: 50; pointer-events: none; background: #fff; border: 1px solid #bbb; border-radius: 5px; box-shadow: 0 2px 10px rgba(0,0,0,.15);
+           padding: .5rem .65rem; font-size: .82rem; max-width: 19rem; line-height: 1.4; }
+.sfp-trow { margin-top: .3rem; display: flex; align-items: center; }
+.sfp-tnum { margin-top: .35rem; color: #444; }
+@media (max-width: 800px) { .sfp-wrap { grid-template-columns: 1fr; } }
+</style>
+```
