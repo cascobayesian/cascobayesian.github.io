@@ -58,6 +58,16 @@ search: false
 .atlas-pca[aria-expanded=true] img { outline: 2px solid #222; outline-offset: 2px; }
 .atlas-demog { margin-top: 1.5rem; border-top: 1px dashed #ccc; padding-top: 1rem; scroll-margin-top: 4rem; }
 .atlas-demog > img { display: block; width: 100%; height: auto; }
+.atlas-map-col { min-width: 0; }
+.atlas-heat { margin: 1rem 0 0; border-radius: 4px; }
+.atlas-heat img { border: 1px solid #e3e3e3; border-radius: 4px; }
+.atlas-heat[role=button] { cursor: pointer; }
+.atlas-heat[role=button]:hover img, .atlas-heat[role=button]:focus-visible img, .atlas-heat[aria-expanded=true] img { outline: 2px solid #222; outline-offset: 2px; }
+.atlas-heat[role=button]:focus { outline: none; }
+.atlas-heatmap { margin-top: 1.5rem; border-top: 1px dashed #ccc; padding-top: 1rem; scroll-margin-top: 4rem; }
+.atlas-heatmap > img { display: block; width: 100%; height: auto; }
+.atlas-heat-key { max-width: 22rem; margin-top: .5rem; }
+.atlas-heat-key h3 { font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: #555; margin: 0 0 .4rem; border: 0; }
 .atlas-demog-keys { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-top: .5rem; }
 .atlas-demog-keys h3 { font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: #555; margin: 0 0 .4rem; border: 0; }
 .atlas-demog-keys p, .atlas-demog-note { font-size: .8rem; color: #666; margin: .3rem 0 0; }
@@ -72,6 +82,7 @@ search: false
   .atlas-demog-keys { grid-template-columns: 1fr; }
   .atlas-panel-grid { grid-template-columns: 1fr; }
   .atlas-state-map { order: -1; }
+  .atlas-map-col { order: -1; }
 }
 </style>
 <link rel="stylesheet" href="../files/atlas/bloc_profiles.css">
@@ -101,6 +112,24 @@ document.addEventListener("DOMContentLoaded", () => {
       demog.hidden = !open;
       fig.setAttribute("aria-expanded", String(open));
       if (open) demog.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+    fig.addEventListener("click", toggle);
+    fig.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
+  });
+  // clicking a panel's referendum heatmap opens, below the panel, the same heatmap grouped by voting bloc
+  document.querySelectorAll(".atlas-panel").forEach(panel => {
+    const fig = panel.querySelector(".atlas-heat"), heat = panel.querySelector(".atlas-heatmap");
+    if (!fig || !heat) return;
+    fig.tabIndex = 0;
+    fig.setAttribute("role", "button");
+    fig.setAttribute("aria-controls", heat.id);
+    fig.setAttribute("aria-expanded", "false");
+    const toggle = () => {
+      const open = heat.hidden;
+      if (open) { const img = heat.querySelector("img[data-src]"); if (img && !img.src) img.src = img.dataset.src; }
+      heat.hidden = !open;
+      fig.setAttribute("aria-expanded", String(open));
+      if (open) heat.scrollIntoView({ behavior: "smooth", block: "start" });
     };
     fig.addEventListener("click", toggle);
     fig.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
