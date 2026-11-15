@@ -35,3 +35,9 @@
 .bp-key i { font-style: normal; color: #888; margin-left: .2rem; }
 .bp-note { font-size: .78rem; color: #666; margin: 1rem 0 0; }
 @media (max-width: 900px) { .bp-grid { grid-template-columns: 1fr; } }
+.uc-cert { display: flex; align-items: center; gap: .5rem; }
+.uc-meter { flex: none; width: 5rem; height: 8px; border-radius: 4px; background: #e6e3dc; overflow: hidden; }
+.uc-meter span { display: block; height: 100%; }
+.bp-row + .bp-row + .bp-row .bp-bar { height: 10px; }
+.uc .bp-key { grid-template-columns: 1fr; }
+.uc .bp-row { grid-template-columns: 8.5rem 1fr; }
