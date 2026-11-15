@@ -1,6 +1,5 @@
 ---
 title: "Philadelphia's voting blocs"
-subtitle: "Eight blocs, shaded within Sixty-Six Wards' four"
 toc: false
 page-layout: full
 # Stand-alone page, not linked from the site menus; kept out of search and the sitemap (scripts/unlist_hidden_pages.py).
@@ -8,44 +7,29 @@ page-layout: full
 search: false
 ---
 
-::: {.phl-intro}
-In December 2020, Jonathan Tannen's [Sixty-Six Wards](https://sixtysixwards.com/home/philadelphias-changing-voting-blocs/) sorted Philadelphia's divisions into four voting blocs: **Black Voters**, **Wealthy Progressives**, **Hispanic Voters** and **White Moderates**. Our [voting-bloc model](voting-blocs.qmd), fitted to 56 ballot questions and 11 federal races from 2008 to 2024, finds eight. Each of the eight sits inside one of Tannen's four, so the map keeps his colors and uses shades of each color for the blocs within it: darker shades are more Democratic.
-:::
-
 ```{=html}
 <div class="phl-wrap">
-  <div class="phl-map-col">
-    <div class="phl-toggle" role="group" aria-label="Color the map by">
-      <button type="button" data-mode="sub" aria-pressed="true">Eight blocs</button>
-      <button type="button" data-mode="broad" aria-pressed="false">Four broad blocs</button>
-    </div>
-    <div class="phl-map" id="phl-map" role="img" aria-label="Map of Philadelphia's 1,703 election divisions colored by voting bloc"></div>
-    <p class="phl-hint">Hover over a division, or tap it, for its bloc. Hover over a bloc in the list to find it on the map.</p>
+  <div class="phl-col">
+    <h2 class="phl-head">Four blocs <span>Sixty-Six Wards</span></h2>
+    <div class="phl-map" id="phl-map-broad" role="img" aria-label="Philadelphia's divisions in four broad voting blocs"></div>
+    <div class="phl-legend" id="phl-legend-broad"></div>
   </div>
-  <div class="phl-legend" id="phl-legend"></div>
+  <div class="phl-col">
+    <h2 class="phl-head">Eight blocs <span>BBMM</span></h2>
+    <div class="phl-map" id="phl-map-sub" role="img" aria-label="Philadelphia's divisions in eight voting blocs, shaded within the four"></div>
+    <div class="phl-legend" id="phl-legend-sub"></div>
+  </div>
 </div>
 <div class="phl-tip" id="phl-tip" hidden></div>
 ```
-
-::: {.phl-notes}
-### How the eight fit into the four
-
-Tannen's blocs come from a different method, and he did not publish his division assignments, so each of our blocs is placed by who lives there and how it votes:
-
-- **Black Voters.** The Sound of Philadelphia is 83% Black and voted 97% for Biden.
-- **Wealthy Progressives.** Weavers Way &amp; Clark Park (Mount Airy and West Philadelphia) and Fishtown Lattes &amp; Rittenhouse Brunch (Center City, its ring and parts of the Northwest) are the city's most educated blocs: 65% and 73% of adults have a bachelor's degree.
-- **Hispanic Voters.** El Centro de Oro and Under the Frankford El are the city's most Hispanic blocs, about 35% each. El Centro de Oro is 42% Black, but it is Tannen's "Hispanic North Philly", and Under the Frankford El is the lower Northeast, where he found that bloc moving.
-- **White Moderates.** Manayunk Wall to Mayfair, Pierogies &amp; Pho on the Boulevard and Rizzo's Rowhomes are 48% to 76% white and gave Biden 42% to 68%.
-
-Demographics are from the 2020 Census and ACS 2020–24, allocated to divisions. Colors are sampled from Sixty-Six Wards' "Voting Blocs over time" map; this page is not affiliated with Sixty-Six Wards. The same eight blocs appear in the [Atlas of US Voting Blocs](atlas.qmd#panel-philadelphia).
-:::
 
 ```{=html}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script>
 (() => {
-  // Sixty-Six Wards' four colors (sampled from its map legend) and Lab-lightness shades of each for our blocs,
-  // darker = more Democratic. Numbers, names and counts are the atlas's live Philadelphia panel.
+  // Left: Sixty-Six Wards' four blocs in its colors (sampled from its "Voting Blocs over time" legend). Right: the
+  // eight BBMM blocs (the atlas's live Philadelphia fit), each a Lab-lightness shade of the broad bloc it sits in,
+  // darker = more Democratic. Each division's broad bloc is its BBMM bloc's.
   const BROAD = [
     { k: "BV", name: "Black Voters",         color: "#4091F9" },
     { k: "WP", name: "Wealthy Progressives", color: "#EE6178" },
@@ -65,106 +49,83 @@ Demographics are from the 2020 Census and ACS 2020–24, allocated to divisions.
   const fmt = n => n.toLocaleString("en-US");
   const ink = hex => { const c = [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16) / 255);
     return c.reduce((s, x, i) => s + [0.2126, 0.7152, 0.0722][i] * x ** 2.2, 0) > 0.36 ? "#111" : "#fff"; };
-  let mode = "sub", focus = null;
-  const fill = b => mode === "sub" ? byB[b].color : byG[byB[b].g].color;
-
-  // ---- legend: each broad bloc, then its blocs ----
   const totPop = BLOCS.reduce((s, x) => s + x.pop, 0);
-  const legend = document.getElementById("phl-legend");
-  legend.innerHTML = BROAD.map(G => {
-    const subs = BLOCS.filter(x => x.g === G.k), pop = subs.reduce((s, x) => s + x.pop, 0), n = subs.reduce((s, x) => s + x.n, 0);
-    return `<section class="phl-group" data-g="${G.k}">
-      <h3><span class="phl-chip" style="background:${G.color}"></span>${G.name}</h3>
-      <p class="phl-gmeta">${fmt(n)} divisions &middot; ${Math.round(100 * pop / totPop)}% of residents</p>
-      <div class="phl-share">${subs.map(x => `<span style="flex:${x.pop};background:${x.color}"></span>`).join("")}</div>
-      <ol>${subs.map(x => `<li data-b="${x.b}" tabindex="0">
+  const sum = (g, f) => BLOCS.filter(x => x.g === g).reduce((s, x) => s + x[f], 0);
+
+  // ---- legends ----
+  document.getElementById("phl-legend-broad").innerHTML = '<ol class="phl-broad-list">' + BROAD.map(G =>
+    `<li data-g="${G.k}" tabindex="0"><span class="phl-chip" style="background:${G.color}"></span>
+      <span class="phl-name">${G.name}</span><span class="phl-meta">${fmt(sum(G.k, "n"))} divisions &middot; ${Math.round(100 * sum(G.k, "pop") / totPop)}% of residents</span></li>`).join("") + "</ol>";
+  document.getElementById("phl-legend-sub").innerHTML = BROAD.map(G => `<div class="phl-group">
+      <div class="phl-share">${BLOCS.filter(x => x.g === G.k).map(x => `<span style="flex:${x.pop};background:${x.color}"></span>`).join("")}</div>
+      <ol>${BLOCS.filter(x => x.g === G.k).map(x => `<li data-b="${x.b}" tabindex="0">
         <span class="phl-swatch" style="background:${x.color};color:${ink(x.color)}">${x.b}</span>
         <span class="phl-name">${esc(x.name)}</span>
-        <span class="phl-meta">${fmt(x.n)} divisions &middot; Biden 2020 ${x.biden}% &middot; ${x.race}${x.ba ? ` &middot; ${x.ba}% BA+` : ""}</span></li>`).join("")}</ol>
-    </section>`;
-  }).join("");
+        <span class="phl-meta">${fmt(x.n)} divisions &middot; Biden 2020 ${x.biden}%</span></li>`).join("")}</ol></div>`).join("");
 
-  // ---- map ----
-  const host = document.getElementById("phl-map"), tip = document.getElementById("phl-tip");
+  // ---- two maps of the same divisions; hovering either shows the division on both ----
+  const tip = document.getElementById("phl-tip");
   d3.json("../files/philadelphia-blocs/divisions.geojson").then(geo => {
-    const W = 760, H = 800;
-    const proj = d3.geoIdentity().reflectY(true).fitSize([W, H], geo), path = d3.geoPath(proj);
-    const svg = d3.select(host).append("svg").attr("viewBox", `0 0 ${W} ${H}`);
-    const divs = svg.append("g").selectAll("path").data(geo.features).join("path")
-      .attr("d", path).attr("class", "phl-div").attr("fill", d => fill(d.properties.b));
-    svg.append("path").datum({ type: "FeatureCollection", features: geo.features })
-      .attr("class", "phl-outline").attr("d", path);
-    const hot = svg.append("path").attr("class", "phl-hot");
-    const show = (d, ev) => {
-      if (!d) { tip.hidden = true; hot.attr("d", null); return; }
+    const W = 600, H = 640;
+    const path = d3.geoPath(d3.geoIdentity().reflectY(true).fitSize([W, H], geo));
+    let focus = null;
+    const maps = [["phl-map-broad", b => byG[byB[b].g].color], ["phl-map-sub", b => byB[b].color]].map(([id, fill]) => {
+      const svg = d3.select("#" + id).append("svg").attr("viewBox", `0 0 ${W} ${H}`);
+      const divs = svg.append("g").selectAll("path").data(geo.features).join("path")
+        .attr("d", path).attr("class", "phl-div").attr("fill", d => fill(d.properties.b));
+      const hot = svg.append("path").attr("class", "phl-hot");
+      divs.on("pointermove", (ev, d) => show(d, ev)).on("click", (ev, d) => show(d, ev));
+      svg.on("pointerleave", () => show(null));
+      return { divs, hot };
+    });
+    function show(d, ev) {
+      maps.forEach(m => m.hot.attr("d", d ? path(d) : null));
+      if (!d) { tip.hidden = true; return; }
       const p = d.properties, B = byB[p.b], G = byG[B.g];
-      hot.attr("d", path(d));
       tip.innerHTML = `<b>${esc(p.name)}</b>
-        <div class="phl-trow"><span class="phl-swatch sm" style="background:${B.color};color:${ink(B.color)}">${B.b}</span>${esc(B.name)}</div>
         <div class="phl-trow"><span class="phl-chip sm" style="background:${G.color}"></span>${G.name}</div>
-        <div class="phl-tnum">Biden 2020: <b>${p.biden}%</b> &middot; in this bloc with probability <b>${Math.round(100 * p.p)}%</b></div>`;
+        <div class="phl-trow"><span class="phl-swatch sm" style="background:${B.color};color:${ink(B.color)}">${B.b}</span>${esc(B.name)}</div>
+        <div class="phl-tnum">Biden 2020 <b>${p.biden}%</b> &middot; bloc probability <b>${Math.round(100 * p.p)}%</b></div>`;
       tip.hidden = false;
       const r = tip.getBoundingClientRect(), x = ev.clientX + 14, y = ev.clientY + 14;
-      tip.style.left = Math.min(x, innerWidth - r.width - 8) + "px";
+      tip.style.left = (x + r.width > innerWidth - 8 ? ev.clientX - r.width - 14 : x) + "px";
       tip.style.top = (y + r.height > innerHeight - 8 ? ev.clientY - r.height - 10 : y) + "px";
-    };
-    divs.on("pointermove", (ev, d) => show(d, ev)).on("pointerleave", () => show(null))
-        .on("click", (ev, d) => show(d, ev));
-    svg.on("pointerleave", () => show(null));
-    const paint = () => divs.attr("fill", d => fill(d.properties.b))
-      .attr("opacity", d => focus == null ? 1 : (focus.b ? d.properties.b === focus.b : byB[d.properties.b].g === focus.g) ? 1 : 0.13);
-    // legend hover / focus highlights a bloc or a broad bloc
-    legend.querySelectorAll("li").forEach(li => {
-      const on = () => { focus = { b: +li.dataset.b }; paint(); }, off = () => { focus = null; paint(); };
+    }
+    const paint = () => maps.forEach(m => m.divs.attr("opacity", d => focus == null ? 1 :
+      (focus.b ? d.properties.b === focus.b : byB[d.properties.b].g === focus.g) ? 1 : 0.13));
+    document.querySelectorAll(".phl-legend li").forEach(li => {
+      const on = () => { focus = li.dataset.b ? { b: +li.dataset.b } : { g: li.dataset.g }; paint(); }, off = () => { focus = null; paint(); };
       li.addEventListener("pointerenter", on); li.addEventListener("pointerleave", off);
       li.addEventListener("focus", on); li.addEventListener("blur", off);
     });
-    legend.querySelectorAll(".phl-group h3").forEach(h => {
-      const g = h.closest(".phl-group").dataset.g;
-      h.addEventListener("pointerenter", () => { focus = { g }; paint(); });
-      h.addEventListener("pointerleave", () => { focus = null; paint(); });
-    });
-    document.querySelectorAll(".phl-toggle button").forEach(btn => btn.addEventListener("click", () => {
-      mode = btn.dataset.mode;
-      document.querySelectorAll(".phl-toggle button").forEach(x => x.setAttribute("aria-pressed", String(x === btn)));
-      document.body.classList.toggle("phl-broad", mode === "broad");
-      paint();
-    }));
   });
 })();
 </script>
 <style>
-.phl-intro { max-width: 52rem; font-size: 1.08rem; }
-.phl-wrap { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(18rem, 1fr); gap: 2rem; align-items: start; margin: 1.5rem 0 2rem; }
-.phl-map svg { display: block; width: 100%; height: auto; max-height: 82vh; }
-.phl-div { stroke: #fff; stroke-width: .35; transition: opacity .15s, fill .2s; }
-.phl-outline { fill: none; stroke: #444; stroke-width: .8; pointer-events: none; }
+.phl-wrap { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem; align-items: start; margin: 1rem 0 2rem; }
+.phl-head { font-size: 1.15rem; margin: 0 0 .5rem; border: 0; padding: 0; }
+.phl-head span { font-weight: 400; color: #777; font-size: .9rem; margin-left: .4rem; }
+.phl-map svg { display: block; width: 100%; height: auto; max-height: 78vh; }
+.phl-div { stroke: #fff; stroke-width: .3; transition: opacity .15s; }
 .phl-hot { fill: none; stroke: #111; stroke-width: 2; pointer-events: none; }
-.phl-hint { font-size: .85rem; color: #666; margin: .4rem 0 0; }
-.phl-toggle { display: inline-flex; border: 1px solid #bbb; border-radius: 999px; overflow: hidden; margin-bottom: .6rem; }
-.phl-toggle button { border: 0; background: #fff; padding: .3rem .9rem; font-size: .85rem; cursor: pointer; color: #333; }
-.phl-toggle button[aria-pressed=true] { background: #222; color: #fff; }
-.phl-group { margin-bottom: 1.4rem; }
-.phl-group h3 { display: flex; align-items: center; gap: .5rem; font-size: 1.1rem; margin: 0 0 .15rem; border: 0; cursor: default; }
-.phl-chip { display: inline-block; width: 1.1rem; height: 1.1rem; border-radius: 3px; flex: none; }
-.phl-chip.sm { width: .8rem; height: .8rem; margin-right: .4rem; vertical-align: -1px; }
-.phl-gmeta { font-size: .8rem; color: #666; margin: 0 0 .35rem 1.6rem; }
-.phl-share { display: flex; height: 8px; gap: 2px; margin: 0 0 .5rem 1.6rem; max-width: 18rem; }
+.phl-legend { margin-top: 1rem; }
+.phl-legend ol { list-style: none; padding: 0; margin: 0; }
+.phl-legend li { display: grid; grid-template-columns: 1.7rem 1fr; column-gap: .55rem; padding: .22rem .35rem; margin-left: -.35rem; border-radius: 6px; cursor: default; }
+.phl-legend li:hover, .phl-legend li:focus-visible { background: #f2f1ee; outline: none; }
+.phl-broad-list li { margin-bottom: .3rem; }
+.phl-group { margin-bottom: .7rem; }
+.phl-share { display: flex; height: 6px; gap: 2px; margin: 0 0 .25rem 2.25rem; max-width: 16rem; }
 .phl-share span { border-radius: 2px; }
-.phl-broad .phl-share { opacity: .35; }
-.phl-group ol { list-style: none; padding: 0; margin: 0 0 0 1.6rem; }
-.phl-group li { display: grid; grid-template-columns: 1.7rem 1fr; column-gap: .55rem; padding: .25rem .35rem; margin-left: -.35rem; border-radius: 6px; cursor: default; }
-.phl-group li:hover, .phl-group li:focus-visible { background: #f2f1ee; outline: none; }
+.phl-chip { grid-row: span 2; display: inline-block; width: 1.7rem; height: 1.7rem; border-radius: 4px; }
+.phl-chip.sm { width: .8rem; height: .8rem; margin-right: .45rem; border-radius: 2px; }
 .phl-swatch { grid-row: span 2; width: 1.7rem; height: 1.7rem; border-radius: 50%; border: 1.5px solid #111; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .78rem; }
-.phl-swatch.sm { display: inline-flex; width: 1.2rem; height: 1.2rem; font-size: .65rem; margin-right: .4rem; border-width: 1px; vertical-align: middle; }
-.phl-name { font-weight: 600; font-size: .95rem; line-height: 1.25; }
-.phl-meta { font-size: .76rem; color: #666; }
+.phl-swatch.sm { display: inline-flex; width: 1.15rem; height: 1.15rem; font-size: .62rem; margin-right: .4rem; border-width: 1px; }
+.phl-name { font-weight: 600; font-size: .92rem; line-height: 1.25; }
+.phl-meta { font-size: .75rem; color: #666; }
 .phl-tip { position: fixed; z-index: 50; pointer-events: none; background: #fff; border: 1px solid #bbb; border-radius: 5px; box-shadow: 0 2px 10px rgba(0,0,0,.15);
            padding: .5rem .65rem; font-size: .82rem; max-width: 19rem; line-height: 1.4; }
 .phl-trow { margin-top: .3rem; display: flex; align-items: center; }
 .phl-tnum { margin-top: .35rem; color: #444; }
-.phl-notes { max-width: 52rem; }
-.phl-notes h3 { font-size: 1.1rem; }
-@media (max-width: 900px) { .phl-wrap { grid-template-columns: 1fr; } }
+@media (max-width: 800px) { .phl-wrap { grid-template-columns: 1fr; } }
 </style>
 ```
