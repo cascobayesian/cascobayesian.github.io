@@ -1,0 +1,29 @@
+/* Atlas referendum heatmaps: see atlas_heatmap.js */
+.atlas-map-col { min-width: 0; }
+.atlas-heat { margin: 1rem 0 0; border-radius: 4px; }
+.atlas-heat img { border: 1px solid #e3e3e3; border-radius: 4px; }
+.atlas-heat[role=button] { cursor: pointer; }
+.atlas-heat[role=button]:hover img, .atlas-heat[role=button]:focus-visible img, .atlas-heat[aria-expanded=true] img { outline: 2px solid #222; outline-offset: 2px; }
+.atlas-heat[role=button]:focus { outline: none; }
+.atlas-heatmap { margin-top: 1.5rem; border-top: 1px dashed #ccc; padding-top: 1rem; scroll-margin-top: 4rem; }
+.atlas-heatmap > img { display: block; width: 100%; height: auto; }
+.atlas-heat-hint { font-size: .85rem; color: #555; margin: 0 0 .6rem; }
+.atlas-heat-plot { width: 100%; min-height: 340px; }
+.atlas-heat-stage { position: relative; }
+.atlas-heat-stage canvas { display: block; }
+.atlas-heat-over { position: absolute; inset: 0; cursor: crosshair; touch-action: manipulation; }
+.atlas-heat-tip { position: absolute; z-index: 5; width: min(22rem, 90%); pointer-events: none; background: rgba(255,255,255,.97);
+                  border: 1px solid #bbb; border-radius: 4px; box-shadow: 0 2px 10px rgba(0,0,0,.15); padding: .55rem .7rem;
+                  font-size: .8rem; line-height: 1.35; color: #222; }
+.atlas-heat-tip p { margin: 0; }
+.atlas-heat-tip .q { font-weight: 600; }
+.atlas-heat-tip .qd { color: #555; margin-top: .25rem; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
+.atlas-heat-tip table { width: 100%; border-collapse: collapse; margin-top: .45rem; }
+.atlas-heat-tip th { font-weight: 400; text-align: left; padding: .12rem .5rem .12rem 0; }
+.atlas-heat-tip td { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; white-space: nowrap; padding: .12rem 0; }
+.atlas-heat-tip tr:first-child th { font-weight: 600; }
+.atlas-heat-tip .sw { display: inline-block; min-width: 1.15rem; padding: 0 .2rem; margin-right: .35rem; border-radius: 2px; text-align: center; font-size: .7rem; font-weight: 700; }
+.atlas-heat-tip .pin { color: #777; font-size: .72rem; margin-top: .35rem; }
+.atlas-heat-key { max-width: 22rem; margin-top: .5rem; }
+.atlas-heat-key h3 { font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: #555; margin: 0 0 .4rem; border: 0; }
+@media (max-width: 900px) { .atlas-map-col { order: -1; } }
