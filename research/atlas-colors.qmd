@@ -1,0 +1,45 @@
+---
+title: "The atlas color scheme"
+toc: false
+# Linked only from the atlas pages (research/atlas.qmd, research/atlas-cities.qmd); kept out of search and the sitemap.
+search: false
+---
+
+::: {.atlas-colors-page}
+
+Every place in the [Atlas of US Voting Blocs](atlas.qmd) and the [city atlas](atlas-cities.qmd) is colored on **one scale for every place**, so a bloc's color means the same thing in Maine as in Los Angeles.
+
+Each bloc runs from blue to red by its **Trump 2024 two-party share** (2020 for Chicago, Salt Lake and Utah). Asian-plurality blocs run from teal to olive and Latino-plurality blocs from sand to orange instead, and five ethnically specific blocs take their own colors.
+
+```{=html}
+<figure class="ac-key" role="img" aria-label="Colour key: Trump 2024 two-party share, 0 to 100 percent, for white, Black and mixed; Asian-plurality; and Latino-plurality blocs">
+  <div class="ac-key-row"><span>White / Black / mixed</span><i style="background:linear-gradient(to right,#120A4F,#1B34AA,#2389E6,#5CA9EB,#6FB1E9,#8DB4D8,#98B0C8,#A8B2C0,#BFBFC4,#CCA79C,#E98A66,#E07559,#D6604D,#C8493F,#A51426,#85081A,#67000D)"></i></div>
+  <div class="ac-key-row"><span>Asian</span><i style="background:linear-gradient(to right,#1E5257,#1F698E,#0095A5,#00A6A1,#00AA9E,#37AC90,#47AA86,#56AB7F,#66B17E,#79A565,#98983E,#988E38,#968432,#927A2B,#85671F,#73601A,#615914)"></i></div>
+  <div class="ac-key-row"><span>Latino</span><i style="background:linear-gradient(to right,#A5623F,#C37878,#CAAC8C,#D3BF86,#D8C381,#E0C572,#E3C266,#E9C35D,#F4CA5B,#FBBC3B,#FFAA00,#FF9E00,#FF9300,#FF8700,#F17100,#DD6C00,#CA6700)"></i></div>
+  <div class="ac-key-row ac-key-ax"><span></span><b><em>0%</em><em>25%</em><em>50%</em><em>75%</em><em>100%</em></b></div>
+  <figcaption>Trump share, 2024 (two-party)</figcaption></figure>
+
+```
+
+Every bloc starts on the top ramp, by its Trump 2024 two-party share; the Asian and Latino rows show the same ramp with the group's color fused in.
+
+Bloc names and numbers are each fit's own: bloc 1 in one place has nothing to do with bloc 1 in another.
+
+[&larr; Back to the atlas](atlas.qmd) &middot; [City atlas](atlas-cities.qmd)
+
+:::
+
+```{=html}
+<style>
+.atlas-colors-page { font-size: 1.25rem; line-height: 1.6; max-width: 46rem; }
+.atlas-colors-page p { margin-bottom: 1.1rem; }
+.ac-key { margin: 1.5rem 0 2rem; font-size: 1rem; color: #333; }
+.ac-key-row span { display: block; line-height: 1.3; }
+.ac-key-row i { display: block; height: 1.3rem; border-radius: 3px; margin: .2rem 0 .7rem; }
+.ac-key-ax b { display: block; position: relative; height: 1.5rem; font-weight: 400; font-size: .95rem; color: #555; }
+.ac-key-ax em { position: absolute; font-style: normal; transform: translateX(-50%); }
+.ac-key-ax em:nth-child(1) { left: 0; transform: none; } .ac-key-ax em:nth-child(2) { left: 25%; } .ac-key-ax em:nth-child(3) { left: 50%; }
+.ac-key-ax em:nth-child(4) { left: 75%; } .ac-key-ax em:nth-child(5) { right: 0; transform: none; }
+.ac-key figcaption { text-align: center; font-size: 1rem; color: #555; margin-top: .3rem; }
+</style>
+```

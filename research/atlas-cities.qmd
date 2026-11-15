@@ -9,6 +9,16 @@ search: false
 
 {{< include _atlas_cities_map.html >}}
 
+```{=html}
+<p class="atlas-colors-link"><a href="atlas-colors.html">More about the color scheme</a></p>
+<style>
+.atlas-colors-link { display: flex; justify-content: flex-end; margin: .25rem 0 1.25rem; }
+.atlas-colors-link a { font-size: .8rem; padding: .3rem .75rem; border: 1px solid #bbb; border-radius: 999px; color: #333;
+                       text-decoration: none; background: #fff; transition: border-color .15s, background .15s; }
+.atlas-colors-link a:hover, .atlas-colors-link a:focus-visible { border-color: #222; background: #f4f3ef; }
+</style>
+```
+
 {{< include _atlas_fused_panels.html >}}
 
 ```{=html}

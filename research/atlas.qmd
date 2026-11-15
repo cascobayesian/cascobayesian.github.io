@@ -11,11 +11,19 @@ search: false
 
 {{< include _atlas_fused_map.html >}}
 
-::: {.atlas-caption}
-Places analyzed with the [voting-bloc model](voting-blocs.qmd), colored on **one scale for every place**, the same as the [city atlas](atlas-cities.qmd). Each bloc runs from blue to red by its Trump 2024 two-party share (2020 for Chicago, Salt Lake and Utah); Asian-plurality blocs run from teal to olive and Latino-plurality blocs from sand to orange instead, and five ethnically specific blocs take their own colors. Points mark city and county fits; Maricopa and Pima Counties in Arizona, one joint fit around Phoenix and Tucson, are filled like a state. **Click any colored state or point** to explore its blocs; bloc names and numbers are each fit's own.
-:::
+```{=html}
+<p class="atlas-colors-link"><a href="atlas-colors.html">More about the color scheme</a></p>
+<style>
+.atlas-colors-link { display: flex; justify-content: flex-end; margin: .25rem 0 1.25rem; }
+.atlas-colors-link a { font-size: .8rem; padding: .3rem .75rem; border: 1px solid #bbb; border-radius: 999px; color: #333;
+                       text-decoration: none; background: #fff; transition: border-color .15s, background .15s; }
+.atlas-colors-link a:hover, .atlas-colors-link a:focus-visible { border-color: #222; background: #f4f3ef; }
+</style>
+```
 
-{{< include _atlas_fused_key.html >}}
+::: {.atlas-caption}
+Places analyzed with the [voting-bloc model](voting-blocs.qmd), colored on **one scale for every place**, the same as the [city atlas](atlas-cities.qmd). Points mark city and county fits; Maricopa and Pima Counties in Arizona, one joint fit around Phoenix and Tucson, are filled like a state. **Click any colored state or point** to explore its blocs; bloc names and numbers are each fit's own.
+:::
 
 {{< include _atlas_fused_panels.html >}}
 
