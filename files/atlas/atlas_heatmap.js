@@ -154,7 +154,7 @@
       const img = grid.querySelector(".atlas-heat") && grid.querySelector(".atlas-state-map .atlas-zoom img");
       if (!img) return;
       const fit = () => { if (img.naturalWidth && img.naturalHeight)
-        grid.style.setProperty("--heat-cols", `1fr minmax(12rem, 1fr) ${(img.naturalWidth / img.naturalHeight).toFixed(3)}fr 1fr`); };
+        grid.style.setProperty("--heat-cols", `1fr minmax(12rem, 1.5fr) ${(img.naturalWidth / img.naturalHeight).toFixed(3)}fr 1fr`); };
       if (img.complete) fit(); else img.addEventListener("load", fit, { once: true });
     });
     // one subpanel open at a time, on the whole page: opening the PCA's demographics, a bloc's profile
