@@ -149,5 +149,21 @@
       fig.addEventListener("click", toggle);
       fig.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
     });
+    // one subpanel open at a time, on the whole page: opening the PCA's demographics, a bloc's profile
+    // (bloc_profiles.js, which adds .atlas-bloc-profile) or the heatmap closes every other one
+    const SUB = ".atlas-demog, .atlas-heatmap, .atlas-bloc-profile";
+    const close = el => {
+      if (el.hidden) return;
+      const panel = el.closest(".atlas-panel");
+      if (el.classList.contains("atlas-bloc-profile")) { panel.dispatchEvent(new CustomEvent("bloc-select", { detail: 0 })); return; }
+      el.hidden = true;
+      const fig = panel.querySelector(el.classList.contains("atlas-demog") ? ".atlas-pca" : ".atlas-heat");
+      if (fig) fig.setAttribute("aria-expanded", "false");
+    };
+    const watch = new MutationObserver(recs => recs.forEach(r => {
+      if (r.target.hidden) return;
+      document.querySelectorAll(SUB).forEach(el => { if (el !== r.target) close(el); });
+    }));
+    document.querySelectorAll(SUB).forEach(el => watch.observe(el, { attributes: true, attributeFilter: ["hidden"] }));
   });
 })();

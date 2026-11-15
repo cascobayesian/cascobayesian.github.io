@@ -1,6 +1,7 @@
 /* Atlas referendum heatmaps: see atlas_heatmap.js */
-.atlas-map-col { min-width: 0; }
-.atlas-heat { margin: 1rem 0 0; border-radius: 4px; }
+.atlas-panel-grid:has(> .atlas-heat) { grid-template-columns: 1fr minmax(13rem, .85fr) 1.15fr 1fr; gap: 1.25rem; }
+.atlas-panel-grid > * { min-width: 0; }
+.atlas-heat { margin: 0; border-radius: 4px; align-self: center; }
 .atlas-heat img { border: 1px solid #e3e3e3; border-radius: 4px; }
 .atlas-heat[role=button] { cursor: pointer; }
 .atlas-heat[role=button]:hover img, .atlas-heat[role=button]:focus-visible img, .atlas-heat[aria-expanded=true] img { outline: 2px solid #222; outline-offset: 2px; }
@@ -26,4 +27,5 @@
 .atlas-heat-tip .pin { color: #777; font-size: .72rem; margin-top: .35rem; }
 .atlas-heat-key { max-width: 22rem; margin-top: .5rem; }
 .atlas-heat-key h3 { font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: #555; margin: 0 0 .4rem; border: 0; }
-@media (max-width: 900px) { .atlas-map-col { order: -1; } }
+@media (max-width: 1100px) { .atlas-panel-grid:has(> .atlas-heat) { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 900px) { .atlas-panel-grid:has(> .atlas-heat) { grid-template-columns: 1fr; } }
