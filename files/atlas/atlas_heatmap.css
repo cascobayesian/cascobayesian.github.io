@@ -30,7 +30,8 @@
 .atlas-heat-tip tr:first-child th { font-weight: 600; }
 .atlas-heat-tip .sw { display: inline-block; min-width: 1.15rem; padding: 0 .2rem; margin-right: .35rem; border-radius: 2px; text-align: center; font-size: .7rem; font-weight: 700; }
 .atlas-heat-tip .pin { color: #777; font-size: .72rem; margin-top: .35rem; }
-.atlas-heat-key { max-width: 22rem; margin-top: .5rem; }
+.atlas-heat-key { max-width: 30rem; margin-top: .5rem; }
+.atlas-heat-key .atlas-ramp, .atlas-heat-key .atlas-ticks { max-width: 22rem; }
 .atlas-heat-key h3 { font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: #555; margin: 0 0 .4rem; border: 0; }
 @media (max-width: 1100px) { .atlas-panel-grid:has(> .atlas-heat) { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 900px) { .atlas-panel-grid:has(> .atlas-heat) { grid-template-columns: 1fr; } }
