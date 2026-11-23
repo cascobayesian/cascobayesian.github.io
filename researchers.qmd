@@ -68,11 +68,23 @@ Gaps for Croatia: no one yet for **forecasting** (try the Ipsos and Promocija pl
 ## Switzerland {#switzerland}
 
 ::: {.rs-country}
-| Name | Role | Affiliation | City | Subjects | Contact | Status |
-|---|---|---|---|---|---|---|
-| Michael Hermann | Researcher | Sotomo (political geography and polling) | Zurich | Local politics; Forecasting; Cultural studies | | Suggested |
-| Lucas Leemann | Scholar | Department of Political Science, University of Zurich | Zurich | Forecasting | | Suggested |
-| Georg Lutz | Scholar | FORS / University of Lausanne (Selects election study) | Lausanne | Political sociology | | Suggested |
+| Name | Role | Affiliation | City | Subjects | Why | Key work | Status |
+|---|---|---|---|---|---|---|---|
+| Michael Hermann | Researcher | Sotomo | Zurich | Local politics; Cultural studies; Forecasting | Closest precedent. His *Atlas der politischen Landschaften* (with Heiri Leuthold) maps commune-level positions from 184 federal referendums (1982–2002) and finds communes' political attitudes barely move. He also studies polarization between the French- and German-speaking regions (the "Röstigraben"). | [Atlas (swissinfo)](https://www.swissinfo.ch/eng/new-atlas-plots-swiss-political-landscape/3713924); [Röstigraben study](https://www.swissinfo.ch/eng/study-highlights-growing-gulf-between-swiss-language-regions/2155920) | Suggested |
+| Heiri Leuthold | Researcher | Co-author of Hermann's atlas | Zurich | Local politics; Cultural studies | Argues the town–country split comes mostly from people choosing where to live by their values. Useful when interpreting stable blocs. | [Atlas (swissinfo)](https://www.swissinfo.ch/eng/new-atlas-plots-swiss-political-landscape/3713924) | Suggested |
+| Lucas Leemann | Scholar | University of Zurich; co-founder of LeeWas (polls for Tamedia and *20 Minuten*) | Zurich | Forecasting; Political history | Built municipality-level outcomes for every federal vote from 1866 to 2023, and an item-response model of popular initiatives from municipal returns. | [Municipal votes 1866–2023 (SPSR 2025)](https://alexandria.unisg.ch/entities/publication/f7e4d7ea-53d5-45e7-8cee-414cf634d1c2); [Vox Populi (APSR), supplement](https://static.cambridge.org/content/id/urn%3Acambridge.org%3Aid%3Aarticle%3AS0003055424001400/resource/name/S0003055424001400sup001.pdf) | Suggested |
+| Patrick Emmenegger | Scholar | University of St. Gallen | St. Gallen | Political history | Co-author of the 1866–2023 municipal dataset. Has also written on landholding inequality and 19th-century votes. | [SPSR 2025](https://alexandria.unisg.ch/entities/publication/f7e4d7ea-53d5-45e7-8cee-414cf634d1c2) | Suggested |
+| Fabio Wasserfallen | Scholar | University of Bern (check); co-founder of LeeWas | Bern | Forecasting | LeeWas weights its large online polls by demographic, geographic and political variables. | [LeeWas report example](https://Tamedia.ch/tl_files/content/Group/PDF%20Files/Deutsch/20230726_Bericht_W_4.Welle.pdf) | Suggested |
+| Matthias Grossglauser, Patrick Thiran, Victor Kristof | Scholar | INDY Lab, EPFL (Predikon) | Lausanne | Forecasting | Methodologically closest. Predikon factorizes a referendum-by-municipality matrix (330 votes, 2,196 municipalities) into municipal representations, then predicts vote-night results within about 1% from roughly 5% of returns. | [KDD 2020 paper](https://infoscience.epfl.ch/record/278872); [Predikon history](https://c4dt.epfl.ch/a-journey-with-predikon-3/) | Suggested |
+| Shin Alexandre Koseki | Researcher | EPFL | Lausanne | Cultural studies; Local politics | Mapped 30 years of municipal votes. Finds the main divide has moved from language (the Röstigraben) to cities and French-speaking areas against German-speaking suburbs and countryside. | [swissinfo](https://www.swissinfo.ch/eng/society/rural-urban-divide_is-switzerland-s-double-majority-system-outdated/42575520) | Suggested |
+| Andreas Ladner | Scholar | IDHEAP, University of Lausanne | Lausanne | Local politics | Co-leads the national survey of municipalities (1988–2017 waves, 1,868 responses in 2017), with data on local parties, turnout and direct democracy for covariates. | [Municipal monitoring (ZHAW)](https://www.zhaw.ch/en/research/project/71898) | Suggested |
+| Lukas Golder and Urs Bieri | Researcher | gfs.bern (SRG trend surveys) | Bern | Forecasting; Political sociology | Run the national broadcaster's polls before each federal vote, including an online sample added for French- and Italian-speaking regions. | [gfs.bern voting research](https://gfsbern.ch/en/angebot/election-and-voting-research) | Suggested |
+| Georg Lutz | Scholar | FORS / University of Lausanne (Selects election study) | Lausanne | Political sociology | Swiss national election study, for links to individual voters. | | Suggested |
+| SRF Data | Journalist | Swiss public broadcaster's data team | Zurich | Local politics | Publishes reproducible municipal-level election analyses in R, with fixed municipal boundaries so mergers don't distort comparisons. | [Party history](https://srfdata.github.io/2019-06-party-history); [Political shifts 2015](https://srfdata.github.io/2015-09-elections-political-shifts) | Suggested |
+:::
+
+::: {.rs-note}
+Data: official results by municipality are on [opendata.swiss](https://opendata.swiss/en/dataset/geodaten-zu-den-eidgenoessischen-abstimmungsvorlagen) and through the Federal Statistical Office's [results service](https://www.bfs.admin.ch/bfs/en/home/statistics/politics/popular-votes.html).
 :::
 
 ## Netherlands {#netherlands}
