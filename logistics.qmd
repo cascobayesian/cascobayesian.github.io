@@ -6,5 +6,6 @@ search: false
 ---
 
 - [Travel](travel.qmd): itinerary for Europe, India and Thailand
+- [People to meet](researchers.qmd): scholars, researchers and journalists, by country and subject
 - [Conferences](conferences.qmd): meetings, dates and deadlines for 2026–27
 - [Grants](grants.qmd): funding opportunities and deadlines

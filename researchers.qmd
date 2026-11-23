@@ -1,0 +1,282 @@
+---
+pagetitle: "People to meet"
+title: "People to meet"
+subtitle: "Scholars, researchers and journalists for the Europe and Asia trips"
+page-layout: full
+# Not linked from anywhere on the site, and kept out of the site search and sitemap; reach it at /researchers.html.
+search: false
+---
+
+::: {.rs-note}
+Working list. Each country has one table; to add someone, add a row. In the **Subjects** column, list any of *Local politics*, *Political history*, *Forecasting*, *Political sociology* and *Cultural studies*, separated by semicolons. In the **Role** column, use *Scholar*, *Researcher* or *Journalist*. Rows marked **Suggested** are starting ideas whose affiliations still need checking.
+:::
+
+```{=html}
+<nav class="rs-nav" aria-label="Countries">
+  <div class="rs-navrow"><span class="rs-navlabel">Europe</span>
+    <a href="#croatia">Croatia</a><a href="#switzerland">Switzerland</a><a href="#netherlands">Netherlands</a><a href="#denmark">Denmark</a>
+    <a href="#czechia">Czechia</a><a href="#slovakia">Slovakia</a><a href="#hungary">Hungary</a>
+    <a href="#romania">Romania</a><a href="#serbia">Serbia</a><a href="#bulgaria">Bulgaria</a>
+  </div>
+  <div class="rs-navrow"><span class="rs-navlabel">Asia</span>
+    <a href="#india">India</a><a href="#thailand">Thailand</a>
+  </div>
+</nav>
+<div class="rs-chips" role="group" aria-label="Subjects">
+  <span class="rs-chipslabel">Subject</span>
+  <button type="button" class="rs-chip" data-s="all" aria-pressed="true">All</button>
+  <button type="button" class="rs-chip" data-s="local" aria-pressed="false"><i style="background:var(--s-local)"></i>Local politics</button>
+  <button type="button" class="rs-chip" data-s="history" aria-pressed="false"><i style="background:var(--s-history)"></i>Political history</button>
+  <button type="button" class="rs-chip" data-s="forecasting" aria-pressed="false"><i style="background:var(--s-forecasting)"></i>Forecasting</button>
+  <button type="button" class="rs-chip" data-s="sociology" aria-pressed="false"><i style="background:var(--s-sociology)"></i>Political sociology</button>
+  <button type="button" class="rs-chip" data-s="cultural" aria-pressed="false"><i style="background:var(--s-cultural)"></i>Cultural studies</button>
+</div>
+<div class="rs-chips" role="group" aria-label="Roles">
+  <span class="rs-chipslabel">Role</span>
+  <button type="button" class="rs-chip" data-r="all" aria-pressed="true">All</button>
+  <button type="button" class="rs-chip" data-r="scholar" aria-pressed="false">Scholars</button>
+  <button type="button" class="rs-chip" data-r="researcher" aria-pressed="false">Researchers</button>
+  <button type="button" class="rs-chip" data-r="journalist" aria-pressed="false">Journalists</button>
+</div>
+<p class="rs-count" id="rs-count" aria-live="polite"></p>
+```
+
+# Europe
+
+## Croatia {#croatia}
+
+::: {.rs-country}
+| Name | Role | Affiliation | City | Subjects | Why | Key work | Status |
+|---|---|---|---|---|---|---|---|
+| Marko Grdešić | Scholar | Faculty of Political Science, University of Zagreb | Zagreb | Local politics; Political history | Closest match. Municipal-level spatial analysis of "red" and "black" Croatia, tested against socialist-era development, post-1990 demographic change and the legacies of WWII and the Homeland War. | [Red and Black Croatia in the Long Run (2021)](https://hrcak.srce.hr/clanak/387474); [Spatial analysis (2012)](https://hrcak.srce.hr/en/clanak/149058) | Suggested |
+| Josip Glaurdić | Scholar | Institute of Political Science, University of Luxembourg | Luxembourg | Local politics; Political history | Municipality-level work on how exposure to the 1991–95 war shapes party choice, local fiscal voting and the EU referendum. With Leo Fel, finds the determinants of bloc support unchanged since the 1990s in the 2021 county elections. Based outside Croatia. | [2021 county elections](https://orbilu.uni.lu/bitstream/10993/52798/1/2021%20county%20elections%20in%20Croatia_OrbiLu.pdf); [CV](https://www.uni.lu/wp-content/uploads/sites/2/2025/05/Glaurdic-CV.pdf) | Suggested |
+| Andrija Henjak | Scholar | Faculty of Political Science, University of Zagreb | Zagreb | Political sociology | Cleavage voting: religion, tradition and history as the source of Croatia's bipolar competition. | [Old Cleavages and New Parties (with Čular), on 2020](https://hrcak.srce.hr/en/clanak/301773) | Suggested |
+| Goran Čular | Scholar | Faculty of Political Science, University of Zagreb | Zagreb | Political sociology | Party system and election studies; part of the faculty's long-running Croatian election survey project. | [Old Cleavages and New Parties](https://hrcak.srce.hr/en/clanak/301773) | Suggested |
+| Daniela Širinić | Scholar | Faculty of Political Science, University of Zagreb | Zagreb | Political sociology | Class voting, a useful contrast to cleavages based on identity. | | Suggested |
+| Višeslav Raos | Scholar | Faculty of Political Science, University of Zagreb | Zagreb | Political sociology; Local politics | Profiles of party voters and populism. Frequent media commentator on local elections, including Rijeka in 2025. | | Suggested |
+| Nenad Zakošek | Scholar | Faculty of Political Science, University of Zagreb | Zagreb | Political history; Political sociology | Founding generation of Croatian empirical election research. | | Suggested |
+| Ivan Koprić | Scholar | Faculty of Law, University of Zagreb; Institute of Public Administration | Zagreb | Local politics | Local self-government, the 556-unit territorial structure and independent local lists. Useful for understanding the units your blocs sit on. | [Profile](https://scjujf.pravo.unizg.hr/en/ivan.kopric) | Suggested |
+| Institute for Social Research in Zagreb (IDIZ) | Researcher | Independent research institute | Zagreb | Political sociology; Cultural studies | Values, religion, youth and political attitudes, with some regional comparisons. | [ECPR profile](https://ecpr.eu/Membership/Institute-for-Social-Research-in-Zagreb) | Suggested |
+| Davor Gjenero | Researcher | Independent political analyst | Zagreb | Political sociology | Widely quoted commentator on election results. | | Suggested |
+| John E. Ashbrook | Scholar | History, Midwestern State University (US) | Wichita Falls, TX | Cultural studies; Political history | Regional identity politics in Dalmatia and Istria, which helps explain the coastal and Istrian exceptions in a bloc map. | [When Drniš Came to the Sea (2025)](https://www.degruyterbrill.com/document/doi/10.1515/soeu-2024-0045/html) | Suggested |
+:::
+
+::: {.rs-note}
+Gaps for Croatia: no one yet for **forecasting** (try the Ipsos and Promocija plus teams who poll for Nova TV and HRT) or **journalists** (try the data desks at Telegram, Index and Jutarnji).
+:::
+
+## Switzerland {#switzerland}
+
+::: {.rs-country}
+| Name | Role | Affiliation | City | Subjects | Contact | Status |
+|---|---|---|---|---|---|---|
+| Michael Hermann | Researcher | Sotomo (political geography and polling) | Zurich | Local politics; Forecasting; Cultural studies | | Suggested |
+| Lucas Leemann | Scholar | Department of Political Science, University of Zurich | Zurich | Forecasting | | Suggested |
+| Georg Lutz | Scholar | FORS / University of Lausanne (Selects election study) | Lausanne | Political sociology | | Suggested |
+:::
+
+## Netherlands {#netherlands}
+
+::: {.rs-country}
+| Name | Role | Affiliation | City | Subjects | Contact | Status |
+|---|---|---|---|---|---|---|
+| Josse de Voogd | Researcher | Electoral geographer; writes on Dutch voting maps | | Local politics; Cultural studies | | Suggested |
+| Tom Louwerse | Scholar | Leiden University (Peilingwijzer poll aggregator) | Leiden | Forecasting | | Suggested |
+| Tom van der Meer | Scholar | University of Amsterdam | Amsterdam | Political sociology | | Suggested |
+:::
+
+## Denmark {#denmark}
+
+::: {.rs-country}
+| Name | Role | Affiliation | City | Subjects | Contact | Status |
+|---|---|---|---|---|---|---|
+| Kasper Møller Hansen | Scholar | Department of Political Science, University of Copenhagen | Copenhagen | Political sociology; Local politics | | Suggested |
+:::
+
+## Czechia {#czechia}
+
+::: {.rs-country}
+| Name | Role | Affiliation | City | Subjects | Contact | Status |
+|---|---|---|---|---|---|---|
+| Michal Pink | Scholar | Masaryk University (electoral geography) | Brno | Local politics; Political history | | Suggested |
+| Tomáš Lebeda | Scholar | Palacký University Olomouc | Olomouc | Political sociology | | Suggested |
+:::
+
+## Slovakia {#slovakia}
+
+::: {.rs-country}
+| Name | Role | Affiliation | City | Subjects | Contact | Status |
+|---|---|---|---|---|---|---|
+| Oľga Gyárfášová | Scholar | Comenius University | Bratislava | Political sociology | | Suggested |
+| Grigorij Mesežnikov | Researcher | Institute for Public Affairs (IVO) | Bratislava | Political history | | Suggested |
+:::
+
+## Hungary {#hungary}
+
+::: {.rs-country}
+| Name | Role | Affiliation | City | Subjects | Contact | Status |
+|---|---|---|---|---|---|---|
+| Gábor Tóka | Scholar | Central European University | Budapest / Vienna | Political sociology; Forecasting | | Suggested |
+| András Bíró-Nagy | Researcher | Policy Solutions | Budapest | Political sociology | | Suggested |
+:::
+
+## Romania {#romania}
+
+::: {.rs-country}
+| Name | Role | Affiliation | City | Subjects | Contact | Status |
+|---|---|---|---|---|---|---|
+| Bogdan Voicu | Scholar | Research Institute for Quality of Life, Romanian Academy | Bucharest | Political sociology; Cultural studies | | Suggested |
+| Cristian Preda | Scholar | Faculty of Political Science, University of Bucharest | Bucharest | Political history | | Suggested |
+:::
+
+## Serbia {#serbia}
+
+::: {.rs-country}
+| Name | Role | Affiliation | City | Subjects | Contact | Status |
+|---|---|---|---|---|---|---|
+| Dušan Spasojević | Scholar | Faculty of Political Sciences, University of Belgrade | Belgrade | Political sociology | | Suggested |
+| CRTA | Researcher | Election-observation and research organization | Belgrade | Local politics | | Suggested |
+:::
+
+## Bulgaria {#bulgaria}
+
+::: {.rs-country}
+| Name | Role | Affiliation | City | Subjects | Contact | Status |
+|---|---|---|---|---|---|---|
+| Ivan Krastev | Researcher | Centre for Liberal Strategies | Sofia | Political sociology; Cultural studies | | Suggested |
+| Daniel Smilov | Scholar | Sofia University / Centre for Liberal Strategies | Sofia | Political history | | Suggested |
+:::
+
+# Asia
+
+## India {#india}
+
+::: {.rs-country}
+| Name | Role | Affiliation | City | Subjects | Contact | Status |
+|---|---|---|---|---|---|---|
+| Sanjay Kumar | Scholar | Lokniti, Centre for the Study of Developing Societies | New Delhi | Forecasting; Political sociology | | Suggested |
+| Trivedi Centre for Political Data | Researcher | Ashoka University (constituency-level election data) | Sonipat | Local politics; Political history | | Suggested |
+:::
+
+## Thailand {#thailand}
+
+::: {.rs-country}
+| Name | Role | Affiliation | City | Subjects | Contact | Status |
+|---|---|---|---|---|---|---|
+| Prajak Kongkirati | Scholar | Faculty of Political Science, Thammasat University | Bangkok | Local politics; Political history | | Suggested |
+:::
+
+```{=html}
+<style>
+:root {
+  --s-local:       #2a78d6;
+  --s-history:     #eda100;
+  --s-forecasting: #eb6834;
+  --s-sociology:   #1baf7a;
+  --s-cultural:    #6250d6;
+}
+.rs-note { color: var(--jo-muted); font-size: .92rem; max-width: 46rem; }
+.rs-nav { margin: 1.2rem 0 1rem; display: grid; gap: .5rem; }
+.rs-navrow { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
+.rs-navlabel, .rs-chipslabel { font-size: .75rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--jo-muted); min-width: 4.5rem; }
+.rs-nav a { display: inline-flex; align-items: center; gap: .35rem; padding: .25rem .75rem; border: 1px solid var(--jo-rule); border-radius: 999px;
+  text-decoration: none; font-size: .9rem; background: var(--jo-card-bg); }
+.rs-nav a:hover, .rs-nav a:focus-visible { border-color: var(--bs-link-color); }
+.rs-nav a .n { font-size: .75rem; color: var(--jo-muted); }
+.rs-chips { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; margin: .3rem 0; }
+.rs-chip { display: inline-flex; align-items: center; gap: .4rem; font: inherit; font-size: .85rem; padding: .25rem .7rem; border-radius: 999px;
+  border: 1px solid var(--jo-rule); background: #fff; color: var(--jo-muted); cursor: pointer; }
+.rs-chip i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.rs-chip[aria-pressed="true"] { border-color: #9aa6b0; color: #1d2733; background: #f4f7f9; font-weight: 500; }
+.rs-chip:focus-visible { outline: 2px solid var(--jo-mark); outline-offset: 2px; }
+.rs-count { font-size: .85rem; color: var(--jo-muted); margin: .4rem 0 0; min-height: 1.3em; }
+.rs-tag { display: inline-flex; align-items: center; gap: .3rem; white-space: nowrap; font-size: .8rem; margin: 0 .5rem .1rem 0; }
+.rs-tag i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex: none; }
+.rs-status-suggested { color: var(--jo-muted); font-style: italic; }
+.rs-country tr.is-hidden { display: none; }
+.rs-empty { color: var(--jo-muted); font-size: .9rem; font-style: italic; }
+main h1:not(.title) { margin-top: 2.6rem; font-size: 1.7rem; }
+main table { font-size: .9rem; }
+main table td:first-child { min-width: 10rem; font-weight: 500; }
+@media (max-width: 700px) { main table { display: block; overflow-x: auto; max-width: calc(100vw - 32px); } }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const SUBJ = {
+    "local politics": "local", "political history": "history", "forecasting": "forecasting",
+    "political sociology": "sociology", "cultural studies": "cultural"
+  };
+  const LABEL = { local: "Local politics", history: "Political history", forecasting: "Forecasting",
+                  sociology: "Political sociology", cultural: "Cultural studies" };
+  const sections = [...document.querySelectorAll(".rs-country")];
+  const rows = [];
+
+  sections.forEach(sec => {
+    const table = sec.querySelector("table");
+    if (!table) return;
+    const heads = [...table.querySelectorAll("thead th")].map(th => th.textContent.trim().toLowerCase());
+    const iS = heads.indexOf("subjects"), iR = heads.indexOf("role"), iSt = heads.indexOf("status");
+    table.querySelectorAll("tbody tr").forEach(tr => {
+      const cells = tr.children;
+      const subj = iS < 0 ? [] : cells[iS].textContent.split(/[;,]/).map(s => SUBJ[s.trim().toLowerCase()]).filter(Boolean);
+      tr.dataset.subjects = subj.join(" ");
+      tr.dataset.role = iR < 0 ? "" : cells[iR].textContent.trim().toLowerCase();
+      if (iS >= 0) cells[iS].innerHTML = subj.map(k =>
+        `<span class="rs-tag"><i style="background:var(--s-${k})"></i>${LABEL[k]}</span>`).join("");
+      if (iSt >= 0 && /suggest/i.test(cells[iSt].textContent)) cells[iSt].classList.add("rs-status-suggested");
+      rows.push(tr);
+    });
+    const empty = document.createElement("p");
+    empty.className = "rs-empty";
+    empty.hidden = true;
+    empty.textContent = "No one here yet under this filter.";
+    sec.appendChild(empty);
+  });
+
+  // Country links show how many people each country has under the current filter.
+  const navLinks = [...document.querySelectorAll(".rs-nav a")];
+  navLinks.forEach(a => { const n = document.createElement("span"); n.className = "n"; a.appendChild(n); });
+
+  let subject = "all", role = "all";
+  const subjChips = [...document.querySelectorAll(".rs-chip[data-s]")];
+  const roleChips = [...document.querySelectorAll(".rs-chip[data-r]")];
+
+  function update() {
+    subjChips.forEach(c => c.setAttribute("aria-pressed", c.dataset.s === subject));
+    roleChips.forEach(c => c.setAttribute("aria-pressed", c.dataset.r === role));
+    let shown = 0;
+    rows.forEach(tr => {
+      const ok = (subject === "all" || tr.dataset.subjects.split(" ").includes(subject)) &&
+                 (role === "all" || tr.dataset.role === role);
+      tr.classList.toggle("is-hidden", !ok);
+      if (ok) shown++;
+    });
+    sections.forEach(sec => {
+      const table = sec.querySelector("table");
+      const any = table && table.querySelector("tbody tr:not(.is-hidden)");
+      if (table) table.hidden = !any;
+      sec.querySelector(".rs-empty").hidden = !!any;
+    });
+    navLinks.forEach(a => {
+      const h = document.querySelector(a.getAttribute("href"));
+      let sec = h && h.closest("section");
+      const n = sec ? sec.querySelectorAll(".rs-country tbody tr:not(.is-hidden)").length : 0;
+      a.querySelector(".n").textContent = n;
+    });
+    const filtered = subject !== "all" || role !== "all";
+    document.getElementById("rs-count").textContent = filtered
+      ? `Showing ${shown} of ${rows.length} people.` : `${rows.length} people across ${navLinks.length} countries.`;
+    const hash = subject !== "all" ? "#subject=" + subject : "";
+    if (location.hash.startsWith("#subject=") || hash) history.replaceState(null, "", hash || location.pathname);
+  }
+
+  subjChips.forEach(c => c.addEventListener("click", () => { subject = c.dataset.s; update(); }));
+  roleChips.forEach(c => c.addEventListener("click", () => { role = c.dataset.r; update(); }));
+
+  // Subject groupings are linkable: researchers.html#subject=forecasting
+  const m = location.hash.match(/^#subject=(\w+)/);
+  if (m && LABEL[m[1]]) subject = m[1];
+  update();
+});
+</script>
+```
